@@ -1,0 +1,89 @@
+#!/usr/bin/env python
+
+# Build a multi screen wallpaper
+
+# First argument is the directory where the wallpapers can be
+# found. We use xinerama to know the dimension of each screen.
+
+import sys
+import os
+import re
+import random
+import string
+import subprocess
+import optparse
+
+import xcb
+import xcb.xproto
+import xcb.xinerama
+
+import Image
+
+parser = optparse.OptionParser()
+parser.add_option("-d", "--directory", dest="directory", default=".",
+                   help="search for images in DIRECTORY", metavar="DIRECTORY")
+parser.add_option("-t", "--target", dest="target", default="background.jpg",
+                   help="write background to FILE", metavar="FILE")
+parser.add_option("-c", "--crop", dest="crop", action="store_true",
+                  help="crop image instead of centering them")
+options, args = parser.parse_args()
+
+assert not args, "No additional arguments are accepted"
+
+background = None
+
+# Get display size
+display = xcb.connect()
+root = display.get_setup().roots[0]
+background = Image.new('RGB', (root.width_in_pixels, root.height_in_pixels))
+
+# Query xinerama (not randr since the query is longer)
+try:
+    xinerama = display(xcb.xinerama.key)
+except xcb.ExtensionException:
+    xinerama = None
+if not xinerama or not xinerama.IsActive().reply().state:
+    screens = [(background.size[0], background.size[1], 0, 0)]
+else:
+    screens = [(screen.width, screen.height, screen.x_org, screen.y_org)
+               for screen in xinerama.QueryScreens().reply().screen_info]
+screens.sort(key=lambda screen: -screen[0]*screen[1])
+
+# Get as many random image as we have screens
+images = []
+for root, _, files in os.walk(os.path.join(options.directory)):
+    for i in files:
+        if string.lower(os.path.splitext(i)[1]) in ('.jpg',
+                                                    '.jpeg',
+                                                    '.png'):
+            images.append(os.path.join(root, i))
+images = random.sample(images,
+                       len(screens) + \
+                           random.randint(0, 3)) # Randomly favor larger images
+images = [Image.open(os.path.join(options.directory,
+                                  image)) for image in images]
+images.sort(key=lambda image: -image.size[0]*image.size[1])
+
+for index in range(len(screens)):
+    x, y, offsetx, offsety = screens[index]
+    image = images[index]
+
+    # Find the right size for the screen
+    imx, imy = x, image.size[1]*x/image.size[0]
+    if (options.crop and imy < y) or (not options.crop and imy > y):
+        imx, imy = image.size[0]*y/image.size[1], y
+    image = image.resize((imx, imy), Image.CUBIC)
+    if options.crop:
+        image = image.crop(((imx-x)/2, (imy-y)/2,
+                            imx-(imx-x)/2, imy-(imy-y)/2))
+
+    # Include it
+    if options.crop:
+        background.paste(image, (offsetx, offsety))
+    else:
+        background.paste(image, ((x-imx)/2 + offsetx,
+                                 (y-imy)/2 + offsety))
+
+# Save
+assert background, "Don't know the size of the display area"
+background.save(options.target)
