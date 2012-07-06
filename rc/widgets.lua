@@ -15,7 +15,7 @@ vicious.register(datewidget, vicious.widgets.date,
 local cpuwidget = widget({ type = "textbox" })
 cpuwidget.text = '<span font="Terminus 8" color="' .. beautiful.fg_widget_label .. '">CPU: </span>'
 local cpugraph = awful.widget.graph()
-cpugraph:set_width(45):set_height(12):set_max_value(100)
+cpugraph:set_width(45):set_height(12)
 cpugraph:set_border_color(beautiful.fg_widget_border)
 cpugraph:set_gradient_angle(0):set_gradient_colors({
    beautiful.fg_widget_start, beautiful.fg_widget_center, beautiful.fg_widget_end
