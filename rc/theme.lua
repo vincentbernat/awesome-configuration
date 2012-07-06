@@ -27,7 +27,8 @@ gtk2:write(gtk)
 gtk2:close()
 
 -- GTK3 is the same, but no double quotes for strings
-local gtk3 = io.open(os.getenv("HOME") .. "/.config/gtk-3.0/settings.ini")
+local gtk3 = io.open(os.getenv("HOME") .. "/.config/gtk-3.0/settings.ini", "w")
+gtk, _ = gtk:gsub('"', '')
 gtk3:write("[Settings]\n")
-gtk3:write(gtk:gsub('"', ''))
+gtk3:write(gtk)
 gtk3:close()
