@@ -40,8 +40,7 @@ vicious.register(memwidget, vicious.widgets.mem,
 -- Volume level
 local volwidget = widget({ type = "textbox" })
 vicious.register(volwidget, vicious.widgets.volume,
-		 '<span font="Terminus 8" color="' .. beautiful.fg_widget_label .. '">Vol: </span>' ..
-		    '<span font="Terminus 8" color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
+		 '<span font="Terminus 8" color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
 		2, "Master")
 volwidget:buttons(awful.util.table.join(
    awful.button({ }, 1, function () awful.util.spawn("pavucontrol", false) end),
