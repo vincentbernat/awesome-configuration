@@ -33,12 +33,52 @@ if config.hostname == "guybrush" then
 		       end
 		       return string.format(
 			  '<span font="Terminus 8" color="' .. beautiful.fg_widget_label ..
-			     '">BAT: </span>' ..
+			     '">Bat: </span>' ..
 			     '<span font="Terminus 8" color="' .. color ..
 			     '">%s %d%%</span>', args[1], current)
 		    end,
 		    61, "BAT1")
 end
+
+-- Network
+local netwidget = widget({ type = "textbox" })
+local netgraph = awful.widget.graph()
+netgraph:set_width(80):set_height(14)
+netgraph:set_stack(true):set_scale(true)
+netgraph:set_border_color(beautiful.fg_widget_border)
+netgraph:set_stack_colors({ "#FF0000", "#0000FF" })
+netgraph:set_background_color("#00000000")
+vicious.register(netwidget, vicious.widgets.net,
+    function (widget, args)
+       -- We sum up/down value for all interfaces
+       local up = 0
+       local down = 0
+       local iface
+       for name, value in pairs(args) do
+	  iface = name:match("^{(%S+) down_b}$")
+	  if iface and iface ~= "lo" then down = down + value end
+	  iface = name:match("^{(%S+) up_b}$")
+	  if iface and iface ~= "lo" then up = up + value end
+       end
+       -- Update the graph
+       netgraph:add_value(up, 1)
+       netgraph:add_value(down, 2)
+       -- Format the string representation
+       local format = function(val)
+	  if val > 500000 then
+	     return string.format("%.1f MB", val/1000000.)
+	  elseif val > 500 then
+	     return string.format("%.1f KB", val/1000.)
+	  end
+	  return string.format("%d B", val)
+       end
+       return string.format(
+	  '<span font="Terminus 8" color="' .. beautiful.fg_widget_label ..
+	     '">Up/Down: </span><span font="Terminus 8" color="' .. beautiful.fg_widget_value ..
+	     '">%08s</span><span font="Terminus 8" color="' .. beautiful.fg_widget_label ..
+	     '">/</span><span font="Terminus 8" color="' .. beautiful.fg_widget_value ..
+	     '">%08s</span> ', format(up), format(down))
+    end, 3)
 
 -- Memory usage
 local memwidget = widget({ type = "textbox" })
@@ -169,6 +209,7 @@ for s = 1, screen.count() do
 	on(2, fswidget), on(2, separator),
 	on(1, memwidget), on(1, separator),
 	on(1, cpuwidget), on(1, separator),
+	on(1, netgraph.widget), on(1, netwidget), on(1, separator),
 	tasklist[s], tasklist[s] ~= "" and separator or "",
 	layout = awful.widget.layout.horizontal.rightleft }
 end
