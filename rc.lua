@@ -24,9 +24,9 @@ modkey = "Mod4"
 config = {}
 config.terminal = table.concat({"urxvtcd",
 				"++iso14755 +sb -si -sw -j -fn fixed -sl 2000",
-				"-fade 40 -sh 30 -bc -tint white -fg white -depth 32",
+				"-sh 30 -bc -tint white -fg white -depth 32",
 				"--color4 RoyalBlue --color12 RoyalBlue",
-				"-bg rgba:0000/0000/0000/bbbb -fadecolor rgba:0000/0000/0000/6666"},
+				"-bg rgba:0000/0000/0000/dddd"},
 			       " ")
 config.layouts = {
    awful.layout.suit.tile,
