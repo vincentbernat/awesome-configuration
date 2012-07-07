@@ -159,7 +159,7 @@ for s = 1, screen.count() do
 	on(2, fswidget), on(2, separator),
 	on(1, memwidget), on(1, separator),
 	on(1, cpuwidget), on(1, separator),
-	tasklist[s], tasklist ~= "" and separator or "",
+	tasklist[s], tasklist[s] ~= "" and separator or "",
 	layout = awful.widget.layout.horizontal.rightleft }
 end
 
