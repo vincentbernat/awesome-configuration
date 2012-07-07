@@ -45,7 +45,12 @@ config.keys.global = awful.util.table.join(
    awful.key({ modkey,           }, "Return", function () awful.util.spawn(config.terminal) end),
 
    -- Restart awesome
-   awful.key({ modkey, "Control" }, "r", awesome.restart)
+   awful.key({ modkey, "Control" }, "r", awesome.restart),
+
+   -- Multimedia keys
+   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q -c 0 set Master 2dB+", false) end),
+   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q -c 0 set Master 2dB-", false) end),
+   awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -q -c 0 set Master toggle", false) end)
 )
 
 config.keys.client = awful.util.table.join(
