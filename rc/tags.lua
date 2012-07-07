@@ -42,8 +42,16 @@ for i = 1, #tags do
 		   end),
 	 awful.key({ modkey, "Control" }, "#" .. i + 9,
 		   function ()
-		      if tags[i] then
-			 awful.tag.viewtoggle(tags[i])
+		      local t = tags[i]
+		      if t then
+			 if t.screen ~= mouse.screen then
+			    sharetags.tag_move(t, mouse.screen)
+			    if not t.selected then
+			       awful.tag.viewtoggle(t)
+			    end
+			 else
+			    awful.tag.viewtoggle(t)
+			 end
 		      end
 		   end),
 	 awful.key({ modkey, "Shift" }, "#" .. i + 9,
