@@ -21,7 +21,7 @@ vicious.register(cpuwidget, vicious.widgets.cpu,
 		 end, 2)
 
 -- Battery
-local batwidget = nil
+local batwidget = ""
 if config.hostname == "guybrush" then
    batwidget = widget({ type = "textbox" })
    vicious.register(batwidget, vicious.widgets.bat,
@@ -155,7 +155,7 @@ for s = 1, screen.count() do
 	onfirst(systray), onfirst(separator),
 	datewidget, separator,
 	onsecond(volwidget), onsecond(separator),
-	onsecond(batwidget), onsecond(batwidget and separator or nil),
+	onsecond(batwidget), onsecond(batwidget ~= "" and separator or nil),
 	onsecond(fswidget), onsecond(separator),
 	onfirst(memwidget), onfirst(separator),
 	onfirst(cpuwidget), onfirst(separator),
