@@ -2,8 +2,10 @@
 
 loadrc("sharetags")
 
-local tags = { names = { "main", "emacs", "www", "im", 5 },
+local tags = { names = { "main", "emacs", "www", "im", 5, 6, 7 },
 	       layout = { awful.layout.suit.tile,
+			  awful.layout.suit.tile,
+			  awful.layout.suit.tile,
 			  awful.layout.suit.tile,
 			  awful.layout.suit.tile,
 			  awful.layout.suit.tile,
