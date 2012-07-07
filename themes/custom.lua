@@ -12,6 +12,7 @@ if theme then
    theme.bg_widget        = "#00000099"
    theme.fg_widget_label  = "#708090"
    theme.fg_widget_value  = "#FFFFFF"
+   theme.fg_widget_value_important  = "#FF2222"
    theme.fg_widget_sep    = "#FFFFFF"
    theme.fg_widget_border = "#FFFFFF"
    theme.fg_widget_clock  = "#FF7F00"

@@ -48,6 +48,33 @@ volwidget:buttons(awful.util.table.join(
    awful.button({ }, 5, function () awful.util.spawn("amixer -q -c 0 set Master 2dB-", false) end)
 ))
 
+-- File systems
+local fs = { ["/"] = "root",
+	     ["/home"] = "home",
+	     ["/var"] = "var",
+	     ["/usr"] = "usr",
+	     ["/tmp"] = "tmp",
+	     ["/var/cache/build"] = "pbuilder" }
+local fswidget = widget({ type = "textbox" })
+vicious.register(fswidget, vicious.widgets.fs,
+		 function (widget, args)
+		    local result = ""
+		    for path, name in pairs(fs) do
+		       local used = args["{" .. path .. " used_p}"]
+		       local color = beautiful.fg_widget_value
+		       if used then
+			  if used > 90 then
+			     color = beautiful.fg_widget_value_important
+			  end
+			  result = string.format(
+			     '%s%s<span font="Terminus 8" color="' .. beautiful.fg_widget_label .. '">%s: </span>' ..
+				'<span font="Terminus 8" color="' .. color .. '">%2d%%</span>',
+			     result, #result > 0 and separator.text or "", name, used)
+		       end
+		    end
+		    return result
+		 end, 10)
+
 local systray = widget({ type = "systray" })
 
 -- Wibox initialisation
@@ -129,6 +156,7 @@ for s = 1, screen.count() do
 	datewidget, separator,
 	onsecond(volwidget), onsecond(separator),
 	onsecond(batwidget), onsecond(batwidget and separator or nil),
+	onsecond(fswidget), onsecond(separator),
 	onfirst(memwidget), onfirst(separator),
 	onfirst(cpuwidget), onfirst(separator),
 	tasklist[s], separator,
