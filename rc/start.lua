@@ -18,7 +18,7 @@ if xrandr[config.hostname] then
 end
 
 -- Spawn a composoting manager
-awful.util.spawn("unagi", false)
+awful.util.spawn("xcompmgr", false)
 
 -- Start idempotent commands
 local execute = {

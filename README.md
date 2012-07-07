@@ -18,8 +18,7 @@ Here some of the things you may be interested in:
    `ps`, it looks at the list of the connected clients with
    `xwininfo`. Seems reliable.
  - I use a light transparency effect to tell if a window has the focus
-   or not. It needs a composite manager. I have chosen `unagi` for
-   this (packaged in Debian).
+   or not. It needs a composite manager.
  - I use a Python script `bin/build-wallpaper` to build the wallpaper
    to be displayed. There is a random selection and it works with
    multihead setup. It seems that classic tools are now able to change
