@@ -13,21 +13,12 @@ vicious.register(datewidget, vicious.widgets.date,
 
 -- CPU usage
 local cpuwidget = widget({ type = "textbox" })
-cpuwidget.text = '<span font="Terminus 8" color="' .. beautiful.fg_widget_label .. '">CPU: </span>'
-local cpugraph = awful.widget.graph()
-cpugraph:set_width(45):set_height(12)
-cpugraph:set_border_color(beautiful.fg_widget_border)
-cpugraph:set_gradient_angle(0):set_gradient_colors({
-   beautiful.fg_widget_start, beautiful.fg_widget_center, beautiful.fg_widget_end
-						   })
-vicious.register(cpugraph, vicious.widgets.cpu, "$1")
-local cpuvalue = widget({ type = "textbox" })
-vicious.register(cpuvalue, vicious.widgets.cpu,
+vicious.register(cpuwidget, vicious.widgets.cpu,
 		 function (widget, args)
-		    return string.format('<span font="Terminus 8" color="' ..
-					 beautiful.fg_widget_value ..
-					 '"> %2d%%</span>', args[1])
-		 end)
+		    return string.format('<span font="Terminus 8" color="' .. beautiful.fg_widget_label .. '">CPU: </span>' ..
+					 '<span font="Terminus 8" color="' .. beautiful.fg_widget_value .. '">%3d%%</span>',
+					 args[1])
+		 end, 2)
 
 -- Battery
 local batwidget = nil
@@ -60,7 +51,7 @@ volwidget:buttons(awful.util.table.join(
 
 local systray = widget({ type = "systray" })
 
--- {{{ Wibox initialisation
+-- Wibox initialisation
 local wibox     = {}
 local promptbox = {}
 local layoutbox = {}
@@ -135,12 +126,12 @@ for s = 1, screen.count() do
 	   separator, promptbox[s],
 	   layout = awful.widget.layout.horizontal.leftright
 	},
-	onfirst(systray), onfirst(seperator),
+	onfirst(systray), onfirst(separator),
 	datewidget, separator,
 	onsecond(volwidget), onsecond(separator),
 	onsecond(batwidget), onsecond(batwidget and separator or nil),
 	onfirst(memwidget), onfirst(separator),
-	onfirst(cpuvalue), onfirst(cpugraph.widget), onfirst(cpuwidget), onfirst(separator),
+	onfirst(cpuwidget), onfirst(separator),
 	tasklist[s], separator,
 	layout = awful.widget.layout.horizontal.rightleft }
 end
