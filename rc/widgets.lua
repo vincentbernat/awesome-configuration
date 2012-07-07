@@ -112,11 +112,11 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox
     local onfirst = function(what)
        if s == 1 then return what end
-       return nil
+       return ""
     end
     local onsecond = function(what)
        if s == 2 or screen.count() == 1 then return what end
-       return nil
+       return ""
     end
 
     wibox[s].widgets = {
