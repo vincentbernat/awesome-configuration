@@ -36,7 +36,7 @@ config.layouts = {
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 
 -- Remaining modules
-loadrc("theme")
+loadrc("apparance")
 loadrc("start")
 loadrc("bindings")
 loadrc("wallpaper")

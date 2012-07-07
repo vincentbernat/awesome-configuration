@@ -1,34 +1,27 @@
--- Theme
-beautiful.init(awful.util.getdir("config") .. "/themes/custom.lua")
+-- Small modifications to anrxc's zenburn theme
 
--- GTK stuff: we choose Adwaita theme which seems to be the only one
--- kept up-to-date with GTK2 and GTK3...
+local theme = loadrc("../themes/nice-and-clean-theme/theme")
+if theme then
+   theme.wallpaper_cmd = { "/bin/true" }
+   theme.font = "Cantarell 9"
+   theme.border_width = 2
+   theme.border_normal = "#00000000"
+   theme.border_focus = theme.border_focus .. "66"
+   theme.border_marked = theme.border_marked .. "66"
 
--- Also see: http://developer.gnome.org/gtk3/3.2/GtkSettings.html
-local gtk = 'gtk-font-name="' .. beautiful.font .. '"' .. [[
-
-gtk-theme-name="Adwaita"
-gtk-icon-theme-name="gnome-wine"
-gtk-cursor-theme-name="oxy-cherry"
-gtk-cursor-theme-size=0
-gtk-toolbar-style=GTK_TOOLBAR_BOTH
-gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
-gtk-button-images=1
-gtk-menu-images=1
-gtk-xft-antialias=1
-gtk-xft-hinting=1
-gtk-xft-hintstyle="hintfull"
-gtk-xft-rgba="rgb"
-gtk-key-theme-name="Emacs"
-]]
-
-local gtk2 = io.open(os.getenv("HOME") .. "/.gtkrc-2.0", "w")
-gtk2:write(gtk)
-gtk2:close()
-
--- GTK3 is the same, but no double quotes for strings
-local gtk3 = io.open(os.getenv("HOME") .. "/.config/gtk-3.0/settings.ini", "w")
-gtk, _ = gtk:gsub('"', '')
-gtk3:write("[Settings]\n")
-gtk3:write(gtk)
-gtk3:close()
+   theme.bg_normal        = theme.bg_normal .. "99"
+   theme.bg_focus         = theme.bg_focus .. "99"
+   theme.bg_urgent        = theme.bg_urgent .. "99"
+   theme.bg_minimize      = theme.bg_minimize .. "99"
+   theme.bg_widget        = "#00000099"
+   theme.fg_widget_label  = "#708090"
+   theme.fg_widget_value  = "#FFFFFF"
+   theme.fg_widget_value_important  = "#FF2222"
+   theme.fg_widget_sep    = "#FFFFFF"
+   theme.fg_widget_border = "#FFFFFF"
+   theme.fg_widget_clock  = "#FF7F00"
+   theme.fg_widget_end    = "#FFFFFF"
+   theme.fg_widget_center = "#FFCCCC"
+   theme.fg_widget_start  = "#FF0000"
+   return theme
+end

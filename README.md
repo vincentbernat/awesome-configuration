@@ -26,7 +26,7 @@ Here some of the things you may be interested in:
    useless but I keep it.
  - I am using `xautolock` + `i3lock` as a screensaver. Nothing fancy
    but I reuse the wallpaper built above.
- - In `rc/theme.lua`, you may be interested by the way I configure
+ - In `rc/apparance.lua`, you may be interested by the way I configure
    GTK2 and GTK3 to have an unified look. It works and it does not
    need `gnome-control-center`.
  - I am sharing tags between screen with
