@@ -25,8 +25,18 @@ local batwidget = ""
 if config.hostname == "guybrush" then
    batwidget = widget({ type = "textbox" })
    vicious.register(batwidget, vicious.widgets.bat,
-		    '<span font="Terminus 8" color="' .. beautiful.fg_widget_label .. '">BAT: </span>' ..
-		       '<span font="Terminus 8" color="' .. beautiful.fg_widget_value .. '">$1 $2%</span>',
+		    function (widget, args)
+		       local color = beautiful.fg_widget_value
+		       local current = args[2]
+		       if current < 10 then
+			  color = beautiful.fg_widget_value_important
+		       end
+		       return string.format(
+			  '<span font="Terminus 8" color="' .. beautiful.fg_widget_label ..
+			     '">BAT: </span>' ..
+			     '<span font="Terminus 8" color="' .. color ..
+			     '">%s %d%%</span>', args[1], current)
+		    end,
 		    61, "BAT1")
 end
 
