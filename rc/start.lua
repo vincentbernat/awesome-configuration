@@ -74,6 +74,6 @@ startapps = function()
       xrun("Transmission", "transmission-gtk -m")
    elseif config.hostname == "guybrush" then
       xrun("keepassx", "keepassx -min -lock")
-      -- xrun("nm-applet")
+      xrun("NetworkManager Applet", "nm-applet")
    end
 end
