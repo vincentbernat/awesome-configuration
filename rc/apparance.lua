@@ -32,3 +32,8 @@ gtk, _ = gtk:gsub('"', '')
 gtk3:write("[Settings]\n")
 gtk3:write(gtk)
 gtk3:close()
+
+-- For QT, the configuration file is ~/.config/Trolltech.conf. It
+-- seems a bit complex to override it each time. The solution is to
+-- run qtconfig and to select "GTK+" for the style and "Cantarell 9"
+-- for the font.
