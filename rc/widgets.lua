@@ -122,10 +122,14 @@ tasklist.buttons = awful.util.table.join(
 for s = 1, screen.count() do
     promptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
     layoutbox[s] = awful.widget.layoutbox(s)
-    tasklist[s]  = awful.widget.tasklist(
-       function(c)
-	  return awful.widget.tasklist.label.currenttags(c, s)
-       end, tasklist.buttons)
+    if screen.count() > 1 then
+       tasklist[s]  = awful.widget.tasklist(
+	  function(c)
+	     return awful.widget.tasklist.label.currenttags(c, s)
+	  end, tasklist.buttons)
+    else
+       tasklist[s] = ""
+    end
     
     -- Create the taglist
     taglist[s]   = sharetags.taglist(s, sharetags.label.all, taglist.buttons)
@@ -137,12 +141,8 @@ for s = 1, screen.count() do
 			     height = 14,
     })
     -- Add widgets to the wibox
-    local onfirst = function(what)
-       if s == 1 then return what end
-       return ""
-    end
-    local onsecond = function(what)
-       if s == 2 or screen.count() == 1 then return what end
+    local on = function(n, what)
+       if s == n or n > screen.count() then return what end
        return ""
     end
 
@@ -152,14 +152,14 @@ for s = 1, screen.count() do
 	   separator, promptbox[s],
 	   layout = awful.widget.layout.horizontal.leftright
 	},
-	onfirst(systray), onfirst(separator),
+	on(1, systray), on(1, separator),
 	datewidget, separator,
-	onsecond(volwidget), onsecond(separator),
-	onsecond(batwidget), onsecond(batwidget ~= "" and separator or nil),
-	onsecond(fswidget), onsecond(separator),
-	onfirst(memwidget), onfirst(separator),
-	onfirst(cpuwidget), onfirst(separator),
-	tasklist[s], separator,
+	on(2, volwidget), on(2, separator),
+	on(2, batwidget), on(2, batwidget ~= "" and separator or ""),
+	on(2, fswidget), on(2, separator),
+	on(1, memwidget), on(1, separator),
+	on(1, cpuwidget), on(1, separator),
+	tasklist[s], tasklist ~= "" and separator or "",
 	layout = awful.widget.layout.horizontal.rightleft }
 end
 
