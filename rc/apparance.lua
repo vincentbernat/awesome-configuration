@@ -9,6 +9,7 @@ local gtk = 'gtk-font-name="' .. beautiful.font .. '"' .. [[
 
 gtk-theme-name="Adwaita"
 gtk-icon-theme-name="gnome-wine"
+gtk-fallback-icon-theme="gnome"
 gtk-cursor-theme-name="oxy-cherry"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH
