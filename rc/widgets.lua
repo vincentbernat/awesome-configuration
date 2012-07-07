@@ -27,7 +27,7 @@ if config.hostname == "guybrush" then
    vicious.register(batwidget, vicious.widgets.bat,
 		    '<span font="Terminus 8" color="' .. beautiful.fg_widget_label .. '">BAT: </span>' ..
 		       '<span font="Terminus 8" color="' .. beautiful.fg_widget_value .. '">$1 $2%</span>',
-		    61, "BAT0")
+		    61, "BAT1")
 end
 
 -- Memory usage
