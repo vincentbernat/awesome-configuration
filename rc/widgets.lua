@@ -207,9 +207,9 @@ for s = 1, screen.count() do
 	on(2, volwidget), on(2, separator),
 	on(2, batwidget), on(2, batwidget ~= "" and separator or ""),
 	on(2, fswidget), on(2, separator),
+	on(1, netgraph.widget), on(1, netwidget), on(1, separator),
 	on(1, memwidget), on(1, separator),
 	on(1, cpuwidget), on(1, separator),
-	on(1, netgraph.widget), on(1, netwidget), on(1, separator),
 	tasklist[s], tasklist[s] ~= "" and separator or "",
 	layout = awful.widget.layout.horizontal.rightleft }
 end
