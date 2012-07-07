@@ -28,6 +28,14 @@ for i = 1, #tags do
 		   function ()
 		      local t = tags[i]
 		      if t.screen ~= mouse.screen then
+			 if t.selected then
+			    -- This tag is selected on another screen, let's swap
+			    local currents = awful.tag.selectedlist(mouse.screen)
+			    for _,current in pairs(currents) do
+			       sharetags.tag_move(current, t.screen)
+			    end
+			    awful.tag.viewmore(currents, t.screen)
+			 end
 			 sharetags.tag_move(t, mouse.screen)
 		      end
 		      awful.tag.viewonly(tags[i])
