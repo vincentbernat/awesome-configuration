@@ -38,3 +38,15 @@ gtk3:close()
 -- seems a bit complex to override it each time. The solution is to
 -- run qtconfig and to select "GTK+" for the style and the appropriate
 -- font.
+
+-- The systray is a bit complex. We need to configure it to display
+-- the right colors. Here is a link with more background about this:
+--  http://thread.gmane.org/gmane.comp.window-managers.awesome/9028
+xprop = assert(io.popen("xprop -root _NET_SUPPORTING_WM_CHECK"))
+wid = xprop:read():match("^_NET_SUPPORTING_WM_CHECK.WINDOW.: window id # (0x[%S]+)$")
+if wid then
+   wid = tonumber(wid) + 1
+   os.execute("xprop -id " .. wid .. " -format _NET_SYSTEM_TRAY_COLORS 32c " ..
+	      "-set _NET_SYSTEM_TRAY_COLORS " ..
+	      "65535,65535,65535,65535,8670,8670,65535,32385,0,8670,65535,8670")
+end
