@@ -31,6 +31,7 @@ config.terminal = table.concat({"urxvtcd",
 config.layouts = {
    awful.layout.suit.tile,
    awful.layout.suit.tile.left,
+   awful.layout.suit.tile.bottom,
    awful.layout.suit.floating,
 }
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
