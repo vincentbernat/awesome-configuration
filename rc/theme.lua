@@ -4,7 +4,7 @@ local theme = loadrc("../themes/nice-and-clean-theme/theme")
 if theme then
    theme.wallpaper_cmd = { "/bin/true" }
    theme.font = "DejaVu Sans 9"
-   theme.border_width = 2
+   theme.border_width = 4
    theme.border_normal = "#00000000"
    theme.border_focus = theme.border_focus .. "66"
    theme.border_marked = theme.border_marked .. "66"
