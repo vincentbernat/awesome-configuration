@@ -18,7 +18,7 @@ config.keys.global = awful.util.table.join(
 		awful.client.focus.byidx(-1)
 		if client.focus then client.focus:raise() end
 	     end),
-   awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
+   awful.key({ modkey,           }, "u", function () awful.client.urgent.jumpto(true) end),
 
    -- Layout manipulation
    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
