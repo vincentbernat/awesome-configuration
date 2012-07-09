@@ -133,26 +133,6 @@ local promptbox = {}
 local layoutbox = {}
 
 local taglist = {}
-taglist.buttons = awful.util.table.join(
-   awful.button({ },        1,
-		function(t)
-		   if t.screen ~= mouse.screen then
-		      sharetags.tag_move(t, mouse.screen)
-		   end
-		   awful.tag.viewonly(t)
-		end),
-   awful.button({ modkey }, 1, awful.client.movetotag),
-   awful.button({ },        3,
-		function(t)
-		   if t.screen ~= mouse.screen then
-		      sharetags.tag_move(t, mouse.screen)
-		   end
-		   awful.tag.viewtoggle(t)
-		end),
-   awful.button({ modkey }, 3, awful.client.toggletag),
-   awful.button({ },        4, awful.tag.viewnext),
-   awful.button({ },        5, awful.tag.viewprev))
-
 local tasklist = {}
 tasklist.buttons = awful.util.table.join(
    awful.button({ }, 1, function (c)
@@ -206,7 +186,7 @@ for s = 1, screen.count() do
        end, tasklist.buttons)
 
     -- Create the taglist
-    taglist[s]   = sharetags.taglist(s, sharetags.label.all, taglist.buttons)
+    taglist[s]   = sharetags.taglist(s, sharetags.label.all)
     -- Create the wibox
     wibox[s] = awful.wibox({ screen = s,
 			     fg = beautiful.fg_normal,
