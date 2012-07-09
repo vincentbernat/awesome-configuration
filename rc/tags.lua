@@ -21,6 +21,9 @@ keynumber = math.min(9, #tags)
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, #tags do
    config.tags[tags[i].name] = tags[i]
+   if tags[i].name ~= tostring(i) then
+      tags[i].name = tostring(i) .. "↭" .. tags[i].name
+   end
    if i <= keynumber then
       config.keys.global = awful.util.table.join(
 	 config.keys.global,
