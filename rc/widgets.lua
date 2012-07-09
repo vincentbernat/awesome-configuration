@@ -175,7 +175,26 @@ for s = 1, screen.count() do
     if screen.count() > 1 then
        tasklist[s]  = awful.widget.tasklist(
 	  function(c)
-	     return awful.widget.tasklist.label.currenttags(c, s)
+	     local title, color, _, icon = awful.widget.tasklist.label.currenttags(c, s)
+	     -- Try to search for an alternative icon if none is available
+	     for _, name in pairs({c.class, c.instance}) do
+		if not icon and title and name then
+		   for _, n in pairs({name, name:lower()}) do
+		      icon = awful.util.geticonpath(name,
+						    nil,
+						    {"/usr/share/fvwm-crystal/fvwm/icons/Default/16x16/apps/",
+						     "/usr/share/fvwm-crystal/fvwm/icons/Default/22x22/apps/",
+						     "/usr/share/icons/hicolor/16x16/apps/"})
+		      if icon then
+			 -- This is our new icon. And we set it for the client to not search again
+			 icon = image(icon)
+			 c.icon = icon
+		      end
+		   end
+		end
+	     end
+	     -- Use our icon and don't set the status image.
+	     return title, color, nil, icon
 	  end, tasklist.buttons)
     else
        tasklist[s] = ""
