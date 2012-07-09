@@ -172,6 +172,7 @@ tasklist.buttons = awful.util.table.join(
 for s = 1, screen.count() do
     promptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
     layoutbox[s] = awful.widget.layoutbox(s)
+    awful.widget.layout.margins[layoutbox[s]] = { left = 5 }
     if screen.count() > 1 then
        tasklist[s]  = awful.widget.tasklist(
 	  function(c)
