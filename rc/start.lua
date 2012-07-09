@@ -65,11 +65,9 @@ startapps = function()
 	"/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
    xrun("Bluetooth Applet",
 	"bluetooth-applet")
+   xrun("Pidgin", "pidgin -n")
    
-   if config.hostname == "naruto" then
-      xrun("Pidgin", "pidgin")
-   elseif config.hostname == "neo" then
-      xrun("Pidgin", "pidgin")
+   if config.hostname == "neo" then
       xrun("keepassx", "keepassx -min -lock")
       xrun("Transmission", "transmission-gtk -m")
    elseif config.hostname == "guybrush" then
