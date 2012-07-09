@@ -173,34 +173,38 @@ for s = 1, screen.count() do
     promptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
     layoutbox[s] = awful.widget.layoutbox(s)
     awful.widget.layout.margins[layoutbox[s]] = { left = 5 }
-    if screen.count() > 1 then
-       tasklist[s]  = awful.widget.tasklist(
-	  function(c)
-	     local title, color, _, icon = awful.widget.tasklist.label.currenttags(c, s)
-	     -- Try to search for an alternative icon if none is available
-	     for _, name in pairs({c.class, c.instance}) do
-		if not icon and title and name then
-		   for _, n in pairs({name, name:lower()}) do
-		      icon = awful.util.geticonpath(name,
-						    nil,
-						    {"/usr/share/fvwm-crystal/fvwm/icons/Default/16x16/apps/",
-						     "/usr/share/fvwm-crystal/fvwm/icons/Default/22x22/apps/",
-						     "/usr/share/icons/hicolor/16x16/apps/"})
-		      if icon then
-			 -- This is our new icon. And we set it for the client to not search again
-			 icon = image(icon)
-			 c.icon = icon
-		      end
+    tasklist[s]  = awful.widget.tasklist(
+       function(c)
+	  local fn = awful.widget.tasklist.label.currenttags
+	  if screen.count() == 1 then
+	     fn = awful.widget.tasklist.label.alltags
+	  end
+	  local title, color, _, icon = fn(c, s)
+	  -- Try to search for an alternative icon if none is available
+	  for _, name in pairs({c.class, c.instance}) do
+	     if not icon and title and name then
+		for _, n in pairs({name, name:lower()}) do
+		   icon = awful.util.geticonpath(name,
+						 nil,
+						 {"/usr/share/fvwm-crystal/fvwm/icons/Default/16x16/apps/",
+						  "/usr/share/fvwm-crystal/fvwm/icons/Default/22x22/apps/",
+						  "/usr/share/icons/hicolor/16x16/apps/"})
+		   if icon then
+		      -- This is our new icon. And we set it for the client to not search again
+		      icon = image(icon)
+		      c.icon = icon
 		   end
 		end
 	     end
-	     -- Use our icon and don't set the status image.
+	  end
+	  -- Use our icon and don't set the status image.
+	  if screen.count() > 1 then
 	     return title, color, nil, icon
-	  end, tasklist.buttons)
-    else
-       tasklist[s] = ""
-    end
-    
+	  elseif icon then
+	     return "", color, nil, icon
+	  end
+       end, tasklist.buttons)
+
     -- Create the taglist
     taglist[s]   = sharetags.taglist(s, sharetags.label.all, taglist.buttons)
     -- Create the wibox
@@ -230,7 +234,7 @@ for s = 1, screen.count() do
 	on(1, netgraph.widget), on(1, netwidget), on(1, separator),
 	on(1, memwidget), on(1, separator),
 	on(1, cpuwidget), on(1, separator),
-	tasklist[s], tasklist[s] ~= "" and separator or "",
+	tasklist[s], separator,
 	layout = awful.widget.layout.horizontal.rightleft }
 end
 
