@@ -44,6 +44,7 @@ gtk3:close()
 --  http://thread.gmane.org/gmane.comp.window-managers.awesome/9028
 xprop = assert(io.popen("xprop -root _NET_SUPPORTING_WM_CHECK"))
 wid = xprop:read():match("^_NET_SUPPORTING_WM_CHECK.WINDOW.: window id # (0x[%S]+)$")
+xprop:close()
 if wid then
    wid = tonumber(wid) + 1
    os.execute("xprop -id " .. wid .. " -format _NET_SYSTEM_TRAY_COLORS 32c " ..
