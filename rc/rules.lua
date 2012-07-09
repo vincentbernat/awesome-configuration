@@ -16,6 +16,8 @@ awful.rules.rules = {
      properties = { tag = config.tags.www }},
    { rule = { name = "Chromium" },
      properties = { tag = config.tags.www }},
+   { rule = { instance = "plugin-container" },
+     properties = { floating = true }},
    { rule = { class = "Pidgin" },
      properties = { tag = config.tags.im }},
    { rule = { class = "URxvt" },
