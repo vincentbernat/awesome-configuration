@@ -23,13 +23,24 @@ vicious.register(cpuwidget, vicious.widgets.cpu,
 -- Battery
 local batwidget = ""
 if config.hostname == "guybrush" then
+   local batlastwarn = nil
    batwidget = widget({ type = "textbox" })
    vicious.register(batwidget, vicious.widgets.bat,
 		    function (widget, args)
 		       local color = beautiful.fg_widget_value
 		       local current = args[2]
-		       if current < 10 then
+		       if current < 10 and args[1] == "-" then
 			  color = beautiful.fg_widget_value_important
+			  -- Maybe we want to display a small warning?
+			  if current ~= batlastwarn then
+			     naughty.notify({ title = "Battery low!",
+					      preset = naughty.config.presets.critical,
+					      text = "Battery level is currently " ..
+						 current .. "%.\n" .. args[3] ..
+						 " left before running out of power.",
+					      icon = "/usr/share/icons/gnome/32x32" ..
+						 "/status/battery-caution.png" })
+			  end
 		       end
 		       return string.format(
 			  '<span font="Terminus 8" color="' .. beautiful.fg_widget_label ..
