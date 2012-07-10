@@ -72,5 +72,6 @@ for i = 1, #tags do
    end
 end
 
-awful.tag.setproperty(config.tags.emacs, "mwfact", 0.6) -- emacs
-awful.tag.setproperty(config.tags.www, "mwfact", 0.7) -- www
+awful.tag.setproperty(config.tags.emacs, "mwfact", 0.6)
+awful.tag.setproperty(config.tags.www, "mwfact", 0.7)
+awful.tag.setproperty(config.tags.im, "mwfact", 0.2)

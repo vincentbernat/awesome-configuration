@@ -22,9 +22,13 @@ awful.rules.rules = {
      properties = { floating = true }}, -- Flash with Firefox
    { rule = { instance = "exe", class="Exe", instance="exe" },
      properties = { floating = true }}, -- Flash with Chromium
-   -- Other stuff
+   -- Pidgin
    { rule = { class = "Pidgin" },
      properties = { tag = config.tags.im }},
+   { rule = { class = "Pidgin" },
+     except = { role = "buddy_list" }, -- buddy_list is the master
+     properties = { }, callback = awful.client.setslave },
+   -- Other stuff
    { rule = { class = "URxvt" },
      properties = { }, callback = awful.client.setslave },
 }
