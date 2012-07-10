@@ -8,8 +8,10 @@ awful.rules.rules = {
 		    maximized_horizontal = false,
 		    keys = config.keys.client,
 		    buttons = config.mouse.client }},
+   -- Emacs
    { rule = { class = "Emacs" },
      properties = { tag = config.tags.emacs }},
+   -- Browser stuff
    { rule = { name = "Iceweasel" },
      properties = { tag = config.tags.www }},
    { rule = { name = "Firefox" },
@@ -17,7 +19,10 @@ awful.rules.rules = {
    { rule = { name = "Chromium" },
      properties = { tag = config.tags.www }},
    { rule = { instance = "plugin-container" },
-     properties = { floating = true }},
+     properties = { floating = true }}, -- Flash with Firefox
+   { rule = { instance = "exe", class="Exe", instance="exe" },
+     properties = { floating = true }}, -- Flash with Chromium
+   -- Other stuff
    { rule = { class = "Pidgin" },
      properties = { tag = config.tags.im }},
    { rule = { class = "URxvt" },
