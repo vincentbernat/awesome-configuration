@@ -11,6 +11,11 @@ function loadrc(name)
    local path = awful.util.getdir("config") .. "/rc/" .. name .. ".lua"
    success, result = pcall(function() return dofile(path) end)
    if not success then
+      naughty.notify({ title = "Error while loading an RC file",
+		       text = "When loading `" .. name ..
+			  "`, got the following error:\n" .. result,
+		       preset = naughty.config.presets.critical
+		     })
       return print("E: error loading RC file '" .. name .. "': " .. result)
    end
    return result
