@@ -21,25 +21,27 @@ vicious.register(cpuwidget, vicious.widgets.cpu,
 		 end, 2)
 
 -- Battery
-local batwidget = ""
+local batwidget = { widget = "" }
 if config.hostname == "guybrush" then
-   local batlastwarn = nil
-   batwidget = widget({ type = "textbox" })
-   vicious.register(batwidget, vicious.widgets.bat,
+   batwidget.widget = widget({ type = "textbox" })
+   vicious.register(batwidget.widget, vicious.widgets.bat,
 		    function (widget, args)
 		       local color = beautiful.fg_widget_value
 		       local current = args[2]
 		       if current < 10 and args[1] == "-" then
 			  color = beautiful.fg_widget_value_important
 			  -- Maybe we want to display a small warning?
-			  if current ~= batlastwarn then
-			     naughty.notify({ title = "Battery low!",
-					      preset = naughty.config.presets.critical,
-					      text = "Battery level is currently " ..
-						 current .. "%.\n" .. args[3] ..
-						 " left before running out of power.",
-					      icon = "/usr/share/icons/gnome/32x32" ..
-						 "/status/battery-caution.png" })
+			  if current ~= batwidget.lastwarn then
+			     batwidget.lastid = naughty.notify(
+				{ title = "Battery low!",
+				  preset = naughty.config.presets.critical,
+				  text = "Battery level is currently " ..
+				     current .. "%.\n" .. args[3] ..
+				     " left before running out of power.",
+				  icon = "/usr/share/icons/gnome/32x32" ..
+				     "/status/battery-caution.png",
+				  replaces_id = batwidget.lastid }).id
+			     batwidget.lastwarn = current
 			  end
 		       end
 		       return string.format(
@@ -220,7 +222,7 @@ for s = 1, screen.count() do
 	on(1, systray), on(1, separator),
 	datewidget, separator,
 	on(2, volwidget), on(2, separator),
-	on(2, batwidget), on(2, batwidget ~= "" and separator or ""),
+	on(2, batwidget.widget), on(2, batwidget.widget ~= "" and separator or ""),
 	on(2, fswidget), on(2, separator),
 	on(1, netgraph.widget), on(1, netwidget), on(1, separator),
 	on(1, memwidget), on(1, separator),
