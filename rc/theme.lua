@@ -6,7 +6,7 @@ if theme then
    theme.font = "DejaVu Sans 9"
    theme.border_width = 4
    theme.border_normal = "#00000000"
-   theme.border_focus = theme.border_focus .. "66"
+   theme.border_focus = "#FF7F0066"
    theme.border_marked = theme.border_marked .. "66"
 
    theme.bg_normal        = theme.bg_normal .. "99"
