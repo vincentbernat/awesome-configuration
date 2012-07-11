@@ -1,8 +1,11 @@
 -- Lockscreen
 
 xrun("xautolock",
-     "xautolock -time 3 -locker 'i3lock -n -i " ..
-	awful.util.getdir("cache") .. "/current-wallpaper.png'")
+     "xautolock -notify 10 -notifier " ..
+	" 'notify-send Lock\ screen -i /usr/share/icons/gnome/32x32/actions/system-lock-screen.png -t 10000 " ..
+	"   Lock\ screen\ will\ be\ started\ in\ 10\ seconds...' " ..
+	" -time 3 -locker " ..
+	" 'i3lock -n -i " .. awful.util.getdir("cache") .. "/current-wallpaper.png'")
 
 config.keys.global = awful.util.table.join(
    config.keys.global,
