@@ -107,8 +107,9 @@ vicious.register(volwidget, vicious.widgets.volume,
 		2, "Master")
 volwidget:buttons(awful.util.table.join(
    awful.button({ }, 1, function () awful.util.spawn("pavucontrol", false) end),
-   awful.button({ }, 4, function () awful.util.spawn("amixer -q -c 0 set Master 2dB+", false) end),
-   awful.button({ }, 5, function () awful.util.spawn("amixer -q -c 0 set Master 2dB-", false) end)
+   awful.button({ }, 3, function () awful.util.spawn("amixer -q sset Master toggle", false) end),
+   awful.button({ }, 4, function () awful.util.spawn("amixer -q sset Master 5%+", false) end),
+   awful.button({ }, 5, function () awful.util.spawn("amixer -q sset Master 5%-", false) end)
 ))
 
 -- File systems
