@@ -19,5 +19,4 @@ export GTK2_RC_FILES=$HOME/.gtkrc-2.0
     export XAUTHORITY=$HOME/.Xauthority
 }
 
-# Exec awesome and put its logs in dedicated files instead of ~/.xsession-errors
-exec awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+exec awesome
