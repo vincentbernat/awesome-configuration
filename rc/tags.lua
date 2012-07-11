@@ -42,6 +42,12 @@ for i = 1, #tags do
 			 sharetags.tag_move(t, mouse.screen)
 		      end
 		      awful.tag.viewonly(tags[i])
+		      -- Select the master window
+		      local m = awful.client.getmaster()
+		      if m then
+			 client.focus = m
+			 m:raise()
+		      end
 		   end),
 	 awful.key({ modkey, "Control" }, "#" .. i + 9,
 		   function ()
