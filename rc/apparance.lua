@@ -51,3 +51,6 @@ if wid then
 	      "-set _NET_SYSTEM_TRAY_COLORS " ..
 	      "65535,65535,65535,65535,8670,8670,65535,32385,0,8670,65535,8670")
 end
+
+-- Set cursor theme
+os.execute("xsetroot -cursor_name left_ptr")
