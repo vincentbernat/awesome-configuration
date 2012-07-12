@@ -1,14 +1,6 @@
 require("awesome")
 require("naughty")
 
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
-if awesome.startup_errors then
-    naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
-end
-
 -- Handle runtime errors after startup
 do
     local in_error = false
@@ -22,10 +14,4 @@ do
                          text = err })
         in_error = false
     end)
-end
-
-function dbg(vars)
-    local text = ""
-    for i=1, #vars do text = text .. vars[i] .. " | " end
-    naughty.notify({ text = text, timeout = 0 })
 end
