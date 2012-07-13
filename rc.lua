@@ -40,6 +40,15 @@ config.layouts = {
    awful.layout.suit.fair,
    awful.layout.suit.floating,
 }
+config.tags = { 
+   { layout = awful.layout.suit.fair }, -- 1
+   { name = "emacs", mwfact = 0.6 },
+   { name = "www", mwfact = 0.7 },
+   { name = "im" , mwfact = 0.2 },
+   { }, -- 5
+   { }, -- 6
+   { }, -- 7
+}
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 
 -- Remaining modules

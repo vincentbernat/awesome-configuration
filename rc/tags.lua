@@ -2,16 +2,17 @@
 
 loadrc("sharetags")
 
-local tags = { names = { 1, "emacs", "www", "im", 5, 6, 7 },
-	       layout = { awful.layout.suit.tile,
-			  awful.layout.suit.tile,
-			  awful.layout.suit.tile,
-			  awful.layout.suit.tile,
-			  awful.layout.suit.tile,
-			  awful.layout.suit.tile,
-			  awful.layout.suit.tile }}
-tags = sharetags.create_tags(tags.names, tags.layout)
+local otags = config.tags
 config.tags = {}
+
+local names = {}
+local layouts = {}
+for i, v in ipairs(otags) do
+   names[i] = v.name or i
+   layouts[i] = v.layout or config.layouts[1]
+end
+
+tags = sharetags.create_tags(names, layouts)
 
 -- Compute the maximum number of digit we need, limited to 9
 keynumber = math.min(9, #tags)
@@ -20,10 +21,20 @@ keynumber = math.min(9, #tags)
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, #tags do
+   -- Name
    config.tags[tags[i].name] = tags[i]
    if tags[i].name ~= tostring(i) then
       tags[i].name = tostring(i) .. "↭" .. tags[i].name
    end
+
+   -- Properties
+   for pname, pvalue in pairs(otags[i]) do
+      if pname ~= "name" and pname ~= "layout" then
+	 awful.tag.setproperty(tags[i], pname, pvalue)
+      end
+   end
+
+   -- Key bindings
    if i <= keynumber then
       config.keys.global = awful.util.table.join(
 	 config.keys.global,
@@ -71,7 +82,3 @@ for i = 1, #tags do
 		   end))
    end
 end
-
-awful.tag.setproperty(config.tags.emacs, "mwfact", 0.6)
-awful.tag.setproperty(config.tags.www, "mwfact", 0.7)
-awful.tag.setproperty(config.tags.im, "mwfact", 0.2)
