@@ -10,20 +10,17 @@ awful.rules.rules = {
 		    buttons = config.mouse.client }},
    -- Emacs
    { rule = { class = "Emacs" },
-     properties = { tag = config.tags.emacs,
-		    switchtotag = true }},
+     properties = { tag = config.tags.emacs }},
    -- Browser stuff
    { rule_any = { name = { "Iceweasel", "Firefox", "Chromium" } },
-     properties = { tag = config.tags.www,
-		    switchtotag = true }},
+     properties = { tag = config.tags.www }},
    { rule = { instance = "plugin-container" },
      properties = { floating = true }}, -- Flash with Firefox
    { rule = { instance = "exe", class="Exe", instance="exe" },
      properties = { floating = true }}, -- Flash with Chromium
    -- Pidgin
    { rule = { class = "Pidgin" },
-     properties = { tag = config.tags.im,
-		    switchtotag = true }},
+     properties = { tag = config.tags.im }},
    { rule = { class = "Pidgin" },
      except = { role = "buddy_list" }, -- buddy_list is the master
      properties = { }, callback = awful.client.setslave },
