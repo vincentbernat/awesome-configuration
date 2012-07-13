@@ -1,6 +1,37 @@
 config.keys = {}
 config.mouse = {}
 
+local function client_info()
+    local v = ""
+
+    -- object
+    local c = client.focus
+    v = v .. tostring(c)
+
+    -- geometry
+    local cc = c:geometry()
+    local signx = (cc.x > 0 and "+") or ""
+    local signy = (cc.y > 0 and "+") or ""
+    v = v .. " @ " .. cc.width .. 'x' .. cc.height .. signx .. cc.x .. signy .. cc.y .. "\n\n"
+
+    local inf = {
+        "name", "icon_name", "type", "class", "role", "instance", "pid",
+        "icon_name", "skip_taskbar", "id", "group_id", "leader_id", "machine",
+        "screen", "hide", "minimize", "size_hints_honor", "titlebar", "urgent",
+        "focus", "opacity", "ontop", "above", "below", "fullscreen", "transient_for"
+    }
+
+    for i = 1, #inf do
+        v = v .. string.format('%2s: <span color="%s">%-16s</span> = <span color="%s">%s</span>\n',
+			       i,
+			       beautiful.fg_widget_label, inf[i],
+			       beautiful.fg_widget_value, tostring(c[inf[i]]))
+    end
+
+    naughty.notify{ text = string.format('<span font="Terminus 8">%s</span>', v:sub(1,#v-1)),
+		    timeout = 0, margin = 10, screen = c.screen }
+end
+
 config.keys.global = awful.util.table.join(
    -- Tag navigation
    awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
@@ -60,6 +91,7 @@ config.keys.client = awful.util.table.join(
    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
+   awful.key({ modkey,           }, "i",      client_info),
    awful.key({ modkey,           }, "m",
 	     function (c)
 		c.maximized_horizontal = not c.maximized_horizontal
