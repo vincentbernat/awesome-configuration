@@ -1,23 +1,5 @@
 -- Startup
 
--- run a command only if the client does not already exist
-xrun = function(name, cmd)
-   -- Try first the list of clients from awesome
-   local clients = client.get()
-   local client
-   for _, client in pairs(clients) do
-      if client.name == name or client.class == name or client.instance == name then
-	 return
-      end
-   end
-
-   -- Not found, let's check with xwininfo. We can only check name...
-   if os.execute("xwininfo -name '" .. name .. "' > /dev/null 2> /dev/null") == 0 then
-      return
-   end
-   awful.util.spawn_with_shell(cmd or name)
-end
-
 -- Setup display
 local xrandr = {
    naruto = "--output VGA1 --auto --output DVI1 --auto --left-of VGA1",
@@ -70,34 +52,21 @@ end
 os.execute(table.concat(execute, ";"))
 
 -- Spawn various X programs
-startapps = function(now)
-   -- xrun can only be used when awesome has started
-   if not now then
-      local stimer = timer { timeout = 0 }
-      stimer:add_signal("timeout", function()
-			   stimer:stop()
-			   startapps(true)
-				   end)
-      stimer:start()
-      return
-   end
+xrun("polkit-gnome-authentication-agent-1",
+     "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
+xrun("Bluetooth Applet",
+     "bluetooth-applet")
+xrun("Pidgin", "pidgin -n")
+xrun("emacs")
 
-   xrun("polkit-gnome-authentication-agent-1",
-	"/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
-   xrun("Bluetooth Applet",
-	"bluetooth-applet")
-   xrun("Pidgin", "pidgin -n")
-   xrun("emacs")
-   
-   if config.hostname == "neo" then
-      xrun("keepassx", "keepassx -min -lock")
-      xrun("Transmission", "transmission-gtk -m")
-      xrun("chromium")
-   elseif config.hostname == "guybrush" then
-      xrun("keepassx", "keepassx -min -lock")
-      xrun("NetworkManager Applet", "nm-applet")
-      xrun("chromium")
-   elseif config.hostname == "naruto" then
-      xrun("iceweasel")
-   end
+if config.hostname == "neo" then
+   xrun("keepassx", "keepassx -min -lock")
+   xrun("Transmission", "transmission-gtk -m")
+   xrun("chromium")
+elseif config.hostname == "guybrush" then
+   xrun("keepassx", "keepassx -min -lock")
+   xrun("NetworkManager Applet", "nm-applet")
+   xrun("chromium")
+elseif config.hostname == "naruto" then
+   xrun("iceweasel")
 end

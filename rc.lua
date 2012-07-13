@@ -42,6 +42,7 @@ config.layouts = {
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 
 -- Remaining modules
+loadrc("xrun")
 loadrc("appearance")
 loadrc("start")
 loadrc("bindings")
@@ -53,4 +54,3 @@ loadrc("signals")
 loadrc("rules")
 
 root.keys(config.keys.global)
-startapps()
