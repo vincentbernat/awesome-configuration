@@ -52,5 +52,6 @@ loadrc("widgets")
 loadrc("xlock")
 loadrc("signals")
 loadrc("rules")
+loadrc("quake")
 
 root.keys(config.keys.global)
