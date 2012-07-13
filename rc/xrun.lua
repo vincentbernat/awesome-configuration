@@ -4,12 +4,15 @@ local xrun_now = function(name, cmd)
    -- Try first the list of clients from awesome (which is available
    -- only if awesome has fully started, therefore, this function
    -- should be run inside a 0 timer)
-   local clients = client.get()
-   local client
-   for _, client in pairs(clients) do
-      if client.name == name or client.class == name or client.instance == name then
-	 return
-      end
+   local squid = { name, name:sub(1,1):upper() .. name:sub(2) }
+   if awful.client.cycle(
+      function(c)
+	 return awful.rules.match_any(c,
+				      { name = squid,
+					class = squid,
+					instance = squid })
+      end)() then
+      return
    end
 
    -- Not found, let's check with xwininfo. We can only check name but

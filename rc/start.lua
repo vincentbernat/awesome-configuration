@@ -56,12 +56,12 @@ xrun("polkit-gnome-authentication-agent-1",
      "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 xrun("Bluetooth Applet",
      "bluetooth-applet")
-xrun("Pidgin", "pidgin -n")
+xrun("pidgin", "pidgin -n")
 xrun("emacs")
 
 if config.hostname == "neo" then
    xrun("keepassx", "keepassx -min -lock")
-   xrun("Transmission", "transmission-gtk -m")
+   xrun("transmission", "transmission-gtk -m")
    xrun("chromium")
 elseif config.hostname == "guybrush" then
    xrun("keepassx", "keepassx -min -lock")
