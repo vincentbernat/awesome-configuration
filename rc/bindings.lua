@@ -19,13 +19,14 @@ local function client_info()
 
     local inf = {
         "name", "icon_name", "type", "class", "role", "instance", "pid",
-        "icon_name", "skip_taskbar", "id", "group_id", "leader_id", "machine",
-        "screen", "hide", "minimize", "size_hints_honor", "titlebar", "urgent",
-        "focus", "opacity", "ontop", "above", "below", "fullscreen", "transient_for"
+        "icon_name", "skip_taskbar", "id", "group_window", "leader_id", "machine",
+        "screen", "hidden", "minimized", "size_hints_honor", "titlebar", "urgent",
+        "focus", "opacity", "ontop", "above", "below", "fullscreen", "transient_for",
+	"maximixed_horizontal", "maximixed_vertical", "sticky", "modal", "focusable"
     }
 
     for i = 1, #inf do
-        v = v .. string.format('%2s: <span color="%s">%-16s</span> = <span color="%s">%s</span>\n',
+        v = v .. string.format('%2s: <span color="%s">%-20s</span> = <span color="%s">%s</span>\n',
 			       i,
 			       beautiful.fg_widget_label, inf[i],
 			       beautiful.fg_widget_value, tostring(c[inf[i]]))
