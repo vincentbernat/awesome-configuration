@@ -18,6 +18,11 @@ tags = sharetags.create_tags(names, layouts)
 -- Compute the maximum number of digit we need, limited to 9
 keynumber = math.min(9, #tags)
 
+config.keys.global = awful.util.table.join(
+   config.keys.global,
+   keydoc.group("Tag management"),
+   awful.key({ modkey }, "Escape", awful.tag.history.restore, "Switch to previous tag"))
+
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
