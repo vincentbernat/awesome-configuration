@@ -36,6 +36,17 @@ local function client_info()
 		    timeout = 0, margin = 10, screen = c.screen }
 end
 
+local function screenshot(client)
+   if not client then
+      client = "root"
+   else
+      client = client.window
+   end
+   local path = awful.util.getdir("config") .. "/screenshots/" ..
+      "screenshot-" .. os.date("%Y-%m-%d--%H:%M:%S") .. ".png"
+   awful.util.spawn("import -window " .. client .. " " .. path, false)
+end
+
 config.keys.global = awful.util.table.join(
    keydoc.group("Focus"),
    awful.key({ modkey,           }, "j",
@@ -86,10 +97,14 @@ config.keys.global = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
 	     "Swap with previous window"),
 
-   -- Spawn a terminal
    keydoc.group("Misc"),
+
+   -- Spawn a terminal
    awful.key({ modkey,           }, "Return", function () awful.util.spawn(config.terminal) end,
 	     "Spawn a terminal"),
+
+   -- Screenshot
+   awful.key({}, "Print", screenshot, "Screenshot"),
 
    -- Restart awesome
    awful.key({ modkey, "Control" }, "r", awesome.restart, "Restart awesome"),
@@ -124,7 +139,11 @@ config.keys.client = awful.util.table.join(
 		c.maximized_horizontal = not c.maximized_horizontal
 		c.maximized_vertical   = not c.maximized_vertical
 	     end,
-	     "Maximize")
+	     "Maximize"),
+
+
+   -- Screenshot
+   awful.key({ modkey }, "Print", screenshot, "Screenshot")
 )
 
 config.mouse.client = awful.util.table.join(
