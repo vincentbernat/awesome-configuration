@@ -4,7 +4,7 @@ require("vicious")
 
 -- Separator
 local separator = widget({ type = "textbox" })
-separator.text = ' <span color="' .. beautiful.fg_widget_sep .. '">|</span> '
+separator.text = ' <span color="' .. beautiful.fg_widget_sep .. '" size="small">⋆</span> '
 
 -- Date
 local datewidget = widget({ type = "textbox" })

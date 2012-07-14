@@ -36,9 +36,6 @@ function loadrc(name, mod)
    return result
 end
 
--- Error handling
-loadrc("errors")
-
 -- Global configuration
 modkey = "Mod4"
 config = {}
@@ -69,6 +66,7 @@ config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 -- Remaining modules
 loadrc("xrun")			-- xrun function
 loadrc("appearance")		-- theme and appearance settings
+loadrc("errors")		-- errors and debug stuff
 
 loadrc("start")			-- programs to run on start
 loadrc("bindings")		-- keybindings

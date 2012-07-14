@@ -17,10 +17,10 @@ do
 end
 
 local colors = {
-  header = "#FF004D",
-  count  = "#33FF33",
-  index = "#708090",
-  name = "#8F8870",
+  header = theme.fg_widget_clock,
+  count  = theme.fg_widget_label,
+  index  = theme.fg_widget_label,
+  name   = theme.fg_widget_value_important,
 }
 
 local function dbg_get(var, depth, indent)
