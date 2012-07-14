@@ -234,4 +234,5 @@ end
 
 config.keys.global = awful.util.table.join(
    config.keys.global,
-   awful.key({ modkey }, "r", function () promptbox[mouse.screen]:run() end))
+   awful.key({ modkey }, "r", function () promptbox[mouse.screen]:run() end,
+	     "Prompt for a command"))

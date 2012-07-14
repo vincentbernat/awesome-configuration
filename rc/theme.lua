@@ -12,7 +12,7 @@ if theme then
    theme.border_marked = theme.border_marked .. "66"
 
    theme.bg_normal        = theme.bg_normal .. "99"
-   theme.bg_focus         = theme.bg_focus .. "99"
+   theme.bg_focus         = theme.bg_focus .. "BB"
    theme.bg_urgent        = theme.bg_urgent .. "99"
    theme.bg_minimize      = theme.bg_minimize .. "99"
 
@@ -20,7 +20,7 @@ if theme then
    theme.bg_widget        = "#00000099"
    theme.fg_widget_label  = "#737d8c"
    theme.fg_widget_value  = na(theme.fg_normal)
-   theme.fg_widget_value_important  = na(theme.border_marked)
+   theme.fg_widget_value_important  = "#E80F28"
    theme.fg_widget_sep    = na(theme.fg_normal)
    theme.fg_widget_border = theme.fg_widget_label
    theme.fg_widget_clock  = na(theme.border_focus)

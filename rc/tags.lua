@@ -1,6 +1,7 @@
 -- Tags
 
 sharetags = loadrc("sharetags", "vbe/sharetags")
+keydoc = loadrc("keydoc", "vbe/keydoc")
 
 local otags = config.tags
 config.tags = {}
@@ -38,6 +39,7 @@ for i = 1, #tags do
    if i <= keynumber then
       config.keys.global = awful.util.table.join(
 	 config.keys.global,
+	 keydoc.group("Tag management"),
 	 awful.key({ modkey }, "#" .. i + 9,
 		   function ()
 		      local t = tags[i]
@@ -53,7 +55,7 @@ for i = 1, #tags do
 			 sharetags.tag_move(t, mouse.screen)
 		      end
 		      awful.tag.viewonly(tags[i])
-		   end),
+		   end, i == 5 and "Display only this tag" or nil),
 	 awful.key({ modkey, "Control" }, "#" .. i + 9,
 		   function ()
 		      local t = tags[i]
@@ -67,18 +69,19 @@ for i = 1, #tags do
 			    awful.tag.viewtoggle(t)
 			 end
 		      end
-		   end),
+		   end, i == 5 and "Toggle display of this tag" or nil),
 	 awful.key({ modkey, "Shift" }, "#" .. i + 9,
 		   function ()
 		      if client.focus and tags[i] then
 			 awful.client.movetotag(tags[i])
 		      end
-		   end),
+		   end, i == 5 and "Move window to this tag" or nil),
 	 awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
 		   function ()
 		      if client.focus and tags[i] then
 			 awful.client.toggletag(tags[i])
 		      end
-		   end))
+		   end, i == 5 and "Toggle this tag on this window" or nil),
+	 keydoc.group("Misc"))
    end
 end

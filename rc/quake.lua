@@ -64,4 +64,4 @@ end
 
 config.keys.global = awful.util.table.join(
    config.keys.global,
-   awful.key({ modkey }, "`", toggle))
+   awful.key({ modkey }, "`", toggle, "Toggle Quake console"))
