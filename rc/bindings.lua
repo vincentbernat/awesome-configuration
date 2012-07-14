@@ -1,6 +1,7 @@
 config.keys = {}
 config.mouse = {}
 local volume = loadrc("volume", "vbe/volume")
+local brightness = loadrc("brightness", "vbe/brightness")
 
 local function client_info()
     local v = ""
@@ -80,6 +81,8 @@ config.keys.global = awful.util.table.join(
    awful.key({ modkey, "Control" }, "r", awesome.restart),
 
    -- Multimedia keys
+   awful.key({ }, "XF86MonBrightnessUp",   brightness.increase),
+   awful.key({ }, "XF86MonBrightnessDown", brightness.decrease),
    awful.key({ }, "XF86AudioRaiseVolume", volume.increase),
    awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
    awful.key({ }, "XF86AudioMute",        volume.toggle)
