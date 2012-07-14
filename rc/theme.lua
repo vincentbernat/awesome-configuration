@@ -17,7 +17,7 @@ if theme then
    theme.bg_minimize      = theme.bg_minimize .. "99"
 
    -- Widget stuff
-   theme.bg_widget        = "#00000099"
+   theme.bg_widget        = "#000000BB"
    theme.fg_widget_label  = "#737d8c"
    theme.fg_widget_value  = na(theme.fg_normal)
    theme.fg_widget_value_important  = "#E80F28"
@@ -27,6 +27,9 @@ if theme then
    theme.fg_widget_end    = "#FFFFFF"
    theme.fg_widget_center = "#FFCCCC"
    theme.fg_widget_start  = "#FF0000"
+
+   -- Naughty
+   naughty.config.presets.normal.bg = theme.bg_widget
 
    return theme
 end
