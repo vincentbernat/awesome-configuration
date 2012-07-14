@@ -54,8 +54,10 @@ config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 -- Remaining modules
 loadrc("xrun")			-- xrun function
 loadrc("appearance")		-- theme and appearance settings
+
 loadrc("start")			-- programs to run on start
 loadrc("bindings")		-- keybindings
+loadrc("keyboard")		-- keyboard configuration
 loadrc("wallpaper")		-- wallpaper settings
 loadrc("tags")			-- tags handling
 loadrc("widgets")		-- widgets configuration
