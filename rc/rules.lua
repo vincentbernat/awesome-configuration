@@ -24,7 +24,11 @@ awful.rules.rules = {
    { rule = { class = "Pidgin" },
      except = { role = "buddy_list" }, -- buddy_list is the master
      properties = { }, callback = awful.client.setslave },
-   -- Other stuff
-   { rule = { class = "URxvt" },
+   -- Should not be master
+   { rule_any = { class =
+		  { "URxvt",
+		    "Transmission-gtk",
+		    "Keepassx",
+		  } },
      properties = { }, callback = awful.client.setslave },
 }
