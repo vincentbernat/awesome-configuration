@@ -105,12 +105,12 @@ local volwidget = widget({ type = "textbox" })
 vicious.register(volwidget, vicious.widgets.volume,
 		 '<span font="Terminus 8" color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
 		2, "Master")
+volume = loadrc("volume", "volume")
 volwidget:buttons(awful.util.table.join(
-   awful.button({ }, 1, function () awful.util.spawn("pavucontrol", false) end),
-   awful.button({ }, 3, function () awful.util.spawn("amixer -q sset Master toggle", false) end),
-   awful.button({ }, 4, function () awful.util.spawn("amixer -q sset Master 5%+", false) end),
-   awful.button({ }, 5, function () awful.util.spawn("amixer -q sset Master 5%-", false) end)
-))
+		     awful.button({ }, 1, volume.mixer),
+		     awful.button({ }, 3, volume.toggle),
+		     awful.button({ }, 4, volume.increase),
+		     awful.button({ }, 5, volume.decrease)))
 
 -- File systems
 local fs = { ["/"] = "root",

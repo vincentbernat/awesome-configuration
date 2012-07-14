@@ -1,5 +1,6 @@
 config.keys = {}
 config.mouse = {}
+local volume = loadrc("volume", "volume")
 
 local function client_info()
     local v = ""
@@ -79,9 +80,9 @@ config.keys.global = awful.util.table.join(
    awful.key({ modkey, "Control" }, "r", awesome.restart),
 
    -- Multimedia keys
-   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q -c 0 set Master 2dB+", false) end),
-   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q -c 0 set Master 2dB-", false) end),
-   awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -q -c 0 set Master toggle", false) end)
+   awful.key({ }, "XF86AudioRaiseVolume", volume.increase),
+   awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
+   awful.key({ }, "XF86AudioMute",        volume.toggle)
 )
 
 config.keys.client = awful.util.table.join(

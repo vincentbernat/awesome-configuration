@@ -1,6 +1,6 @@
 -- Tags
 
-loadrc("sharetags")
+sharetags = loadrc("sharetags", "sharetags")
 
 local otags = config.tags
 config.tags = {}
