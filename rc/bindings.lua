@@ -146,6 +146,8 @@ config.keys.client = awful.util.table.join(
    awful.key({ modkey }, "Print", screenshot, "Screenshot")
 )
 
+keydoc.group("Misc")
+
 config.mouse.client = awful.util.table.join(
    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
    awful.button({ modkey }, 1, awful.mouse.client.move),

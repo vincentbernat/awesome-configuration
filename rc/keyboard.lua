@@ -47,7 +47,7 @@ config.keys.global = awful.util.table.join(
    awful.key({ modkey }, "=",
 	     function()
 		os.execute(qdbus.next)
-	     end))
+	     end, "Change keyboard layout"))
 
 -- Run kbdd if not running
 if os.execute(qdbus.check .. " 2> /dev/null > /dev/null") ~= 0 then

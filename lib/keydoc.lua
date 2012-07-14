@@ -42,8 +42,12 @@ awful.key.new = new		-- monkey patch
 
 -- Turn a key to a string
 local function key2str(key)
-   local sym = key.keysym or key.key
-   if sym == "#14" then sym = "#" end
+   local sym = key.key or key.keysym
+   local translate = {
+      ["#14"] = "#",
+      [" "] = "Space",
+   }
+   sym = translate[sym] or sym
    if not key.modifiers or #key.modifiers == 0 then return sym end
    local result = ""
    local translate = {
@@ -52,9 +56,7 @@ local function key2str(key)
       Control  = "Ctrl",
    }
    for _, mod in pairs(key.modifiers) do
-      if translate[mod] then
-	 mod = translate[mod]
-      end
+      mod = translate[mod] or mod
       result = result .. mod .. " + "
    end
    return result .. sym
@@ -74,7 +76,7 @@ function group(name)
 end
 
 local function markup(keys)
-   local result = ""
+   local result = {}
 
    -- Compute longest key combination
    local longest = 0
@@ -88,15 +90,8 @@ local function markup(keys)
    for _, key in ipairs(keys) do
       if doc[key] then
 	 local help, group = doc[key].help, doc[key].group
-	 if group ~= curgroup then
-	    if #result > 0 then result = result .. "\n" end
-	    result = result ..
-	       '<span weight="bold" color="' .. beautiful.fg_widget_value_important .. '">' ..
-	       group .. "</span>\n"
-	    curgroup = group
-	 end
 	 local skey = key2str(key)
-	 result = result ..
+	 result[group] = (result[group] or "") ..
 	    '<span font="DejaVu Sans Mono 10" color="' .. beautiful.fg_widget_clock .. '"> ' ..
 	    string.format("%" .. (longest - unilen(skey)) .. "s  ", "") .. skey ..
 	    '</span>  <span color="' .. beautiful.fg_widget_value .. '">' ..
@@ -110,14 +105,19 @@ end
 -- Display help in a naughty notification
 local nid = nil
 function display()
-   local result = markup(capi.root.keys())
-   if capi.client.focus then
-      result = result .. "\n" .. markup(capi.client.focus:keys())
+   local strings = awful.util.table.join(
+      markup(capi.root.keys()),
+      capi.client.focus and markup(capi.client.focus:keys()) or {})
+
+   local result = ""
+   for group, res in pairs(strings) do
+      if #result > 0 then result = result .. "\n" end
+      result = result ..
+	 '<span weight="bold" color="' .. beautiful.fg_widget_value_important .. '">' ..
+	 group .. "</span>\n" .. res
    end
-   if result then
-      nid = naughty.notify({ text = result,
-			     replaces_id = nid,
-			     hover_timeout = 0.1,
-			     timeout = 30 }).id
-   end
+   nid = naughty.notify({ text = result,
+			  replaces_id = nid,
+			  hover_timeout = 0.1,
+			  timeout = 30 }).id
 end
