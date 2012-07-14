@@ -52,16 +52,16 @@ config.tags = {
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 
 -- Remaining modules
-loadrc("xrun")
-loadrc("appearance")
-loadrc("start")
-loadrc("bindings")
-loadrc("wallpaper")
-loadrc("tags")
-loadrc("widgets")
-loadrc("xlock")
-loadrc("signals")
-loadrc("rules")
-loadrc("quake")
+loadrc("xrun")			-- xrun function
+loadrc("appearance")		-- theme and appearance settings
+loadrc("start")			-- programs to run on start
+loadrc("bindings")		-- keybindings
+loadrc("wallpaper")		-- wallpaper settings
+loadrc("tags")			-- tags handling
+loadrc("widgets")		-- widgets configuration
+loadrc("xlock")			-- lock screen
+loadrc("signals")		-- window manager behaviour
+loadrc("rules")			-- window rules
+loadrc("quake")			-- quake console
 
 root.keys(config.keys.global)
