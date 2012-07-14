@@ -1,6 +1,6 @@
 config.keys = {}
 config.mouse = {}
-local volume = loadrc("volume", "volume")
+local volume = loadrc("volume", "vbe/volume")
 
 local function client_info()
     local v = ""

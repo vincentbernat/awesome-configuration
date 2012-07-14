@@ -5,9 +5,8 @@ local naughty      = require("naughty")
 local tonumber     = tonumber
 local string       = string
 local os           = os
-local setmetatable = setmetatable
 
-module("volume")
+module("vbe/volume")
 
 local volid = nil
 local function change(what)

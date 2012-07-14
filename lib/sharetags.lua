@@ -22,7 +22,7 @@ local pairs = pairs
 local ipairs = ipairs
 --}}}
 
-module("sharetags")
+module("vbe/sharetags")
 
 --{{{ Private structures
 tagwidgets = setmetatable({}, { __mode = 'k' })

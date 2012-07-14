@@ -1,6 +1,6 @@
 -- Tags
 
-sharetags = loadrc("sharetags", "sharetags")
+sharetags = loadrc("sharetags", "vbe/sharetags")
 
 local otags = config.tags
 config.tags = {}
