@@ -41,12 +41,41 @@ loadrc("errors")		-- errors and debug stuff
 -- Global configuration
 modkey = "Mod4"
 config = {}
-config.terminal = table.concat({"urxvtcd",
-				"++iso14755 +sb -si -sw -j -fn fixed -sl 2000",
-				"-sh 30 -bc -tint white -fg white -depth 32",
-				"--color4 RoyalBlue --color12 RoyalBlue",
-				"-bg rgba:0000/0000/0000/dddd"},
-			       " ")
+config.terminal = table.concat(
+   { 
+      "urxvtcd",
+      "++iso14755",		-- Disable ISO 14755 mode
+      "+sb",			-- Disable scrollbar
+      "-si -sw",		-- Don't scroll to bottom
+      "-j",			-- Enable jump scrolling
+      "-sl 2000",		-- Scrollback buffer
+      "-bc",			-- Blink cursor
+      "-cr green",		-- Cursor color
+      "-depth 32",
+      "-sh 30",			-- Darken the background
+      -- Color stuff
+      "-bg rgba:0000/0000/0000/dddd",
+      "-fg white",
+      "--color0 rgb:00/00/00",
+      "--color1 rgb:AA/00/00",
+      "--color2 rgb:00/AA/00",
+      "--color3 rgb:AA/55/00",
+      "--color4 rgb:41/69/E1", -- Royal Blue
+      "--color5 rgb:AA/00/AA",
+      "--color6 rgb:00/AA/AA",
+      "--color7 rgb:AA/AA/AA",
+      "--color8 rgb:55/55/55",
+      "--color9 rgb:FF/55/55",
+      "--color10 rgb:55/FF/55",
+      "--color11 rgb:FF/FF/55",
+      "--color12 rgb:55/55/FF",
+      "--color13 rgb:FF/55/FF",
+      "--color14 rgb:55/FF/FF",
+      "--color15 rgb:FF/FF/FF",
+      "-fn xft:DejaVuSansMono-8",	       -- Font
+      "-letsp -1",			       -- Fix font width
+      "-pe matcher",			       -- Enable "matcher extension" (to detect URL)
+   }, " ")
 config.layouts = {
    awful.layout.suit.tile,
    awful.layout.suit.tile.left,
