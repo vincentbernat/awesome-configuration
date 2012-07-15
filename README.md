@@ -59,4 +59,8 @@ Here some of the things you may be interested in:
 
 Things in `lib/` are meant to be reused. I am using my own `loadrc()`
 function to load modules and therefore, I prefix my modules with
-`vbe/`. Before reusing a module, you may want to change this.
+`vbe/`. Before reusing a module, you may want to change this. Another
+way to load them is to use:
+
+	require("lib/quake")
+	local quake = package.loaded["vbe/quake"]
