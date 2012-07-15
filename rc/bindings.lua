@@ -4,38 +4,6 @@ local volume = loadrc("volume", "vbe/volume")
 local brightness = loadrc("brightness", "vbe/brightness")
 local keydoc = loadrc("keydoc", "vbe/keydoc")
 
-local function client_info()
-    local v = ""
-
-    -- object
-    local c = client.focus
-    v = v .. tostring(c)
-
-    -- geometry
-    local cc = c:geometry()
-    local signx = (cc.x > 0 and "+") or ""
-    local signy = (cc.y > 0 and "+") or ""
-    v = v .. " @ " .. cc.width .. 'x' .. cc.height .. signx .. cc.x .. signy .. cc.y .. "\n\n"
-
-    local inf = {
-        "name", "icon_name", "type", "class", "role", "instance", "pid",
-        "skip_taskbar", "id", "group_window", "leader_id", "machine",
-        "screen", "hidden", "minimized", "size_hints_honor", "titlebar", "urgent",
-        "focus", "opacity", "ontop", "above", "below", "fullscreen", "transient_for",
-	"maximixed_horizontal", "maximixed_vertical", "sticky", "modal", "focusable"
-    }
-
-    for i = 1, #inf do
-        v = v .. string.format('%2s: <span color="%s">%-20s</span> = <span color="%s">%s</span>\n',
-			       i,
-			       beautiful.fg_widget_label, inf[i],
-			       beautiful.fg_widget_value, tostring(c[inf[i]]))
-    end
-
-    naughty.notify{ text = string.format('<span font="Terminus 8">%s</span>', v:sub(1,#v-1)),
-		    timeout = 0, margin = 10, screen = c.screen }
-end
-
 local function screenshot(client)
    if not client then
       client = "root"
@@ -132,7 +100,7 @@ config.keys.client = awful.util.table.join(
 	     "Switch with master window"),
    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
 	     "Stay on top"),
-   awful.key({ modkey,           }, "i",      client_info,
+   awful.key({ modkey,           }, "i",      dbg,
 	     "Get client-related information"),
    awful.key({ modkey,           }, "m",
 	     function (c)

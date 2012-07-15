@@ -53,6 +53,9 @@ Here some of the things you may be interested in:
  - Keybindings are "autodocumented". See `lib/keydoc.lua` to see how
    this works. The list of key bindings can be accessed with Mod4 +
    F1.
+   
+ - On the debug front, I am quite happy with `dbg()` in
+   `rc/debug.lua`.
 
 Things in `lib/` are meant to be reused. I am using my own `loadrc()`
 function to load modules and therefore, I prefix my modules with
