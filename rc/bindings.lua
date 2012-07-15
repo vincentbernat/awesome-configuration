@@ -19,7 +19,7 @@ local function client_info()
 
     local inf = {
         "name", "icon_name", "type", "class", "role", "instance", "pid",
-        "icon_name", "skip_taskbar", "id", "group_window", "leader_id", "machine",
+        "skip_taskbar", "id", "group_window", "leader_id", "machine",
         "screen", "hidden", "minimized", "size_hints_honor", "titlebar", "urgent",
         "focus", "opacity", "ontop", "above", "below", "fullscreen", "transient_for",
 	"maximixed_horizontal", "maximixed_vertical", "sticky", "modal", "focusable"

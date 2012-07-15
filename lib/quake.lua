@@ -127,8 +127,14 @@ function QuakeConsole:new(config)
    local console = setmetatable(config, { __index = QuakeConsole })
    capi.client.add_signal("manage",
 			  function(c)
-			     if c.name == console.name and c.screen == console.screen then
+			     if c.icon_name == console.name and c.screen == console.screen then
 				console:display()
+			     end
+			  end)
+   capi.client.add_signal("unmanage",
+			  function(c)
+			     if c.icon_name == console.name and c.screen == console.screen then
+				console.visible = false
 			     end
 			  end)
 
