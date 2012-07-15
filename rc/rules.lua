@@ -33,4 +33,7 @@ awful.rules.rules = {
      except = { icon_name = "QuakeConsoleNeedsUniqueName" },
      properties = { },
      callback = awful.client.setslave },
+   -- Floating windows
+   { rule_any = { class = { "Display.im6" } },
+     properties = { floating = true }},
 }
