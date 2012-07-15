@@ -138,6 +138,7 @@ function QuakeConsole:new(config)
 			     end
 			  end)
 
+   -- "Reattach" currently running QuakeConsole. This is in case awesome is restarted.
    local reattach = capi.timer { timeout = 0 }
    reattach:add_signal("timeout",
 		       function()
