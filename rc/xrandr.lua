@@ -42,7 +42,7 @@ local function arrange(out)
    return choices
 end
 
--- Display xrandr menu
+-- Build available choices
 local function menu()
    local menu = {}
    local out = outputs()
@@ -66,24 +66,69 @@ local function menu()
 
       local label = ""
       if #choice == 1 then
-	 label = 'Only ' .. choice[1]
+	 label = 'Only <span weight="bold">' .. choice[1] .. '</span>'
       else
 	 for i, o in pairs(choice) do
-	    if i > 1 then label = label .. ", " end
-	    label = label .. o
+	    if i > 1 then label = label .. " + " end
+	    label = label .. '<span weight="bold">' .. o .. '</span>'
 	 end
       end
 
-      menu[#menu + 1] = { " " .. label,
-			  function() awful.util.spawn(cmd, false) end,
+      menu[#menu + 1] = { label,
+			  cmd,
 			  "/usr/share/icons/gnome/32x32/devices/display.png" }
    end
 
-   -- Show the menu
-   awful.menu({ items = menu,
-		width = 300 }):show({ keygrabber = true })
+   return menu
+end
+
+-- Display xrandr notifications from choices
+local state = { iterator = nil,
+		timer = nil,
+		cid = nil }
+local function xrandr()
+   -- Stop any previous timer
+   if state.timer then
+      state.timer:stop()
+      state.timer = nil
+   end
+
+   -- Build the list of choices
+   if not state.iterator then
+      state.iterator = awful.util.table.cycle(menu(),
+					function() return true end)
+   end
+
+   -- Select one and display the appropriate notification
+   local next  = state.iterator()
+   local label, action, icon
+   if not next then
+      label, icon = "Keep the current configuration", "/usr/share/icons/gnome/32x32/devices/display.png"
+      state.iterator = nil
+   else
+      label, action, icon = unpack(next)
+   end
+   state.cid = naughty.notify({ text = label,
+				icon = icon,
+				timeout = 4,
+				screen = mouse.screen, -- Important, not all screens may be visible
+				font = "Free Sans 18",
+				replaces_id = state.cid }).id
+
+   -- Setup the timer
+   state.timer = timer { timeout = 4 }
+   state.timer:add_signal("timeout",
+			  function()
+			     state.timer:stop()
+			     state.timer = nil
+			     state.iterator = nil
+			     if action then
+				-- awful.util.spawn(action, false)
+			     end
+			  end)
+   state.timer:start()
 end
 
 config.keys.global = awful.util.table.join(
    config.keys.global,
-   awful.key({}, "XF86Display", menu))
+   awful.key({}, "XF86Display", xrandr))
