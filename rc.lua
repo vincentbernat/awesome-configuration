@@ -78,5 +78,6 @@ loadrc("xlock")			-- lock screen
 loadrc("signals")		-- window manager behaviour
 loadrc("rules")			-- window rules
 loadrc("quake")			-- quake console
+loadrc("xrandr")		-- xrandr menu
 
 root.keys(config.keys.global)
