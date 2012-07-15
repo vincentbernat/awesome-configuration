@@ -1,5 +1,7 @@
 -- Keyboard configuration with kbdd
 
+local icons = loadrc("icons", "vbe/icons")
+
 -- Global configuration
 if config.hostname == "guybrush" then
    os.execute("setxkbmap us,fr '' compose:rctrl ctrl:nocaps")
@@ -38,7 +40,8 @@ dbus.add_signal("ru.gentoo.kbdd",
 		   nid = naughty.notify({ title = "Keyboard layout changed",
 					  text = "New layout is <i>" .. layout .. "</i>",
 					  replaces_id = nid,
-					  icon = "/usr/share/icons/gnome/32x32/devices/keyboard.png",
+					  icon = icons.lookup({ name = "keyboard",
+								type = "devices" }),
 					  screen = client.focus.screen }).id
 		end)
 

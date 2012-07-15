@@ -1,3 +1,5 @@
+local icons = loadrc("icons", "vbe/icons")
+
 -- Signal function to execute when a new client appears.
 client.add_signal("manage",
 		  function (c, startup)
@@ -9,6 +11,15 @@ client.add_signal("manage",
 					 client.focus = c
 				     end
 				  end)
+
+		     -- Setup icon if none exists
+		     if not c.icon then
+			local icon = icons.lookup({ name = { c.class, c.instance },
+						    type = "apps" })
+			if icon then
+			   c.icon = image(icon)
+			end
+		     end
 		     
 		     if not startup then
 			-- Put windows in a smart way, only if they does not set an initial position.

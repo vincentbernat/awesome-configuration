@@ -1,5 +1,7 @@
 -- Menu with xrandr choices
 
+local icons = loadrc("icons", "vbe/icons")
+
 -- Get active outputs
 local function outputs()
    local outputs = {}
@@ -76,7 +78,7 @@ local function menu()
 
       menu[#menu + 1] = { label,
 			  cmd,
-			  "/usr/share/icons/gnome/32x32/devices/display.png" }
+			  icons.lookup({ name = "display", type = "devices" }) }
    end
 
    return menu
@@ -103,7 +105,7 @@ local function xrandr()
    local next  = state.iterator()
    local label, action, icon
    if not next then
-      label, icon = "Keep the current configuration", "/usr/share/icons/gnome/32x32/devices/display.png"
+      label, icon = "Keep the current configuration", icons.lookup({ name = "display", type = "devices" })
       state.iterator = nil
    else
       label, action, icon = unpack(next)

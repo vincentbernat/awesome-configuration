@@ -1,6 +1,7 @@
 -- Widgets
 
 require("vicious")
+local icons = loadrc("icons", "vbe/icons")
 
 -- Separator
 local separator = widget({ type = "textbox" })
@@ -38,8 +39,8 @@ if config.hostname == "guybrush" then
 				  text = "Battery level is currently " ..
 				     current .. "%.\n" .. args[3] ..
 				     " left before running out of power.",
-				  icon = "/usr/share/icons/gnome/32x32" ..
-				     "/status/battery-caution.png",
+				  icon = icons.lookup({name = "battery-caution",
+						       type = "status"}),
 				  replaces_id = batwidget.lastid }).id
 			     batwidget.lastwarn = current
 			  end
@@ -174,27 +175,11 @@ for s = 1, screen.count() do
 	     fn = awful.widget.tasklist.label.alltags
 	  end
 	  local title, color, _, icon = fn(c, s)
-	  -- Try to search for an alternative icon if none is available
-	  for _, name in pairs({c.class, c.instance}) do
-	     if not icon and title and name then
-		for _, n in pairs({name, name:lower()}) do
-		   icon = awful.util.geticonpath(name,
-						 nil,
-						 {"/usr/share/fvwm-crystal/fvwm/icons/Default/16x16/apps/",
-						  "/usr/share/fvwm-crystal/fvwm/icons/Default/22x22/apps/",
-						  "/usr/share/icons/hicolor/16x16/apps/"})
-		   if icon then
-		      -- This is our new icon. And we set it for the client to not search again
-		      icon = image(icon)
-		      c.icon = icon
-		   end
-		end
-	     end
-	  end
-	  -- Use our icon and don't set the status image.
 	  if screen.count() > 1 then
+	     -- title, color and icon
 	     return title, color, nil, icon
 	  elseif icon then
+	     -- just color and icon
 	     return "", color, nil, icon
 	  end
        end, tasklist.buttons)

@@ -6,6 +6,10 @@ local tonumber     = tonumber
 local string       = string
 local os           = os
 
+-- A bit odd, but...
+require("lib/icons")
+local icons        = package.loaded["vbe/icons"]
+
 module("vbe/volume")
 
 local volid = nil
@@ -25,7 +29,8 @@ local function change(what)
    elseif vol < 60 then
       icon = "medium"
    end
-   icon = "/usr/share/icons/gnome/32x32/status/audio-volume-" .. icon .. ".png"
+   icon = icons.lookup({name = "audio-volume-" .. icon,
+		       type = "status"})
 
    volid = naughty.notify({ text = string.format("%3d %%", vol),
 			    icon = icon,

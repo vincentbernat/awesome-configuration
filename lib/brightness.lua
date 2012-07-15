@@ -6,6 +6,10 @@ local tonumber     = tonumber
 local string       = string
 local os           = os
 
+-- A bit odd, but...
+require("lib/icons")
+local icons        = package.loaded["vbe/icons"]
+
 module("vbe/brightness")
 
 local nid = nil
@@ -15,7 +19,8 @@ local function change(what)
    if not out then return end
 
    out = tonumber(out)
-   local icon = "/usr/share/icons/HighContrast/32x32/status/display-brightness.png"
+   local icon = icons.lookup({name = "display-brightness",
+			      type = "status"})
 
    nid = naughty.notify({ text = string.format("%3d %%", out),
 			  icon = icon,
