@@ -30,5 +30,7 @@ awful.rules.rules = {
 		    "Transmission-gtk",
 		    "Keepassx",
 		  } },
-     properties = { }, callback = awful.client.setslave },
+     except = { icon_name = "QuakeConsoleNeedsUniqueName" },
+     properties = { },
+     callback = awful.client.setslave },
 }

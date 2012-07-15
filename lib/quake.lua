@@ -21,6 +21,11 @@
 --    awful.key({ modkey }, "`",
 -- 	     function () quakeconsole[mouse.screen]:toggle() end)
 
+-- If you have a rule like "awful.client.setslave" for your terminals,
+-- ensure you use an exception for
+-- QuakeConsoleNeedsUniqueName. Otherwise, you may run into problems
+-- with focus.
+
 local setmetatable = setmetatable
 local string = string
 local awful  = require("awful")
@@ -94,6 +99,7 @@ function QuakeConsole:display()
    client.above = true
    client.skip_taskbar = true
    client.sticky = true
+   client.
 
    -- Toggle display
    if self.visible then
