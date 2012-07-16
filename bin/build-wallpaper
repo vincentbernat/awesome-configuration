@@ -60,6 +60,7 @@ for root, _, files in os.walk(os.path.join(options.directory)):
 images = random.sample(images,
                        len(screens) + \
                            random.randint(0, 3)) # Randomly favor larger images
+print "Build new wallpaper with %s" % " + ".join(["`%s`" % x[(len(options.directory) + 1):] for x in images])
 images = [Image.open(os.path.join(options.directory,
                                   image)) for image in images]
 images.sort(key=lambda image: -image.size[0]*image.size[1])
