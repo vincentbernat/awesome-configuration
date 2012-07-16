@@ -62,7 +62,7 @@ local function menu()
       -- Disabled outputs
       for _, o in pairs(out) do
 	 if not awful.util.table.hasitem(choice, o) then
-	    cmd = cmd .. " --output " .. o .. " -off"
+	    cmd = cmd .. " --output " .. o .. " --off"
 	 end
       end
 
@@ -125,7 +125,7 @@ local function xrandr()
 			     state.timer = nil
 			     state.iterator = nil
 			     if action then
-				-- awful.util.spawn(action, false)
+				awful.util.spawn(action, false)
 			     end
 			  end)
    state.timer:start()
