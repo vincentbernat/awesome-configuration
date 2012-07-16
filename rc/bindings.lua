@@ -100,6 +100,8 @@ config.keys.client = awful.util.table.join(
 	     "Switch with master window"),
    awful.key({ modkey,           }, "t",      function (c) c:raise()            end,
 	     "Raise window"),
+   awful.key({ modkey,           }, "s",      function (c) c.sticky = not c.sticky end,
+	     "Stick window"),
    awful.key({ modkey,           }, "i",      dbg,
 	     "Get client-related information"),
    awful.key({ modkey,           }, "m",
