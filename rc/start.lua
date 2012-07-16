@@ -19,6 +19,8 @@ local execute = {
    "xset -b",	-- Disable bell
    -- Enable numlock
    "numlockx on",
+   -- Read resources
+   "xrdb -merge " .. awful.util.getdir("config") .. "/Xresources",
 }
 
 if config.hostname == "naruto" then
