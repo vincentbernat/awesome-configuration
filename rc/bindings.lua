@@ -3,6 +3,7 @@ config.mouse = {}
 local volume = loadrc("volume", "vbe/volume")
 local brightness = loadrc("brightness", "vbe/brightness")
 local keydoc = loadrc("keydoc", "vbe/keydoc")
+local sharetags = loadrc("sharetags", "vbe/sharetags")
 
 local function screenshot(client)
    if not client then
@@ -13,6 +14,56 @@ local function screenshot(client)
    local path = awful.util.getdir("config") .. "/screenshots/" ..
       "screenshot-" .. os.date("%Y-%m-%d--%H:%M:%S") .. ".png"
    awful.util.spawn("import -window " .. client .. " " .. path, false)
+end
+
+-- Pull the first window with urgent flag in the current workspace if
+-- not displayed. If displayed, just raise it. If no urgent window,
+-- push back the previous urgent window to its original tag
+local urgent_undo_stack = {}
+local function pull_urgent()
+   local cl = awful.client.urgent.get()
+   local s = client.focus and client.focus.screen or mouse.screen
+   if cl then
+      -- So, we have a client.
+      if not cl:isvisible() then
+	 -- But it is not visible. So we will add it to the current
+	 -- tag of the current screen.
+	 local t = awful.tag.selected(s)
+	 if not t then
+	    return awful.client.urgent.jumpto()
+	 end
+	 -- Before adding the tag to the client, we should ensure it
+	 -- is on the same screen.
+	 if s ~= cl.screen then
+	    sharetags.tag_move(cl:tags()[1], s)
+	 end
+	 -- Add our tag to the client
+	 urgent_undo_stack[#urgent_undo_stack + 1] = { cl, t }
+	 awful.client.toggletag(t, cl)
+      end
+
+      -- Focus and raise the client
+      if s ~= cl.screen then
+	 mouse.screen = cl.screen
+      end
+      client.focus = cl
+      cl:raise()
+   else
+      -- OK, we need to restore the previously pushed window to its
+      -- original state.
+      while #urgent_undo_stack > 0 do
+	 local cl, t = unpack(table.remove(urgent_undo_stack,
+					   #urgent_undo_stack))
+	 -- We only handle visible clients that are attached to the
+	 -- appropriate tag. Otherwise, the client is discarded (and
+	 -- won't be restored later).
+	 if cl and cl:isvisible() and
+	    awful.util.table.hasitem(cl:tags(), t) then
+	    awful.client.toggletag(t, cl)
+	    return
+	 end
+      end
+   end
 end
 
 config.keys.global = awful.util.table.join(
@@ -37,7 +88,7 @@ config.keys.global = awful.util.table.join(
 		end
 	     end,
 	     "Focus previously focused window"),
-   awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
+   awful.key({ modkey,           }, "u", pull_urgent,
 	    "Jump to urgent-flagged window"),
    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
 	     "Jump to next screen"),
