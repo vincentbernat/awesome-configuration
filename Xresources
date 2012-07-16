@@ -4,23 +4,23 @@ Xft.hinting: true
 Xft.hintstyle: hintlight
 Xft.rgba: rgb
 
-!! Colors, stolen from http://xcolors.net/dl/colorfulcolors
-*color0: #151515
-*color8: #696969
-*color1: #FF8EAF
-*color9: #ED4C7A
-*color2:  #A6E25F
-*color10: #A6E179
-*color3: #F8E578
-*color11: #FFDF6B
-*color4: #A6E2F0
-*color12: #79D2FF
-*color5: #E85B92
-*color13: #BB5D79
-*color6: #5F868F
-*color14: #87A8AF
-*color7: #D5F1F2
-*color15: #E2F1F6
+!! Colors, stolen from http://xcolors.net/dl/derp
+*color0:   #111111
+*color8:   #666666
+*color1:   rgb:d3/62/65
+*color9:   rgb:ef/81/71
+*color2:   #aece91
+*color10:  #cfefb3
+*color3:   rgb:e7/e1/8c
+*color11:  rgb:ff/f7/96
+*color4:   #5297cf
+*color12:  #74b8ef
+*color5:   #963c59
+*color13:  #b85e7b
+*color6:   #5E7175
+*color14:  #A3BABF
+*color7:   #bebebe
+*color15:  #ffffff
 
 !! rxvt configuration
 URxvt.foreground: white
