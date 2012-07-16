@@ -1,0 +1,42 @@
+!! Xft
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: hintlight
+Xft.rgba: rgb
+
+!! Colors, stolen from http://xcolors.net/dl/colorfulcolors
+*color0: #151515
+*color8: #696969
+*color1: #FF8EAF
+*color9: #ED4C7A
+*color2:  #A6E25F
+*color10: #A6E179
+*color3: #F8E578
+*color11: #FFDF6B
+*color4: #A6E2F0
+*color12: #79D2FF
+*color5: #E85B92
+*color13: #BB5D79
+*color6: #5F868F
+*color14: #87A8AF
+*color7: #D5F1F2
+*color15: #E2F1F6
+
+!! rxvt configuration
+URxvt.foreground: white
+URxvt.background: rgba:0000/0000/0000/eeee
+URxvt.cursorColor: green
+URxvt.depth: 32
+URxvt.cursorBlink: True
+
+URxvt.scrollBar: False
+URxvt.scrollTtyOutput: False
+URxvt.scrollWithBuffer: False
+URxvt.jumpScroll: True
+URxvt.saveLines: 5000
+
+URxvt.font: xft:DejaVu Sans Mono-8
+URxvt.letterSpace: -1
+
+URxvt.iso14755: False
+URxvt.perl-ext-common: default,-option-popup,-selection-popup
