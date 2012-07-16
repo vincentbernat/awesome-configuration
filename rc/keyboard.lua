@@ -2,29 +2,6 @@
 
 local icons = loadrc("icons", "vbe/icons")
 
--- Global configuration
-if config.hostname == "guybrush" then
-   os.execute("setxkbmap us,fr '' compose:rctrl ctrl:nocaps")
-else
-   os.execute("setxkbmap us,fr '' compose:rwin ctrl:nocaps")
-end
-
--- Additional mappings
-local mappings = { Pause = "XF86ScreenSaver" }
-if config.hostname == "guybrush" then
-   mappings = { XF86AudioPlay = "XF86ScreenSaver" }
-end
-
-
-
-local function update_mappings()
-   for src, dst in pairs(mappings) do
-      os.execute(string.format("xmodmap -e 'keysym %s = %s'", src, dst))
-   end
-end
-
-update_mappings()
-
 local qdbus = {
    check = "qdbus ru.gentoo.KbddService /ru/gentoo/KbddService",
    next  = "qdbus ru.gentoo.KbddService /ru/gentoo/KbddService ru.gentoo.kbdd.next_layout"
@@ -38,13 +15,14 @@ dbus.add_signal("ru.gentoo.kbdd",
 		function(...)
 		   local data = {...}
 		   local layout = data[2]
-		   update_mappings()
+		   local screen = mouse.screen
+		   if client.focus then screen = client.focus.screen end
 		   nid = naughty.notify({ title = "Keyboard layout changed",
 					  text = "New layout is <i>" .. layout .. "</i>",
 					  replaces_id = nid,
 					  icon = icons.lookup({ name = "keyboard",
 								type = "devices" }),
-					  screen = client.focus.screen }).id
+					  screen = screen }).id
 		end)
 
 config.keys.global = awful.util.table.join(
