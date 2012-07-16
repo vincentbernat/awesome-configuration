@@ -23,6 +23,8 @@ local function update_mappings()
    end
 end
 
+update_mappings()
+
 local qdbus = {
    check = "qdbus ru.gentoo.KbddService /ru/gentoo/KbddService",
    next  = "qdbus ru.gentoo.KbddService /ru/gentoo/KbddService ru.gentoo.kbdd.next_layout"
