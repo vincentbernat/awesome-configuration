@@ -16,55 +16,75 @@ local function screenshot(client)
    awful.util.spawn("import -window " .. client .. " " .. path, false)
 end
 
--- Pull the first window with urgent flag in the current workspace if
--- not displayed. If displayed, just raise it. If no urgent window,
--- push back the previous urgent window to its original tag
-local urgent_undo_stack = {}
-local function pull_urgent()
-   local cl = awful.client.urgent.get()
-   local s = client.focus and client.focus.screen or mouse.screen
-   if cl then
-      -- So, we have a client.
-      if not cl:isvisible() then
-	 -- But it is not visible. So we will add it to the current
-	 -- tag of the current screen.
-	 local t = awful.tag.selected(s)
-	 if not t then
-	    return awful.client.urgent.jumpto()
-	 end
-	 -- Before adding the tag to the client, we should ensure it
-	 -- is on the same screen.
-	 if s ~= cl.screen then
-	    sharetags.tag_move(cl:tags()[1], s)
-	 end
-	 -- Add our tag to the client
-	 urgent_undo_stack[#urgent_undo_stack + 1] = { cl, t }
-	 awful.client.toggletag(t, cl)
-      end
 
-      -- Focus and raise the client
-      if s ~= cl.screen then
-	 mouse.screen = cl.screen
-      end
-      client.focus = cl
-      cl:raise()
-   else
-      -- OK, we need to restore the previously pushed window to its
-      -- original state.
-      while #urgent_undo_stack > 0 do
-	 local cl, t = unpack(table.remove(urgent_undo_stack,
-					   #urgent_undo_stack))
-	 -- We only handle visible clients that are attached to the
-	 -- appropriate tag. Otherwise, the client is discarded (and
-	 -- won't be restored later).
-	 if cl and cl:isvisible() and
-	    awful.util.table.hasitem(cl:tags(), t) then
+-- Function to toggle a given window to the currently selected and
+-- focused tag. We need a filter. This function can be used to focus a
+-- particular window. When the filter is unable to select something,
+-- we undo previous actions (hence "toggle"). This function returns a
+-- function that will effectively toggle things.
+local function toggle_window(filter)
+   local undo = {}		-- undo stack
+   local toggle = function()
+      -- "Current" screen
+      local s = client.focus and client.focus.screen or mouse.screen
+      local cl = filter()	-- Client to toggle
+      if cl and client.focus ~= cl then
+	 -- So, we have a client.
+	 if not cl:isvisible() then
+	    -- But it is not visible. So we will add it to the current
+	    -- tag of the current screen.
+	    local t = assert(awful.tag.selected(s))
+	    -- Before adding the tag to the client, we should ensure it
+	    -- is on the same screen.
+	    if s ~= cl.screen then
+	       sharetags.tag_move(cl:tags()[1], s)
+	    end
+	    -- Add our tag to the client
+	    undo[#undo + 1] = { cl, t }
 	    awful.client.toggletag(t, cl)
-	    return
+	 end
+
+	 -- Focus and raise the client
+	 if s ~= cl.screen then
+	    mouse.screen = cl.screen
+	 end
+	 client.focus = cl
+	 cl:raise()
+      else
+	 -- OK, we need to restore the previously pushed window to its
+	 -- original state.
+	 local i = #undo
+	 while i > 0 do
+	    local cl, t = unpack(undo[i])
+	    -- We only handle visible clients that are attached to the
+	    -- appropriate tag. Otherwise, we try the next one.
+	    if cl and cl:isvisible() and
+	       awful.util.table.hasitem(cl:tags(), t) then
+	       awful.client.toggletag(t, cl)
+	       table.remove(undo, i)
+	       return
+	    end
+	 end
+	 -- Clean up...
+	 while #undo > 10 do
+	    table.remove(undo, 1)
 	 end
       end
    end
+   return toggle
 end
+
+-- Toggle pidgin conversation window
+local toggle_pidgin = toggle_window(
+   function ()
+      return awful.client.cycle(function(c)
+			    return awful.rules.match(c, { class = "Pidgin",
+							  role = "conversation" })
+			 end)()
+   end)
+
+-- Toggle urgent window
+local toggle_urgent = toggle_window(awful.client.urgent.get)
 
 config.keys.global = awful.util.table.join(
    keydoc.group("Focus"),
@@ -88,8 +108,8 @@ config.keys.global = awful.util.table.join(
 		end
 	     end,
 	     "Focus previously focused window"),
-   awful.key({ modkey,           }, "u", pull_urgent,
-	    "Jump to urgent-flagged window"),
+   awful.key({ modkey,           }, "u", toggle_pidgin,
+	    "Toggle Pidgin conversation window"),
    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
 	     "Jump to next screen"),
    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
