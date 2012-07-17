@@ -29,7 +29,7 @@ awful.rules.rules = {
 		  { "URxvt",
 		    "Transmission-gtk",
 		    "Keepassx",
-		  } },
+		  }, instance = { "Download" }},
      except = { icon_name = "QuakeConsoleNeedsUniqueName" },
      properties = { },
      callback = awful.client.setslave },
