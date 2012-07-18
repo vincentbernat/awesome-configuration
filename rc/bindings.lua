@@ -58,12 +58,13 @@ local function toggle_window(filter)
 	    local cl, t = unpack(undo[i])
 	    -- We only handle visible clients that are attached to the
 	    -- appropriate tag. Otherwise, we try the next one.
-	    if cl and cl:isvisible() and
+	    if cl and cl:isvisible() and t.selected and
 	       awful.util.table.hasitem(cl:tags(), t) then
 	       awful.client.toggletag(t, cl)
 	       table.remove(undo, i)
 	       return
 	    end
+	    i = i - 1
 	 end
 	 -- Clean up...
 	 while #undo > 10 do
