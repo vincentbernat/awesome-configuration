@@ -28,7 +28,7 @@ if config.hostname == "naruto" then
       execute, {
 	 -- Keyboard and mouse
 	 "xset m 4 3",	-- Mouse acceleration
-	 "setxkbmap us,fr '' compose:rctrl ctrl:nocaps",
+	 "setxkbmap us,fr '' compose:rwin ctrl:nocaps",
 	 "xmodmap -e 'keysym Pause = XF86ScreenSaver'",
 	       })
 elseif config.hostname == "neo" then
@@ -36,15 +36,15 @@ elseif config.hostname == "neo" then
       execute, {
 	 -- Keyboard and mouse
 	 "xset m 3 3",	-- Mouse acceleration
-	 "setxkbmap us,fr '' compose:rctrl ctrl:nocaps",
+	 "setxkbmap us,fr '' compose:rwin ctrl:nocaps",
 	 "xmodmap -e 'keysym Pause = XF86ScreenSaver'",
 	       })
 elseif config.hostname == "guybrush" then
    execute = awful.util.table.join(
       execute, {
 	 -- Keyboard and mouse
-	 "setxkbmap us,fr '' compose:rwin  ctrl:nocaps",
-	 "xmodmap -e 'keysym  = XF86ScreenSaver'",
+	 "setxkbmap us,fr '' compose:rctrl ctrl:nocaps",
+	 "xmodmap -e 'keysym XF86AudioPlay = XF86ScreenSaver'",
 	 -- Wheel emulation
 	 "xinput set-int-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation' 8 1",
 	 "xinput set-int-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Button' 8 2",
