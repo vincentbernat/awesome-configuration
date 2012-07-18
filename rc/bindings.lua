@@ -12,8 +12,8 @@ local function screenshot(client)
       client = client.window
    end
    local path = awful.util.getdir("config") .. "/screenshots/" ..
-      "screenshot-" .. os.date("%Y-%m-%d--%H:%M:%S") .. ".png"
-   awful.util.spawn("import -window " .. client .. " " .. path, false)
+      "screenshot-" .. os.date("%Y-%m-%d--%H:%M:%S") .. ".jpg"
+   awful.util.spawn("import -quality 95 -window " .. client .. " " .. path, false)
 end
 
 
