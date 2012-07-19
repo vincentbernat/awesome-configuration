@@ -51,7 +51,7 @@ local function menu()
    local choices = arrange(out)
 
    for _, choice in pairs(choices) do
-      local cmd = "xrandr"
+      local cmd = "xrandr --auto"
       -- Enabled outputs
       for i, o in pairs(choice) do
 	 cmd = cmd .. " --output " .. o .. " --auto"
