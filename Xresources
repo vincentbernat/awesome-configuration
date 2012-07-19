@@ -31,7 +31,7 @@ URxvt.cursorBlink: True
 
 URxvt.scrollBar: False
 URxvt.scrollTtyOutput: False
-URxvt.scrollWithBuffer: False
+URxvt.scrollWithBuffer: True
 URxvt.jumpScroll: True
 URxvt.saveLines: 5000
 
