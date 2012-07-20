@@ -42,8 +42,7 @@ Here some of the things you may be interested in:
 
  - I am using notifications when changing volume or brightness. I am
    also using notifications to change xrandr setup. This is pretty
-   cool. Notifications are also used to interface with `kbdd` (tool to
-   change keybord layout).
+   cool.
  
  - I am sharing tags between screen with
    [sharetags](http://awesome.naquadah.org/wiki/Shared_tags). I am
