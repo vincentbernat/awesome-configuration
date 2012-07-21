@@ -19,4 +19,7 @@ export GTK2_RC_FILES=$HOME/.gtkrc-2.0
     export XAUTHORITY=$HOME/.Xauthority
 }
 
+[ -x /usr/sbin/rfkill ] && rfkill block all 2> /dev/null
+[ -x /usr/bin/xbacklight ] && xbacklight = 60 2> /dev/null
+
 exec awesome
