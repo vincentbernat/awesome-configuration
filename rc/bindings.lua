@@ -87,18 +87,34 @@ local toggle_pidgin = toggle_window(
 -- Toggle urgent window
 local toggle_urgent = toggle_window(awful.client.urgent.get)
 
+-- Move mouse to the top left corner of the currently focused client
+local function move_mouse()
+   if client.focus and client.focus.screen == mouse.screen then
+      local _, x, y = awful.mouse.client.corner(nil, "top_left")
+      if x and y then
+	 mouse.coords({ x = x, y = y }, true)
+      end
+   end
+end
+
 config.keys.global = awful.util.table.join(
    keydoc.group("Focus"),
    awful.key({ modkey,           }, "j",
 	     function ()
 		awful.client.focus.byidx( 1)
-		if client.focus then client.focus:raise() end
+		if client.focus then
+		   client.focus:raise()
+		   move_mouse()
+		end
 	     end,
 	     "Focus next window"),
    awful.key({ modkey,           }, "k",
 	     function ()
 		awful.client.focus.byidx(-1)
-		if client.focus then client.focus:raise() end
+		if client.focus then
+		   client.focus:raise()
+		   move_mouse()
+		end
 	     end,
 	     "Focus previous window"),
    awful.key({ modkey,           }, "Tab",
@@ -106,14 +122,21 @@ config.keys.global = awful.util.table.join(
 		awful.client.focus.history.previous()
 		if client.focus then
 		   client.focus:raise()
+		   move_mouse()
 		end
 	     end,
 	     "Focus previously focused window"),
    awful.key({ modkey,           }, "u", toggle_pidgin,
 	    "Toggle Pidgin conversation window"),
-   awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+   awful.key({ modkey, "Control" }, "j", function ()
+		awful.screen.focus_relative( 1)
+		move_mouse()
+					 end,
 	     "Jump to next screen"),
-   awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+   awful.key({ modkey, "Control" }, "k", function ()
+		awful.screen.focus_relative(-1)
+		move_mouse()
+					 end),
 
    keydoc.group("Layout manipulation"),
    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end,
