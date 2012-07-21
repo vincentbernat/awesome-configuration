@@ -12,8 +12,12 @@ awful.rules.rules = {
    { rule = { class = "Emacs" },
      properties = { tag = config.tags.emacs }},
    -- Browser stuff
-   { rule_any = { name = { "Iceweasel", "Firefox", "Chromium" } },
-     properties = { tag = config.tags.www }},
+   { rule_any = { class = { "Iceweasel", "Firefox", "Chromium" } },
+     properties = { tag = config.tags.www },
+     callback = function(c)
+	-- All windows should be slaves, except the browser windows.
+	if c.role ~= "browser" then awful.client.setslave(c) end
+     end },
    { rule = { instance = "plugin-container" },
      properties = { floating = true }}, -- Flash with Firefox
    { rule = { instance = "exe", class="Exe", instance="exe" },
