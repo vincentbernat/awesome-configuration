@@ -89,10 +89,13 @@ local toggle_urgent = toggle_window(awful.client.urgent.get)
 
 -- Move mouse to the top left corner of the currently focused client
 local function move_mouse()
-   if client.focus and client.focus.screen == mouse.screen then
+   local c = client.focus
+   local margin = 10
+   if c and c.screen == mouse.screen then
+      local cc = c:geometry()
       local _, x, y = awful.mouse.client.corner(nil, "top_left")
-      if x and y then
-	 mouse.coords({ x = x, y = y }, true)
+      if x and y and cc.width > margin * 2 and cc.height > margin * 2 then
+	 mouse.coords({ x = x + margin , y = y + margin }, true)
       end
    end
 end
