@@ -24,6 +24,7 @@ awful.rules.rules = {
      properties = { floating = true }}, -- Flash with Chromium
    -- Pidgin
    { rule = { class = "Pidgin" },
+     except = { type = "dialog" },
      properties = { tag = config.tags.im }},
    { rule = { class = "Pidgin" },
      except = { role = "buddy_list" }, -- buddy_list is the master
