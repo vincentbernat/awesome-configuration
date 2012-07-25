@@ -36,6 +36,7 @@ if config.hostname == "guybrush" then
 			     batwidget.lastid = naughty.notify(
 				{ title = "Battery low!",
 				  preset = naughty.config.presets.critical,
+				  timeout = 20,
 				  text = "Battery level is currently " ..
 				     current .. "%.\n" .. args[3] ..
 				     " left before running out of power.",
