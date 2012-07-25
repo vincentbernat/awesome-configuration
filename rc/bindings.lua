@@ -87,6 +87,14 @@ local toggle_pidgin = toggle_window(
 -- Toggle urgent window
 local toggle_urgent = toggle_window(awful.client.urgent.get)
 
+-- Focus a relative screen (similar to `awful.screen.focus_relative`)
+local function screen_focus(i)
+    local s = awful.util.cycle(screen.count(), mouse.screen + i)
+    local c = awful.client.focus.history.get(s, 0)
+    mouse.screen = s
+    if c then client.focus = c end
+end
+
 config.keys.global = awful.util.table.join(
    keydoc.group("Focus"),
    awful.key({ modkey,           }, "j",
@@ -116,11 +124,11 @@ config.keys.global = awful.util.table.join(
    awful.key({ modkey,           }, "u", toggle_pidgin,
 	    "Toggle Pidgin conversation window"),
    awful.key({ modkey, "Control" }, "j", function ()
-		awful.screen.focus_relative( 1)
+		screen_focus( 1)
 					 end,
 	     "Jump to next screen"),
    awful.key({ modkey, "Control" }, "k", function ()
-		awful.screen.focus_relative(-1)
+		screen_focus(-1)
 					 end),
 
    keydoc.group("Layout manipulation"),
