@@ -28,12 +28,8 @@ if theme then
    theme.fg_widget_label  = "#737d8c"
    theme.fg_widget_value  = na(theme.fg_normal)
    theme.fg_widget_value_important  = "#E80F28"
-   theme.fg_widget_sep    = na(theme.fg_normal)
    theme.fg_widget_border = theme.fg_widget_label
    theme.fg_widget_clock  = na(theme.border_focus)
-   theme.fg_widget_end    = "#FFFFFF"
-   theme.fg_widget_center = "#FFCCCC"
-   theme.fg_widget_start  = "#FF0000"
 
    -- Naughty
    naughty.config.presets.normal.bg = theme.bg_widget
