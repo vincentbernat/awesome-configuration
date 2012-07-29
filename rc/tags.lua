@@ -30,7 +30,11 @@ for i = 1, #tags do
    -- Name
    config.tags[tags[i].name] = tags[i]
    if tags[i].name ~= tostring(i) then
-      tags[i].name = tostring(i) .. "↭" .. tags[i].name
+      if screen.count() > 1 then
+	 tags[i].name = tostring(i) .. "↭" .. tags[i].name
+      else
+	 tags[i].name = tostring(i)
+      end
    end
 
    -- Properties
