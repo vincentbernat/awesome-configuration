@@ -53,11 +53,8 @@ if config.hostname == "guybrush" then
 			     batwidget.lastwarn = current
 			  end
 		       end
-		       return string.format(
-			  '<span color="' .. beautiful.fg_widget_label ..
-			     '">Bat: </span>' ..
-			     '<span color="' .. color ..
-			     '">%s %d%%</span>', args[1], current)
+		       return string.format('<span color="' .. color ..
+			     '">%s%d%%</span>', args[1], current)
 		    end,
 		    61, "BAT1")
 end
