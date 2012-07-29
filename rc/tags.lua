@@ -35,7 +35,9 @@ for i = 1, #tags do
 
    -- Properties
    for pname, pvalue in pairs(otags[i]) do
-      if pname ~= "name" and pname ~= "layout" then
+      if pname == "icon" then
+	 awful.tag.seticon(awful.util.getdir("config") .. "/icons/" .. pvalue .. ".png", tags[i])
+      elseif pname ~= "name" and pname ~= "layout" then
 	 awful.tag.setproperty(tags[i], pname, pvalue)
       end
    end

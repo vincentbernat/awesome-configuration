@@ -50,10 +50,10 @@ config.layouts = {
    awful.layout.suit.floating,
 }
 config.tags = { 
-   { layout = awful.layout.suit.fair }, -- 1
-   { name = "emacs", mwfact = 0.6 },
-   { name = "www", mwfact = 0.7 },
-   { name = "im" , mwfact = 0.2 },
+   { layout = awful.layout.suit.fair, icon = "main" }, -- 1
+   { name = "emacs", mwfact = 0.6, icon = "dev" },
+   { name = "www", mwfact = 0.7, icon = "web" },
+   { name = "im" , mwfact = 0.2, icon = "im" },
    { }, -- 5
    { }, -- 6
    { }, -- 7

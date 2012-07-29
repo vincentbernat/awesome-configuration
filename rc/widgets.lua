@@ -3,23 +3,30 @@
 require("vicious")
 local icons = loadrc("icons", "vbe/icons")
 
--- Separator
-local separator = widget({ type = "textbox" })
-separator.text = ' <span color="' .. beautiful.fg_widget_sep .. '" size="small">⋆</span> '
+-- Separators
+local sepopen = widget({ type = "imagebox" })
+sepopen.image = image(awful.util.getdir("config") .. "/icons/widgets/left.png")
+local sepclose = widget({ type = "imagebox" })
+sepclose.image = image(awful.util.getdir("config") .. "/icons/widgets/right.png")
+local spacer = widget({ type = "imagebox" })
+spacer.image = image(awful.util.getdir("config") .. "/icons/widgets/spacer.png")
 
 -- Date
 local datewidget = widget({ type = "textbox" })
 vicious.register(datewidget, vicious.widgets.date,
 		 '<span color="' .. beautiful.fg_widget_clock .. '">%a %d/%m, %H:%M</span>', 61)
+local dateicon = widget({ type = "imagebox" })
+dateicon.image = image(awful.util.getdir("config") .. "/icons/widgets/clock.png")
 
 -- CPU usage
 local cpuwidget = widget({ type = "textbox" })
 vicious.register(cpuwidget, vicious.widgets.cpu,
 		 function (widget, args)
-		    return string.format('<span color="' .. beautiful.fg_widget_label .. '">CPU: </span>' ..
-					 '<span color="' .. beautiful.fg_widget_value .. '">%3d%%</span>',
+		    return string.format('<span color="' .. beautiful.fg_widget_value .. '">%2d%%</span>',
 					 args[1])
 		 end, 2)
+local cpuicon = widget({ type = "imagebox" })
+cpuicon.image = image(awful.util.getdir("config") .. "/icons/widgets/cpu.png")
 
 -- Battery
 local batwidget = { widget = "" }
@@ -56,14 +63,20 @@ if config.hostname == "guybrush" then
 end
 
 -- Network
-local netwidget = widget({ type = "textbox" })
+local netup   = widget({ type = "textbox" })
+local netdown = widget({ type = "textbox" })
+local netupicon = widget({ type = "imagebox" })
+netupicon.image = image(awful.util.getdir("config") .. "/icons/widgets/up.png")
+local netdownicon = widget({ type = "imagebox" })
+netdownicon.image = image(awful.util.getdir("config") .. "/icons/widgets/down.png")
+
 local netgraph = awful.widget.graph()
-netgraph:set_width(80):set_height(14)
+netgraph:set_width(80):set_height(16)
 netgraph:set_stack(true):set_scale(true)
 netgraph:set_border_color(beautiful.fg_widget_border)
 netgraph:set_stack_colors({ "#FF0000", "#0000FF" })
 netgraph:set_background_color("#00000000")
-vicious.register(netwidget, vicious.widgets.net,
+vicious.register(netup, vicious.widgets.net,
     function (widget, args)
        -- We sum up/down value for all interfaces
        local up = 0
@@ -87,22 +100,25 @@ vicious.register(netwidget, vicious.widgets.net,
 	  end
 	  return string.format("%d B", val)
        end
-       return string.format(
-	  '<span color="' .. beautiful.fg_widget_label ..
-	     '">Up/Down: </span><span color="' .. beautiful.fg_widget_value ..
-	     '">%08s</span><span color="' .. beautiful.fg_widget_label ..
-	     '">/</span><span color="' .. beautiful.fg_widget_value ..
-	     '">%08s</span> ', format(up), format(down))
+       -- Down
+       netdown.text = string.format('<span color="' .. beautiful.fg_widget_value ..
+				    '">%08s</span>', format(down))
+       -- Up
+       return string.format('<span color="' .. beautiful.fg_widget_value ..
+			    '">%08s</span>', format(up))
     end, 3)
 
 -- Memory usage
 local memwidget = widget({ type = "textbox" })
 vicious.register(memwidget, vicious.widgets.mem,
-		 '<span color="' .. beautiful.fg_widget_label .. '">Mem: </span>' ..
-		    '<span color="' .. beautiful.fg_widget_value .. '">$1%</span>',
+		 '<span color="' .. beautiful.fg_widget_value .. '">$1%</span>',
 		 13)
+local memicon = widget({ type = "imagebox" })
+memicon.image = image(awful.util.getdir("config") .. "/icons/widgets/mem.png")
 
 -- Volume level
+local volicon = widget({ type = "imagebox" })
+volicon.image = image(awful.util.getdir("config") .. "/icons/widgets/vol.png")
 local volwidget = widget({ type = "textbox" })
 vicious.register(volwidget, vicious.widgets.volume,
 		 '<span color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
@@ -121,6 +137,8 @@ local fs = { ["/"] = "root",
 	     ["/usr"] = "usr",
 	     ["/tmp"] = "tmp",
 	     ["/var/cache/build"] = "pbuilder" }
+local fsicon = widget({ type = "imagebox" })
+fsicon.image = image(awful.util.getdir("config") .. "/icons/widgets/disk.png")
 local fswidget = widget({ type = "textbox" })
 vicious.register(fswidget, vicious.widgets.fs,
 		 function (widget, args)
@@ -135,7 +153,7 @@ vicious.register(fswidget, vicious.widgets.fs,
 			  result = string.format(
 			     '%s%s<span color="' .. beautiful.fg_widget_label .. '">%s: </span>' ..
 				'<span color="' .. color .. '">%2d%%</span>',
-			     result, #result > 0 and separator.text or "", name, used)
+			     result, #result > 0 and " " or "", name, used)
 		       end
 		    end
 		    return result
@@ -168,7 +186,6 @@ tasklist.buttons = awful.util.table.join(
 for s = 1, screen.count() do
     promptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
     layoutbox[s] = awful.widget.layoutbox(s)
-    awful.widget.layout.margins[layoutbox[s]] = { left = 5 }
     tasklist[s]  = awful.widget.tasklist(
        function(c)
 	  local fn = awful.widget.tasklist.label.currenttags
@@ -192,7 +209,7 @@ for s = 1, screen.count() do
 			     fg = beautiful.fg_normal,
 			     bg = beautiful.bg_widget,
 			     position = "top",
-			     height = 14,
+			     height = 16,
     })
     -- Add widgets to the wibox
     local on = function(n, what)
@@ -202,19 +219,22 @@ for s = 1, screen.count() do
 
     wibox[s].widgets = {
         {
-	   taglist[s], layoutbox[s],
-	   separator, promptbox[s],
+	   sepopen,
+	   taglist[s],
+	   spacer,
+	   layoutbox[s], sepclose,
+	   promptbox[s],
 	   layout = awful.widget.layout.horizontal.leftright
 	},
-	on(1, systray), on(1, separator),
-	datewidget, separator,
-	on(2, volwidget), on(2, separator),
-	on(2, batwidget.widget), on(2, batwidget.widget ~= "" and separator or ""),
-	on(2, fswidget), on(2, separator),
-	on(1, netgraph.widget), on(1, netwidget), on(1, separator),
-	on(1, memwidget), on(1, separator),
-	on(1, cpuwidget), on(1, separator),
-	tasklist[s], separator,
+	on(1, systray),
+	sepclose, datewidget, dateicon, spacer,
+	on(2, volwidget), on(2, volicon), on(2, spacer),
+	on(2, batwidget.widget), on(2, batwidget.widget ~= "" and spacer or ""),
+	on(2, fswidget), on(2, fsicon), on(2, sepopen),
+	on(1, netgraph.widget), on(1, netdownicon), on(1, netdown), on(1, netupicon), on(1, netup), on(1, spacer),
+	on(1, memwidget), on(1, memicon), on(1, spacer),
+	on(1, cpuwidget), on(1, cpuicon), on(1, sepopen),
+	tasklist[s],
 	layout = awful.widget.layout.horizontal.rightleft }
 end
 
