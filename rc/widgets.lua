@@ -13,10 +13,67 @@ spacer.image = image(awful.util.getdir("config") .. "/icons/widgets/spacer.png")
 
 -- Date
 local datewidget = widget({ type = "textbox" })
+local dateformat = "%H:%M"
+if screen.count() > 1 then dateformat = "%a %d/%m, " .. dateformat end
 vicious.register(datewidget, vicious.widgets.date,
-		 '<span color="' .. beautiful.fg_widget_clock .. '">%a %d/%m, %H:%M</span>', 61)
+		 '<span color="' .. beautiful.fg_widget_clock .. '">' ..
+		    dateformat .. '</span>', 61)
 local dateicon = widget({ type = "imagebox" })
 dateicon.image = image(awful.util.getdir("config") .. "/icons/widgets/clock.png")
+local cal = (
+   function()
+      local calendar = nil
+      local offset = 0
+
+      local remove_calendar = function()
+	 if calendar ~= nil then
+	    naughty.destroy(calendar)
+	    calendar = nil
+	    offset = 0
+	 end
+      end
+
+      local add_calendar = function(inc_offset)
+	 local save_offset = offset
+	 remove_calendar()
+	 offset = save_offset + inc_offset
+	 local datespec = os.date("*t")
+	 datespec = datespec.year * 12 + datespec.month - 1 + offset
+	 datespec = (datespec % 12 + 1) .. " " .. math.floor(datespec / 12)
+	 local cal = awful.util.pread("ncal -w -m " .. datespec)
+	 -- Highlight the current date and month
+	 cal = cal:gsub("_.(%d)",
+			string.format('<span color="%s">%%1</span>',
+				      beautiful.fg_widget_clock))
+	 cal = cal:gsub("^( +[^ ]+ [0-9]+) *",
+			string.format('<span color="%s">%%1</span>',
+				      beautiful.fg_widget_clock))
+	 -- Turn anything other than days in labels
+	 cal = cal:gsub("(\n[^%d]+)",
+			string.format('<span color="%s">%%1</span>',
+				      beautiful.fg_widget_label))
+	 cal = cal:gsub("([%d ]+)\n?$",
+			string.format('<span color="%s">%%1</span>',
+				      beautiful.fg_widget_label))
+	 calendar = naughty.notify(
+	    {
+	       text = string.format('<span font="%s">%s</span>',
+				    "Terminus 8",
+				    cal:gsub(" +\n","\n")),
+	       timeout = 0, hover_timeout = 0.5,
+	       width = 160,
+	    })
+      end
+
+      return { add = add_calendar,
+	       rem = remove_calendar }
+   end)()
+
+datewidget:add_signal("mouse::enter", function() cal.add(0) end)
+datewidget:add_signal("mouse::leave", cal.rem)
+datewidget:buttons(awful.util.table.join(
+		      awful.button({ }, 3, function() cal.add(-1) end),
+		      awful.button({ }, 1, function() cal.add(1) end)))
 
 -- CPU usage
 local cpuwidget = widget({ type = "textbox" })
