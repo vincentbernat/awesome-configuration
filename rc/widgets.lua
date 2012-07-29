@@ -10,14 +10,14 @@ separator.text = ' <span color="' .. beautiful.fg_widget_sep .. '" size="small">
 -- Date
 local datewidget = widget({ type = "textbox" })
 vicious.register(datewidget, vicious.widgets.date,
-		 '<span font="Terminus 8" color="' .. beautiful.fg_widget_clock .. '">%a %d/%m, %H:%M</span>', 61)
+		 '<span color="' .. beautiful.fg_widget_clock .. '">%a %d/%m, %H:%M</span>', 61)
 
 -- CPU usage
 local cpuwidget = widget({ type = "textbox" })
 vicious.register(cpuwidget, vicious.widgets.cpu,
 		 function (widget, args)
-		    return string.format('<span font="Terminus 8" color="' .. beautiful.fg_widget_label .. '">CPU: </span>' ..
-					 '<span font="Terminus 8" color="' .. beautiful.fg_widget_value .. '">%3d%%</span>',
+		    return string.format('<span color="' .. beautiful.fg_widget_label .. '">CPU: </span>' ..
+					 '<span color="' .. beautiful.fg_widget_value .. '">%3d%%</span>',
 					 args[1])
 		 end, 2)
 
@@ -47,9 +47,9 @@ if config.hostname == "guybrush" then
 			  end
 		       end
 		       return string.format(
-			  '<span font="Terminus 8" color="' .. beautiful.fg_widget_label ..
+			  '<span color="' .. beautiful.fg_widget_label ..
 			     '">Bat: </span>' ..
-			     '<span font="Terminus 8" color="' .. color ..
+			     '<span color="' .. color ..
 			     '">%s %d%%</span>', args[1], current)
 		    end,
 		    61, "BAT1")
@@ -88,24 +88,24 @@ vicious.register(netwidget, vicious.widgets.net,
 	  return string.format("%d B", val)
        end
        return string.format(
-	  '<span font="Terminus 8" color="' .. beautiful.fg_widget_label ..
-	     '">Up/Down: </span><span font="Terminus 8" color="' .. beautiful.fg_widget_value ..
-	     '">%08s</span><span font="Terminus 8" color="' .. beautiful.fg_widget_label ..
-	     '">/</span><span font="Terminus 8" color="' .. beautiful.fg_widget_value ..
+	  '<span color="' .. beautiful.fg_widget_label ..
+	     '">Up/Down: </span><span color="' .. beautiful.fg_widget_value ..
+	     '">%08s</span><span color="' .. beautiful.fg_widget_label ..
+	     '">/</span><span color="' .. beautiful.fg_widget_value ..
 	     '">%08s</span> ', format(up), format(down))
     end, 3)
 
 -- Memory usage
 local memwidget = widget({ type = "textbox" })
 vicious.register(memwidget, vicious.widgets.mem,
-		 '<span font="Terminus 8" color="' .. beautiful.fg_widget_label .. '">Mem: </span>' ..
-		    '<span font="Terminus 8" color="' .. beautiful.fg_widget_value .. '">$1%</span>',
+		 '<span color="' .. beautiful.fg_widget_label .. '">Mem: </span>' ..
+		    '<span color="' .. beautiful.fg_widget_value .. '">$1%</span>',
 		 13)
 
 -- Volume level
 local volwidget = widget({ type = "textbox" })
 vicious.register(volwidget, vicious.widgets.volume,
-		 '<span font="Terminus 8" color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
+		 '<span color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
 		2, "Master")
 volume = loadrc("volume", "vbe/volume")
 volwidget:buttons(awful.util.table.join(
@@ -133,8 +133,8 @@ vicious.register(fswidget, vicious.widgets.fs,
 			     color = beautiful.fg_widget_value_important
 			  end
 			  result = string.format(
-			     '%s%s<span font="Terminus 8" color="' .. beautiful.fg_widget_label .. '">%s: </span>' ..
-				'<span font="Terminus 8" color="' .. color .. '">%2d%%</span>',
+			     '%s%s<span color="' .. beautiful.fg_widget_label .. '">%s: </span>' ..
+				'<span color="' .. color .. '">%2d%%</span>',
 			     result, #result > 0 and separator.text or "", name, used)
 		       end
 		    end

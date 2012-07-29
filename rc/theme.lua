@@ -4,7 +4,7 @@ local na = awful.util.color_strip_alpha
 local theme = loadrc("../themes/nice-and-clean-theme/theme")
 if theme then
    theme.wallpaper_cmd = { "/bin/true" }
-   theme.font = "DejaVu Sans 9"
+   theme.font = "Terminus 8"
 
    theme.border_width  = 4
    theme.border_normal = "#00000000"
