@@ -6,6 +6,13 @@ if theme then
    theme.wallpaper_cmd = { "/bin/true" }
    theme.font = "Terminus 8"
 
+   for n, l in pairs(theme) do
+      local layout = n:match("layout_([%w]+)")
+      if layout then
+	 theme[n] = awful.util.getdir("config") .. "/icons/layouts/" .. layout .. ".png"
+      end
+   end
+
    theme.border_width  = 4
    theme.border_normal = "#00000000"
    theme.border_focus  = "#FF7F0066"
