@@ -99,6 +99,6 @@ function dbg(...)
 
    -- Display only if we don't have only clients to be displayed
    if clients ~= num then
-      naughty.notify{ text = text, timeout = 0, hover_timeout = 0.05, screen = screen.count() }
+      naughty.notify{ text = text, timeout = 0, hover_timeout = 2, screen = screen.count() }
    end
 end
