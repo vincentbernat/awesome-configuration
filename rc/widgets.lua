@@ -74,8 +74,8 @@ local netgraph = awful.widget.graph()
 netgraph:set_width(80):set_height(16)
 netgraph:set_stack(true):set_scale(true)
 netgraph:set_border_color(beautiful.fg_widget_border)
-netgraph:set_stack_colors({ "#FF0000", "#0000FF" })
-netgraph:set_background_color("#00000000")
+netgraph:set_stack_colors({ "#EF8171", "#cfefb3" })
+netgraph:set_background_color("#00000033")
 vicious.register(netup, vicious.widgets.net,
     function (widget, args)
        -- We sum up/down value for all interfaces
