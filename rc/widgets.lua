@@ -208,10 +208,11 @@ for s = 1, screen.count() do
 
     wibox[s].widgets = {
         {
-	   sepopen,
+	   screen.count() > 1 and sepopen or "",
 	   taglist[s],
-	   spacer,
-	   layoutbox[s], sepclose,
+	   screen.count() > 1 and spacer or "",
+	   layoutbox[s],
+	   screen.count() > 1 and sepclose or "",
 	   promptbox[s],
 	   layout = awful.widget.layout.horizontal.leftright
 	},
