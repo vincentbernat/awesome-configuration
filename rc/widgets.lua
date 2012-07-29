@@ -187,15 +187,8 @@ for s = 1, screen.count() do
     layoutbox[s] = awful.widget.layoutbox(s)
     tasklist[s]  = awful.widget.tasklist(
        function(c)
-	  local fn = awful.widget.tasklist.label.currenttags
-	  local title, color, _, icon = fn(c, s)
-	  if screen.count() > 1 then
-	     -- title, color and icon
-	     return title, color, nil, icon
-	  elseif icon then
-	     -- just color and icon
-	     return "", color, nil, icon
-	  end
+	  local title, color, _, icon = awful.widget.tasklist.label.currenttags(c, s)
+	  return title, color, nil, icon
        end, tasklist.buttons)
 
     -- Create the taglist
@@ -223,11 +216,20 @@ for s = 1, screen.count() do
 	   layout = awful.widget.layout.horizontal.leftright
 	},
 	on(1, systray),
-	sepclose, datewidget, dateicon, spacer,
+	sepclose, datewidget, screen.count() > 1 and dateicon or "", spacer,
 	on(2, volwidget), on(2, volicon), on(2, spacer),
-	on(2, batwidget.widget), on(2, batwidget.widget ~= "" and baticon or ""), on(2, batwidget.widget ~= "" and spacer or ""),
-	on(2, fswidget), on(2, fsicon), on(2, sepopen),
-	on(1, netgraph.widget), on(1, netdownicon), on(1, netdown), on(1, netupicon), on(1, netup), on(1, spacer),
+
+	on(2, batwidget.widget),
+	on(2, batwidget.widget ~= "" and screen.count() > 1 and baticon or ""),
+	on(2, batwidget.widget ~= "" and spacer or ""),
+
+	on(2, fswidget), screen.count() > 1 and on(2, fsicon) or "",
+	screen.count() > 1 and on(2, sepopen) or on(2, spacer),
+
+	screen.count() > 1 and on(1, netgraph.widget) or "",
+	on(1, netdownicon), on(1, netdown),
+	on(1, netupicon), on(1, netup), on(1, spacer),
+
 	on(1, memwidget), on(1, memicon), on(1, spacer),
 	on(1, cpuwidget), on(1, cpuicon), on(1, sepopen),
 	tasklist[s],
