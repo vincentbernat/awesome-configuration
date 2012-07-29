@@ -24,7 +24,7 @@ vicious.register(cpuwidget, vicious.widgets.cpu,
 		 function (widget, args)
 		    return string.format('<span color="' .. beautiful.fg_widget_value .. '">%2d%%</span>',
 					 args[1])
-		 end, 2)
+		 end, 7)
 local cpuicon = widget({ type = "imagebox" })
 cpuicon.image = image(awful.util.getdir("config") .. "/icons/widgets/cpu.png")
 
@@ -56,7 +56,7 @@ if config.hostname == "guybrush" then
 		       return string.format('<span color="' .. color ..
 			     '">%s%d%%</span>', args[1], current)
 		    end,
-		    61, "BAT1")
+		    59, "BAT1")
 end
 local baticon = widget({ type = "imagebox" })
 baticon.image = image(awful.util.getdir("config") .. "/icons/widgets/bat.png")
@@ -111,7 +111,7 @@ vicious.register(netup, vicious.widgets.net,
 local memwidget = widget({ type = "textbox" })
 vicious.register(memwidget, vicious.widgets.mem,
 		 '<span color="' .. beautiful.fg_widget_value .. '">$1%</span>',
-		 13)
+		 19)
 local memicon = widget({ type = "imagebox" })
 memicon.image = image(awful.util.getdir("config") .. "/icons/widgets/mem.png")
 
@@ -121,7 +121,7 @@ volicon.image = image(awful.util.getdir("config") .. "/icons/widgets/vol.png")
 local volwidget = widget({ type = "textbox" })
 vicious.register(volwidget, vicious.widgets.volume,
 		 '<span color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
-		2, "Master")
+		17, "Master")
 volume = loadrc("volume", "vbe/volume")
 volwidget:buttons(awful.util.table.join(
 		     awful.button({ }, 1, volume.mixer),
@@ -156,7 +156,7 @@ vicious.register(fswidget, vicious.widgets.fs,
 		       end
 		    end
 		    return result
-		 end, 10)
+		 end, 53)
 
 local systray = widget({ type = "systray" })
 
