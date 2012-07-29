@@ -61,6 +61,8 @@ if config.hostname == "guybrush" then
 		    end,
 		    61, "BAT1")
 end
+local baticon = widget({ type = "imagebox" })
+baticon.image = image(awful.util.getdir("config") .. "/icons/widgets/bat.png")
 
 -- Network
 local netup   = widget({ type = "textbox" })
@@ -229,7 +231,7 @@ for s = 1, screen.count() do
 	on(1, systray),
 	sepclose, datewidget, dateicon, spacer,
 	on(2, volwidget), on(2, volicon), on(2, spacer),
-	on(2, batwidget.widget), on(2, batwidget.widget ~= "" and spacer or ""),
+	on(2, batwidget.widget), on(2, batwidget.widget ~= "" and baticon or ""), on(2, batwidget.widget ~= "" and spacer or ""),
 	on(2, fswidget), on(2, fsicon), on(2, sepopen),
 	on(1, netgraph.widget), on(1, netdownicon), on(1, netdown), on(1, netupicon), on(1, netup), on(1, spacer),
 	on(1, memwidget), on(1, memicon), on(1, spacer),
