@@ -35,8 +35,7 @@ URxvt.scrollWithBuffer: True
 URxvt.jumpScroll: True
 URxvt.saveLines: 5000
 
-URxvt.font: xft:DejaVu Sans Mono-8
-URxvt.letterSpace: -1
+URxvt.font: xft:Terminus-9
 
 URxvt.iso14755: False
 URxvt.perl-ext-common: default,-option-popup,-selection-popup
