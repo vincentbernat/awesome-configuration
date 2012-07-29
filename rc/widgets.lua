@@ -188,9 +188,6 @@ for s = 1, screen.count() do
     tasklist[s]  = awful.widget.tasklist(
        function(c)
 	  local fn = awful.widget.tasklist.label.currenttags
-	  if screen.count() == 1 then
-	     fn = awful.widget.tasklist.label.alltags
-	  end
 	  local title, color, _, icon = fn(c, s)
 	  if screen.count() > 1 then
 	     -- title, color and icon
