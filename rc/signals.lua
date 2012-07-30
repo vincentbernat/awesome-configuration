@@ -40,7 +40,7 @@ client.add_signal("focus", function(c)
 
 		     -- Move the mouse to the top left corner
 		     local margin = 10
-		     if not focus_from_mouse then
+		     if not focus_from_mouse and c.type ~= "dialog" then
 			local cc = c:geometry()
 			local _, x, y = awful.mouse.client.corner(nil, "top_left")
 			if x and y and cc.width > margin * 2 and cc.height > margin * 2 then
