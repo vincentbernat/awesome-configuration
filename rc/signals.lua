@@ -2,6 +2,17 @@ local icons = loadrc("icons", "vbe/icons")
 
 -- Did we get the focus because of sloppy focus?
 local focus_from_mouse = false
+local function mouse_follow_focus(c)
+   -- Move the mouse to the top left corner
+   local margin = 10
+   if c.type ~= "dialog" then
+      local cc = c:geometry()
+      local _, x, y = awful.mouse.client.corner(nil, "top_left")
+      if x and y and cc.width > margin * 2 and cc.height > margin * 2 then
+	 mouse.coords({ x = x + margin , y = y + margin }, true)
+      end
+   end
+end
 
 -- Signal function to execute when a new client appears.
 client.add_signal("manage",
@@ -14,6 +25,13 @@ client.add_signal("manage",
 					 focus_from_mouse = true
 					 client.focus = c
 				     end
+				  end)
+
+		     c:add_signal("property::geometry",
+				  function()
+				 if client.focus == c then
+				    mouse_follow_focus(c)
+				 end
 				  end)
 
 		     -- Setup icon if none exists
@@ -38,14 +56,8 @@ client.add_signal("focus", function(c)
 		     c.border_color = beautiful.border_focus
 		     c.opacity = 1
 
-		     -- Move the mouse to the top left corner
-		     local margin = 10
-		     if not focus_from_mouse and c.type ~= "dialog" then
-			local cc = c:geometry()
-			local _, x, y = awful.mouse.client.corner(nil, "top_left")
-			if x and y and cc.width > margin * 2 and cc.height > margin * 2 then
-			   mouse.coords({ x = x + margin , y = y + margin }, true)
-			end
+		     if not focus_from_mouse then
+			mouse_follow_focus(c)
 		     end
 		     focus_from_mouse = false
 					 
