@@ -5,8 +5,8 @@ beautiful.init(awful.util.getdir("config") .. "/rc/theme.lua")
 -- kept up-to-date with GTK2 and GTK3...
 
 -- Also see: http://developer.gnome.org/gtk3/3.2/GtkSettings.html
-local gtk = 'gtk-font-name="' .. beautiful.font .. '"' .. [[
-
+local gtk = [[
+gtk-font-name="DejaVu Sans 9"
 gtk-theme-name="Adwaita"
 gtk-icon-theme-name="gnome-wine"
 gtk-fallback-icon-theme="gnome"
