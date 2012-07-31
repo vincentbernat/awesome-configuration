@@ -43,6 +43,8 @@ end
 
 -- Naughty
 naughty.config.presets.normal.bg = theme.bg_widget
-naughty.config.default_preset.font = "DejaVu Sans 10"
+for _,preset in pairs({"normal", "low", "critical"}) do
+   naughty.config.presets[preset].font = "DejaVu Sans 10"
+end
 
 return theme
