@@ -62,6 +62,7 @@ local cal = (
 				    cal:gsub(" +\n","\n")),
 	       timeout = 0, hover_timeout = 0.5,
 	       width = 160,
+	       screen = mouse.screen,
 	    })
       end
 
