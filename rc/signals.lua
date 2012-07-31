@@ -20,13 +20,19 @@ client.add_signal("manage",
 		     -- Enable sloppy focus
 		     c:add_signal("mouse::enter",
 				  function(c)
-				     if ((awful.layout.get(c.screen) ~= awful.layout.suit.magnifier or awful.client.getmaster(c.screen) == c)
+				     -- If magnifier suit, only give sloppy focus to master window
+				     if ((awful.layout.get(c.screen) ~= awful.layout.suit.magnifier or
+					  awful.client.getmaster(c.screen) == c)
+					 -- Don't give focus to a client already having focus
+					 and client.focus ~= c
+					 -- Don't give focus to a window that does not want focus
 					 and awful.client.focus.filter(c)) then
-					 focus_from_mouse = true
+					 focus_from_mouse = c
 					 client.focus = c
 				     end
 				  end)
 
+		     -- If a window change its geometry, track it with the mouse
 		     c:add_signal("property::geometry",
 				  function()
 				 if client.focus == c then
@@ -56,7 +62,7 @@ client.add_signal("focus", function(c)
 		     c.border_color = beautiful.border_focus
 		     c.opacity = 1
 
-		     if not focus_from_mouse then
+		     if focus_from_mouse ~= c then
 			mouse_follow_focus(c)
 		     end
 		     focus_from_mouse = false
