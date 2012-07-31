@@ -4,6 +4,7 @@ local na = awful.util.color_strip_alpha
 local icons = awful.util.getdir("config") .. "/icons"
 
 theme = {}
+theme.icons = icons
 theme.wallpaper_cmd = { "/bin/true" }
 theme.font = "Terminus 8"
 theme.tasklist_font = "DejaVu Sans 8"

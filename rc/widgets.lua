@@ -5,11 +5,11 @@ local icons = loadrc("icons", "vbe/icons")
 
 -- Separators
 local sepopen = widget({ type = "imagebox" })
-sepopen.image = image(awful.util.getdir("config") .. "/icons/widgets/left.png")
+sepopen.image = image(beautiful.icons .. "/widgets/left.png")
 local sepclose = widget({ type = "imagebox" })
-sepclose.image = image(awful.util.getdir("config") .. "/icons/widgets/right.png")
+sepclose.image = image(beautiful.icons .. "/widgets/right.png")
 local spacer = widget({ type = "imagebox" })
-spacer.image = image(awful.util.getdir("config") .. "/icons/widgets/spacer.png")
+spacer.image = image(beautiful.icons .. "/widgets/spacer.png")
 
 -- Date
 local datewidget = widget({ type = "textbox" })
@@ -19,7 +19,7 @@ vicious.register(datewidget, vicious.widgets.date,
 		 '<span color="' .. beautiful.fg_widget_clock .. '">' ..
 		    dateformat .. '</span>', 61)
 local dateicon = widget({ type = "imagebox" })
-dateicon.image = image(awful.util.getdir("config") .. "/icons/widgets/clock.png")
+dateicon.image = image(beautiful.icons .. "/widgets/clock.png")
 local cal = (
    function()
       local calendar = nil
@@ -84,7 +84,7 @@ vicious.register(cpuwidget, vicious.widgets.cpu,
 					 args[1])
 		 end, 7)
 local cpuicon = widget({ type = "imagebox" })
-cpuicon.image = image(awful.util.getdir("config") .. "/icons/widgets/cpu.png")
+cpuicon.image = image(beautiful.icons .. "/widgets/cpu.png")
 
 -- Battery
 local batwidget = { widget = "" }
@@ -117,15 +117,15 @@ if config.hostname == "guybrush" then
 		    59, "BAT1")
 end
 local baticon = widget({ type = "imagebox" })
-baticon.image = image(awful.util.getdir("config") .. "/icons/widgets/bat.png")
+baticon.image = image(beautiful.icons .. "/widgets/bat.png")
 
 -- Network
 local netup   = widget({ type = "textbox" })
 local netdown = widget({ type = "textbox" })
 local netupicon = widget({ type = "imagebox" })
-netupicon.image = image(awful.util.getdir("config") .. "/icons/widgets/up.png")
+netupicon.image = image(beautiful.icons .. "/widgets/up.png")
 local netdownicon = widget({ type = "imagebox" })
-netdownicon.image = image(awful.util.getdir("config") .. "/icons/widgets/down.png")
+netdownicon.image = image(beautiful.icons .. "/widgets/down.png")
 
 local netgraph = awful.widget.graph()
 netgraph:set_width(80):set_height(16)
@@ -171,11 +171,11 @@ vicious.register(memwidget, vicious.widgets.mem,
 		 '<span color="' .. beautiful.fg_widget_value .. '">$1%</span>',
 		 19)
 local memicon = widget({ type = "imagebox" })
-memicon.image = image(awful.util.getdir("config") .. "/icons/widgets/mem.png")
+memicon.image = image(beautiful.icons .. "/widgets/mem.png")
 
 -- Volume level
 local volicon = widget({ type = "imagebox" })
-volicon.image = image(awful.util.getdir("config") .. "/icons/widgets/vol.png")
+volicon.image = image(beautiful.icons .. "/widgets/vol.png")
 local volwidget = widget({ type = "textbox" })
 vicious.register(volwidget, vicious.widgets.volume,
 		 '<span color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
@@ -195,7 +195,7 @@ local fs = { ["/"] = "root",
 	     ["/tmp"] = "tmp",
 	     ["/var/cache/build"] = "pbuilder" }
 local fsicon = widget({ type = "imagebox" })
-fsicon.image = image(awful.util.getdir("config") .. "/icons/widgets/disk.png")
+fsicon.image = image(beautiful.icons .. "/widgets/disk.png")
 local fswidget = widget({ type = "textbox" })
 vicious.register(fswidget, vicious.widgets.fs,
 		 function (widget, args)
