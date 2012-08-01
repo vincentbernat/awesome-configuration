@@ -42,14 +42,14 @@ local cal = (
 	 datespec = (datespec % 12 + 1) .. " " .. math.floor(datespec / 12)
 	 local cal = awful.util.pread("ncal -w -m " .. datespec)
 	 -- Highlight the current date and month
-	 cal = cal:gsub("_.(%d)",
+	 cal = cal:gsub("_.([%d ])",
 			string.format('<span color="%s">%%1</span>',
 				      beautiful.fg_widget_clock))
 	 cal = cal:gsub("^( +[^ ]+ [0-9]+) *",
 			string.format('<span color="%s">%%1</span>',
 				      beautiful.fg_widget_clock))
 	 -- Turn anything other than days in labels
-	 cal = cal:gsub("(\n[^%d]+)",
+	 cal = cal:gsub("(\n[^%d ]+)",
 			string.format('<span color="%s">%%1</span>',
 				      beautiful.fg_widget_label))
 	 cal = cal:gsub("([%d ]+)\n?$",
