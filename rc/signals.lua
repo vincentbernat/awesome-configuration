@@ -35,9 +35,14 @@ client.add_signal("manage",
 		     -- If a window change its geometry, track it with the mouse
 		     c:add_signal("property::geometry",
 				  function()
-				 if client.focus == c then
-				    mouse_follow_focus(c)
-				 end
+				     -- Check if the current focused client is our
+				     if client.focus ~=c then return end
+				     -- Check that no button is pressed
+				     local buttons = mouse.coords().buttons
+				     for _, state in pairs(buttons) do
+					if state then return end
+				     end
+				     mouse_follow_focus(c)
 				  end)
 
 		     -- Setup icon if none exists
