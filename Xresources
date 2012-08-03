@@ -35,7 +35,9 @@ URxvt.scrollWithBuffer: True
 URxvt.jumpScroll: True
 URxvt.saveLines: 5000
 
-URxvt.font: xft:Terminus-9
+URxvt.font:        -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
+!URxvt.boldFont:    -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso10646-1
+!URxvt.font: xft:Terminus-9
 
 URxvt.iso14755: False
 URxvt.perl-ext-common: default,-option-popup,-selection-popup
