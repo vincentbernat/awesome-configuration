@@ -12,7 +12,7 @@ awful.rules.rules = {
    { rule = { class = "Emacs" },
      properties = { tag = config.tags.emacs }},
    -- Browser stuff
-   { rule_any = { class = { "Iceweasel", "Firefox", "Chromium" } },
+   { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "Conkeror" } },
      properties = { tag = config.tags.www },
      callback = function(c)
 	-- All windows should be slaves, except the browser windows.
