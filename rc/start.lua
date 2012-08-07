@@ -67,11 +67,11 @@ xrun("emacs")
 if config.hostname == "neo" then
    xrun("keepassx", "keepassx -min -lock")
    xrun("transmission", "transmission-gtk -m")
-   xrun("chromium")
+   xrun("conkeror")
 elseif config.hostname == "guybrush" then
    xrun("keepassx", "keepassx -min -lock")
    xrun("NetworkManager Applet", "nm-applet")
-   xrun("chromium")
+   xrun("conkeror")
 elseif config.hostname == "naruto" then
-   xrun("iceweasel")
+   xrun("conkeror")
 end
