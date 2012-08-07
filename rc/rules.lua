@@ -1,3 +1,5 @@
+local icons = loadrc("icons", "vbe/icons")
+
 awful.rules.rules = {
    -- All clients will match this rule.
    { rule = { },
@@ -22,6 +24,9 @@ awful.rules.rules = {
      properties = { floating = true }}, -- Flash with Firefox
    { rule = { instance = "exe", class="Exe", instance="exe" },
      properties = { floating = true }}, -- Flash with Chromium
+   { rule = { class = "Conkeror" },
+     properties = { icon = image(icons.lookup({ name = "web-browser",
+						type = "apps" })) }},
    -- Pidgin
    { rule = { class = "Pidgin" },
      except = { type = "dialog" },
