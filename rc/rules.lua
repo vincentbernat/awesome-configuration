@@ -14,8 +14,19 @@ awful.rules.rules = {
    { rule = { class = "Emacs" },
      properties = { tag = config.tags.emacs }},
    -- Browser stuff
-   { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "Conkeror" } },
+   { rule = { role = "browser" },
      properties = { tag = config.tags.www },
+     callback = function(c)
+	if not c.icon then
+	   local icon = icons.lookup({ name = "web-browser",
+				       type = "apps" })
+	   if icon then
+	      c.icon = image(icon)
+	   end
+	end
+     end },
+   { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "Conkeror",
+			    "Xulrunner-15.0" } },
      callback = function(c)
 	-- All windows should be slaves, except the browser windows.
 	if c.role ~= "browser" then awful.client.setslave(c) end
@@ -24,9 +35,6 @@ awful.rules.rules = {
      properties = { floating = true }}, -- Flash with Firefox
    { rule = { instance = "exe", class="Exe", instance="exe" },
      properties = { floating = true }}, -- Flash with Chromium
-   { rule = { class = "Conkeror" },
-     properties = { icon = image(icons.lookup({ name = "web-browser",
-						type = "apps" })) }},
    -- Pidgin
    { rule = { class = "Pidgin" },
      except = { type = "dialog" },
