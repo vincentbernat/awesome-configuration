@@ -276,10 +276,10 @@ for s = 1, screen.count() do
 	},
 	on(1, systray),
 	sepclose, datewidget, screen.count() > 1 and dateicon or "", spacer,
-	on(2, volwidget), on(2, volicon), on(2, spacer),
+	on(2, volwidget), screen.count() > 1 and on(2, volicon) or "", on(2, spacer),
 
 	on(2, batwidget.widget),
-	on(2, batwidget.widget ~= "" and screen.count() > 1 and baticon or ""),
+	on(2, batwidget.widget ~= "" and baticon or ""),
 	on(2, batwidget.widget ~= "" and spacer or ""),
 
 	on(2, fswidget), screen.count() > 1 and on(2, fsicon) or "",
