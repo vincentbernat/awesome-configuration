@@ -1,4 +1,5 @@
 -- Startup
+local browser = "conkeror"
 
 -- Setup display
 local xrandr = {
@@ -21,6 +22,9 @@ local execute = {
    "numlockx on",
    -- Read resources
    "xrdb -merge " .. awful.util.getdir("config") .. "/Xresources",
+   -- Default browser
+   "xdg-mime default " .. browser .. ".desktop x-scheme-handler/http",
+   "xdg-mime default " .. browser .. ".desktop x-scheme-handler/https"
 }
 
 -- Keyboard/Mouse configuration
@@ -63,15 +67,12 @@ xrun("Bluetooth Applet",
      "bluetooth-applet")
 xrun("pidgin", "pidgin -n")
 xrun("emacs")
+xrun(browser)
 
 if config.hostname == "neo" then
    xrun("keepassx", "keepassx -min -lock")
    xrun("transmission", "transmission-gtk -m")
-   xrun("conkeror")
 elseif config.hostname == "guybrush" then
    xrun("keepassx", "keepassx -min -lock")
    xrun("NetworkManager Applet", "nm-applet")
-   xrun("conkeror")
-elseif config.hostname == "naruto" then
-   xrun("conkeror")
 end
