@@ -21,9 +21,10 @@ Xft.rgba: rgb
 *color14:  #A3BABF
 *color7:   #bebebe
 *color15:  #ffffff
+*colorBD:  #ffffff
 
 !! rxvt configuration
-URxvt.foreground: white
+URxvt.foreground: #dfdfdf
 URxvt.background: rgba:0000/0000/0000/eeee
 URxvt.cursorColor: green
 URxvt.depth: 32
@@ -36,8 +37,6 @@ URxvt.jumpScroll: True
 URxvt.saveLines: 5000
 
 URxvt.font:        -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
-!URxvt.boldFont:    -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso10646-1
-!URxvt.font: xft:Terminus-9
 
 URxvt.iso14755: False
 URxvt.perl-ext-common: default,-option-popup,-selection-popup
