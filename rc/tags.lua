@@ -37,20 +37,14 @@ shifty.config.tags = {
       mwfact = 0.2,
       exclusive = true,
       icon = tagicon("im"),
-      nopopup = true
+      nopopup = true,           -- don't give focus on creation
    }
 }
 
 -- Also, see rules.lua
 shifty.config.apps = {
    {
-      match = {
-         "Iceweasel",
-         "Firefox",
-         "Chromium",
-         "Conkeror",
-         "Xulrunner-15.0"
-      },
+      match = { role = { "browser" } },
       tag = "3↭www",
    },
    {
@@ -58,7 +52,7 @@ shifty.config.apps = {
       tag = "2↭emacs",
    },
    {
-      match = { "Pidgin" },
+      match = { role = { "conversation", "buddy_list" } },
       tag = "4↭im",
    },
    {

@@ -20,8 +20,7 @@ awful.rules.rules = {
 	   end
 	end
      end },
-   { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "Conkeror",
-			    "Xulrunner-15.0" } },
+   { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "Conkeror" } },
      callback = function(c)
 	-- All windows should be slaves, except the browser windows.
 	if c.role ~= "browser" then awful.client.setslave(c) end
