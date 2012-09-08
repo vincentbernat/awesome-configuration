@@ -4,7 +4,10 @@ require("shifty")
 keydoc = loadrc("keydoc", "vbe/keydoc")
 
 local tagicon = function(icon)
-   return beautiful.icons .. "/taglist/" .. icon .. ".png"
+   if screen.count() > 1 then
+      return beautiful.icons .. "/taglist/" .. icon .. ".png"
+   end
+   return nil
 end
 
 shifty.config.tags = {
