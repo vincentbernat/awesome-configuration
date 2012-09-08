@@ -176,7 +176,15 @@ config.keys.client = awful.util.table.join(
 	     "Fullscreen"),
    awful.key({ modkey,           }, "x",      function (c) c:kill()                         end,
 	     "Close"),
-   awful.key({ modkey,           }, "o",      awful.client.movetoscreen, "Move to the other screen"),
+   awful.key({ modkey,           }, "o",
+             function (c)
+                local s = awful.util.cycle(screen.count(), c.screen + 1)
+                if awful.tag.selected(s) then
+                   c.screen = s
+                   client.focus = c
+                   c:raise()
+                end
+             end, "Move to the other screen"),
    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle, "Toggle floating"),
    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
 	     "Switch with master window"),
