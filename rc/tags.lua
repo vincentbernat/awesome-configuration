@@ -12,14 +12,17 @@ end
 
 shifty.config.tags = {
    ["3↭www"] = {
+      position = 3,
       mwfact = 0.7,
       exclusive = true,
       max_clients = 1,
+      position = 3,
       screen = math.max(screen.count(), 2),
       spawn = browser,
       icon = tagicon("web")
    },
    ["2↭emacs"] = {
+      position = 2,
       mwfact = 0.6,
       exclusive = true,
       screen = 1,
@@ -27,6 +30,7 @@ shifty.config.tags = {
       icon = tagicon("dev"),
    },
    ["1↭xterm"] = {
+      position = 1,
       layout = awful.layout.suit.fair,
       exclusive = true,
       slave = true,
@@ -34,6 +38,7 @@ shifty.config.tags = {
       icon = tagicon("main"),
    },
    ["4↭im"] = {
+      position = 4,
       mwfact = 0.2,
       exclusive = true,
       icon = tagicon("im"),
