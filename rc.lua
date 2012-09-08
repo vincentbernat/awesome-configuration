@@ -49,16 +49,8 @@ config.layouts = {
    awful.layout.suit.fair,
    awful.layout.suit.floating,
 }
-config.tags = { 
-   { layout = awful.layout.suit.fair, icon = "main" }, -- 1
-   { name = "emacs", mwfact = 0.6, icon = "dev" },
-   { name = "www", mwfact = 0.7, icon = "web" },
-   { name = "im" , mwfact = 0.2, icon = "im" },
-   { }, -- 5
-   { }, -- 6
-   { }, -- 7
-}
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
+config.browser = "conkeror"
 
 -- Remaining modules
 loadrc("xrun")			-- xrun function
@@ -68,8 +60,8 @@ loadrc("debug")			-- debugging primitive `dbg()`
 loadrc("start")			-- programs to run on start
 loadrc("bindings")		-- keybindings
 loadrc("wallpaper")		-- wallpaper settings
-loadrc("tags")			-- tags handling
 loadrc("widgets")		-- widgets configuration
+loadrc("tags")			-- tags handling
 loadrc("xlock")			-- lock screen
 loadrc("signals")		-- window manager behaviour
 loadrc("rules")			-- window rules

@@ -250,7 +250,8 @@ for s = 1, screen.count() do
        end, tasklist.buttons)
 
     -- Create the taglist
-    taglist[s]   = sharetags.taglist(s, sharetags.label.all)
+    taglist[s] = awful.widget.taglist.new(s,
+                                          awful.widget.taglist.label.all)
     -- Create the wibox
     wibox[s] = awful.wibox({ screen = s,
 			     fg = beautiful.fg_normal,
@@ -299,3 +300,5 @@ config.keys.global = awful.util.table.join(
    config.keys.global,
    awful.key({ modkey }, "r", function () promptbox[mouse.screen]:run() end,
 	     "Prompt for a command"))
+
+config.taglist = taglist

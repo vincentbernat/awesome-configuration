@@ -3,7 +3,6 @@ config.mouse = {}
 local volume = loadrc("volume", "vbe/volume")
 local brightness = loadrc("brightness", "vbe/brightness")
 local keydoc = loadrc("keydoc", "vbe/keydoc")
-local sharetags = loadrc("sharetags", "vbe/sharetags")
 
 local function screenshot(client)
    if not client then
@@ -32,13 +31,8 @@ local function toggle_window(filter)
 	 -- So, we have a client.
 	 if not cl:isvisible() then
 	    -- But it is not visible. So we will add it to the current
-	    -- tag of the current screen.
-	    local t = assert(awful.tag.selected(s))
-	    -- Before adding the tag to the client, we should ensure it
-	    -- is on the same screen.
-	    if s ~= cl.screen then
-	       sharetags.tag_move(cl:tags()[1], s)
-	    end
+	    -- tag of the screen where it currently is
+	    local t = assert(awful.tag.selected(cl.screen))
 	    -- Add our tag to the client
 	    undo[#undo + 1] = { cl, t }
 	    awful.client.toggletag(t, cl)

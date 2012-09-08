@@ -1,6 +1,3 @@
--- Startup
-local browser = "conkeror"
-
 -- Setup display
 local xrandr = {
    naruto = "--output VGA1 --auto --output DVI1 --auto --left-of VGA1",
@@ -23,8 +20,8 @@ local execute = {
    -- Read resources
    "xrdb -merge " .. awful.util.getdir("config") .. "/Xresources",
    -- Default browser
-   "xdg-mime default " .. browser .. ".desktop x-scheme-handler/http",
-   "xdg-mime default " .. browser .. ".desktop x-scheme-handler/https"
+   "xdg-mime default " .. config.browser .. ".desktop x-scheme-handler/http",
+   "xdg-mime default " .. config.browser .. ".desktop x-scheme-handler/https"
 }
 
 -- Keyboard/Mouse configuration
@@ -66,8 +63,6 @@ xrun("polkit-gnome-authentication-agent-1",
 xrun("Bluetooth Applet",
      "bluetooth-applet")
 xrun("pidgin", "pidgin -n")
-xrun("emacs")
-xrun(browser)
 
 if config.hostname == "neo" then
    xrun("keepassx", "keepassx -min -lock")

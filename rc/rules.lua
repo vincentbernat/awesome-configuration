@@ -8,14 +8,9 @@ awful.rules.rules = {
 		    focus = true,
 		    maximized_vertical   = false,
 		    maximized_horizontal = false,
-		    keys = config.keys.client,
 		    buttons = config.mouse.client }},
-   -- Emacs
-   { rule = { class = "Emacs" },
-     properties = { tag = config.tags.emacs }},
    -- Browser stuff
    { rule = { role = "browser" },
-     properties = { tag = config.tags.www },
      callback = function(c)
 	if not c.icon then
 	   local icon = icons.lookup({ name = "web-browser",
@@ -36,9 +31,6 @@ awful.rules.rules = {
    { rule = { instance = "exe", class="Exe", instance="exe" },
      properties = { floating = true }}, -- Flash with Chromium
    -- Pidgin
-   { rule = { class = "Pidgin" },
-     except = { type = "dialog" },
-     properties = { tag = config.tags.im }},
    { rule = { class = "Pidgin" },
      except = { role = "buddy_list" }, -- buddy_list is the master
      properties = { }, callback = awful.client.setslave },

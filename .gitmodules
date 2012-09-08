@@ -1,0 +1,3 @@
+[submodule "shifty"]
+	path = shifty
+	url = http://bioe007@github.com/bioe007/awesome-shifty.git

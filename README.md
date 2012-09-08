@@ -44,11 +44,6 @@ Here some of the things you may be interested in:
    also using notifications to change xrandr setup. This is pretty
    cool.
  
- - I am sharing tags between screen with
-   [sharetags](http://awesome.naquadah.org/wiki/Shared_tags). I am
-   also giving names to tags: I access them with something like
-   `config.tags.emacs`. I need to try out shifty.
-
  - Keybindings are "autodocumented". See `lib/keydoc.lua` to see how
    this works. The list of key bindings can be accessed with Mod4 +
    F1.
