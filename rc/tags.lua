@@ -97,8 +97,9 @@ config.keys.global = awful.util.table.join(
                 t = shifty.tagtoscr(s, t)
                 awful.tag.viewonly(t)
              end,
-             "Send tag to next screen"))
-   
+             "Send tag to next screen"),
+   awful.key({ modkey }, 0, shifty.add, "Create a new tag"),
+   awful.key({ modkey, "Shift" }, 0, shifty.del, "Delete tag"))
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
