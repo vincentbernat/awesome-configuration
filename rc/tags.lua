@@ -13,6 +13,7 @@ shifty.config.tags = {
       exclusive = true,
       max_clients = 1,
       position = 3,
+      screen = math.max(screen.count(), 2),
       spawn = browser,
       icon = tagicon("web")
    },
