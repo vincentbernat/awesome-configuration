@@ -61,8 +61,8 @@ shifty.config.apps = {
       tag = "4↭im",
    },
    {
-      match = { "URxvt" },
-      -- tag = "1↭xterm",
+      match = { "URxvt",
+                "Keepassx" },
       intrusive = true,         -- Display even on exclusive tags
    },
 }
