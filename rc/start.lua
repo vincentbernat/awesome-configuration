@@ -21,7 +21,8 @@ local execute = {
    "xrdb -merge " .. awful.util.getdir("config") .. "/Xresources",
    -- Default browser
    "xdg-mime default " .. config.browser .. ".desktop x-scheme-handler/http",
-   "xdg-mime default " .. config.browser .. ".desktop x-scheme-handler/https"
+   "xdg-mime default " .. config.browser .. ".desktop x-scheme-handler/https",
+   "xdg-mime default " .. config.browser .. ".desktop text/html"
 }
 
 -- Keyboard/Mouse configuration
