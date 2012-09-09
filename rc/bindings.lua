@@ -154,10 +154,10 @@ config.keys.global = awful.util.table.join(
 	     "Spawn a terminal"),
 
    -- Screenshot
-   awful.key({}, "Print", screenshot, "Screenshot"),
+   awful.key({}, "Print", screenshot),
 
    -- Restart awesome
-   awful.key({ modkey, "Control" }, "r", awesome.restart, "Restart awesome"),
+   awful.key({ modkey, "Control" }, "r", awesome.restart),
 
    -- Multimedia keys
    awful.key({ }, "XF86MonBrightnessUp",   brightness.increase),
