@@ -5,6 +5,13 @@
 -- http://awesome.naquadah.org/wiki/index.php?title=Shifty
 --
 -- Modified version for my own use (Vincent Bernat)
+--
+-- TODO:
+--   - Add tag position before the name automatically
+--   - Auto numbering of tags.
+--   - Don't ask for names for new tag, just put a number.
+--   - Maybe name a tag after first client.
+
 
 -- environment
 local type = type
