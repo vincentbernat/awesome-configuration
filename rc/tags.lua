@@ -1,7 +1,7 @@
 -- Tags
 
-require("shifty")
-keydoc = loadrc("keydoc", "vbe/keydoc")
+local shifty = loadrc("shifty", "vbe/shifty")
+local keydoc = loadrc("keydoc", "vbe/keydoc")
 
 local tagicon = function(icon)
    if screen.count() > 1 then
