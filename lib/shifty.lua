@@ -7,7 +7,6 @@
 -- Modified version for my own use (Vincent Bernat)
 --
 -- TODO:
---   - Add tag position before the name automatically
 --   - Auto numbering of tags.
 --   - Don't ask for names for new tag, just put a number.
 --   - Maybe name a tag after first client.
@@ -61,6 +60,31 @@ local matchp = ""
 local index_cache = {}
 for i = 1, capi.screen.count() do index_cache[i] = {} end
 
+--getname: return the "user" name of a tag
+-- @param t : tag
+-- @return username of the tag
+local function getname(t)
+   local name = awful.tag.getproperty(t, "shortname")
+   if name then
+      return name
+   end
+   return t.name
+end
+
+--setname: set the "user" name of a tag and update its name
+-- @param t : tag
+-- @param name : new name
+local function setname(t, name)
+   if name then
+      local dispname = name
+      awful.tag.setproperty(t, "shortname", name)
+      if awful.tag.getproperty(t, "position") then
+         dispname = awful.tag.getproperty(t, "position") .. '↭' .. dispname
+      end
+      t.name = dispname
+   end
+end
+
 --name2tags: matches string 'name' to tag objects
 -- @param name : tag name to find
 -- @param scr : screen to look for tags on
@@ -70,7 +94,7 @@ function name2tags(name, scr)
     local a, b = scr or 1, scr or capi.screen.count()
     for s = a, b do
         for i, t in ipairs(capi.screen[s]:tags()) do
-            if name == t.name then
+           if name == getname(t) then
                 table.insert(ret, t)
             end
         end
@@ -95,16 +119,14 @@ end
 
 --rename
 --@param tag: tag object to be renamed
---@param prefix: if any prefix is to be added
---@param no_selectall:
-function rename(tag, prefix, no_selectall)
+function rename(tag, no_selectall)
     local theme = beautiful.get()
     local t = tag or awful.tag.selected(capi.mouse.screen)
     local scr = t.screen
     local bg = nil
     local fg = nil
-    local text = prefix or t.name
-    local before = t.name
+    local text = getname(t)
+    local before = getname(t)
 
     if t == awful.tag.selected(scr) then
         bg = theme.bg_focus or '#535d6c'
@@ -118,12 +140,12 @@ function rename(tag, prefix, no_selectall)
         fg_cursor = fg, bg_cursor = bg, ul_cursor = "single",
         text = text, selectall = not no_selectall},
         taglist[scr][tag2index(scr, t) * 2],
-        function (name) if name:len() > 0 then t.name = name; end end,
+        function (name) if name:len() > 0 then setname(t, name); end end,
         completion,
         awful.util.getdir("cache") .. "/history_tags",
         nil,
         function ()
-            if t.name == before then
+            if getname(t) == before then
                 if awful.tag.getproperty(t, "initial") then del(t) end
             else
                 awful.tag.setproperty(t, "initial", true)
@@ -213,11 +235,11 @@ function set(t, args)
     if not args then args = {} end
 
     -- set the name
-    t.name = args.name or t.name
+    setname(t, args.name or getname(t))
 
     -- attempt to load preset on initial run
     local preset = (awful.tag.getproperty(t, "initial") and
-    config.tags[t.name]) or {}
+                    config.tags[getname(t)]) or {}
 
     -- pick screen and get its tag table
     local scr = args.screen or
@@ -304,8 +326,8 @@ function set(t, args)
     elseif props.position then
         idx = pos2idx(props.position, scr)
         if t_idx and t_idx < idx then idx = idx - 1 end
-    elseif config.remember_index and index_cache[scr][t.name] then
-        idx = index_cache[scr][t.name]
+    elseif config.remember_index and index_cache[scr][getname(t)] then
+        idx = index_cache[scr][getname(t)]
     elseif not t_idx then
         idx = #tags + 1
     end
@@ -314,7 +336,7 @@ function set(t, args)
     if idx then
         if t_idx then table.remove(tags, t_idx) end
         table.insert(tags, idx, t)
-        index_cache[scr][t.name] = idx
+        index_cache[scr][getname(t)] = idx
     end
 
     -- set tag properties and push the new tag table
@@ -362,18 +384,13 @@ function add(args)
 
     -- get the name or rename
     if args.name then
-        t.name = args.name
+       setname(t, args.name)
     else
         -- FIXME: hack to delay rename for un-named tags for
         -- tackling taglist refresh which disabled prompt
         -- from being rendered until input
         awful.tag.setproperty(t, "initial", true)
-        local f
-        if args.position then
-            f = function() rename(t, args.rename, true); tmr:stop() end
-        else
-            f = function() rename(t); tmr:stop() end
-        end
+        local f = function() rename(t); tmr:stop() end
         tmr = capi.timer({timeout = 0.01})
         tmr:add_signal("timeout", f)
         tmr:start()
@@ -400,7 +417,7 @@ function del(tag)
     if #clients > sticky then return end
 
     -- store index for later
-    index_cache[scr][t.name] = idx
+    index_cache[scr][getname(t)] = idx
 
     -- remove tag
     t.screen = nil
@@ -740,8 +757,7 @@ function getpos(pos, scr_arg)
     if not v then
         -- not existing, not preconfigured
         v = add({position = pos,
-                rename = pos .. '↭',
-                no_selectall = true,
+                name = i,
                 noswitch = not switch})
     end
     return v
@@ -830,7 +846,7 @@ function completion(cmd, cur_pos, ncomp, sources, matchers)
                                             capi.mouse.screen + i - 1)
                 local tags = capi.screen[s]:tags()
                 for j, t in pairs(tags) do
-                    table.insert(ret, t.name)
+                   table.insert(ret, getname(t))
                 end
             end
             return ret

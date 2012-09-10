@@ -11,7 +11,7 @@ local tagicon = function(icon)
 end
 
 shifty.config.tags = {
-   ["3↭www"] = {
+   www = {
       position = 3,
       mwfact = 0.7,
       exclusive = true,
@@ -21,7 +21,7 @@ shifty.config.tags = {
       spawn = browser,
       icon = tagicon("web")
    },
-   ["2↭emacs"] = {
+   emacs = {
       position = 2,
       mwfact = 0.6,
       exclusive = true,
@@ -29,7 +29,7 @@ shifty.config.tags = {
       spawn = "emacs",
       icon = tagicon("dev"),
    },
-   ["1↭xterm"] = {
+   xterm = {
       position = 1,
       layout = awful.layout.suit.fair,
       exclusive = true,
@@ -37,7 +37,7 @@ shifty.config.tags = {
       spawn = config.terminal,
       icon = tagicon("main"),
    },
-   ["4↭im"] = {
+   im = {
       position = 4,
       mwfact = 0.2,
       exclusive = true,
@@ -50,20 +50,20 @@ shifty.config.tags = {
 shifty.config.apps = {
    {
       match = { role = { "browser" } },
-      tag = "3↭www",
+      tag = "www",
    },
    {
       match = { "emacs" },
-      tag = "2↭emacs",
+      tag = "emacs",
    },
    {
       match = { role = { "conversation", "buddy_list" } },
-      tag = "4↭im",
+      tag = "im",
    },
    {
       match = { "URxvt" },
       startup = {
-         tag = "1↭xterm"
+         tag = "xterm"
       },
       intrusive = true,         -- Display even on exclusive tags
    },
