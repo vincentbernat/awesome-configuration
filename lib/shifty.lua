@@ -7,8 +7,6 @@
 -- Modified version for my own use (Vincent Bernat)
 --
 -- TODO:
---   - Auto numbering of tags.
---   - Don't ask for names for new tag, just put a number.
 --   - Maybe name a tag after first client.
 
 
@@ -83,6 +81,37 @@ local function setname(t, name)
       end
       t.name = dispname
    end
+end
+
+--freeposition: get a free position
+local function freeposition()
+   local positions = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+   for k, a in pairs(config.tags) do
+      if a.startup then
+         a = awful.util.table.join(a, a.startup)
+      end
+      if a.position then
+         local idx = awful.util.table.hasitem(positions, a.position)
+         if idx then
+            table.remove(positions, idx)
+         end
+      end
+   end
+   for s = 1, capi.screen.count() do
+      for i, t in ipairs(capi.screen[s]:tags()) do
+         local pos = awful.tag.getproperty(t, "position")
+         if pos then
+            local idx = awful.util.table.hasitem(positions, pos)
+            if idx then
+               table.remove(positions, idx)
+            end
+         end
+      end
+   end
+   if #positions > 0 then
+      return positions[1]
+   end
+   return nil
 end
 
 --name2tags: matches string 'name' to tag objects
@@ -294,7 +323,7 @@ function set(t, args)
                         awful.tag.getproperty(t, "max_clients"),
                         config.defaults.max_clients},
         position = select{args.position, preset.position,
-                        awful.tag.getproperty(t, "position")},
+                          awful.tag.getproperty(t, "position"), freeposition()},
         icon = select{args.icon and capi.image(args.icon),
                         preset.icon and capi.image(preset.icon),
                         awful.tag.getproperty(t, "icon"),
