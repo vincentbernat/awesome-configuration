@@ -35,15 +35,9 @@ config = {}
 config.tags = {}
 config.apps = {}
 config.defaults = {}
-config.float_bars = false
 config.guess_name = true
-config.guess_position = true
 config.remember_index = true
-config.sloppy = true
 config.default_name = "new"
-config.clientkeys = {}
-config.globalkeys = nil
-config.layouts = {}
 config.prompt_sources = {
     "config_tags",
     "config_apps",
@@ -128,7 +122,6 @@ function rename(tag, prefix, no_selectall)
                 awful.tag.setproperty(t, "initial", true)
                 set(t)
             end
-            tagkeys(capi.screen[scr])
             t:emit_signal("property::name")
         end
         )
@@ -233,13 +226,6 @@ function set(t, args)
     end
     local tags = capi.screen[scr]:tags()
 
-    -- try to guess position from the name
-    local guessed_position = nil
-    if not (args.position or preset.position) and config.guess_position then
-        local num = t.name:find('^[1-9]')
-        if num then guessed_position = tonumber(t.name:sub(1, 1)) end
-    end
-
     -- allow preset.layout to be a table to provide a different layout per
     -- screen for a given tag
     local preset_layout = preset.layout
@@ -278,7 +264,7 @@ function set(t, args)
         max_clients = select{args.max_clients, preset.max_clients,
                         awful.tag.getproperty(t, "max_clients"),
                         config.defaults.max_clients},
-        position = select{args.position, preset.position, guessed_position,
+        position = select{args.position, preset.position,
                         awful.tag.getproperty(t, "position")},
         icon = select{args.icon and capi.image(args.icon),
                         preset.icon and capi.image(preset.icon),
@@ -290,26 +276,7 @@ function set(t, args)
         sweep_delay = select{args.sweep_delay, preset.sweep_delay,
                         awful.tag.getproperty(t, "sweep_delay"),
                         config.defaults.sweep_delay},
-        overload_keys = select{args.overload_keys, preset.overload_keys,
-                        awful.tag.getproperty(t, "overload_keys"),
-                        config.defaults.overload_keys},
     }
-
-    -- get layout by name if given as string
-    if type(props.layout) == "string" then
-        props.layout = getlayout(props.layout)
-    end
-
-    -- set keys
-    if args.keys or preset.keys then
-        local keys = awful.util.table.join(config.globalkeys,
-        args.keys or preset.keys)
-        if props.overload_keys then
-            props.keys = keys
-        else
-            props.keys = squash_keys(keys)
-        end
-    end
 
     -- calculate desired taglist index
     local index = args.index or preset.index or config.defaults.index
@@ -468,11 +435,7 @@ function match(c, startup)
     local inst = c.instance
     local role = c.role
     local name = c.name
-    local keys = config.clientkeys or c:keys() or {}
     local target_screen = capi.mouse.screen
-
-    c.border_color = beautiful.border_normal
-    c.border_width = beautiful.border_width
 
     -- try matching client to config.apps
     for i, a in ipairs(config.apps) do
@@ -538,6 +501,9 @@ function match(c, startup)
             end
             -- set attributes
             if matched then
+                if a.startup and startup then
+                    a = awful.util.table.join(a, a.startup)
+                end
                 if a.screen then target_screen = a.screen end
                 if a.tag then
                     if type(a.tag) == "string" then
@@ -546,61 +512,14 @@ function match(c, startup)
                         target_tag_names = a.tag
                     end
                 end
-                if a.startup and startup then
-                    a = awful.util.table.join(a, a.startup)
-                end
-                if a.geometry ~=nil then
-                    geom = {x = a.geometry[1],
-                    y = a.geometry[2],
-                    width = a.geometry[3],
-                    height = a.geometry[4]}
-                end
                 if a.float ~= nil then float = a.float end
                 if a.slave ~=nil then slave = a.slave end
-                if a.border_width ~= nil then
-                    c.border_width = a.border_width
-                end
                 if a.nopopup ~=nil then nopopup = a.nopopup end
                 if a.intrusive ~=nil then
                     intrusive = a.intrusive
                 end
-                if a.fullscreen ~=nil then
-                    c.fullscreen = a.fullscreen
-                end
-                if a.honorsizehints ~=nil then
-                    c.size_hints_honor = a.honorsizehints
-                end
-                if a.kill ~=nil then c:kill(); return end
-                if a.ontop ~= nil then c.ontop = a.ontop end
-                if a.above ~= nil then c.above = a.above end
-                if a.below ~= nil then c.below = a.below end
-                if a.buttons ~= nil then
-                    c:buttons(a.buttons)
-                end
                 if a.nofocus ~= nil then nofocus = a.nofocus end
-                if a.keys ~= nil then
-                    keys = awful.util.table.join(keys, a.keys)
-                end
-                if a.hidden ~= nil then c.hidden = a.hidden end
-                if a.minimized ~= nil then
-                    c.minimized = a.minimized
-                end
-                if a.dockable ~= nil then
-                    awful.client.dockable.set(c, a.dockable)
-                end
-                if a.urgent ~= nil then
-                    c.urgent = a.urgent
-                end
-                if a.opacity ~= nil then
-                    c.opacity = a.opacity
-                end
                 if a.run ~= nil then run = a.run end
-                if a.sticky ~= nil then c.sticky = a.sticky end
-                if a.wfact ~= nil then wfact = a.wfact end
-                if a.struts then struts = a.struts end
-                if a.skip_taskbar ~= nil then
-                    c.skip_taskbar = a.skip_taskbar
-                end
                 if a.props then
                     for kk, vv in pairs(a.props) do
                         awful.client.property.set(c, kk, vv)
@@ -608,28 +527,6 @@ function match(c, startup)
                 end
             end
         end
-    end
-
-    -- set key bindings
-    c:keys(keys)
-
-    -- Add titlebars to all clients when the float, remove when they are
-    -- tiled.
-    if config.float_bars then
-        c:add_signal("property::floating", function(c)
-            if awful.client.floating.get(c) then
-                awful.titlebar.add(c, {modkey=modkey})
-            else
-                awful.titlebar.remove(c)
-            end
-            awful.placement.no_offscreen(c)
-        end)
-    end
-
-    -- set properties of floating clients
-    if float ~= nil then
-        awful.client.floating.set(c, float)
-        awful.placement.no_offscreen(c)
     end
 
     local sel = awful.tag.selectedlist(target_screen)
@@ -695,10 +592,6 @@ function match(c, startup)
     if slave then awful.client.setslave(c) end
     c:tags(target_tags)
 
-    if wfact then awful.client.setwfact(wfact, c) end
-    if geom then c:geometry(geom) end
-    if struts then c:struts(struts) end
-
     local showtags = {}
     local u = nil
     if #target_tags > 0 and not startup then
@@ -727,7 +620,7 @@ function match(c, startup)
         end
     end
 
-    if not (nofocus or c.hidden or c.minimized) then
+    if nofocus then
         --focus and raise accordingly or lower if supressed
         if (target and target ~= sel) and
            (awful.tag.getproperty(target, "nopopup") or nopopup)  then
@@ -738,16 +631,6 @@ function match(c, startup)
         c:raise()
     else
         c:lower()
-    end
-
-    if config.sloppy then
-        -- Enable sloppy focus
-        c:add_signal("mouse::enter", function(c)
-            if awful.client.focus.filter(c) and
-                awful.layout.get(c.screen) ~= awful.layout.suit.magnifier then
-                capi.client.focus = c
-            end
-        end)
     end
 
     -- execute run function if specified
@@ -850,7 +733,7 @@ function getpos(pos, scr_arg)
     if not v then
         -- not existing, not preconfigured
         v = add({position = pos,
-                rename = pos .. ':',
+                rename = pos .. '↭',
                 no_selectall = true,
                 noswitch = not switch})
     end
@@ -998,38 +881,6 @@ function completion(cmd, cur_pos, ncomp, sources, matchers)
     return matches[ncomp], cur_pos
 end
 
--- tagkeys : hook function that sets keybindings per tag
-function tagkeys(s)
-    local sel = awful.tag.selected(s.index)
-    local keys = awful.tag.getproperty(sel, "keys") or
-                    config.globalkeys
-    if keys and sel.selected then capi.root.keys(keys) end
-end
-
--- squash_keys: helper function which removes duplicate
--- keybindings by picking only the last one to be listed in keys
--- table arg
-function squash_keys(keys)
-    local squashed = {}
-    local ret = {}
-    for i, k in ipairs(keys) do
-        squashed[table.concat(k.modifiers) .. k.key] = k
-    end
-    for i, k in pairs(squashed) do
-        table.insert(ret, k)
-    end
-    return ret
-end
-
--- getlayout: returns a layout by name
-function getlayout(name)
-    for _, layout in ipairs(config.layouts) do
-        if awful.layout.getname(layout) == name then
-            return layout
-        end
-    end
-end
-
 -- signals
 capi.client.add_signal("manage", match)
 capi.client.add_signal("unmanage", sweep)
@@ -1038,6 +889,5 @@ capi.client.remove_signal("manage", awful.tag.withcurrent)
 for s = 1, capi.screen.count() do
     awful.tag.attached_add_signal(s, "property::selected", sweep)
     awful.tag.attached_add_signal(s, "tagged", sweep)
-    capi.screen[s]:add_signal("tag::history::update", tagkeys)
 end
 

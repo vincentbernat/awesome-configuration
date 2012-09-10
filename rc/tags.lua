@@ -61,25 +61,25 @@ shifty.config.apps = {
       tag = "4↭im",
    },
    {
-      match = { "URxvt",
-                "Keepassx" },
+      match = { "URxvt" },
+      startup = {
+         tag = "1↭xterm"
+      },
       intrusive = true,         -- Display even on exclusive tags
+   },
+   {
+      match = { "Keepassx" },
+      intrustive = true,
    },
 }
 
 shifty.config.defaults = {
    layout = config.layouts[1],
-   floatBars = false,
    mwfact = 0.6,
    ncol = 1,
-   guess_name = true,
-   guess_position = true,
 }
-shifty.config.sloppy = false
 
 shifty.taglist = config.taglist -- Set in widget.lua
-shifty.config.modkey = modkey
-shifty.config.clientkeys = config.keys.client
 shifty.init()
 
 config.keys.global = awful.util.table.join(

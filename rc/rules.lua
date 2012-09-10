@@ -8,6 +8,7 @@ awful.rules.rules = {
 		    focus = true,
 		    maximized_vertical   = false,
 		    maximized_horizontal = false,
+                    keys = config.keys.client,
 		    buttons = config.mouse.client }},
    -- Browser stuff
    { rule = { role = "browser" },
