@@ -786,7 +786,7 @@ function getpos(pos, scr_arg)
     if not v then
         -- not existing, not preconfigured
         v = add({position = pos,
-                name = i,
+                name = pos,
                 noswitch = not switch})
     end
     return v
