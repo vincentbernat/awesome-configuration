@@ -75,9 +75,12 @@ end
 local function setname(t, name)
    if name then
       local dispname = name
+      local pos = awful.tag.getproperty(t, "position")
       awful.tag.setproperty(t, "shortname", name)
-      if awful.tag.getproperty(t, "position") then
-         dispname = awful.tag.getproperty(t, "position") .. '↭' .. dispname
+      if pos then
+         if "" .. pos ~= "" .. dispname then
+            dispname = pos .. '↭' .. dispname
+         end
       end
       t.name = dispname
    end
