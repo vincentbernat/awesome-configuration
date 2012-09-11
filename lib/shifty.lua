@@ -484,7 +484,6 @@ end
 --@param c : client to be matched
 function match(c, startup)
     local nopopup, intrusive, nofocus, run, slave
-    local wfact, struts, geom, float
     local target_tag_names, target_tags = {}, {}
     local typ = c.type
     local cls = c.class
@@ -568,7 +567,6 @@ function match(c, startup)
                         target_tag_names = a.tag
                     end
                 end
-                if a.float ~= nil then float = a.float end
                 if a.slave ~=nil then slave = a.slave end
                 if a.nopopup ~=nil then nopopup = a.nopopup end
                 if a.intrusive ~=nil then
@@ -594,7 +592,7 @@ function match(c, startup)
         elseif #sel > 0 then
             for i, t in ipairs(sel) do
                 local mc = awful.tag.getproperty(t, "max_clients")
-                if intrusive or
+                if intrusive or c.type == "dialog" or
                     not (awful.tag.getproperty(t, "exclusive") or
                                     (mc and mc >= #t:clients())) then
                     table.insert(target_tags, t)
