@@ -98,7 +98,8 @@ config.keys.global = awful.util.table.join(
              end,
              "Send tag to next screen"),
    awful.key({ modkey }, 0, shifty.add, "Create a new tag"),
-   awful.key({ modkey, "Shift" }, 0, shifty.del, "Delete tag"))
+   awful.key({ modkey, "Shift" }, 0, shifty.del, "Delete tag"),
+   awful.key({ modkey, "Control" }, 0, shifty.rename, "Rename tag"))
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.

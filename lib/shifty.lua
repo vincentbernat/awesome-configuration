@@ -64,7 +64,7 @@ for i = 1, capi.screen.count() do index_cache[i] = {} end
 local function getname(t)
    local name = awful.tag.getproperty(t, "shortname")
    if name then
-      return name
+      return "" .. name
    end
    return t.name
 end
@@ -74,7 +74,7 @@ end
 -- @param name : new name
 local function setname(t, name)
    if name then
-      local dispname = name
+      local dispname = "" .. name
       local pos = awful.tag.getproperty(t, "position")
       awful.tag.setproperty(t, "shortname", name)
       if pos then
