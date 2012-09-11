@@ -52,6 +52,7 @@ function QuakeConsole:display()
       i = i + 1
       if i == 1 then
 	 client = c
+         client:tags({})
       else
 	 -- Additional matching clients, let's remove the sticky bit
 	 -- which may persist between awesome restarts. We don't close
