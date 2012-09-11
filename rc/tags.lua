@@ -125,9 +125,10 @@ for i = 1, (shifty.config.maxtags or 9) do
                 i == 5 and "Toggle display of this tag" or nil),
       awful.key({ modkey, "Shift" }, i,
                 function ()
-                   if client.focus then
+                   local c = client.focus
+                   if c then
                       local t = shifty.getpos(i)
-                      awful.client.movetotag(t)
+                      awful.client.movetotag(t, c)
                    end
                 end,
                 i == 5 and "Move window to this tag" or nil),
