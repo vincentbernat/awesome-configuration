@@ -69,7 +69,7 @@ shifty.config.apps = {
    },
    {
       match = { "Keepassx" },
-      intrustive = true,
+      intrusive = true,
    },
 }
 
