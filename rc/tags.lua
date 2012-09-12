@@ -68,7 +68,8 @@ shifty.config.apps = {
       intrusive = true,         -- Display even on exclusive tags
    },
    {
-      match = { "Keepassx" },
+      match = { class = { "Keepassx" },
+                role = { "pop-up" } },
       intrusive = true,
    },
 }
