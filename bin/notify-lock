@@ -1,0 +1,8 @@
+#!/bin/sh
+
+icon="$1"
+
+exec notify-send "Lock screen" \
+    ${icon:+-i $icon} \
+    -t 10000 \
+    "Lock screen will be started in 10 seconds..."

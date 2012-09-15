@@ -1,0 +1,10 @@
+#!/bin/sh
+
+icon="$1"
+notify=$(dirname $(readlink -f "$0"))/notify-lock
+
+exec xautolock \
+    -time 4 \
+    -locker "i3lock -n -i $HOME/.cache/awesome/current-wallpaper.png" \
+    -notify 10 \
+    -notifier "$notify $icon"
