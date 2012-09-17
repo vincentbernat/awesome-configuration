@@ -69,9 +69,9 @@ client.add_signal("focus", function(c)
 
 		     if focus_from_mouse ~= c then
 			mouse_follow_focus(c)
+                        c:raise()
 		     end
 		     focus_from_mouse = false
-					 
 			   end)
 client.add_signal("unfocus", function(c)
 		     c.border_color = beautiful.border_normal
