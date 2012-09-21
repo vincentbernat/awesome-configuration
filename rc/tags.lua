@@ -79,6 +79,7 @@ shifty.config.defaults = {
    layout = config.layouts[1],
    mwfact = 0.6,
    ncol = 1,
+   sweep_delay = 1,
 }
 
 shifty.taglist = config.taglist -- Set in widget.lua
