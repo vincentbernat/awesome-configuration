@@ -69,8 +69,8 @@ shifty.config.apps = {
    },
    {
       match = { class = { "Keepassx" },
-                role = { "pop-up" },
-                instance = { "plugin-container", "exe" } },
+                role = { "pop[-]up" },
+                instance = { "plugin[-]container", "exe" } },
       intrusive = true,
    },
 }
