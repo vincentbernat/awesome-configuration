@@ -16,9 +16,8 @@ shifty.config.tags = {
       mwfact = 0.7,
       exclusive = true,
       max_clients = 1,
-      position = 3,
       screen = math.max(screen.count(), 2),
-      spawn = browser,
+      spawn = config.browser,
       icon = tagicon("web")
    },
    emacs = {
