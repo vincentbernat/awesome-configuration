@@ -41,7 +41,7 @@ config.apps = {}
 config.defaults = {}
 config.guess_name = true
 config.remember_index = true
-config.default_name = "new"
+config.default_name = "…"
 config.prompt_sources = {
     "config_tags",
     "config_apps",
@@ -596,6 +596,12 @@ function match(c, startup)
                     not (awful.tag.getproperty(t, "exclusive") or
                                     (mc and mc >= #t:clients())) then
                     table.insert(target_tags, t)
+                    if config.guess_name and cls then
+                       if getname(t) == config.default_name or
+                          getname(t) == "" .. awful.tag.getproperty(t, "position") then
+                          setname(t, cls:lower())
+                       end
+                    end
                 end
             end
         end
