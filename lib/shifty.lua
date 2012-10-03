@@ -715,9 +715,12 @@ function sweep()
                         not awful.tag.getproperty(t, "leave_kills") then
                         local delay = awful.tag.getproperty(t, "sweep_delay")
                         if delay then
-                            local f = function()
-                                        del(t); tmr:stop()
-                                    end
+                            local f
+                            f = function()
+                               del(t)
+                               tmr:remove_signal("timeout", f)
+                               tmr:stop()
+                            end
                             tmr = capi.timer({timeout = delay})
                             tmr:add_signal("timeout", f)
                             tmr:start()
