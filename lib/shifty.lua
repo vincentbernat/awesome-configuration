@@ -422,6 +422,7 @@ function add(args)
         -- tackling taglist refresh which disabled prompt
         -- from being rendered until input
         awful.tag.setproperty(t, "initial", true)
+        local tmr
         local f = function() rename(t); tmr:stop() end
         tmr = capi.timer({timeout = 0.01})
         tmr:add_signal("timeout", f)
@@ -715,10 +716,9 @@ function sweep()
                         not awful.tag.getproperty(t, "leave_kills") then
                         local delay = awful.tag.getproperty(t, "sweep_delay")
                         if delay then
-                            local f
-                            f = function()
+                            local tmr
+                            local f = function()
                                del(t)
-                               tmr:remove_signal("timeout", f)
                                tmr:stop()
                             end
                             tmr = capi.timer({timeout = delay})
