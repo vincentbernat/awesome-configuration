@@ -39,4 +39,8 @@ URxvt.font: xft:DejaVu Sans Mono-8
 URxvt.letterSpace: -1
 
 URxvt.iso14755: False
-URxvt.perl-ext-common: default,-option-popup,-selection-popup
+
+!URxvt.perl-lib: ...
+URxvt.perl-ext-common: default,-option-popup,-selection-popup,font-size
+URxvt.keysym.C-equal: perl:font-size:increase
+URxvt.keysym.C-minus: perl:font-size:decrease

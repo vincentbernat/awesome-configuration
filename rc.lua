@@ -41,7 +41,7 @@ loadrc("errors")		-- errors and debug stuff
 -- Global configuration
 modkey = "Mod4"
 config = {}
-config.terminal = "urxvtcd"
+config.terminal = "urxvtcd --perl-lib " .. awful.util.getdir("config") .. "/lib/rxvt"
 config.layouts = {
    awful.layout.suit.tile,
    awful.layout.suit.tile.left,
