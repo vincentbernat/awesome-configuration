@@ -68,7 +68,7 @@ shifty.config.apps = {
       intrusive = true,         -- Display even on exclusive tags
    },
    {
-      match = { class = { "Keepassx" },
+      match = { class = { "Keepassx", "Key[-]mon" },
                 role = { "pop[-]up" },
                 name = { "Firebug" },
                 instance = { "plugin[-]container", "exe" } },

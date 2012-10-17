@@ -44,6 +44,6 @@ awful.rules.rules = {
      properties = { },
      callback = awful.client.setslave },
    -- Floating windows
-   { rule_any = { class = { "Display.im6" } },
+   { rule_any = { class = { "Display.im6", "Key-mon" } },
      properties = { floating = true }},
 }
