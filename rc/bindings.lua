@@ -207,6 +207,7 @@ config.keys.client = awful.util.table.join(
 	     function (c)
 		c.maximized_horizontal = not c.maximized_horizontal
 		c.maximized_vertical   = not c.maximized_vertical
+                c:raise()
 	     end,
 	     "Maximize"),
 
