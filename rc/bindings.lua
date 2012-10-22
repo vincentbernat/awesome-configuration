@@ -23,6 +23,15 @@ end
 -- function that will effectively toggle things.
 local function toggle_window(filter)
    local undo = {}		-- undo stack
+   client.add_signal('unmanage',
+                     function(c)
+                        -- If the client is in the undo stack, remove it
+                        while true do
+                           idx = awful.util.table.hasitem(undo, c)
+                           if not idx then break end
+                           table.remove(undo, idx)
+                        end
+                     end)
    local toggle = function()
       -- "Current" screen
       local s = client.focus and client.focus.screen or mouse.screen
