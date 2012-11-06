@@ -38,6 +38,10 @@ end
 
 loadrc("errors")		-- errors and debug stuff
 
+-- Create cache directory
+os.execute("test -d " .. awful.util.getdir("cache") ..
+           " || mkdir -p " .. awful.util.getdir("cache"))
+
 -- Global configuration
 modkey = "Mod4"
 config = {}

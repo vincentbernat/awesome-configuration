@@ -1,0 +1,21 @@
+# Packages needed
+
+awesome
+awesome-extra
+i3lock
+xautolock
+xfonts-terminus
+ttf-dejavu
+xcompmgr
+python-xpyb
+python-imaging
+fvwm
+fvwm-crystal
+gnome-themes-standard
+gnome-wine-icon-theme
+alsa-utils
+pidgin
+gnome-bluetooth
+pulseaudio
+numlockx
+rxvt-unicode-256color
