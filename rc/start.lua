@@ -1,7 +1,8 @@
 -- Setup display
 local xrandr = {
    naruto = "--output VGA1 --auto --output DVI1 --auto --left-of VGA1",
-   neo    = "--output HDMI-0 --auto --output DVI-0 --auto --right-of HDMI-0"
+   neo    = "--output HDMI-0 --auto --output DVI-0 --auto --right-of HDMI-0",
+   alucard = "--output DVI-0 --auto --output DVI-1 --auto --right-of DVI-0"
 }
 if xrandr[config.hostname] then
    os.execute("xrandr " .. xrandr[config.hostname])
@@ -26,7 +27,7 @@ local execute = {
 }
 
 -- Keyboard/Mouse configuration
-if config.hostname == "naruto" then
+if config.hostname == "alucard" then
    execute = awful.util.table.join(
       execute, {
 	 -- Keyboard and mouse
