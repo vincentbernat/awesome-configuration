@@ -4,6 +4,7 @@ awesome
 awesome-extra
 i3lock
 xautolock
+libnotify-bin
 xfonts-terminus
 ttf-dejavu
 xcompmgr
