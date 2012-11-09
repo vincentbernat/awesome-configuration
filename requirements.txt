@@ -14,6 +14,7 @@ fvwm-crystal
 gnome-themes-standard
 gnome-wine-icon-theme
 alsa-utils
+pavucontrol
 pidgin
 gnome-bluetooth
 pulseaudio
