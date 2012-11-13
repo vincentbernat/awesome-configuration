@@ -48,7 +48,7 @@ elseif config.hostname == "guybrush" then
       execute, {
 	 -- Keyboard and mouse
 	 "setxkbmap us,fr '' compose:ralt ctrl:nocaps grp:rctrl_rshift_toggle",
-	 "xmodmap -e 'keysym XF86AudioPlay = XF86ScreenSaver'",
+	 "xmodmap -e 'keysym XF86WebCam = XF86ScreenSaver'",
 	 -- Wheel emulation
 	 "xinput set-int-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation' 8 1",
 	 "xinput set-int-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Button' 8 2",
