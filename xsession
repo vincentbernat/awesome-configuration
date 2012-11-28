@@ -10,6 +10,9 @@ export LC_MESSAGES=en_US.utf8
 # Ensure we use the appropriate gtkrc-2.0 file
 export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 
+# Java fonts are ugly by default
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
+
 # GDM move Xauthority in some obscure place
 # See:
 #  http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=614972
