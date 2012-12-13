@@ -188,25 +188,29 @@ volwidget:buttons(awful.util.table.join(
 		     awful.button({ }, 5, volume.decrease)))
 
 -- File systems
-local fs = { ["/"] = "root",
-	     ["/home"] = "home",
-	     ["/var"] = "var",
-	     ["/usr"] = "usr",
-	     ["/tmp"] = "tmp",
-	     ["/var/cache/build"] = "pbuilder" }
+local fs = { "/",
+	     "/home",
+	     "/var",
+	     "/usr",
+	     "/tmp",
+	     "/var/cache/build",
+	     "/var/lib/mongodb",
+             "/var/lib/systems" }
 local fsicon = widget({ type = "imagebox" })
 fsicon.image = image(beautiful.icons .. "/widgets/disk.png")
 local fswidget = widget({ type = "textbox" })
 vicious.register(fswidget, vicious.widgets.fs,
 		 function (widget, args)
 		    local result = ""
-		    for path, name in pairs(fs) do
+		    for _, path in pairs(fs) do
 		       local used = args["{" .. path .. " used_p}"]
 		       local color = beautiful.fg_widget_value
 		       if used then
 			  if used > 90 then
 			     color = beautiful.fg_widget_value_important
 			  end
+                          local name = string.gsub(path, "[%w/]*/(%w+)", "%1")
+                          if name == "/" then name = "root" end
 			  result = string.format(
 			     '%s%s<span color="' .. beautiful.fg_widget_label .. '">%s: </span>' ..
 				'<span color="' .. color .. '">%2d%%</span>',
