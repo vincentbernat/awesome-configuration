@@ -80,36 +80,49 @@ end
 
 -- Toggle pidgin conversation window
 local toggle_pidgin = toggle_window(
-   function ()
-      local cls = client.get()
-      local focus = client.focus
-      local rule = { class = "Pidgin",
-                     role = "conversation" }
-      -- Score. We want a Pidgin window. Then:
-      --  1. Urgent, visible, not focused
-      --  2. Urgent, not visible, not focused.
-      --  3. Not urgent, not visible, not focused
-      --  4. Focused
-      --  5. Visible, not focused
-      local function score(cl)
-         if not awful.rules.match(cl, rule) then return -10 end
+   (function ()
+       local adding = true
+       local choose = function()
+          local cls = client.get()
+          local focus = client.focus
+          local rule = { class = "Pidgin",
+                         role = "conversation" }
+          -- Score. We want a Pidgin window. Then:
+          --  1. Urgent, visible, not focused
+          --  2. Urgent, not visible, not focused.
+          --  3. Not urgent, not visible, not focused
+          --  4. Focused
+          --  5. Visible, not focused
+          local function score(cl)
+             if not awful.rules.match(cl, rule) then return -10 end
 
-         local urgent = cl.urgent
-         local focused = (focus == cl)
-         local visible = cl:isvisible()
-         if urgent and visible and not focused then return 100 end
-         if urgent and not visible and not focused then return 90 end
-         if not urgent and not visible then return 80 end
-         if focused then return 50 end
-         return 10
-      end
-      table.sort(cls, function(c1, c2)
-                    local s1 = score(c1)
-                    local s2 = score(c2)
-                    return s1 > s2
-                      end)
-      if awful.rules.match(cls[1], rule) then return cls[1] end
-   end)
+             local urgent = cl.urgent
+             local focused = (focus == cl)
+             local visible = cl:isvisible()
+             if urgent and visible and not focused then return 100 end
+             if urgent and not visible and not focused then return 90 end
+             if not adding and focused then return 80 end
+             if adding and not urgent and not visible then return 70 end
+             if focused then return 50 end
+             if not urgent and not visible then return 40 end
+             return 10
+          end
+          table.sort(cls, function(c1, c2)
+                        local s1 = score(c1)
+                        local s2 = score(c2)
+                        return s1 > s2
+                          end)
+          local candidate = cls[1]
+          if candidate == nil or not awful.rules.match(candidate, rule) then return nil end
+
+          -- Maybe we need to switch direction
+          if candidate == focus     and     adding then adding = false
+          elseif candidate ~= focus and not adding then adding = true end
+
+          return candidate
+       end
+       return choose
+    end)())
 
 -- Toggle urgent window
 local toggle_urgent = toggle_window(awful.client.urgent.get)
