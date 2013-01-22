@@ -36,7 +36,7 @@ awful.rules.rules = {
      properties = { }, callback = awful.client.setslave },
    -- Should not be master
    { rule_any = { class =
-		  { "URxvt",
+		  { config.termclass,
 		    "Transmission-gtk",
 		    "Keepassx",
 		  }, instance = { "Download" }},

@@ -46,6 +46,7 @@ os.execute("test -d " .. awful.util.getdir("cache") ..
 modkey = "Mod4"
 config = {}
 config.terminal = "urxvtcd --perl-lib " .. awful.util.getdir("config") .. "/lib/rxvt"
+config.termclass = "URxvt"
 config.layouts = {
    awful.layout.suit.tile,
    awful.layout.suit.tile.left,

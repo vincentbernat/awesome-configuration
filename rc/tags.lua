@@ -61,7 +61,7 @@ shifty.config.apps = {
       tag = "im",
    },
    {
-      match = { "URxvt" },
+      match = { config.termclass },
       startup = {
          tag = "xterm"
       },
