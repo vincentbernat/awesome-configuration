@@ -7,12 +7,12 @@ Xft.rgba: rgb
 !! Colors, stolen from http://xcolors.net/dl/derp
 *color0:   #111111
 *color8:   #666666
-*color1:   rgb:d3/62/65
-*color9:   rgb:ef/81/71
+*color1:   #d36265
+*color9:   #ef8171
 *color2:   #aece91
 *color10:  #cfefb3
-*color3:   rgb:e7/e1/8c
-*color11:  rgb:ff/f7/96
+*color3:   #e7e18c
+*color11:  #fff796
 *color4:   #5297cf
 *color12:  #74b8ef
 *color5:   #963c59
