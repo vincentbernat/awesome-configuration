@@ -31,8 +31,10 @@ URxvt.cursorBlink: True
 
 URxvt.scrollBar: False
 URxvt.scrollTtyOutput: False
+URxvt.scrollTtyKeypress: True
 URxvt.scrollWithBuffer: True
 URxvt.jumpScroll: True
+URxvt.skipScroll: True
 URxvt.saveLines: 5000
 
 URxvt.font: xft:DejaVu Sans Mono-8
