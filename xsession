@@ -12,6 +12,7 @@ export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 
 # Java fonts are ugly by default
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # GDM move Xauthority in some obscure place
 # See:
@@ -26,7 +27,6 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 [ -x /usr/bin/xbacklight ] && xbacklight = 60 2> /dev/null
 
 # Configure gnome-terminal
-
 gnoterm() {
     gconftool-2 --type $1 --set /apps/gnome-terminal/profiles/Default/$2 $3
 }
@@ -45,6 +45,5 @@ gnoterm string background_color      "#000000"
 gnoterm string palette \
     $(sed -n 's/^.color\([0-9]*\): /\1/p' ~/.Xresources | sort -n | \
       awk '{print $2}' | tr '\n' ':' | sed 's/:$//')
-
 
 exec awesome
