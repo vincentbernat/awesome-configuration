@@ -37,7 +37,14 @@ URxvt.jumpScroll: True
 URxvt.skipScroll: True
 URxvt.saveLines: 5000
 
-URxvt.font: xft:DejaVu Sans Mono-8
+!! To get this font, use the font patcher from https://github.com/Lokaltog/vim-powerline
+!! To get a smaller version of this font, use:
+!!
+!!                        # Remove most glyphs
+!!                        for glyph in target_font.glyphs():
+!!                                if glyph.unicode not in range(32,64):
+!!                                        target_font.removeGlyph(glyph)
+URxvt.font: xft:DejaVu Sans Mono-8,xft:DejaVu Sans Mono for Powerline-8
 URxvt.letterSpace: -1
 
 URxvt.iso14755: False
