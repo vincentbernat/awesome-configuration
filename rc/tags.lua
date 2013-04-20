@@ -106,8 +106,9 @@ config.keys.global = awful.util.table.join(
              function()
                 if screen.count() == 1 then return nil end
                 local t = awful.tag.selected()
-                local s = awful.util.cycle(screen.count(), t.screen + 1)
-                for _, t in ipairs(awful.tag.gettags(s, t.screen)) do
+                local o = t.screen
+                local s = awful.util.cycle(screen.count(), o + 1)
+                for _, t in pairs(screen[o]:tags()) do
                    shifty.tagtoscr(s, t)
                 end
              end,
