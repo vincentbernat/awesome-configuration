@@ -235,6 +235,7 @@ config.keys.client = awful.util.table.join(
 	     "Close"),
    awful.key({ modkey,           }, "o",
              function (c)
+                if screen.count() == 1 then return nil end
                 local s = awful.util.cycle(screen.count(), c.screen + 1)
                 if awful.tag.selected(s) then
                    c.screen = s

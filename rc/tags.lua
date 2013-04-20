@@ -94,6 +94,7 @@ config.keys.global = awful.util.table.join(
    awful.key({ modkey }, "Right", awful.tag.viewnext, "View next tag"),
    awful.key({ modkey, "Shift"}, "o",
              function()
+                if screen.count() == 1 then return nil end
                 local t = awful.tag.selected()
                 local s = awful.util.cycle(screen.count(), t.screen + 1)
                 awful.tag.history.restore()
