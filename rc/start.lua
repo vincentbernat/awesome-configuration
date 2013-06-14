@@ -2,7 +2,7 @@
 local xrandr = {
    naruto = "--output VGA1 --auto --output DVI1 --auto --left-of VGA1",
    neo    = "--output HDMI-0 --auto --output DVI-0 --auto --right-of HDMI-0",
-   alucard = "--output DVI-0 --auto --output DVI-1 --auto --right-of DVI-0"
+   alucard = "--output DVI-0 --auto --output DisplayPort-0 --auto --right-of DVI-0"
 }
 if xrandr[config.hostname] then
    os.execute("xrandr " .. xrandr[config.hostname])
