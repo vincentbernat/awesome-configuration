@@ -4,7 +4,12 @@ local icons = loadrc("icons", "vbe/icons")
 local focus_from_mouse = false
 local function mouse_follow_focus(c)
    -- Move the mouse to the top left corner
-   local margin = 10
+   local margin = function()
+      if c.class == "Chromium" then return 30
+      else return 10
+      end
+   end
+   margin = margin()
    if c.type ~= "dialog" then
       local cc = c:geometry()
       local _, x, y = awful.mouse.client.corner(nil, "top_left")
