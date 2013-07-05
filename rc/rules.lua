@@ -28,7 +28,7 @@ awful.rules.rules = {
      end },
    { rule = { instance = "plugin-container" },
      properties = { floating = true }}, -- Flash with Firefox
-   { rule = { instance = "exe", class="Exe", instance="exe" },
+   { rule = { instance = "exe", class = "Exe" },
      properties = { floating = true }}, -- Flash with Chromium
    -- Pidgin
    { rule = { class = "Pidgin" },
