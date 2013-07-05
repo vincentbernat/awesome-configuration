@@ -70,7 +70,14 @@ shifty.config.apps = {
    {
       match = { class = { "Keepassx", "Key[-]mon" },
                 role = { "pop[-]up" },
-                name = { "Firebug", "Chromium" },
+                name = { "Firebug" },
+                check = function (c)
+                   return awful.rules.match(c,
+                                            { instance = "chromium",
+                                              class = "Chromium",
+                                              name = "Chromium",
+                                              fullscreen = true })
+                end,
                 instance = { "plugin[-]container", "exe" } },
       intrusive = true,
    },

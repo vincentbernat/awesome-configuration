@@ -30,6 +30,7 @@ awful.rules.rules = {
      properties = { floating = true }}, -- Flash with Firefox
    { rule = { instance = "exe", class = "Exe" },
      properties = { floating = true }}, -- Flash with Chromium
+   -- See also tags.lua
    -- Pidgin
    { rule = { class = "Pidgin" },
      except = { role = "buddy_list" }, -- buddy_list is the master

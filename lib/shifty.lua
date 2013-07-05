@@ -497,6 +497,11 @@ function match(c, startup)
     for i, a in ipairs(config.apps) do
         if a.match then
             local matched = false
+            -- match function
+            if not matched and a.match.check then
+               matched = a.match.check(c)
+            end
+
             -- match only class
             if not matched and cls and a.match.class then
                 for k, w in ipairs(a.match.class) do
