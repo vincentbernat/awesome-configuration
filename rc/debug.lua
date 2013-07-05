@@ -5,11 +5,11 @@ local colors = {
   name   = theme.fg_widget_value_important,
 }
 
-local function client_info()
+local function client_info(c)
     local v = ""
 
     -- object
-    local c = client.focus
+    local c = c or client.focus
     v = v .. tostring(c)
 
     -- geometry
