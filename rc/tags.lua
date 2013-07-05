@@ -70,7 +70,7 @@ shifty.config.apps = {
    {
       match = { class = { "Keepassx", "Key[-]mon" },
                 role = { "pop[-]up" },
-                name = { "Firebug" },
+                name = { "Firebug", "Chromium" },
                 instance = { "plugin[-]container", "exe" } },
       intrusive = true,
    },
