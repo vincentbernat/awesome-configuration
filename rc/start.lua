@@ -23,7 +23,7 @@ local execute = {
    -- Default browser
    "xdg-mime default " .. config.browser .. ".desktop x-scheme-handler/http",
    "xdg-mime default " .. config.browser .. ".desktop x-scheme-handler/https",
-   "xdg-mime default " .. config.browser .. ".desktop text/html"
+   "xdg-mime default " .. config.browser .. ".desktop text/html",
    -- Default reader for PDF. See: https://wiki.archlinux.org/index.php/Default_Applications
    "xdg-mime default evince.desktop application/pdf"
 }
