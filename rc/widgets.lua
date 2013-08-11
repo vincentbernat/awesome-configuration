@@ -218,7 +218,7 @@ vicious.register(fswidget, vicious.widgets.fs,
 		       end
 		    end
 		    return result
-		 end, 53, "-lx fuse")
+		 end, 53, "-lx fuse -x aufs")
 
 local systray = widget({ type = "systray" })
 
