@@ -14,6 +14,9 @@ export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# Environment variables
+[ -e ~/.zsh/env ] && . ~/.zsh/env
+
 # GDM move Xauthority in some obscure place
 # See:
 #  http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=614972
