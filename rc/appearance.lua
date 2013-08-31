@@ -20,11 +20,18 @@ gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintfull"
 gtk-xft-rgba="rgb"
-gtk-key-theme-name="Emacs"
 ]]
 
 local gtk2 = io.open(os.getenv("HOME") .. "/.gtkrc-2.0", "w")
 gtk2:write(gtk)
+gtk2:write([[
+gtk-key-theme-name="Emacs"
+binding "does-not-intercept-ctrl-w" {
+  unbind "<ctrl>w"
+}
+class "GtkEntry" binding "does-not-intercept-ctrl-w"
+class "GtkTextView" binding "does-not-intercept-ctrl-w"
+]])
 gtk2:close()
 
 -- GTK3 is the same, but no double quotes for strings
@@ -33,6 +40,49 @@ local gtk3 = io.open(os.getenv("HOME") .. "/.config/gtk-3.0/settings.ini", "w")
 gtk, _ = gtk:gsub('"', '')
 gtk3:write("[Settings]\n")
 gtk3:write(gtk)
+gtk3:close()
+local gtk3 = io.open(os.getenv("HOME") .. "/.config/gtk-3.0/gtk.css", "w")
+gtk3:write([[
+/* Useless: we cannot override properly by unbinding some keys */
+/* @import url("/usr/share/themes/Emacs/gtk-3.0/gtk-keys.css"); */
+
+@binding-set custom-text-entry
+{
+  bind "<ctrl>b" { "move-cursor" (logical-positions, -1, 0) };
+  bind "<shift><ctrl>b" { "move-cursor" (logical-positions, -1, 1) };
+  bind "<ctrl>f" { "move-cursor" (logical-positions, 1, 0) };
+  bind "<shift><ctrl>f" { "move-cursor" (logical-positions, 1, 1) };
+
+  bind "<alt>b" { "move-cursor" (words, -1, 0) };
+  bind "<shift><alt>b" { "move-cursor" (words, -1, 1) };
+  bind "<alt>f" { "move-cursor" (words, 1, 0) };
+  bind "<shift><alt>f" { "move-cursor" (words, 1, 1) };
+
+  bind "<ctrl>a" { "move-cursor" (paragraph-ends, -1, 0) };
+  bind "<shift><ctrl>a" { "move-cursor" (paragraph-ends, -1, 1) };
+  bind "<ctrl>e" { "move-cursor" (paragraph-ends, 1, 0) };
+  bind "<shift><ctrl>e" { "move-cursor" (paragraph-ends, 1, 1) };
+
+  /* bind "<ctrl>w" { "cut-clipboard" () }; */
+  bind "<ctrl>y" { "paste-clipboard" () };
+
+  bind "<ctrl>d" { "delete-from-cursor" (chars, 1) };
+  bind "<alt>d" { "delete-from-cursor" (word-ends, 1) };
+  bind "<ctrl>k" { "delete-from-cursor" (paragraph-ends, 1) };
+  bind "<alt>backslash" { "delete-from-cursor" (whitespace, 1) };
+  bind "<alt>BackSpace" { "delete-from-cursor" (word-ends, -1) };
+
+  bind "<alt>space" { "delete-from-cursor" (whitespace, 1)
+                      "insert-at-cursor" (" ") };
+  bind "<alt>KP_Space" { "delete-from-cursor" (whitespace, 1)
+                         "insert-at-cursor" (" ")  };
+}
+
+GtkEntry, GtkTextView
+{
+  gtk-key-bindings: custom-text-entry;
+}
+]])
 gtk3:close()
 
 -- For QT, the configuration file is ~/.config/Trolltech.conf. It
