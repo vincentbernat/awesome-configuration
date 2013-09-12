@@ -28,6 +28,7 @@ gtk2:write([[
 gtk-key-theme-name="Emacs"
 binding "does-not-intercept-ctrl-w" {
   unbind "<ctrl>w"
+  bind "<alt>BackSpace" { "delete-from-cursor" (word-ends, -1) }
 }
 class "GtkEntry" binding "does-not-intercept-ctrl-w"
 class "GtkTextView" binding "does-not-intercept-ctrl-w"
