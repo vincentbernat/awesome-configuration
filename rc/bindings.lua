@@ -231,6 +231,7 @@ config.keys.global = awful.util.table.join(
                                   elseif key == "c" then music.pause()
                                   elseif key == "v" then music.stop()
                                   elseif key == "b" then music.next()
+                                  elseif key == "s" then music.show()
                                   end
                                   return true
                                end)

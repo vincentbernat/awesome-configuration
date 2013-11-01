@@ -35,3 +35,9 @@ end
 function previous()
    spotify("Previous")
 end
+
+function show()
+   -- This should work, but no:
+   -- spotify("Raise")
+   awful.util.spawn("spotify")
+end
