@@ -220,6 +220,22 @@ config.keys.global = awful.util.table.join(
    awful.key({ }, "XF86AudioNext",        music.next),
    awful.key({ }, "XF86AudioPrev",        music.previous),
 
+   awful.key({ modkey }, "s", function()
+                keygrabber.run(function(mod, key, event)
+                                  if event == "release" then
+                                     return true
+                                  end
+                                  keygrabber.stop()
+                                  if     key == "z" then music.previous()
+                                  elseif key == "x" then music.play()
+                                  elseif key == "c" then music.pause()
+                                  elseif key == "v" then music.stop()
+                                  elseif key == "b" then music.next()
+                                  end
+                                  return true
+                               end)
+                              end),
+
    -- Help
    awful.key({ modkey, }, "F1", keydoc.display)
 )
