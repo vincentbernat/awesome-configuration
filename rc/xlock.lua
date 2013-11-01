@@ -11,7 +11,8 @@ config.keys.global = awful.util.table.join(
    config.keys.global,
    awful.key({}, "XF86ScreenSaver",
              function()
-                awful.util.spawn_with_shell("xautolock -locknow & sleep 1 ; xautolock -enable ; sleep 1 ; xautolock -locknow", false)
+                awful.util.spawn(awful.util.getdir("config") ..
+                                 "/bin/locker", false)
              end))
 
 -- Configure DPMS
