@@ -1,5 +1,11 @@
 -- Drive spotify
 
+-- Spotify uses the MPRIS D-BUS interface. See more information here:
+--   http://specifications.freedesktop.org/mpris-spec/latest/
+
+-- To get the complete interface:
+--   mdbus2 org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2
+
 local awful     = require("awful")
 
 module("vbe/spotify")
