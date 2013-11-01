@@ -15,7 +15,9 @@ function playpause()
 end
 
 function play()
-   spotify("Play")
+   -- Play seems unable to play in many situations, let's use
+   -- PlayPause instead.
+   spotify("PlayPause")
 end
 
 function pause()
