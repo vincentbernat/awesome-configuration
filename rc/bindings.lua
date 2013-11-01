@@ -135,11 +135,7 @@ local function screen_focus(i)
     if c then client.focus = c end
 end
 
--- Send a command to spotify
-local function spotify(command)
-   awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify " ..
-      "/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player." .. command, false)
-end
+local music = loadrc("spotify", "vbe/spotify")
 
 config.keys.global = awful.util.table.join(
    keydoc.group("Focus"),
@@ -217,11 +213,12 @@ config.keys.global = awful.util.table.join(
    awful.key({ }, "XF86AudioRaiseVolume", volume.increase),
    awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
    awful.key({ }, "XF86AudioMute",        volume.toggle),
-   awful.key({ }, "XF86AudioPlay",        function() spotify("PlayPause") end),
-   awful.key({ }, "XF86AudioPause",       function() spotify("PlayPause") end),
-   awful.key({ }, "XF86AudioStop",        function() spotify("Stop") end),
-   awful.key({ }, "XF86AudioNext",        function() spotify("Next") end),
-   awful.key({ }, "XF86AudioPrev",        function() spotify("Previous") end),
+
+   awful.key({ }, "XF86AudioPlay",        music.playpause),
+   awful.key({ }, "XF86AudioPause",       music.pause),
+   awful.key({ }, "XF86AudioStop",        music.stop),
+   awful.key({ }, "XF86AudioNext",        music.next),
+   awful.key({ }, "XF86AudioPrev",        music.previous),
 
    -- Help
    awful.key({ modkey, }, "F1", keydoc.display)
