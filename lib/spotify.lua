@@ -6,7 +6,11 @@
 -- To get the complete interface:
 --   mdbus2 org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2
 
-local awful     = require("awful")
+local awful = require("awful")
+local pairs = pairs
+local capi = {
+   client = client
+}
 
 module("vbe/spotify")
 
@@ -45,5 +49,17 @@ end
 function show()
    -- This should work, but no:
    -- spotify("Raise")
+   local clients = capi.client.get()
+   for k, c in pairs(clients) do
+      if awful.rules.match(c, { instance = "spotify",
+                                class = "Spotify" }) then
+         if not c:isvisible() then
+            awful.tag.viewonly(c:tags()[1])
+         end
+         capi.client.focus = c
+         c:raise()
+         return
+      end
+   end
    awful.util.spawn("spotify")
 end
