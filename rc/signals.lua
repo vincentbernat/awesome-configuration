@@ -81,7 +81,7 @@ client.add_signal("focus", function(c)
 			   end)
 client.add_signal("unfocus", function(c)
 		     c.border_color = beautiful.border_normal
-                     if not awful.rules.match_any(c, { instance = { "plugin-container", "vlc" } }) then
+                     if not c.fullscreen then
                         c.opacity = 0.85
                      end
 			     end)
