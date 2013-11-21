@@ -28,5 +28,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 [ -x /usr/sbin/rfkill ] && rfkill block all 2> /dev/null
 [ -x /usr/bin/xbacklight ] && xbacklight = 60 2> /dev/null
+[ -x /usr/bin/redshift ] && redshift -l 2.3508:48.8567 -t 6500:5500 2> /dev/null &
 
 exec awesome
