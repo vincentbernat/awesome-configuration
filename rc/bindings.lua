@@ -78,15 +78,17 @@ local function toggle_window(filter)
    return toggle
 end
 
--- Toggle pidgin conversation window
-local toggle_pidgin = toggle_window(
+-- Toggle IM conversation window
+local toggle_im = toggle_window(
    (function ()
        local adding = true
        local choose = function()
           local cls = client.get()
           local focus = client.focus
-          local rule = { class = "Pidgin",
-                         role = "conversation" }
+          local rules = { { class = "Pidgin",
+                            role = "conversation" },
+                          { class = "Skype",
+                            role = "ConversationsWindow" } }
           -- Score. We want a Pidgin window. Then:
           --  1. Urgent, visible, not focused
           --  2. Urgent, not visible, not focused.
@@ -94,7 +96,14 @@ local toggle_pidgin = toggle_window(
           --  4. Focused
           --  5. Visible, not focused
           local function score(cl)
-             if not awful.rules.match(cl, rule) then return -10 end
+             local found = false
+             for _, rule in pairs(rules) do
+                if awful.rules.match(cl, rule) then
+                   found = true
+                   break
+                end
+             end
+             if not found then return -10 end
 
              local urgent = cl.urgent
              local focused = (focus == cl)
@@ -113,7 +122,15 @@ local toggle_pidgin = toggle_window(
                         return s1 > s2
                           end)
           local candidate = cls[1]
-          if candidate == nil or not awful.rules.match(candidate, rule) then return nil end
+          if candidate == nil then return nil end
+          local found = false
+          for _, rule in pairs(rules) do
+             if awful.rules.match(candidate, rule) then
+                found = true
+                break
+             end
+          end
+          if not found then return nil end
 
           -- Maybe we need to switch direction
           if candidate == focus     and     adding then adding = false
@@ -163,7 +180,7 @@ config.keys.global = awful.util.table.join(
 		end
 	     end,
 	     "Focus previously focused window"),
-   awful.key({ modkey,           }, "u", toggle_pidgin,
+   awful.key({ modkey,           }, "u", toggle_im,
 	    "Toggle Pidgin conversation window"),
    awful.key({ modkey, "Control" }, "j", function ()
 		screen_focus( 1)

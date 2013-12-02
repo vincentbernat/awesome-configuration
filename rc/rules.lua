@@ -35,6 +35,10 @@ awful.rules.rules = {
    { rule = { class = "Pidgin" },
      except = { role = "buddy_list" }, -- buddy_list is the master
      properties = { }, callback = awful.client.setslave },
+   -- Skype
+   { rule = { class = "Skipe" },
+     except = { role = nil }, -- should be the master
+     properties = { }, callback = awful.client.setslave },
    -- Should not be master
    { rule_any = { class =
 		  { config.termclass,

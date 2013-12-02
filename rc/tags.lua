@@ -61,6 +61,10 @@ shifty.config.apps = {
       tag = "im",
    },
    {
+      match = { class = { "Skype" } },
+      tag = "im",
+   },
+   {
       match = { config.termclass },
       startup = {
          tag = "xterm"
