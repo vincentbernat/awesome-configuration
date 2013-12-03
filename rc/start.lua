@@ -65,11 +65,7 @@ os.execute(table.concat(execute, ";"))
 -- Spawn various X programs
 xrun("polkit-gnome-authentication-agent-1",
      "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
-if config.hostname == "alucard" then
-   xrun("Skype", "skype")
-else
-   xrun("pidgin", "pidgin -n")
-end
+xrun("pidgin", "pidgin -n")
 
 if config.hostname == "neo" then
    xrun("keepassx", "keepassx -min -lock")
