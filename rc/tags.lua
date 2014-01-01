@@ -158,7 +158,7 @@ for i = 1, (shifty.config.maxtags or 9) do
                 function ()
                    local c = client.focus
                    if c then
-                      local t = shifty.getpos(i, nil, true)
+                      local t = shifty.getpos(i, {nospawn = true })
                       awful.client.movetotag(t, c)
                    end
                 end,
@@ -166,7 +166,7 @@ for i = 1, (shifty.config.maxtags or 9) do
       awful.key({ modkey, "Control", "Shift" }, i,
                 function ()
                    if client.focus then
-                      awful.client.toggletag(shifty.getpos(i, nil, true))
+                      awful.client.toggletag(shifty.getpos(i, {nospawn = true}))
                    end
                 end,
                 i == 5 and "Toggle this tag on this window" or nil),
