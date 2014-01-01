@@ -58,3 +58,9 @@ way to load them is to use:
 
 	require("lib/quake")
 	local quake = package.loaded["vbe/quake"]
+
+I am using [lain][] for additional layouts. It is included as a
+submodule. I would have preferred to put it in `lib/`, but this does
+not seem possible. Don't forget to run `git submodule update`.
+
+[lain]: https://github.com/copycat-killer/lain/

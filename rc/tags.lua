@@ -2,6 +2,7 @@
 
 local shifty = loadrc("shifty", "vbe/shifty")
 local keydoc = loadrc("keydoc", "vbe/keydoc")
+local lain = require("lain")
 
 local tagicon = function(icon)
    if screen.count() > 1 then
@@ -30,7 +31,9 @@ shifty.config.tags = {
    },
    xterm = {
       position = 1,
-      layout = awful.layout.suit.fair,
+      layout = lain.layout.termfair,
+      nmaster = math.floor(screen[1].geometry.width / 500),
+      ncol = 1,
       exclusive = true,
       slave = true,
       spawn = config.terminal,
