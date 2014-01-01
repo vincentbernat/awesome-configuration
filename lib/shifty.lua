@@ -377,12 +377,14 @@ function set(t, args)
 
     -- execute run/spawn
     if awful.tag.getproperty(t, "initial") then
-        local spawn = args.spawn or preset.spawn or config.defaults.spawn
-        local run = args.run or preset.run or config.defaults.run
-        if spawn and args.matched ~= true then
-            awful.util.spawn_with_shell(spawn, scr)
+        if not args.nospawn then
+           local spawn = args.spawn or preset.spawn or config.defaults.spawn
+           local run = args.run or preset.run or config.defaults.run
+           if spawn and args.matched ~= true then
+              awful.util.spawn_with_shell(spawn, scr)
+           end
+           if run then run(t) end
         end
-        if run then run(t) end
         awful.tag.setproperty(t, "initial", nil)
     end
 
@@ -752,7 +754,7 @@ end
 --getpos : returns a tag to match position
 -- @param pos : the index to find
 -- @return v : the tag (found or created) at position == 'pos'
-function getpos(pos, scr_arg)
+function getpos(pos, scr_arg, nospawn)
     local v = nil
     local existing = {}
     local selected = nil
@@ -794,7 +796,8 @@ function getpos(pos, scr_arg)
             if j.position == pos then
                 v = add({name = i,
                         position = pos,
-                        noswitch = not switch})
+                        noswitch = true,
+                        nospawn = nospawn})
             end
         end
     end
@@ -802,7 +805,8 @@ function getpos(pos, scr_arg)
         -- not existing, not preconfigured
         v = add({position = pos,
                 name = pos,
-                noswitch = not switch})
+                noswitch = true,
+                nospawn = nospawn})
     end
     return v
 end
