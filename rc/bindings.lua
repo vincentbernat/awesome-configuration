@@ -154,6 +154,21 @@ end
 
 local music = loadrc("spotify", "vbe/spotify")
 
+local display_nmaster_ncol =
+   (function()
+       local nid = nil
+       return function()
+          local nmaster = awful.tag.getnmaster()
+          local ncol = awful.tag.getncol()
+          nid = naughty.notify(
+				{ title = "Tag configuration",
+				  timeout = 5,
+				  text = "Number of masters: " .. nmaster ..
+                                     "\nNumber of columns: " .. ncol,
+				  replaces_id = nid }).id
+              end
+    end)()
+
 config.keys.global = awful.util.table.join(
    keydoc.group("Focus"),
    awful.key({ modkey,           }, "j",
@@ -195,13 +210,25 @@ config.keys.global = awful.util.table.join(
 	     "Increase master-width factor"),
    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end,
 	     "Decrease master-width factor"),
-   awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster( 1)      end,
+   awful.key({ modkey, "Shift"   }, "l",     function ()
+                awful.tag.incnmaster(1)
+                display_nmaster_ncol()
+                                             end,
 	     "Increase number of masters"),
-   awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster(-1)      end,
+   awful.key({ modkey, "Shift"   }, "h",     function ()
+                awful.tag.incnmaster(-1)
+                display_nmaster_ncol()
+                                             end,
 	     "Decrease number of masters"),
-   awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol( 1)         end,
+   awful.key({ modkey, "Control" }, "l",     function ()
+                awful.tag.incncol(1)
+                display_nmaster_ncol()
+                                             end,
 	     "Increase number of columns"),
-   awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol(-1)         end,
+   awful.key({ modkey, "Control" }, "h",     function ()
+                awful.tag.incncol(-1)
+                display_nmaster_ncol()
+                                             end,
 	     "Decrease number of columns"),
    awful.key({ modkey,           }, "space", function () awful.layout.inc(config.layouts,  1) end,
 	     "Next layout"),
