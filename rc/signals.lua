@@ -5,7 +5,7 @@ local focus_from_mouse = false
 local function mouse_follow_focus(c)
    -- Move the mouse to the top left corner
    local margin = function()
-      if c.class == "Chromium" then return 30
+      if c.class == "Chromium" or c.class == "Emacs" then return 30
       else return 10
       end
    end
