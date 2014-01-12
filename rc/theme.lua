@@ -40,8 +40,6 @@ theme.taglist_squares_unsel = icons .. "/taglist/squarew.png"
 for _, l in pairs(config.layouts) do
    theme["layout_" .. l.name] = icons .. "/layouts/" .. l.name .. ".png"
 end
-local lain_icons = awful.util.getdir("config") .. "/lain/icons/layout/zenburn"
-theme.layout_termfair    = lain_icons .. "/termfair.png"
 
 -- Naughty
 naughty.config.presets.normal.bg = theme.bg_widget
