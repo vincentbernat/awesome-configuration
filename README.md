@@ -6,6 +6,8 @@ does not exactly feature the same keybindings as the default
 configuration. I don't recommend using it by you can pick anything you
 need in it.
 
+This configuration is for _awesome_ 3.4. I did not update to 3.5 yet.
+
 I rely on machine hostname for some configuration parts (see
 `rc/start.lua`) for the most important part.
 
