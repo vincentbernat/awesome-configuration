@@ -14,6 +14,9 @@ export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# We do not want to rely on crappy mailcap
+export MAILCAPS=$HOME/.mailcap
+
 # Environment variables
 [ -e ~/.zsh/env ] && . ~/.zsh/env
 
