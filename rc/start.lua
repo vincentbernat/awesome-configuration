@@ -27,7 +27,7 @@ local execute = {
       "x-scheme-handler/https " ..
       "text/html",
    -- Default MIME types
-   "xdg-mime default evince.desktop application/pdf"
+   "xdg-mime default evince.desktop application/pdf",
    "xdg-mime default gpicview.desktop image/png image/jpeg image/jpg image/gif"
 }
 
