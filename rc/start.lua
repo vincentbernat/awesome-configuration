@@ -22,9 +22,10 @@ local execute = {
    -- Read resources
    "xrdb -merge " .. awful.util.getdir("config") .. "/Xresources",
    -- Default browser
-   "xdg-mime default " .. config.browser .. ".desktop x-scheme-handler/http",
-   "xdg-mime default " .. config.browser .. ".desktop x-scheme-handler/https",
-   "xdg-mime default " .. config.browser .. ".desktop text/html",
+   "xdg-mime default " .. config.browser .. ".desktop " ..
+      "x-scheme-handler/http " ..
+      "x-scheme-handler/https " ..
+      "text/html",
    -- Default MIME types
    "xdg-mime default evince.desktop application/pdf"
    "xdg-mime default gpicview.desktop image/png image/jpeg image/jpg image/gif"
