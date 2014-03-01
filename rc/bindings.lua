@@ -5,14 +5,16 @@ local brightness = loadrc("brightness", "vbe/brightness")
 local keydoc = loadrc("keydoc", "vbe/keydoc")
 
 local function screenshot(client)
-   if not client then
-      client = "root"
+   if client == "root" then
+      client = "-window root"
+   elseif client then
+      client = "-window " .. client.window
    else
-      client = client.window
+      client = ""
    end
    local path = awful.util.getdir("config") .. "/screenshots/" ..
       "screenshot-" .. os.date("%Y-%m-%d--%H:%M:%S") .. ".jpg"
-   awful.util.spawn("import -quality 95 -window " .. client .. " " .. path, false)
+   awful.util.spawn("import -quality 95 " .. client .. " " .. path, false)
 end
 
 
@@ -246,7 +248,8 @@ config.keys.global = awful.util.table.join(
 	     "Spawn a terminal"),
 
    -- Screenshot
-   awful.key({}, "Print", screenshot),
+   awful.key({}, "Print", function() screenshot("root") end),
+   awful.key({ modkey, "Shift" }, "Print", screenshot),
 
    -- Restart awesome
    awful.key({ modkey, "Control" }, "r", awesome.restart),
