@@ -90,7 +90,8 @@ gtk3:close()
 -- seems a bit complex to override it each time. The solution is to
 -- run qtconfig and to select "GTK+" for the style and the appropriate
 -- font. QT uses GTK2. You should ensure that the appropriate engines
--- exist (in both 32 and 64 bits in case of multiarch).
+-- exist (in both 32 and 64 bits in case of multiarch), notably
+-- gtk2-engines-pixbuf.
 
 -- The systray is a bit complex. We need to configure it to display
 -- the right colors. Here is a link with more background about this:
