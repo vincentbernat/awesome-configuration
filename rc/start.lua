@@ -1,7 +1,6 @@
 -- Setup display
 local xrandr = {
-   naruto = "--output VGA1 --auto --output DVI1 --auto --left-of VGA1",
-   neo    = "--output HDMI1 --auto --output HDMI2 --auto --left-of HDMI1",
+   neo    = "--output HDMI1 --auto --output HDMI2 --auto --right-of HDMI1",
    alucard = "--output DVI-0 --auto --primary --output DisplayPort-0 --auto --right-of DVI-0"
 }
 if xrandr[config.hostname] then
