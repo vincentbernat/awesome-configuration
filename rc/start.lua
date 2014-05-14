@@ -1,12 +1,3 @@
--- Setup display
-local xrandr = {
-   neo    = "--output HDMI1 --auto --output HDMI2 --auto --right-of HDMI1",
-   alucard = "--output DVI-0 --auto --primary --output DisplayPort-0 --auto --right-of DVI-0"
-}
-if xrandr[config.hostname] then
-   os.execute("xrandr " .. xrandr[config.hostname])
-end
-
 -- Spawn a composoting manager
 awful.util.spawn("compton", false)
 awful.util.spawn("xcompmgr", false) -- Will fail if compton has been started

@@ -29,6 +29,15 @@ export MAILCAPS=$HOME/.mailcap
     export XAUTHORITY=$HOME/.Xauthority
 }
 
+case "$(hostname)" in
+    neo)
+        xrandr --output HDMI1 --auto --output HDMI2 --auto --right-of HDMI1
+        ;;
+    alucard)
+        xrandr --output DVI-0 --auto --primary --output DisplayPort-0 --auto --right-of DVI-0
+        ;;
+esac
+
 [ -x /usr/sbin/rfkill ] && rfkill block all 2> /dev/null
 [ -x /usr/bin/xbacklight ] && xbacklight = 60 2> /dev/null
 [ -x /usr/bin/redshift ] && redshift -l 2.3508:48.8567 -t 6500:5500 2> /dev/null &
