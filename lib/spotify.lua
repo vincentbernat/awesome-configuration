@@ -61,5 +61,5 @@ function show()
          return
       end
    end
-   awful.util.spawn("spotify")
+   awful.util.spawn("spotify --ui.track_notifications_enabled=false")
 end
