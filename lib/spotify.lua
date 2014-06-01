@@ -61,5 +61,8 @@ function show()
          return
       end
    end
-   awful.util.spawn("spotify --ui.track_notifications_enabled=false")
+   awful.util.spawn("spotify")
+   -- To disable notifications, add the following line to
+   -- ~/.config/spotify/Users/<spotifylogin>-user/prefs:
+   --   ui.track_notifications_enabled=false
 end
