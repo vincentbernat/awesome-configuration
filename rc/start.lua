@@ -50,6 +50,20 @@ elseif config.hostname == "guybrush" then
 	 "xinput set-int-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Axes' 8 6 7 4 5",
 	 -- Disable touchpad
 	 "xinput set-int-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Off' 8 1"})
+elseif config.hostname == "zoro" then
+   execute = awful.util.table.join(
+      execute, {
+	 -- Keyboard and mouse
+	 "setxkbmap us,fr '' compose:ralt grp:rctrl_rshift_toggle",
+	 "xmodmap -e 'keysym Home = Control_L'",
+	 "xmodmap -e 'keysym End = Control_L'",
+	 -- Wheel emulation
+	 "xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation' 1",
+	 "xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Button' 2",
+	 "xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Axes' 6 7 4 5",
+	 -- Make touchpad buttons work
+         "xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Soft Button Areas' 3656 5112 0 2200 2928 3656 0 2200",
+         "xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Area' 0 0 2200 0"})
 end
 
 os.execute(table.concat(execute, ";"))
