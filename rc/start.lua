@@ -55,15 +55,18 @@ elseif config.hostname == "zoro" then
       execute, {
 	 -- Keyboard and mouse
 	 "setxkbmap us,fr '' compose:ralt grp:rctrl_rshift_toggle",
-	 "xmodmap -e 'keysym Home = Control_L'",
-	 "xmodmap -e 'keysym End = Control_L'",
+	 "xmodmap -e 'keycode 110 = Control_L'", -- home
+	 "xmodmap -e 'keycode 115 = Control_L'", -- end
+	 "xmodmap -e 'add control Control_L Control_R'",
+	 "xmodmap -e 'keycode 49 = Insert", -- between alt_l and ctrl_l
+	 "xmodmap -e 'keycode 9 = grave asciitilde'", -- escape
 	 -- Wheel emulation
 	 "xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation' 1",
 	 "xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Button' 2",
 	 "xinput set-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Axes' 6 7 4 5",
 	 -- Make touchpad buttons work
-         "xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Soft Button Areas' 3656 5112 0 2200 2928 3656 0 2200",
-         "xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Area' 0 0 2200 0"})
+	 "xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Soft Button Areas' 3656 5112 0 2200 2928 3656 0 2200",
+	 "xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Area' 0 0 2200 0"})
 end
 
 os.execute(table.concat(execute, ";"))
