@@ -36,6 +36,9 @@ case "$(hostname)" in
     alucard)
         xrandr --output DVI-0 --auto --primary --output DisplayPort-0 --auto --right-of DVI-0
         ;;
+    zoro)
+        xrandr --output eDP1 --mode 1920x1080 # no HiDPI...
+        ;;
 esac
 
 [ -x /usr/sbin/rfkill ] && rfkill block all 2> /dev/null
