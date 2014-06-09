@@ -22,23 +22,7 @@ local execute = {
 }
 
 -- Keyboard/Mouse configuration
-if config.hostname == "alucard" then
-   execute = awful.util.table.join(
-      execute, {
-	 -- Keyboard and mouse
-	 "xset m 4 3",	-- Mouse acceleration
-	 "setxkbmap us,fr '' compose:rwin ctrl:nocaps grp:rctrl_rshift_toggle",
-	 "xmodmap -e 'keysym Pause = XF86ScreenSaver'",
-	       })
-elseif config.hostname == "neo" then
-   execute = awful.util.table.join(
-      execute, {
-	 -- Keyboard and mouse
-	 "xset m 3 3",	-- Mouse acceleration
-	 "setxkbmap us,fr '' compose:rwin ctrl:nocaps grp:rctrl_rshift_toggle",
-	 "xmodmap -e 'keysym Pause = XF86ScreenSaver'",
-	       })
-elseif config.hostname == "guybrush" then
+if config.hostname == "guybrush" then
    execute = awful.util.table.join(
       execute, {
 	 -- Keyboard and mouse
