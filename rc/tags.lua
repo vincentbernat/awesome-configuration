@@ -100,7 +100,7 @@ shifty.init()
 config.keys.global = awful.util.table.join(
    config.keys.global,
    keydoc.group("Tag management"),
-   awful.key({ modkey, "Control" }, "`", awful.tag.history.restore, "Switch to previous tag"),
+   awful.key({ modkey }, "Tab", awful.tag.history.restore, "Switch to previous tag"),
    awful.key({ modkey }, "Left", awful.tag.viewprev),
    awful.key({ modkey }, "Right", awful.tag.viewnext),
    awful.key({ modkey, "Shift"}, "o",

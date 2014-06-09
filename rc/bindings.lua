@@ -189,14 +189,6 @@ config.keys.global = awful.util.table.join(
 		end
 	     end,
 	     "Focus previous window"),
-   awful.key({ modkey,           }, "Tab",
-	     function ()
-		awful.client.focus.history.previous()
-		if client.focus then
-		   client.focus:raise()
-		end
-	     end,
-	     "Focus previously focused window"),
    awful.key({ modkey,           }, "u", toggle_im,
 	    "Toggle Pidgin conversation window"),
    awful.key({ modkey, "Control" }, "j", function ()
