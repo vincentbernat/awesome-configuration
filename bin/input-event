@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# Event handler for inputplug
+
+event="$1"
+device="$2"
+use="$3"
+name="$4"
+
+[ x"$event" = x"XIDeviceEnabled" ] || exit 0
+
+# Load the given keymap
+xkb() {
+    xkbcomp -i ${device} -w 0 -I$HOME/.config/awesome/xkb \
+        $HOME/.config/awesome/xkb/$1.xkb ${DISPLAY}
+}
+
+printf "$use: [%3d] $name\n" $device
+
+case "$use,$(uname -n),$name" in
+    XISlaveKeyboard,guybrush,"AT Translated Set 2 keyboard")
+        xkb norwin
+        ;;
+    XISlaveKeyboard,*,"ThinkPad Extra Buttons")
+        xkb thinkpad-extra
+        ;;
+    XISlaveKeyboard,*)
+        xkb default
+        ;;
+    XISlavePointer,*,"Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)")
+        xinput set-ptr-feedback $device 3 3 1
+        ;;
+    XISlavePointer,*,"TPPS/2 IBM TrackPoint")
+	xinput set-prop $device 'Evdev Wheel Emulation' 1
+	xinput set-prop $device 'Evdev Wheel Emulation Button' 2
+	xinput set-prop $device 'Evdev Wheel Emulation Axes' 6 7 4 5
+        ;;
+    XISlavePointer,guybrush,"SynPS/2 Synaptics TouchPad")
+        xinput set-prop $device 'Synaptics Off' 1
+        ;;
+esac

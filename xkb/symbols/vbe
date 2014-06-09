@@ -1,0 +1,13 @@
+partial
+xkb_symbols "pause" {
+    key <PAUS> {
+        [ XF86ScreenSaver, NoSymbol ]
+    };
+};
+
+partial
+xkb_symbols "webcam" {
+    key <I220> {
+        [ XF86ScreenSaver, NoSymbol ]
+    };
+};

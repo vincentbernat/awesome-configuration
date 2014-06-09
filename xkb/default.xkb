@@ -1,0 +1,14 @@
+# -*- conf -*-
+
+# Default configuration with:
+#  - compose → rwin
+#  - capslock as ctrl
+#  - us+fr and switch with rctrl+rshift
+#  - pause key becomes xscreensaver
+xkb_keymap {
+        xkb_keycodes  { include "evdev+aliases(qwerty)" };
+        xkb_types     { include "complete" };
+        xkb_compat    { include "complete" };
+        xkb_symbols   { include "pc+us+fr:2+inet(evdev)+compose(rwin)+ctrl(nocaps)+group(rctrl_rshift_toggle)+vbe(pause)" };
+        xkb_geometry  { include "pc(pc105)" };
+};
