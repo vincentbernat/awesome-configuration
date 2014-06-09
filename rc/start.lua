@@ -22,19 +22,7 @@ local execute = {
 }
 
 -- Keyboard/Mouse configuration
-if config.hostname == "guybrush" then
-   execute = awful.util.table.join(
-      execute, {
-	 -- Keyboard and mouse
-	 "setxkbmap us,fr '' compose:ralt ctrl:nocaps grp:rctrl_rshift_toggle",
-	 "xmodmap -e 'keysym XF86WebCam = XF86ScreenSaver'",
-	 -- Wheel emulation
-	 "xinput set-int-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation' 8 1",
-	 "xinput set-int-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Button' 8 2",
-	 "xinput set-int-prop 'TPPS/2 IBM TrackPoint' 'Evdev Wheel Emulation Axes' 8 6 7 4 5",
-	 -- Disable touchpad
-	 "xinput set-int-prop 'SynPS/2 Synaptics TouchPad' 'Synaptics Off' 8 1"})
-elseif config.hostname == "zoro" then
+if config.hostname == "zoro" then
    execute = awful.util.table.join(
       execute, {
 	 -- Keyboard and mouse
