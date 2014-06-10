@@ -41,7 +41,7 @@ case "$(hostname)" in
         ;;
 esac
 
-[ -x ~/bin/inputplug ] && ~/bin/inputplug -0 -c ~/.awesome/bin/input-event
+[ -x ~/bin/inputplug ] && ~/bin/inputplug -0 -c ~/.config/awesome/bin/input-event
 
 [ -x /usr/sbin/rfkill ] && rfkill block all 2> /dev/null
 [ -x /usr/bin/xbacklight ] && xbacklight = 60 2> /dev/null
