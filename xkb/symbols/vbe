@@ -1,14 +1,14 @@
 partial
 xkb_symbols "pause" {
     key <PAUS> {
-        [ XF86ScreenSaver, NoSymbol ]
+        [ XF86ScreenSaver, XF86ScreenSaver ]
     };
 };
 
 partial
 xkb_symbols "webcam" {
     key <I220> {
-        [ XF86ScreenSaver, NoSymbol ]
+        [ XF86ScreenSaver, XF86ScreenSaver ]
     };
 };
 
@@ -16,7 +16,7 @@ partial
 xkb_symbols "x1" {
     replace key <HOME> { [ Control_L, Control_L ] };
     replace key <END>  { [ Control_L, Control_L ] };
-    modifier map Control { Control_L, <HOME>, <END> };
-    replace key <TLDE> { [ Insert ] };
+    modifier_map Control { Control_L, <HOME>, <END> };
+    replace key <TLDE> { [ Insert, Insert ] };
     replace key <ESC>  { [ grave, asciitilde, dead_grave, dead_tilde ] };
 };
