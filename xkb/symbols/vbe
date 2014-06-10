@@ -11,3 +11,12 @@ xkb_symbols "webcam" {
         [ XF86ScreenSaver, NoSymbol ]
     };
 };
+
+partial
+xkb_symbols "x1" {
+    replace key <HOME> { [ Control_L, Control_L ] };
+    replace key <END>  { [ Control_L, Control_L ] };
+    modifier map Control { Control_L, <HOME>, <END> };
+    replace key <TLDE> { [ Insert ] };
+    replace key <ESC>  { [ grave, asciitilde, dead_grave, dead_tilde ] };
+};

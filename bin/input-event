@@ -18,6 +18,9 @@ xkb() {
 printf "$use: [%3d] $name\n" $device
 
 case "$use,$(uname -n),$name" in
+    XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
+        xkb x1
+        ;;
     XISlaveKeyboard,guybrush,"AT Translated Set 2 keyboard")
         xkb norwin
         ;;
@@ -34,6 +37,10 @@ case "$use,$(uname -n),$name" in
 	xinput set-prop $device 'Evdev Wheel Emulation' 1
 	xinput set-prop $device 'Evdev Wheel Emulation Button' 2
 	xinput set-prop $device 'Evdev Wheel Emulation Axes' 6 7 4 5
+        ;;
+    XISlavePointer,zoro,"SynPS/2 Synaptics TouchPad")
+        xinput set-prop $device 'Synaptics Soft Button Areas' 3656 5112 0 2200 2928 3656 0 2200
+        xinput set-prop $device 'Synaptics Area' 0 0 2200 0
         ;;
     XISlavePointer,guybrush,"SynPS/2 Synaptics TouchPad")
         xinput set-prop $device 'Synaptics Off' 1

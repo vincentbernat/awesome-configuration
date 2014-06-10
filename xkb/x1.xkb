@@ -1,0 +1,19 @@
+# -*- conf -*-
+
+# Configuration for a Lenovo X1 Carbon Gen 2 keyboard
+#
+# This keyboard is a mess. Really. Here is what we do about it:
+#
+#  - transform Home and End as a Control_L key
+#  - transform Backquote (between left alt and left ctrl) into Insert
+#  - transform Escape to Backquote. Let's say we don't need escape.
+#
+# Escape can be replaced with C-[. See:
+#  http://vim.wikia.com/wiki/Avoid_the_escape_key
+xkb_keymap {
+        xkb_keycodes  { include "evdev+aliases(qwerty)" };
+        xkb_types     { include "complete" };
+        xkb_compat    { include "complete" };
+        xkb_symbols   { include "pc+us+fr:2+inet(evdev)+compose(ralt)+ctrl(nocaps)+group(rctrl_rshift_toggle)+vbe(x1)" };
+        xkb_geometry  { include "pc(pc105)" };
+};
