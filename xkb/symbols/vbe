@@ -14,9 +14,9 @@ xkb_symbols "webcam" {
 
 partial
 xkb_symbols "x1" {
-    replace key <HOME> { [ Control_L, Control_L ] };
-    replace key <END>  { [ Control_L, Control_L ] };
+    key <HOME> { [ Control_L, Control_L ] };
+    key <END>  { [ Control_L, Control_L ] };
     modifier_map Control { Control_L, <HOME>, <END> };
-    replace key <TLDE> { [ Insert, Insert ] };
-    replace key <ESC>  { [ grave, asciitilde, dead_grave, dead_tilde ] };
+    key <TLDE> { [ Insert, Insert ] };
+    key <ESC>  { [ grave, asciitilde, dead_grave, dead_tilde ] };
 };
