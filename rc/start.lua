@@ -1,6 +1,5 @@
 -- Spawn a composoting manager
 awful.util.spawn("compton", false)
-awful.util.spawn("xcompmgr", false) -- Will fail if compton has been started
 
 -- Start idempotent commands
 local execute = {
