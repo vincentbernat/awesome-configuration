@@ -39,8 +39,13 @@ case "$use,$(uname -n),$name" in
 	xinput set-prop $device 'Evdev Wheel Emulation Axes' 6 7 4 5
         ;;
     XISlavePointer,zoro,"SynPS/2 Synaptics TouchPad")
-        xinput set-prop $device 'Synaptics Soft Button Areas' 3656 5112 0 2200 2928 3656 0 2200
-        xinput set-prop $device 'Synaptics Area' 0 0 2200 0
+        # [    12.756] (--) synaptics: SynPS/2 Synaptics TouchPad: x-axis range 1472 - 5112 (res 42)
+        # [    12.756] (--) synaptics: SynPS/2 Synaptics TouchPad: y-axis range 1408 - 3834 (res 42)
+        # The following is 60% 0 0 0 40% 60% 0 0
+        # The logic is explained here:
+        #  http://who-t.blogspot.de/2013/12/lenovo-t440-touchpad-button.html
+        xinput set-prop $device 'Synaptics Soft Button Areas' 3656 0 0 0 2928 3656 0 0
+        xinput set-prop $device 'Synaptics Area' 1 1 1 1
         ;;
     XISlavePointer,guybrush,"SynPS/2 Synaptics TouchPad")
         xinput set-prop $device 'Synaptics Off' 1
