@@ -14,7 +14,7 @@ module("vbe/brightness")
 
 local nid = nil
 local function change(what)
-   -- We don't really change the brightness, just report the change...
+   os.execute("xbacklight -" .. what)
    local out = awful.util.pread("xbacklight -get")
    if not out then return end
 
@@ -29,9 +29,9 @@ local function change(what)
 end
 
 function increase()
-   change("+ 5")
+   change("inc 5")
 end
 
 function decrease()
-   change("- 5")
+   change("dec 5")
 end
