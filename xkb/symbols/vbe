@@ -12,11 +12,13 @@ xkb_symbols "webcam" {
     };
 };
 
-partial
+partial modifier_keys alphanumeric_keys
 xkb_symbols "x1" {
+    key <LCTL> { [ Escape, Escape ] };
     key <HOME> { [ Control_L, Control_L ] };
     key <END>  { [ Control_L, Control_L ] };
     modifier_map Control { Control_L, <HOME>, <END> };
+
     key <TLDE> { [ Insert, Insert ] };
     key <ESC>  { [ grave, asciitilde, dead_grave, dead_tilde ] };
 };
