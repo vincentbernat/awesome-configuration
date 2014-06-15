@@ -41,10 +41,9 @@ case "$(hostname)" in
         ;;
 esac
 
-[ -x ~/bin/inputplug ] && ~/bin/inputplug -0 -c ~/.config/awesome/bin/input-event
-
-[ -x /usr/sbin/rfkill ] && rfkill block all 2> /dev/null
-[ -x /usr/bin/xbacklight ] && xbacklight = 60 2> /dev/null
-[ -x /usr/bin/redshift ] && redshift -l 2.3508:48.8567 -t 6500:5500 2> /dev/null &
+inputplug -0 -c ~/.config/awesome/bin/input-event 2> /dev/null
+rfkill block all 2> /dev/null
+xbacklight = 60 2> /dev/null
+redshift -l 2.3508:48.8567 -t 6500:5500 2> /dev/null &
 
 exec awesome
