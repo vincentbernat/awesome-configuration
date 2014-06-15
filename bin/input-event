@@ -45,7 +45,8 @@ case "$use,$(uname -n),$name" in
         # The logic is explained here:
         #  http://who-t.blogspot.de/2013/12/lenovo-t440-touchpad-button.html
         xinput set-prop $device 'Synaptics Soft Button Areas' 3656 0 0 0 2928 3656 0 0
-        xinput set-prop $device 'Synaptics Area' 1 1 1 1
+        xinput set-prop $device 'Synaptics Off' 3   # Needs a patch: http://lists.x.org/archives/xorg/2014-June/056689.html
+        xinput set-prop $device 'Synaptics Two-Finger Scrolling' 1 1
         ;;
     XISlavePointer,zoro,"ELAN Touchscreen")
         xinput disable $device
