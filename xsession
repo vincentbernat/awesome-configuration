@@ -38,6 +38,7 @@ case "$(hostname)" in
         ;;
     zoro)
         xrandr --output eDP1 --auto --dpi 144
+        echo Xft.dpi: 144 | xrdb -merge
         ;;
 esac
 
