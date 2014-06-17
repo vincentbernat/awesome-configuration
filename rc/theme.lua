@@ -3,11 +3,27 @@
 local na = awful.util.color_strip_alpha
 local icons = awful.util.getdir("config") .. "/icons"
 
+local function scale()
+   local xdpyinfo = io.popen("xdpyinfo")
+   if xdpyinfo then
+      for line in xdpyinfo:lines() do
+	 output = line:match("^%s*resolution:%s+(%d+)x%d+ dots per inch$")
+	 if output then
+            xdpyinfo:close()
+	    return tonumber(output)/96
+	 end
+      end
+      xdpyinfo:close()
+   end
+   return 1
+end
+
 theme = {}
+theme.scale = scale()
 theme.icons = icons
 theme.wallpaper_cmd = { "/bin/true" }
-theme.font = "Terminus 8"
-theme.tasklist_font = "DejaVu Sans 8"
+theme.font = "Terminus " .. 8 * theme.scale
+theme.tasklist_font = "DejaVu Sans " .. 8 * theme.scale
 
 theme.bg_normal     = "#22222299"
 theme.bg_focus      = "#d8d8d8bb"
@@ -44,7 +60,7 @@ end
 -- Naughty
 naughty.config.presets.normal.bg = theme.bg_widget
 for _,preset in pairs({"normal", "low", "critical"}) do
-   naughty.config.presets[preset].font = "DejaVu Sans 10"
+   naughty.config.presets[preset].font = "DejaVu Sans " .. 10 * theme.scale
 end
 
 return theme

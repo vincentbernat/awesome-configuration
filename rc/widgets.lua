@@ -130,7 +130,7 @@ local netdownicon = widget({ type = "imagebox" })
 netdownicon.image = image(beautiful.icons .. "/widgets/down.png")
 
 local netgraph = awful.widget.graph()
-netgraph:set_width(80):set_height(16)
+netgraph:set_width(80):set_height(16 * theme.scale)
 netgraph:set_stack(true):set_scale(true)
 netgraph:set_border_color(beautiful.fg_widget_border)
 netgraph:set_stack_colors({ "#EF8171", "#cfefb3" })
@@ -263,7 +263,7 @@ for s = 1, screen.count() do
 			     fg = beautiful.fg_normal,
 			     bg = beautiful.bg_widget,
 			     position = "top",
-			     height = 16,
+			     height = 16 * theme.scale,
     })
     -- Add widgets to the wibox
     local on = function(n, what)
