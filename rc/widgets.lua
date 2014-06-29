@@ -195,8 +195,6 @@ local fs = { "/",
 	     "/var",
 	     "/usr",
 	     "/tmp",
-	     "/var/cache/build",
-	     "/var/lib/mongodb",
              "/var/lib/systems" }
 local fsicon = widget({ type = "imagebox" })
 fsicon.image = image(beautiful.icons .. "/widgets/disk.png")
