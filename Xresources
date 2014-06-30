@@ -1,7 +1,7 @@
 !! Xft
 Xft.antialias: true
 Xft.hinting: true
-Xft.hintstyle: hintlight
+Xft.hintstyle: hintslight
 Xft.rgba: rgb
 
 !! Colors, stolen from http://xcolors.net/dl/derp
