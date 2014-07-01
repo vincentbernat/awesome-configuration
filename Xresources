@@ -27,7 +27,7 @@ URxvt.foreground: white
 URxvt.background: rgba:0000/0000/0000/dddd
 URxvt.cursorColor: green
 URxvt.depth: 32
-URxvt.cursorBlink: True
+URxvt.cursorBlink: False
 URxvt*colorIT: #ff7f00
 
 URxvt.scrollBar: False
