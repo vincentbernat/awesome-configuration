@@ -37,7 +37,7 @@ case "$use,$(uname -n),$name" in
 	xinput set-prop $device 'Evdev Wheel Emulation' 1
 	xinput set-prop $device 'Evdev Wheel Emulation Button' 2
 	xinput set-prop $device 'Evdev Wheel Emulation Axes' 6 7 4 5
-        xinput set-ptr-feedback $device 3 3 1
+        xinput set-ptr-feedback $device 2 5 1
         ;;
     XISlavePointer,zoro,"SynPS/2 Synaptics TouchPad")
         # [    12.756] (--) synaptics: SynPS/2 Synaptics TouchPad: x-axis range 1472 - 5112 (res 42)
