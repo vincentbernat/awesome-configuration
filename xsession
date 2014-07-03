@@ -10,8 +10,7 @@ export LC_MESSAGES=en_US.utf8
 # Ensure we use the appropriate gtkrc-2.0 file
 export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 
-# Java fonts are ugly by default
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
+# Java incompatibility with awesome
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # We do not want to rely on crappy mailcap
