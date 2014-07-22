@@ -18,4 +18,4 @@ config.keys.global = awful.util.table.join(
    awful.key({ modkey, }, "Delete", lock))
 
 -- Configure DPMS
-os.execute("xset -dpms")
+os.execute("xset dpms 360 720 1200")
