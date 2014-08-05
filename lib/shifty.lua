@@ -75,7 +75,7 @@ end
 local function setname(t, name)
    if name then
       local dispname = "" .. name
-      local pos = awful.tag.getproperty(t, "position")
+      local pos = awful.tag.getproperty(t, "position") or "?"
       awful.tag.setproperty(t, "shortname", name)
       if pos then
          if "" .. pos ~= "" .. dispname then
@@ -606,7 +606,7 @@ function match(c, startup)
                     table.insert(target_tags, t)
                     if config.guess_name and cls then
                        if getname(t) == config.default_name or
-                          getname(t) == "" .. awful.tag.getproperty(t, "position") then
+                           getname(t) == "" .. (awful.tag.getproperty(t, "position") or "?") then
                           setname(t, cls:lower())
                        end
                     end
