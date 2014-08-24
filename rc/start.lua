@@ -27,7 +27,6 @@ os.execute(table.concat(execute, ";"))
 xrun("polkit-gnome-authentication-agent-1",
      "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 xrun("pidgin", "pidgin -n")
-xrun("keepassx", "keepassx -min -lock")
 xrun("NetworkManager Applet", "nm-applet")
 
 if config.hostname == "neo" then
