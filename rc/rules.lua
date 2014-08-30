@@ -42,8 +42,7 @@ awful.rules.rules = {
    -- Should not be master
    { rule_any = { class =
 		  { config.termclass,
-		    "Transmission-gtk",
-		    "Keepassx",
+		    "Transmission-gtk"
 		  }, instance = { "Download" }},
      except = { icon_name = "QuakeConsoleNeedsUniqueName" },
      properties = { },
