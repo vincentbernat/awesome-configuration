@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec i3lock -e -n -i $HOME/.cache/awesome/current-wallpaper.png

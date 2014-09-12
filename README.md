@@ -30,9 +30,11 @@ Here some of the things you may be interested in:
    the wallpaper per screen and therefore, the script may seem a bit
    useless but I keep it.
 
- - I am using `xautolock` + `i3lock` as a screensaver. Nothing fancy
-   but I reuse the wallpaper built above. A notification is sent 10
-   seconds before starting.
+ - I am using `xss-lock` with `i3lock` as a screensaver. It relies on
+   standard X screensaver handling (and therefore is easy for
+   application to disable) and also supports systemd
+   inhibitors. Nothing fancy but I reuse the wallpaper built above. A
+   notification is sent 10 seconds before starting.
 
  - In `rc/apparance.lua`, you may be interested by the way I configure
    GTK2 and GTK3 to have an unified look. It works and it does not

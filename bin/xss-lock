@@ -1,0 +1,37 @@
+#!/bin/bash
+
+me="$(readlink -f "$0")"
+timeout=240
+notify=5
+
+case "$1" in
+    start)
+        xset s $timeout $notify
+        xset dpms $(($timeout * 2 + $notify)) $(($timeout * 3 + $notify)) $(($timeout * 4 + $notify))
+        exec xss-lock -n "$me dim" -l $me lock
+        ;;
+    dim)
+        trap 'exit 0' TERM INT
+        trap "xbacklight -steps 1 -set $(xbacklight -get); kill %%" EXIT
+        min_brightness=0
+        fade_time=$(($notify * 1000))
+        fade_steps=20
+        fade_step_time=0.05
+        xbacklight -time $fade_time -steps $fade_steps -set $min_brightness
+        sleep 2147483647 &
+        wait
+        ;;
+    lock)
+        i3lock_options="-e -i $HOME/.cache/awesome/current-wallpaper.png"
+        if [ -e /proc/self/fd/${XSS_SLEEP_LOCK_FD:--1} ]; then
+            trap 'kill %%' TERM INT
+            i3lock -n $i3lock_options {XSS_SLEEP_LOCK_FD}<&- &
+            exec {XSS_SLEEP_LOCK_FD}<&-
+            wait
+        else
+            trap 'kill %%' TERM INT
+            i3lock -n $i3lock_options &
+            wait
+        fi
+        ;;
+esac

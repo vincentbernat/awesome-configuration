@@ -3,7 +3,8 @@
 awesome
 awesome-extra
 i3lock
-xautolock
+xss-lock
+xbacklight
 libnotify-bin
 xfonts-terminus
 ttf-dejavu
