@@ -26,6 +26,7 @@ case "$1" in
         if [ -e /proc/self/fd/${XSS_SLEEP_LOCK_FD:--1} ]; then
             trap 'kill %%' TERM INT
             i3lock -n $i3lock_options {XSS_SLEEP_LOCK_FD}<&- &
+            sleep 0.3           # Slight race condition, better than an active loop
             exec {XSS_SLEEP_LOCK_FD}<&-
             wait
         else
