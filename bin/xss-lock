@@ -6,8 +6,8 @@ notify=10
 
 case "$1" in
     start)
-        xset s $timeout $notify
-        xset dpms $(($timeout * 2 + $notify)) $(($timeout * 3 + $notify)) $(($timeout * 4 + $notify))
+        xset s $(($timeout - $notify)) $notify
+        xset dpms $(($timeout * 2)) $(($timeout * 3)) $(($timeout * 4))
         exec xss-lock -n "$me dim" -l $me lock
         ;;
     dim)
