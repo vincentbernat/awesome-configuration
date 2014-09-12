@@ -43,8 +43,7 @@ esac
 
 ~/.config/awesome/bin/xss-lock start &
 inputplug -0 -c ~/.config/awesome/bin/input-event 2> /dev/null
-#rfkill block all 2> /dev/null
-#xbacklight = 60 2> /dev/null
+rfkill block all 2> /dev/null
 redshift -l 2.3508:48.8567 -t 6500:5500 2> /dev/null &
 
 exec awesome
