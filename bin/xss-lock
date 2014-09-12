@@ -2,7 +2,7 @@
 
 me="$(readlink -f "$0")"
 timeout=240
-notify=5
+notify=10
 
 case "$1" in
     start)
