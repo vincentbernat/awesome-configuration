@@ -14,7 +14,7 @@ case "$1" in
         echo "$me: dim: start"
         trap 'exit 0' TERM INT
         trap "kill %% ; wait ; xbacklight -steps 1 -set $(xbacklight -get)" EXIT
-        min_brightness=0
+        min_brightness=1
         fade_time=$(($notify * 1000))
         fade_steps=100
         xbacklight -time $fade_time -steps $fade_steps -set $min_brightness &
