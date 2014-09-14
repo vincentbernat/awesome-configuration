@@ -11,7 +11,7 @@ case "$1" in
         exec xss-lock -n "$me dim" -l $me lock
         ;;
     dim)
-        echo "$me: dim: start"
+        echo "$(date --rfc-3339=seconds) $me: dim: start"
         trap 'exit 0' TERM INT
         trap "kill %% ; wait ; xbacklight -steps 1 -set $(xbacklight -get)" EXIT
         min_brightness=1
@@ -19,13 +19,13 @@ case "$1" in
         fade_steps=100
         xbacklight -time $fade_time -steps $fade_steps -set $min_brightness &
         wait
-        echo "$me: dim: end"
+        echo "$(date --rfc-3339=seconds) $me: dim: end"
         sleep 2147483647 &
         wait
         ;;
     lock)
         i3lock_options="-e -i $HOME/.cache/awesome/current-wallpaper.png"
-        echo "$me: lock: lock screen"
+        echo "$(date --rfc-3339=seconds) $me: lock: lock screen"
         if [ -e /proc/self/fd/${XSS_SLEEP_LOCK_FD:--1} ]; then
             trap 'kill %%' TERM INT
             i3lock -n $i3lock_options {XSS_SLEEP_LOCK_FD}<&- &
@@ -37,6 +37,6 @@ case "$1" in
             i3lock -n $i3lock_options &
             wait
         fi
-        echo "$me: lock: unlock screen"
+        echo "$(date --rfc-3339=seconds) $me: lock: unlock screen"
         ;;
 esac
