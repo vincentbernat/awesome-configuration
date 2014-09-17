@@ -46,7 +46,7 @@ os.execute("test -d " .. awful.util.getdir("cache") ..
 modkey = "Mod4"
 config = {}
 config.terminal = "xfce4-terminal"
-config.termclass = "Xfce4-terminal"
+config.termclass = "terminal"
 config.layouts = {
    awful.layout.suit.tile,
    awful.layout.suit.tile.left,
