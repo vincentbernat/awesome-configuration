@@ -21,4 +21,4 @@ pidgin
 gnome-bluetooth
 pulseaudio
 numlockx
-rxvt-unicode-256color
+xfce4-terminal

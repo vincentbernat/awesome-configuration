@@ -45,8 +45,8 @@ os.execute("test -d " .. awful.util.getdir("cache") ..
 -- Global configuration
 modkey = "Mod4"
 config = {}
-config.terminal = "urxvtcd --perl-lib " .. awful.util.getdir("config") .. "/lib/rxvt"
-config.termclass = "URxvt"
+config.terminal = "xfce4-terminal --perl-lib " .. awful.util.getdir("config") .. "/lib/rxvt"
+config.termclass = "Xfce4-terminal"
 config.layouts = {
    awful.layout.suit.tile,
    awful.layout.suit.tile.left,

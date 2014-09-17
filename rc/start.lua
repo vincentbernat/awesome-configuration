@@ -9,8 +9,6 @@ local execute = {
    "xset -b",	-- Disable bell
    -- Enable numlock
    "numlockx on",
-   -- Read resources
-   "xrdb -merge " .. awful.util.getdir("config") .. "/Xresources",
    -- Default browser
    "xdg-mime default " .. config.browser .. ".desktop " ..
       "x-scheme-handler/http " ..
