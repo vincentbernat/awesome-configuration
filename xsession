@@ -40,12 +40,7 @@ case "$(hostname)" in
         ;;
 esac
 
-if [ -f ~/.config/awesome/xsettingsd.$(hostname) ]; then
-    cat ~/.config/awesome/xsettingsd  ~/.config/awesome/xsettingsd.$(hostname) > ~/.config/awesome/xsettingsd.local
-else
-    cp  ~/.config/awesome/xsettingsd ~/.config/awesome/xsettingsd.local
-fi
-xsettingsd -c ~/.config/awesome/xsettingsd.local &
+. ~/.config/awesome/bin/xsettingsd-setup
 xss-lock start &
 inputplug -0 -c ~/.config/awesome/bin/input-event 2> /dev/null
 rfkill block all 2> /dev/null
