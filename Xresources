@@ -1,9 +1,3 @@
-!! Xft
-Xft.antialias: true
-Xft.hinting: true
-Xft.hintstyle: hintslight
-Xft.rgba: rgb
-
 !! Colors, stolen from http://xcolors.net/dl/derp
 *color0:   #111111
 *color8:   #666666

@@ -41,6 +41,7 @@ case "$(hostname)" in
         ;;
 esac
 
+xsettingsd -c ~/.config/awesome/xsettingsd &
 xss-lock start &
 inputplug -0 -c ~/.config/awesome/bin/input-event 2> /dev/null
 rfkill block all 2> /dev/null
