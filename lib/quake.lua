@@ -46,7 +46,7 @@ function QuakeConsole:display()
    local i = 0
    for c in awful.client.cycle(function (c)
 				  -- c.name may be changed!
-				  return c.instance == self.name
+				  return (c.instance == self.name or c.role == self.name)
 			       end,
 			       nil, self.screen) do
       i = i + 1
@@ -137,13 +137,13 @@ function QuakeConsole:new(config)
    local console = setmetatable(config, { __index = QuakeConsole })
    capi.client.add_signal("manage",
 			  function(c)
-			     if c.instance == console.name and c.screen == console.screen then
+			     if (c.instance == console.name or c.role == console.name) and c.screen == console.screen then
 				console:display()
 			     end
 			  end)
    capi.client.add_signal("unmanage",
 			  function(c)
-			     if c.instance == console.name and c.screen == console.screen then
+			     if (c.instance == console.name or c.role == console.name) and c.screen == console.screen then
 				console.visible = false
 			     end
 			  end)
