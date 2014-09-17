@@ -7,8 +7,8 @@ echo Xft/DPI $(( $(xdpyinfo | \
 
 # Signal xsettingsd
 pid=$(xprop -name xsettingsd _NET_WM_PID 2> /dev/null | awk '{print $NF}')
-if [ -n $pid ]; then
-    kill -HUP $pid
-else
+if [ x"$pid" = x ]; then
     xsettingsd -c ~/.config/awesome/xsettingsd.local &
+else
+    kill -HUP $pid
 fi
