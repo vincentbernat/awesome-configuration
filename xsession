@@ -37,11 +37,15 @@ case "$(hostname)" in
         ;;
     zoro)
         xrandr --output eDP1 --auto --dpi 144
-        echo Xft.dpi: 144 | xrdb -merge
         ;;
 esac
 
-xsettingsd -c ~/.config/awesome/xsettingsd &
+if [ -f ~/.config/awesome/xsettingsd.$(hostname) ]; then
+    cat ~/.config/awesome/xsettingsd  ~/.config/awesome/xsettingsd.$(hostname) > ~/.config/awesome/xsettingsd.local
+else
+    cp  ~/.config/awesome/xsettingsd ~/.config/awesome/xsettingsd.local
+fi
+xsettingsd -c ~/.config/awesome/xsettingsd.local &
 xss-lock start &
 inputplug -0 -c ~/.config/awesome/bin/input-event 2> /dev/null
 rfkill block all 2> /dev/null
