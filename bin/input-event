@@ -7,7 +7,14 @@ device="$2"
 use="$3"
 name="$4"
 
-[ x"$event" = x"XIDeviceEnabled" ] || exit 0
+case "$event" in
+    XIDevice*)
+        ;;
+    *)
+        exit 0
+        ;;
+esac
+event=${event#XIDevice}
 
 # Load the given keymap
 xkb() {
@@ -17,29 +24,49 @@ xkb() {
 
 printf "$use: [%3d] $name\n" $device
 
-case "$use,$(uname -n),$name" in
-    XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
+case "$event,$use,$(uname -n),$name" in
+    # We try to use this keyboard to detect the dock
+    Disabled,XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
+        # We are being undocked?
+        sleep 2
+        if xrandr | grep '^DP. connected'; then
+            # No, still docked?
+            :
+        else
+            xrandr --output DP3 off --output DP4 off
+            xrandr --output eDP1 --auto --dpi 144
+        fi
+        ;;
+    Enabled,XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
+        # Are we getting docked?
+        sleep 2
+        if xrandr | grep '^DP. connected'; then
+            xrandr --output eDP1 --off
+            xrandr --output eDP1 --off --output DP3 --auto --primary --output DP4 --auto --right-of DP3 --dpi 96
+        fi
+        ;;
+    Enabled,XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
         xkb x1
         ;;
-    XISlaveKeyboard,guybrush,"AT Translated Set 2 keyboard")
+    Enabled,XISlaveKeyboard,guybrush,"AT Translated Set 2 keyboard")
         xkb norwin
         ;;
-    XISlaveKeyboard,*,"ThinkPad Extra Buttons")
+    Enabled,XISlaveKeyboard,*,"ThinkPad Extra Buttons")
         xkb thinkpad-extra
         ;;
-    XISlaveKeyboard,*)
+    Enabled,XISlaveKeyboard,*)
         xkb default
         ;;
-    XISlavePointer,*,"Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)")
+    Enabled,XISlavePointer,*,"Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)")
         xinput set-ptr-feedback $device 3 3 1
         ;;
-    XISlavePointer,*,"TPPS/2 IBM TrackPoint")
+    Enabled,XISlavePointer,*,"TPPS/2 IBM TrackPoint")
 	xinput set-prop $device 'Evdev Wheel Emulation' 1
 	xinput set-prop $device 'Evdev Wheel Emulation Button' 2
 	xinput set-prop $device 'Evdev Wheel Emulation Axes' 6 7 4 5
         xinput set-ptr-feedback $device 2 5 1
         ;;
-    XISlavePointer,zoro,"SynPS/2 Synaptics TouchPad")
+    Enabled,XISlavePointer,zoro,"SynPS/2 Synaptics TouchPad")
         # [    12.756] (--) synaptics: SynPS/2 Synaptics TouchPad: x-axis range 1472 - 5112 (res 42)
         # [    12.756] (--) synaptics: SynPS/2 Synaptics TouchPad: y-axis range 1408 - 3834 (res 42)
         # The following is 60% 0 0 0 40% 60% 0 0
@@ -49,10 +76,10 @@ case "$use,$(uname -n),$name" in
         xinput set-prop $device 'Synaptics Off' 3   # Needs a patch: http://lists.x.org/archives/xorg/2014-June/056689.html
         xinput set-prop $device 'Synaptics Two-Finger Scrolling' 1 1
         ;;
-    XISlavePointer,zoro,"ELAN Touchscreen")
+    Enabled,XISlavePointer,zoro,"ELAN Touchscreen")
         xinput disable $device
         ;;
-    XISlavePointer,guybrush,"SynPS/2 Synaptics TouchPad")
+    Enabled,XISlavePointer,guybrush,"SynPS/2 Synaptics TouchPad")
         xinput set-prop $device 'Synaptics Off' 1
         ;;
 esac
