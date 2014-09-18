@@ -33,15 +33,13 @@ case "$event,$use,$(uname -n),$name" in
             # No, still docked?
             :
         else
-            xrandr --output DP3 off --output DP4 off
-            xrandr --output eDP1 --auto --dpi 144
+            xrandr --output DP3 off --output DP4 off --output eDP1 --auto --dpi 144
         fi
         ;;
     Enabled,XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
         # Are we getting docked?
         sleep 2
         if xrandr | grep '^DP. connected'; then
-            xrandr --output eDP1 --off
             xrandr --output eDP1 --off --output DP3 --auto --primary --output DP4 --auto --right-of DP3 --dpi 96
         fi
         ;;
