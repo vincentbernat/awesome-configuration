@@ -42,6 +42,7 @@ case "$event,$use,$(uname -n),$name" in
         if xrandr | grep '^DP. connected'; then
             xrandr --output eDP1 --off --output DP3 --auto --primary --output DP4 --auto --right-of DP3 --dpi 96
         fi
+        xkb default
         ;;
     Enabled,XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
         xkb x1
