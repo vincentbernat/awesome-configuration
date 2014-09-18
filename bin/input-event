@@ -33,7 +33,7 @@ case "$event,$use,$(uname -n),$name" in
             # No, still docked?
             :
         else
-            xrandr --output DP3 off --output DP4 off --output eDP1 --auto --dpi 144
+            xrandr --output DP3 --off --output DP4 --off --output eDP1 --auto --dpi 144
         fi
         ;;
     Enabled,XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
