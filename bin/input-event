@@ -40,7 +40,8 @@ case "$event,$use,$(uname -n),$name" in
         # Are we getting docked?
         sleep 2
         if xrandr | grep '^DP. connected'; then
-            xrandr --output eDP1 --off --output DP3 --auto --primary --output DP4 --auto --right-of DP3 --dpi 96
+            xrandr --output eDP1 --off --output DP3 --auto --primary
+            xrandr --output DP4 --auto --right-of DP3 --dpi 96
         fi
         xkb default
         ;;
