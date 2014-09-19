@@ -24,4 +24,5 @@ ScrollingOnOutput=FALSE
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 ScrollingLines=5000
 ShortcutsNoMnemonics=TRUE
+TitleMode=TERMINAL_TITLE_REPLACE
 
