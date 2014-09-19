@@ -21,4 +21,4 @@ pidgin
 gnome-bluetooth
 pulseaudio
 numlockx
-xfce4-terminal
+evilvte
