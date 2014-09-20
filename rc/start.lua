@@ -1,5 +1,5 @@
 -- Spawn a composoting manager
-awful.util.spawn("compton --vsync drm", false)
+awful.util.spawn("compton", false)
 
 -- Start idempotent commands
 local execute = {
