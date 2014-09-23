@@ -1,5 +1,6 @@
 /* Use // to disable options                                                  */
 
+#define DEFAULT_TERMINAL_SIZE  2x2
 #define BACKGROUND_SATURATION  0.15
 #define BACKGROUND_OPACITY     TRUE  /* True transparent background        */
 #define BELL_AUDIBLE           FALSE
