@@ -46,7 +46,7 @@
 #define SCROLLBAR              OFF_R /* Options: LEFT, RIGHT, OFF_L, OFF_R */
 #define SHOW_WINDOW_BORDER     FALSE
 #define SHOW_WINDOW_DECORATED  FALSE
-#define SHOW_WINDOW_ICON       TRUE
+#define SHOW_WINDOW_ICON       FALSE
 #define STATUS_BAR             FALSE
 #define WINDOW_TITLE_DYNAMIC   TRUE
 #define WORD_CHARS             "-A-Za-z0-9_$.+!*(),;:@&=?/~#%"
