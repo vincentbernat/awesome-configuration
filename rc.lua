@@ -45,8 +45,8 @@ os.execute("test -d " .. awful.util.getdir("cache") ..
 -- Global configuration
 modkey = "Mod4"
 config = {}
-config.terminal = "evilvte"
-config.termclass = "Evilvte"
+config.terminal = "vbeterm"
+config.termclass = "Vbeterm"
 config.layouts = {
    awful.layout.suit.tile,
    awful.layout.suit.tile.left,

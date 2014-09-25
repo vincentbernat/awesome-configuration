@@ -55,6 +55,10 @@ Here some of the things you may be interested in:
  - On the debug front, I am quite happy with `dbg()` in
    `rc/debug.lua`.
 
+Also, I am using my custom terminal (`vbeterm`). You need to change
+that in `rc.lua`. You can also find the sources on
+[GitHub](https://github.com/vincentbernat/vbeterm).
+
 Things in `lib/` are meant to be reused. I am using my own `loadrc()`
 function to load modules and therefore, I prefix my modules with
 `vbe/`. Before reusing a module, you may want to change this. Another
