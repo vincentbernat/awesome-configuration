@@ -26,6 +26,7 @@ case "$use,$(uname -n),$name" in
             xrandr --output DP4 --auto --right-of DP3 --dpi 96
             echo 'awesome.restart()' | awesome-client
         fi
+        rfkill block wifi
         xkb default
         ;;
     XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
