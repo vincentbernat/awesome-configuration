@@ -24,7 +24,8 @@ case "$use,$(uname -n),$name" in
         if xrandr | grep '^DP. connected'; then
             xrandr --output eDP1 --off --output DP3 --auto --primary
             xrandr --output DP4 --auto --right-of DP3 --dpi 96
-            sleep 2
+            pkill compton
+            sleep 1
             echo 'awesome.restart()' | awesome-client
         fi
         rfkill block wifi
