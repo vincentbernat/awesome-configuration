@@ -21,14 +21,7 @@ case "$use,$(uname -n),$name" in
     XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
         # Are we getting docked?
         sleep 2
-        if xrandr | grep '^DP. connected'; then
-            pkill compton
-            xrandr --output eDP1 --off --output DP3 --auto --primary
-            xrandr --output DP4 --auto --right-of DP3 --dpi 96
-            sleep 1
-            echo 'awesome.restart()' | awesome-client
-        fi
-        rfkill block wifi
+        dock
         xkb default
         ;;
     XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
