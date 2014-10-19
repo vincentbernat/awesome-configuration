@@ -50,6 +50,15 @@ client.add_signal("manage",
 				     mouse_follow_focus(c)
 				  end)
 
+                     -- If this is Spotify and it sets the urgent property, unset it
+                     if c.instance == "spotify" then
+                        c.urgent = false
+                        c:add_signal("property::urgent",
+                                     function()
+                                        c.urgent = false
+                                     end)
+                     end
+
 		     -- Setup icon if none exists
 		     if not c.icon then
 			local icon = icons.lookup({ name = { c.class, c.instance },
