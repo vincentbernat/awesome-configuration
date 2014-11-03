@@ -16,6 +16,10 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # We do not want to rely on crappy mailcap
 export MAILCAPS=$HOME/.mailcap
 
+# Workaround a bug in XI focus-in events. See:
+#  https://bugzilla.gnome.org/show_bug.cgi?id=677329
+export GDK_CORE_DEVICE_EVENTS=1
+
 # Environment variables
 [ -e ~/.zsh/env ] && . ~/.zsh/env
 
