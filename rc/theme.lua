@@ -37,7 +37,7 @@ theme.fg_minimize   = "#ffffff"
 
 theme.border_width  = 4
 theme.border_normal = "#00000000"
-theme.border_focus  = "#FF7F00EE"
+theme.border_focus  = "#FF7F00"
 theme.border_marked = "#91231c66"
 
 -- Widget stuff
