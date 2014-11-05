@@ -2,8 +2,8 @@
 
 # Build xsettingsd.local
 cp  ~/.config/awesome/xsettingsd ~/.config/awesome/xsettingsd.local
-echo Xft/DPI $(( $(xdpyinfo | \
-    awk  '$1 ~ /resolution:/ { print $2 }' | sed 's/x.*//') * 1024 )) >> ~/.config/awesome/xsettingsd.local
+dpi=$(xdpyinfo | awk  '$1 ~ /resolution:/ { print $2 }' | sed 's/x.*//')
+echo Xft/DPI $(( $dpi * 1024 )) >> ~/.config/awesome/xsettingsd.local
 
 # Signal xsettingsd
 pid=$(xprop -name xsettingsd _NET_WM_PID 2> /dev/null | awk '{print $NF}')
@@ -12,3 +12,6 @@ if [ x"$pid" = x ]; then
 else
     kill -HUP $pid
 fi
+
+# Also use xrdb for very old stuff (you know, LibreOffice)
+echo Xft.dpi: $dpi | xrdb -merge
