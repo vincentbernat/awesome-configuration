@@ -20,7 +20,7 @@ gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintfull"
 gtk-xft-rgba="rgb"
-gtk-decoration-layout="menu:"
+gtk-decoration-layout=":menu"
 ]]
 
 local gtk2 = io.open(os.getenv("HOME") .. "/.gtkrc-2.0", "w")
