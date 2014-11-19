@@ -1,5 +1,5 @@
 -- Spawn a composoting manager
-awful.util.spawn("compton --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --glx-no-rebind-pixmap", false)
+awful.util.spawn("compton --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc", false)
 
 -- Start idempotent commands
 local execute = {
