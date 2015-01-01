@@ -54,12 +54,12 @@ case "$use,$(uname -n),$name" in
         xstart=1472
         xend=5112
         xinput set-prop $device 'Synaptics Soft Button Areas' \
-               $(( ($xend - $xstart) * 60 / 100 + $xstart )) \
+               $(( ($xend - $xstart) * 65 / 100 + $xstart )) \
                0 \
                0 \
                0 \
-               $(( ($xend - $xstart) * 40 / 100 + $xstart )) \
-               $(( ($xend - $xstart) * 60 / 100 + $xstart )) \
+               $(( ($xend - $xstart) * 35 / 100 + $xstart )) \
+               $(( ($xend - $xstart) * 65 / 100 + $xstart )) \
                0 \
                0
         xinput set-prop $device 'Synaptics Off' 1
