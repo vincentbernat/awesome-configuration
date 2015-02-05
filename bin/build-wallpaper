@@ -5,12 +5,9 @@
 # First argument is the directory where the wallpapers can be
 # found. We use xinerama to know the dimension of each screen.
 
-import sys
 import os
-import re
 import random
 import string
-import subprocess
 import optparse
 
 import xcb
