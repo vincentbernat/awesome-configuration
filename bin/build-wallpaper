@@ -84,5 +84,5 @@ for index in range(len(screens)):
 assert background, "Don't know the size of the display area"
 with tempfile.NamedTemporaryFile(delete=False,
         dir=os.path.dirname(os.path.realpath(options.target))) as tmp:
-    background.save(tmp, "jpeg")
+    background.save(tmp, "png")
     os.rename(tmp.name, options.target)
