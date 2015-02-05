@@ -9,6 +9,7 @@ import os
 import random
 import string
 import optparse
+import tempfile
 
 import xcb
 import xcb.xproto
@@ -82,4 +83,7 @@ for index in range(len(screens)):
 
 # Save
 assert background, "Don't know the size of the display area"
-background.save(options.target)
+with tempfile.NamedTemporaryFile(delete=False,
+        dir=os.path.dirname(os.path.realpath(options.target))) as tmp:
+    background.save(tmp, "jpeg")
+    os.rename(tmp.name, options.target)
