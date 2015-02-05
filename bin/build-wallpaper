@@ -56,8 +56,7 @@ for root, _, files in os.walk(os.path.join(options.directory)):
                                                     '.png'):
             images.append(os.path.join(root, i))
 images = random.sample(images, len(screens))
-images = [Image.open(os.path.join(options.directory,
-                                  image)) for image in images]
+images = [Image.open(image) for image in images]
 print "wallpaper: %s" % " + ".join(["`%s`" % x.filename[(len(options.directory) + 1):]
                                     for x in images])
 
