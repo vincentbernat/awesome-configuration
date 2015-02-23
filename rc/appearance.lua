@@ -27,12 +27,16 @@ local gtk2 = io.open(os.getenv("HOME") .. "/.gtkrc-2.0", "w")
 gtk2:write(gtk)
 gtk2:write([[
 gtk-key-theme-name="Emacs"
-binding "does-not-intercept-ctrl-w" {
+binding "vbe-text-entry-bindings" {
+  unbind "<ctrl>b"
+  unbind "<shift><ctrl>b"
+  unbind "<ctrl>f"
+  unbind "<shift><ctrl>f"
   unbind "<ctrl>w"
   bind "<alt>BackSpace" { "delete-from-cursor" (word-ends, -1) }
 }
-class "GtkEntry" binding "does-not-intercept-ctrl-w"
-class "GtkTextView" binding "does-not-intercept-ctrl-w"
+class "GtkEntry" binding "vbe-text-entry-bindings"
+class "GtkTextView" binding "vbe-text-entry-bindings"
 ]])
 gtk2:close()
 
@@ -50,11 +54,6 @@ gtk3:write([[
 
 @binding-set custom-text-entry
 {
-  bind "<ctrl>b" { "move-cursor" (logical-positions, -1, 0) };
-  bind "<shift><ctrl>b" { "move-cursor" (logical-positions, -1, 1) };
-  bind "<ctrl>f" { "move-cursor" (logical-positions, 1, 0) };
-  bind "<shift><ctrl>f" { "move-cursor" (logical-positions, 1, 1) };
-
   bind "<alt>b" { "move-cursor" (words, -1, 0) };
   bind "<shift><alt>b" { "move-cursor" (words, -1, 1) };
   bind "<alt>f" { "move-cursor" (words, 1, 0) };
@@ -65,7 +64,6 @@ gtk3:write([[
   bind "<ctrl>e" { "move-cursor" (paragraph-ends, 1, 0) };
   bind "<shift><ctrl>e" { "move-cursor" (paragraph-ends, 1, 1) };
 
-  /* bind "<ctrl>w" { "cut-clipboard" () }; */
   bind "<ctrl>y" { "paste-clipboard" () };
 
   bind "<ctrl>d" { "delete-from-cursor" (chars, 1) };
