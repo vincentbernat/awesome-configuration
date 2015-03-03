@@ -57,11 +57,7 @@ shifty.config.apps = {
       tag = "emacs",
    },
    {
-      match = { role = { "conversation", "buddy_list" } },
-      tag = "im",
-   },
-   {
-      match = { class = { "Skype" } },
+      match = { class = { "Skype", "Pidgin" } },
       tag = "im",
    },
    {
