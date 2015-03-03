@@ -36,8 +36,10 @@ awful.rules.rules = {
    -- See also tags.lua
    -- Pidgin
    { rule = { class = "Pidgin" },
-     except = { role = "buddy_list" }, -- buddy_list is the master
+     except = { role = "buddy_list" },
      properties = { }, callback = awful.client.setslave },
+   { rule = { class = "Pidgin", role = "buddy_list" },
+     properties = { }, callback = awful.client.setmaster },
    -- Skype
    { rule = { class = "Skipe" },
      except = { role = nil }, -- should be the master
