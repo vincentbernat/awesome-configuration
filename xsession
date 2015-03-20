@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Setup SHELL
+export SHELL=/bin/sh
+
 # Setup PATH
 export PATH=$HOME/bin:/sbin:/usr/local/sbin:/usr/sbin:/bin:/usr/local/bin:/usr/bin:/usr/local/games:/usr/games
 
