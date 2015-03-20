@@ -20,7 +20,7 @@ local xrun_now = function(name, cmd)
    if os.execute("xwininfo -name '" .. name .. "' > /dev/null 2> /dev/null") == 0 then
       return
    end
-   awful.util.spawn_with_shell(cmd or name)
+   awful.util.spawn(cmd or name, false)
 end
 
 -- Run a command if not already running.
