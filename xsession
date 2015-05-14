@@ -34,7 +34,7 @@ export GDK_CORE_DEVICE_EVENTS=1
 
 case "$(hostname)" in
     neo)
-        xrandr --output HDMI1 --auto --output HDMI2 --auto --right-of HDMI1
+        xrandr --output HDMI-0 --auto --output HDMI-1 --auto --right-of HDMI-0
         ;;
     alucard)
         xrandr --output DVI-0 --auto --primary --output DisplayPort-0 --auto --right-of DVI-0
