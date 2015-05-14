@@ -36,9 +36,6 @@ case "$(hostname)" in
     neo)
         xrandr --output HDMI-0 --auto --output HDMI-1 --auto --right-of HDMI-0
         ;;
-    alucard)
-        xrandr --output DVI-0 --auto --primary --output DisplayPort-0 --auto --right-of DVI-0
-        ;;
     zoro)
         xrandr --output eDP1 --auto --dpi 144
         ;;
