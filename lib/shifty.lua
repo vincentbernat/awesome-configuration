@@ -449,7 +449,7 @@ function del(tag)
     for i, c in ipairs(clients) do
         if c.sticky then sticky = sticky + 1 end
     end
-    if #clients > sticky then return end
+    if #clients > sticky then return false end
 
     -- store index for later
     index_cache[scr][getname(t)] = idx
@@ -469,6 +469,7 @@ function del(tag)
 
     -- FIXME: what is this for??
     if capi.client.focus then capi.client.focus:raise() end
+    return true
 end
 
 --is_client_tagged : replicate behavior in tag.c - returns true if the

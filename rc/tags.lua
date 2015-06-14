@@ -93,6 +93,12 @@ shifty.config.defaults = {
 shifty.taglist = config.taglist -- Set in widget.lua
 shifty.init()
 
+local tag_del_or_rename = function(tag)
+   if not shifty.del(tag) then
+      shifty.rename(tag)
+   end
+end
+
 config.keys.global = awful.util.table.join(
    config.keys.global,
    keydoc.group("Tag management"),
@@ -121,8 +127,8 @@ config.keys.global = awful.util.table.join(
              end,
              "Send all tags to next screen"),
    awful.key({ modkey }, 0, shifty.add, "Create a new tag"),
-   awful.key({ modkey, "Shift" }, 0, shifty.del, "Delete tag"),
-   awful.key({ modkey, "Control" }, 0, shifty.rename, "Rename tag"))
+   awful.key({ modkey, "Shift" }, 0, tag_del_or_rename),
+   awful.key({ modkey, "Control" }, 0, tag_del_or_rename, "Rename or delete tag"))
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
