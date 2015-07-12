@@ -43,10 +43,6 @@ shifty.config.tags = {
       screen = math.max(screen.count(), 2),
       icon = tagicon("im"),
       nopopup = true,           -- don't give focus on creation
-   },
-   spotify = {
-      screen = 1,
-      exclusive = true
    }
 }
 
@@ -63,10 +59,6 @@ shifty.config.apps = {
    {
       match = { class = { "Skype", "Pidgin" } },
       tag = "im",
-   },
-   {
-      match = { class = { "Spotify" } },
-      tag = "spotify"
    },
    {
       match = { config.termclass },
