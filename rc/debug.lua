@@ -74,7 +74,7 @@ local function dbg_get(var, depth, indent)
     end
   else
     if vtype == "tag" or vtype == "client" then
-      name = " [<span color='"..colors.name.."'>" .. var.name:sub(1,10) .. "</span>]"
+      name = " [<span color='"..colors.name.."'>" .. (var.name or '…'):sub(1,10) .. "</span>]"
     end
     text = text .. vstring .. name or ""
   end
