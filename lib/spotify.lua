@@ -8,61 +8,67 @@
 
 local awful = require("awful")
 local pairs = pairs
+local os    = os
 local capi = {
    client = client
 }
 
 module("vbe/spotify")
 
--- Send a command to spotify
-local function spotify(command)
-   awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify " ..
-      "/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player." .. command, false)
-end
-
-function playpause()
-   spotify("PlayPause")
-end
-
-function play()
-   -- Play seems unable to play in many situations, let's use
-   -- PlayPause instead.
-   spotify("PlayPause")
-end
-
-function pause()
-   spotify("Pause")
-end
-
-function stop()
-   spotify("Stop")
-end
-
-function next()
-   spotify("Next")
-end
-
-function previous()
-   spotify("Previous")
-end
-
-function show()
-   -- This should work, but no:
-   -- spotify("Raise")
+-- Get spotify window
+local function spotify()
    local clients = capi.client.get()
    for k, c in pairs(clients) do
       if awful.rules.match(c, { instance = "spotify",
                                 class = "Spotify" }) then
-         if not c:isvisible() then
-            awful.tag.viewonly(c:tags()[1])
-         end
-         capi.client.focus = c
-         c:raise()
-         return
+         return c
       end
    end
-   awful.util.spawn("spotify")
-   -- To disable notifications, add the following line to
-   -- ~/.config/spotify/Users/<spotifylogin>-user/prefs:
-   --   ui.track_notifications_enabled=false
+   return nil
+end
+
+-- Send a command to spotify
+local function cmd(command)
+   local client = spotify()
+   if client then
+      os.execute("xdotool key --window " .. client.window .. " " .. command)
+   end
+end
+
+-- Show spotify
+function show()
+   local client = spotify()
+   if client then
+      if not client:isvisible() then
+         awful.tag.viewonly(client:tags()[1])
+      end
+      capi.client.focus = client
+      client:raise()
+   else
+      awful.util.spawn("spotify")
+   end
+end
+
+function playpause()
+   cmd("space")
+end
+
+function play()
+   cmd("XF86AudioPlay")
+end
+
+function pause()
+   cmd("XF86AudioPause")
+end
+
+function stop()
+   cmd("XF86AudioStop")
+end
+
+function next()
+   cmd("XF86AudioNext")
+end
+
+function previous()
+   cmd("XF86AudioPrev")
 end

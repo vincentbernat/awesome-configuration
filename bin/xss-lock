@@ -22,8 +22,7 @@ case "$1" in
         ;;
     lock)
         # First, stop Spotify
-        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify \
-                  /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
+        xdotool key XF86AudioPause
         # Then, lock screen
         i3lock_options="-e -i $HOME/.cache/awesome/current-wallpaper.png -t"
         echo "$(date --rfc-3339=seconds) $me: lock: lock screen"
