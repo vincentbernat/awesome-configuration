@@ -1,17 +1,11 @@
 #!/bin/sh
 
-# Compute DPI. We extract the value from xrandr output. The screen
-# size is correctly reported (while the X server is lying to respect
-# the provided DPI). We round to the nearest quarter of 96 DPI (96,
-# 120, 144, 168, 192...).
-eval $(xrandr --current | sed -n 's/.* connected primary \([0-9]*\)x.* \([0-9]*\)mm x .*/wd=\1\nwm=\2/p')
-if [ -n "$wd" -a -n "$wm" ]; then
-    dpi=$(echo "$wd/($wm*0.03937)" | bc)
-    dpi=$(printf "%.0f" $(echo "scale=1;$dpi*4/96" | bc))
-    dpi=$((dpi*96/4))
-else
-    dpi=96
-fi
+# Don't try to guess DPI. For a laptop, we don't want the same DPI as
+# for an external screen. Just hardcode stuff...
+case $(hostname),$(xrandr --current | sed -n 's/\([^ ]*\) connected primary.*/\1/p') in
+    zoro,eDP1) dpi=144 ;;
+    *) dpi=96 ;;
+esac
 
 # Build xsettingsd.local
 cp  ~/.config/awesome/xsettingsd ~/.config/awesome/xsettingsd.local
