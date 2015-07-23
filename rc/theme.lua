@@ -4,16 +4,16 @@ local na = awful.util.color_strip_alpha
 local icons = awful.util.getdir("config") .. "/icons"
 
 local function scale()
-   local xdpyinfo = io.popen("xdpyinfo")
-   if xdpyinfo then
-      for line in xdpyinfo:lines() do
-	 output = line:match("^%s*resolution:%s+(%d+)x%d+ dots per inch$")
+   local xrdb = io.popen("xrdb -query")
+   if xrdb then
+      for line in xrdb:lines() do
+	 output = line:match("^Xft.dpi:\t(%d+)$")
 	 if output then
-            xdpyinfo:close()
+            xrdb:close()
 	    return tonumber(output)/96
 	 end
       end
-      xdpyinfo:close()
+      xrdb:close()
    end
    return 1
 end
