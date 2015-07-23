@@ -1,12 +1,20 @@
 #!/bin/sh
 
+# Compute DPI. We extract the value from xrandr output. The screen
+# size is correctly reported (while the X server is lying to respect
+# the provided DPI). We round to the nearest quarter of 96 DPI (96,
+# 120, 144, 168, 192...).
+eval $(xrandr --current | sed -n 's/.* connected primary \([0-9]*\)x.* \([0-9]*\)mm x .*/wd=\1\nwm=\2/p')
+if [ -n "$wd" -a -n "$wm" ]; then
+    dpi=$(echo "$wd/($wm*0.03937)" | bc)
+    dpi=$(printf "%.0f" $(echo "scale=1;$dpi*4/96" | bc))
+    dpi=$((dpi*96/4))
+else
+    dpi=96
+fi
+
 # Build xsettingsd.local
 cp  ~/.config/awesome/xsettingsd ~/.config/awesome/xsettingsd.local
-if [ -f ~/.config/awesome/xsettingsd.dpi ]; then
-    dpi=$(cat ~/.config/awesome/xsettingsd.dpi)
-else
-    dpi=$(xdpyinfo | awk  '$1 ~ /resolution:/ { print $2 }' | sed 's/x.*//')
-fi
 echo Xft/DPI $(( $dpi * 1024 )) >> ~/.config/awesome/xsettingsd.local
 
 # Signal xsettingsd
