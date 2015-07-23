@@ -2,8 +2,11 @@
 
 # Build xsettingsd.local
 cp  ~/.config/awesome/xsettingsd ~/.config/awesome/xsettingsd.local
-dpi=$(cat ~/.config/awesome/xsettingsd.dpi 2> /dev/null)
-dpi=${dpi:-96}
+if [ -f ~/.config/awesome/xsettingsd.dpi ]; then
+    dpi=$(cat ~/.config/awesome/xsettingsd.dpi)
+else
+    dpi=$(xdpyinfo | awk  '$1 ~ /resolution:/ { print $2 }' | sed 's/x.*//')
+fi
 echo Xft/DPI $(( $dpi * 1024 )) >> ~/.config/awesome/xsettingsd.local
 
 # Signal xsettingsd
