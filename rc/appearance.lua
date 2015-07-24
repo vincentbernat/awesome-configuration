@@ -8,7 +8,7 @@ beautiful.init(awful.util.getdir("config") .. "/rc/theme.lua")
 local gtk = [[
 gtk-font-name="DejaVu Sans 10"
 gtk-theme-name="Adwaita"
-gtk-icon-theme-name="gnome-wine"
+gtk-icon-theme-name="Adwaita"
 gtk-fallback-icon-theme="gnome"
 gtk-cursor-theme-name="oxy-cherry"
 gtk-cursor-theme-size=0
