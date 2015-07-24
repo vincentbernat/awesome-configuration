@@ -3,7 +3,6 @@ awful.util.spawn("compton --backend glx --xrender-sync --xrender-sync-fence --vs
 
 -- Start idempotent commands
 local execute = {
-   "~/.config/awesome/bin/xsettingsd-setup",
    -- Start PulseAudio
    "pulseaudio --check || pulseaudio -D",
    "udisks-glue -p /run/user/$(id -u)/udisks-glue.pid",

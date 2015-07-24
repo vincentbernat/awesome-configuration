@@ -42,6 +42,9 @@ loadrc("errors")		-- errors and debug stuff
 os.execute("test -d " .. awful.util.getdir("cache") ..
            " || mkdir -p " .. awful.util.getdir("cache"))
 
+-- Setup xsettings
+os.execute("~/.config/awesome/bin/xsettingsd-setup")
+
 -- Global configuration
 modkey = "Mod4"
 config = {}
