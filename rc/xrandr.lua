@@ -119,7 +119,7 @@ local function xrandr()
 
    -- Setup the timer
    state.timer = timer { timeout = 4 }
-   state.timer:add_signal("timeout",
+   state.timer:connect_signal("timeout",
 			  function()
 			     state.timer:stop()
 			     state.timer = nil

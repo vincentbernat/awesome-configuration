@@ -1,8 +1,18 @@
-require("awful")
-require("awful.autofocus")
-require("awful.rules")
-require("beautiful")
-require("naughty")
+awful = require("awful")
+awful.autofocus = require("awful.autofocus")
+awful.rules = require("awful.rules")
+beautiful = require("beautiful")
+naughty = require("naughty")
+
+-- Override awesome.quit when we're using GNOME
+_awesome_quit = awesome.quit
+awesome.quit = function()
+    if os.getenv("DESKTOP_SESSION") == "gnome-awesome" then
+        os.execute("/usr/bin/gnome-session-quit --logout --no-prompt --force")
+    else
+        _awesome_quit()
+    end
+end
 
 -- Simple function to load additional LUA files from rc/.
 function loadrc(name, mod)

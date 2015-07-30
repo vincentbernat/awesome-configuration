@@ -20,10 +20,10 @@ local function mouse_follow_focus(c)
 end
 
 -- Signal function to execute when a new client appears.
-client.add_signal("manage",
+client.connect_signal("manage",
 		  function (c, startup)
 		     -- Enable sloppy focus
-		     c:add_signal("mouse::enter",
+		     c:connect_signal("mouse::enter",
 				  function(c)
 				     -- If magnifier suit, only give sloppy focus to master window
 				     if ((awful.layout.get(c.screen) ~= awful.layout.suit.magnifier or
@@ -38,7 +38,7 @@ client.add_signal("manage",
 				  end)
 
 		     -- If a window change its geometry, track it with the mouse
-		     c:add_signal("property::geometry",
+		     c:connect_signal("property::geometry",
 				  function()
 				     -- Check if the current focused client is our
 				     if client.focus ~=c then return end
@@ -78,7 +78,7 @@ client.add_signal("manage",
 		     end
 		  end)
 
-client.add_signal("focus", function(c)
+client.connect_signal("focus", function(c)
 		     c.border_color = beautiful.border_focus
 		     c.opacity = 1
 
@@ -88,7 +88,7 @@ client.add_signal("focus", function(c)
 		     end
 		     focus_from_mouse = false
 			   end)
-client.add_signal("unfocus", function(c)
+client.connect_signal("unfocus", function(c)
 		     c.border_color = beautiful.border_normal
                      if not c.fullscreen then
                         c.opacity = 0.85

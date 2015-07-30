@@ -1,133 +1,127 @@
 -- Widgets
-
-require("vicious")
+vicious = require("vicious")
+wibox = require("wibox")
+gears = require("gears")
 local icons = loadrc("icons", "vbe/icons")
 
 -- Separators
-local sepopen = widget({ type = "imagebox" })
-sepopen.image = image(beautiful.icons .. "/widgets/left.png")
-local sepclose = widget({ type = "imagebox" })
-sepclose.image = image(beautiful.icons .. "/widgets/right.png")
-local spacer = widget({ type = "imagebox" })
-spacer.image = image(beautiful.icons .. "/widgets/spacer.png")
+local sepopen = wibox.widget.imagebox()
+sepopen:set_image(beautiful.icons .. "/widgets/left.png")
+local sepclose = wibox.widget.imagebox()
+sepclose:set_image(beautiful.icons .. "/widgets/right.png")
+local spacer = wibox.widget.imagebox()
+spacer:set_image(beautiful.icons .. "/widgets/spacer.png")
 
 -- Date
-local datewidget = widget({ type = "textbox" })
+local datewidget = wibox.widget.textbox()
 local dateformat = "%H:%M"
 if screen.count() > 1 then dateformat = "%a %d/%m, " .. dateformat end
 vicious.register(datewidget, vicious.widgets.date,
-		 '<span color="' .. beautiful.fg_widget_clock .. '">' ..
-		    dateformat .. '</span>', 61)
-local dateicon = widget({ type = "imagebox" })
-dateicon.image = image(beautiful.icons .. "/widgets/clock.png")
+         '<span color="' .. beautiful.fg_widget_clock .. '">' ..
+            dateformat .. '</span>', 10)
+local dateicon = wibox.widget.imagebox()
+dateicon:set_image(beautiful.icons .. "/widgets/clock.png")
 local cal = (
    function()
       local calendar = nil
       local offset = 0
 
       local remove_calendar = function()
-	 if calendar ~= nil then
-	    naughty.destroy(calendar)
-	    calendar = nil
-	    offset = 0
-	 end
+     if calendar ~= nil then
+        naughty.destroy(calendar)
+        calendar = nil
+        offset = 0
+     end
       end
 
       local add_calendar = function(inc_offset)
-	 local save_offset = offset
-	 remove_calendar()
-	 offset = save_offset + inc_offset
-	 local datespec = os.date("*t")
-	 datespec = datespec.year * 12 + datespec.month - 1 + offset
-	 datespec = (datespec % 12 + 1) .. " " .. math.floor(datespec / 12)
-	 local cal = awful.util.pread("ncal -w -m " .. datespec)
-	 -- Highlight the current date and month
-	 cal = cal:gsub("_.([%d ])",
-			string.format('<span color="%s">%%1</span>',
-				      beautiful.fg_widget_clock))
-	 cal = cal:gsub("^( +[^ ]+ [0-9]+) *",
-			string.format('<span color="%s">%%1</span>',
-				      beautiful.fg_widget_clock))
-	 -- Turn anything other than days in labels
-	 cal = cal:gsub("(\n[^%d ]+)",
-			string.format('<span color="%s">%%1</span>',
-				      beautiful.fg_widget_label))
-	 cal = cal:gsub("([%d ]+)\n?$",
-			string.format('<span color="%s">%%1</span>',
-				      beautiful.fg_widget_label))
-	 calendar = naughty.notify(
-	    {
-	       text = string.format('<span font="%s">%s</span>',
-				    "Terminus 8",
-				    cal:gsub(" +\n","\n")),
-	       timeout = 0, hover_timeout = 0.5,
-	       width = 160,
-	       screen = mouse.screen,
-	    })
+     local save_offset = offset
+     remove_calendar()
+     offset = save_offset + inc_offset
+     local datespec = os.date("*t")
+     datespec = datespec.year * 12 + datespec.month - 1 + offset
+     datespec = (datespec % 12 + 1) .. " " .. math.floor(datespec / 12)
+     local cal = awful.util.pread("ncal -w -m " .. datespec)
+     -- Highlight the current date and month
+     cal = cal:gsub("_.([%d ])",
+            string.format('<span color="%s">%%1</span>',
+                      beautiful.fg_widget_clock))
+     cal = cal:gsub("^( +[^ ]+ [0-9]+) *",
+            string.format('<span color="%s">%%1</span>',
+                      beautiful.fg_widget_clock))
+     -- Turn anything other than days in labels
+     cal = cal:gsub("(\n[^%d ]+)",
+            string.format('<span color="%s">%%1</span>',
+                      beautiful.fg_widget_label))
+     cal = cal:gsub("([%d ]+)\n?$",
+            string.format('<span color="%s">%%1</span>',
+                      beautiful.fg_widget_label))
+     calendar = naughty.notify(
+        {
+           text = string.format('<span font="%s">%s</span>',
+                    "Terminus 8",
+                    cal:gsub(" +\n","\n")),
+           timeout = 0, hover_timeout = 0.5,
+           width = 160,
+           screen = mouse.screen,
+        })
       end
 
       return { add = add_calendar,
-	       rem = remove_calendar }
+           rem = remove_calendar }
    end)()
 
-datewidget:add_signal("mouse::enter", function() cal.add(0) end)
-datewidget:add_signal("mouse::leave", cal.rem)
+datewidget:connect_signal("mouse::enter", function() cal.add(0) end)
+datewidget:connect_signal("mouse::leave", cal.rem)
 datewidget:buttons(awful.util.table.join(
-		      awful.button({ }, 3, function() cal.add(-1) end),
-		      awful.button({ }, 1, function() cal.add(1) end)))
+              awful.button({ }, 3, function() cal.add(-1) end),
+              awful.button({ }, 1, function() cal.add(1) end)))
 
 -- CPU usage
-local cpuwidget = widget({ type = "textbox" })
+local cpuwidget = wibox.widget.textbox()
 vicious.register(cpuwidget, vicious.widgets.cpu,
-		 function (widget, args)
-		    return string.format('<span color="' .. beautiful.fg_widget_value .. '">%2d%%</span>',
-					 args[1])
-		 end, 7)
-local cpuicon = widget({ type = "imagebox" })
-cpuicon.image = image(beautiful.icons .. "/widgets/cpu.png")
+         function (widget, args)
+            return string.format('<span color="' .. beautiful.fg_widget_value .. '">%2d%%</span>',
+                     args[1])
+         end, 1)
+local cpuicon = wibox.widget.imagebox()
+cpuicon:set_image(beautiful.icons .. "/widgets/cpu.png")
 
--- Battery
-local batwidget = { widget = "" }
-if awful.util.table.hasitem({"guybrush", "zoro"}, config.hostname) then
-   local bat = "BAT0"
-   if config.hostname == "guybrush" then bat = "BAT1" end
-   batwidget.widget = widget({ type = "textbox" })
-   vicious.register(batwidget.widget, vicious.widgets.bat,
-		    function (widget, args)
-		       local color = beautiful.fg_widget_value
-		       local current = args[2]
-		       if current < 10 and args[1] == "-" then
-			  color = beautiful.fg_widget_value_important
-			  -- Maybe we want to display a small warning?
-			  if current ~= batwidget.lastwarn then
-			     batwidget.lastid = naughty.notify(
-				{ title = "Battery low!",
-				  preset = naughty.config.presets.critical,
-				  timeout = 20,
-				  text = "Battery level is currently " ..
-				     current .. "%.\n" .. args[3] ..
-				     " left before running out of power.",
-				  icon = icons.lookup({name = "battery-caution",
-						       type = "status"}),
-				  replaces_id = batwidget.lastid }).id
-			     batwidget.lastwarn = current
-			  end
-		       end
-		       return string.format('<span color="' .. color ..
-			     '">%s%d%%</span>', args[1], current)
-		    end,
-		    59, bat)
+-- CPU temp
+local thermalwidget  = wibox.widget.textbox()
+
+-- Register
+vicious.register(thermalwidget, vicious.widgets.thermal, " <span color='yellow'>@</span> <span color='" .. beautiful.fg_widget_value .. "'>$1°C</span>", 1, { "coretemp.0/hwmon/hwmon1", "core"} )
+
+-- Battery widget
+batwidget = wibox.widget.textbox()
+-- Register
+vicious.register(batwidget, vicious.widgets.bat, function(widget, args)
+var="% (".. args[3] ..")</span>"
+if args[2] >= 75 then
+var = "<span color='cyan'>" .. args[2] .. var
+elseif args[2] >= 50 then
+var = "<span color='yellow'>" .. args[2] .. var
+elseif args[2] >= 25 then
+var = "<span color='orange'>" .. args[2] .. var
+else
+var = "<span color='red'>Warning : " .. args[2] .. var
 end
-local baticon = widget({ type = "imagebox" })
-baticon.image = image(beautiful.icons .. "/widgets/bat.png")
+return var
+end, 10, "BAT0")
+--vicious.register(batwidget, widgets.bat, "<span color='cyan'>$2%</span> <span color='yellow'>($3)</span> <span color='green'>$1</span> <span color='orange'>|</span> ", 5, "BAT0")
+
+-- Battery usage
+local baticon = wibox.widget.imagebox()
+baticon:set_image(beautiful.icons .. "/widgets/bat.png")
 
 -- Network
-local netup   = widget({ type = "textbox" })
-local netdown = widget({ type = "textbox" })
-local netupicon = widget({ type = "imagebox" })
-netupicon.image = image(beautiful.icons .. "/widgets/up.png")
-local netdownicon = widget({ type = "imagebox" })
-netdownicon.image = image(beautiful.icons .. "/widgets/down.png")
+local netup   = wibox.widget.textbox()
+local netdown = wibox.widget.textbox()
+local netupicon = wibox.widget.imagebox()
+netupicon:set_image(beautiful.icons .. "/widgets/up.png")
+local netdownicon = wibox.widget.imagebox()
+netdownicon:set_image(beautiful.icons .. "/widgets/down.png")
 
 local netgraph = awful.widget.graph()
 netgraph:set_width(80):set_height(16 * theme.scale)
@@ -138,171 +132,229 @@ netgraph:set_background_color("#00000033")
 vicious.register(netup, vicious.widgets.net,
     function (widget, args)
        -- We sum up/down value for all interfaces
-       local up = 0
-       local down = 0
-       local iface
-       for name, value in pairs(args) do
-	  iface = name:match("^{(%S+) down_b}$")
-	  if iface and iface ~= "lo" then down = down + value end
-	  iface = name:match("^{(%S+) up_b}$")
-	  if iface and iface ~= "lo" then up = up + value end
-       end
-       -- Update the graph
-       netgraph:add_value(up, 1)
-       netgraph:add_value(down, 2)
-       -- Format the string representation
-       local format = function(val)
-	  if val > 500000 then
-	     return string.format("%.1f MB", val/1000000.)
-	  elseif val > 500 then
-	     return string.format("%.1f KB", val/1000.)
-	  end
-	  return string.format("%d B", val)
-       end
-       -- Down
-       netdown.text = string.format('<span color="' .. beautiful.fg_widget_value ..
-				    '">%08s</span>', format(down))
-       -- Up
-       return string.format('<span color="' .. beautiful.fg_widget_value ..
-			    '">%08s</span>', format(up))
-    end, 3)
+        local up = 0
+        local down = 0
+        local iface
+        for name, value in pairs(args) do
+            iface = name:match("^{(%S+) down_b}$")
+            if iface and iface ~= "lo" then down = down + value end
+            iface = name:match("^{(%S+) up_b}$")
+            if iface and iface ~= "lo" then up = up + value end
+        end
+        -- Update the graph
+        netgraph:add_value(up, 1)
+        netgraph:add_value(down, 2)
+        -- Format the string representation
+        local format = function(val)
+            if val > 500000 then
+                return string.format("%.1f MB", val/1000000.)
+            elseif val > 500 then
+                return string.format("%.1f KB", val/1000.)
+            end
+            return string.format("%d B", val)
+        end
+        -- Down
+        netdown.text = string.format('<span color="' .. beautiful.fg_widget_value ..
+                    '">%08s</span>', format(down))
+        -- Up
+        return string.format('<span color="' .. beautiful.fg_widget_value ..
+                    '">%08s</span>', format(up))
+    end, 1)
+vicious.register(netdown, vicious.widgets.net, function (widgets, args)
+        return netdown.text
+    end, 1)
 
 -- Memory usage
-local memwidget = widget({ type = "textbox" })
-vicious.register(memwidget, vicious.widgets.mem,
-		 '<span color="' .. beautiful.fg_widget_value .. '">$1%</span>',
-		 19)
-local memicon = widget({ type = "imagebox" })
-memicon.image = image(beautiful.icons .. "/widgets/mem.png")
+-- Initialize widget
+memwidget = wibox.widget.textbox()
+-- Register widget
+vicious.register(memwidget, vicious.widgets.mem, function(widget, args)
+var="%</span>"
+if args[1] >= 75 then
+var = "<span color='red'>Warning : " .. args[1] .. var
+elseif args[1] >= 50 then
+var = "<span color='orange'>" .. args[1] .. var
+elseif args[1] >= 25 then
+var = "<span color='yellow'>" .. args[1] .. var
+else
+var = "<span color='cyan'>" .. args[1] .. var
+end
+return var
+end, 3)
+local memicon = wibox.widget.imagebox()
+memicon:set_image(beautiful.icons .. "/widgets/mem.png")
 
 -- Volume level
-local volicon = widget({ type = "imagebox" })
-volicon.image = image(beautiful.icons .. "/widgets/vol.png")
-local volwidget = widget({ type = "textbox" })
+local volicon = wibox.widget.imagebox()
+volicon:set_image(beautiful.icons .. "/widgets/vol.png")
+local volwidget = wibox.widget.textbox()
 vicious.register(volwidget, vicious.widgets.volume,
-		 '<span color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
-		17, "Master")
+         '<span color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
+        1, "Master")
 volume = loadrc("volume", "vbe/volume")
 volwidget:buttons(awful.util.table.join(
-		     awful.button({ }, 1, volume.mixer),
-		     awful.button({ }, 3, volume.toggle),
-		     awful.button({ }, 4, volume.increase),
-		     awful.button({ }, 5, volume.decrease)))
+             awful.button({ }, 1, volume.mixer),
+             awful.button({ }, 3, volume.toggle),
+             awful.button({ }, 4, volume.increase),
+             awful.button({ }, 5, volume.decrease)))
 
 -- File systems
 local fs = { "/",
-	     "/home",
-	     "/var",
-	     "/usr",
-	     "/tmp",
+         "/home",
+         "/boot",
              "/var/lib/systems" }
-local fsicon = widget({ type = "imagebox" })
-fsicon.image = image(beautiful.icons .. "/widgets/disk.png")
-local fswidget = widget({ type = "textbox" })
+local fsicon = wibox.widget.imagebox()
+fsicon:set_image(beautiful.icons .. "/widgets/disk.png")
+local fswidget = wibox.widget.textbox()
 vicious.register(fswidget, vicious.widgets.fs,
-		 function (widget, args)
-		    local result = ""
-		    for _, path in pairs(fs) do
-		       local used = args["{" .. path .. " used_p}"]
-		       local color = beautiful.fg_widget_value
-		       if used then
-			  if used > 90 then
-			     color = beautiful.fg_widget_value_important
-			  end
+         function (widget, args)
+            local result = ""
+            for _, path in pairs(fs) do
+               local used = args["{" .. path .. " used_p}"]
+               local color = beautiful.fg_widget_value
+               if used then
+              if used > 90 then
+                 color = beautiful.fg_widget_value_important
+              end
                           local name = string.gsub(path, "[%w/]*/(%w+)", "%1")
                           if name == "/" then name = "root" end
-			  result = string.format(
-			     '%s%s<span color="' .. beautiful.fg_widget_label .. '">%s: </span>' ..
-				'<span color="' .. color .. '">%2d%%</span>',
-			     result, #result > 0 and " " or "", name, used)
-		       end
-		    end
-		    return result
-		 end, 53, "-lx fuse -x aufs")
+              result = string.format(
+                 '%s%s<span color="' .. beautiful.fg_widget_label .. '">%s: </span>' ..
+                '<span color="' .. color .. '">%2d%%</span>',
+                 result, #result > 0 and " " or "", name, used)
+               end
+            end
+            return result
+         end, 60, "-lx fuse -x aufs")
 
-local systray = widget({ type = "systray" })
+local systray = wibox.widget.systray()
 
 -- Wibox initialisation
-local wibox     = {}
+local mywibox     = {}
 local promptbox = {}
 local layoutbox = {}
 
 local taglist = {}
 local tasklist = {}
+
 tasklist.buttons = awful.util.table.join(
    awful.button({ }, 1, function (c)
-		   if c == client.focus then
-		      c.minimized = true
-		   else
-		      if not c:isvisible() then
-			 awful.tag.viewonly(c:tags()[1])
-		      end
-		      -- This will also un-minimize
-		      -- the client, if needed
-		      client.focus = c
-		      c:raise()
-		   end
-			end))
+           if c == client.focus then
+              c.minimized = true
+           else
+              if not c:isvisible() then
+             awful.tag.viewonly(c:tags()[1])
+              end
+              -- This will also un-minimize
+              -- the client, if needed
+              client.focus = c
+              c:raise()
+           end
+            end))
 
 for s = 1, screen.count() do
-    promptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
+    gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+    promptbox[s] = awful.widget.prompt()
     layoutbox[s] = awful.widget.layoutbox(s)
-    tasklist[s]  = awful.widget.tasklist(
-       function(c)
-	  local title, color, _, icon = awful.widget.tasklist.label.currenttags(c, s)
-	  return title, color, nil, icon
+    tasklist[s]  = awful.widget.tasklist(s, function(c)
+      local title, color, _, icon = awful.widget.tasklist.filter.currenttags(c, s)
+      return title, color, nil, icon
        end, tasklist.buttons)
 
     -- Create the taglist
-    taglist[s] = awful.widget.taglist.new(s,
-                                          awful.widget.taglist.label.all)
+    taglist[s] = awful.widget.taglist.new(s, awful.widget.taglist.filter.all, taglist.buttons)
     -- Create the wibox
-    wibox[s] = awful.wibox({ screen = s,
-			     fg = beautiful.fg_normal,
-			     bg = beautiful.bg_widget,
-			     position = "top",
-			     height = 16 * theme.scale,
+    mywibox[s] = awful.wibox({ screen = s,
+                 fg = beautiful.fg_normal,
+                 bg = beautiful.bg_widget,
+                 position = "top",
+                 height = 16 * theme.scale,
     })
+
     -- Add widgets to the wibox
     local on = function(n, what)
        if s == n or n > screen.count() then return what end
        return ""
     end
 
-    wibox[s].widgets = {
-        {
-	   screen.count() > 1 and sepopen or "",
-	   taglist[s],
-	   screen.count() > 1 and spacer or "",
-	   layoutbox[s],
-	   screen.count() > 1 and sepclose or "",
-	   promptbox[s],
-	   layout = awful.widget.layout.horizontal.leftright
-	},
-	on(1, systray),
-	sepclose, datewidget, screen.count() > 1 and dateicon or "", spacer,
-	on(2, volwidget), screen.count() > 1 and on(2, volicon) or "", on(2, spacer),
+    local left_layout = wibox.layout.fixed.horizontal()
+    if screen.count() > 1 then left_layout:add(sepopen) end
+    left_layout:add(layoutbox[s])
+    if screen.count() > 1 then left_layout:add(spacer) end
+    left_layout:add(taglist[s])
+    if screen.count() > 1 then left_layout:add(sepclose) end
+    left_layout:add(promptbox[s])
 
-	on(2, batwidget.widget),
-	on(2, batwidget.widget ~= "" and baticon or ""),
-	on(2, batwidget.widget ~= "" and spacer or ""),
+    local right_layout = wibox.layout.fixed.horizontal()
+    right_layout:add(on(1, sepopen))
+    right_layout:add(on(1, thermalwidget))
+    right_layout:add(on(1, spacer))
+    right_layout:add(on(1, cpuicon))
+    right_layout:add(on(1, cpuwidget))
+    right_layout:add(on(1, spacer))
+    right_layout:add(on(1, memicon))
+    right_layout:add(on(1, memwidget))
+    right_layout:add(on(1, spacer))
+    right_layout:add(on(1, netdownicon))
+    right_layout:add(on(1, netdown))
+    right_layout:add(on(1, netupicon))
+    right_layout:add(on(1, netup))
+    if screen.count() > 1 then
+        right_layout:add(on(1, netgraph.widget))
+        right_layout:add(on(2, sepopen))
+        right_layout:add(on(2, fsicon))
+        right_layout:add(on(2, fswidget))
+    end
 
-	on(2, fswidget), screen.count() > 1 and on(2, fsicon) or "",
-	screen.count() > 1 and on(2, sepopen) or on(2, spacer),
+    if batwidget ~= "" then
+        right_layout:add(on(2, spacer))
+        right_layout:add(on(2, baticon))
+        right_layout:add(on(2, batwidget))
+    end
+    right_layout:add(on(2, spacer))
+    right_layout:add(on(2, volwidget))
 
-	screen.count() > 1 and on(1, netgraph.widget) or "",
-	on(1, netdownicon), on(1, netdown),
-	on(1, netupicon), on(1, netup), on(1, spacer),
+    if screen.count() > 1 then
+        right_layout:add(on(2, volicon))
+    end
 
-	on(1, memwidget), on(1, memicon), on(1, spacer),
-	on(1, cpuwidget), on(1, cpuicon), on(1, sepopen),
-	tasklist[s],
-	layout = awful.widget.layout.horizontal.rightleft }
+    right_layout:add(on(2, spacer))
+    right_layout:add(datewidget)
+    if screen.count() > 1 then
+        right_layout:add(dateicon)
+    end
+    right_layout:add(sepclose)
+    right_layout:add(on(1, systray))
+
+    local layout = wibox.layout.align.horizontal()
+    layout:set_left(left_layout)
+    layout:set_middle(tasklist[s])
+    layout:set_right(right_layout)
+
+    mywibox[s]:set_widget(layout)
 end
 
 config.keys.global = awful.util.table.join(
    config.keys.global,
    awful.key({ modkey }, "r", function () promptbox[mouse.screen]:run() end,
-	     "Prompt for a command"))
+         "Prompt for a command"))
 
 config.taglist = taglist
+
+-- Initialize widget
+memwidget = wibox.widget.textbox()
+-- Register widget
+vicious.register(memwidget, vicious.widgets.mem, function(widget, args)
+var="%</span> <span color='yellow'>(".. args[2] .."/".. args[3] ..")</span> <span color='orange'>|</span> "
+if args[1] >= 75 then
+var = "<span color='red'>Warning : " .. args[1] .. var
+elseif args[1] >= 50 then
+var = "<span color='orange'>" .. args[1] .. var
+elseif args[1] >= 25 then
+var = "<span color='yellow'>" .. args[1] .. var
+else
+var = "<span color='cyan'>" .. args[1] .. var
+end
+return var
+end, 5)
+

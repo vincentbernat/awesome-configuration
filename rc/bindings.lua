@@ -25,7 +25,7 @@ end
 -- function that will effectively toggle things.
 local function toggle_window(filter)
    local undo = {}		-- undo stack
-   client.add_signal('unmanage',
+   client.connect_signal('unmanage',
                      function(c)
                         -- If the client is in the undo stack, remove it
                         while true do
@@ -284,8 +284,12 @@ config.keys.client = awful.util.table.join(
    keydoc.group("Window-specific bindings"),
    awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end,
 	     "Fullscreen"),
-   awful.key({ modkey,           }, "x",      function (c) c:kill()                         end,
+   awful.key({ modkey,           }, "x",      function (c) c:kill()                                           end,
 	     "Close"),
+   awful.key({ modkey,           }, "F12",    function() awful.util.spawn("gnome-screensaver-command --lock") end,
+	     "Lock Screen"),
+   awful.key({ modkey, "Shift" }, "q",      awesome.quit,
+         "Quit Awesome"),
    awful.key({ modkey,           }, "o",
              function (c)
                 if screen.count() == 1 then return nil end

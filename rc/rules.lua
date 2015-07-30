@@ -11,19 +11,6 @@ awful.rules.rules = {
                     keys = config.keys.client,
 		    buttons = config.mouse.client }},
    -- Browser stuff
-   { rule = { role = "browser" },
-     callback = function(c)
-	if not c.icon then
-	   local icon = icons.lookup({ name = "web-browser",
-				       type = "apps" })
-	   if icon then
-	      c.icon = image(icon)
-	   end
-	end
-     end },
-   { rule = { class = config.termclass },
-     properties = { icon = image(icons.lookup({ name = "gnome-terminal",
-                                                type = "apps" })) } },
    { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "Conkeror", "Google-chrome" } },
      callback = function(c)
 	-- All windows should be slaves, except the browser windows.

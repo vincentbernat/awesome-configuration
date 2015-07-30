@@ -16,7 +16,7 @@ local change = function()
 	 "&& fvwm-root -r " .. config.wallpaper.current)
 end
 
-wtimer:add_signal("timeout", function()
+wtimer:connect_signal("timeout", function()
 		     change()
 		     wtimer:stop()
 		     wtimer.timeout = math.random(3000, 3600)
