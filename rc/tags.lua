@@ -16,7 +16,7 @@ shifty.config.tags = {
       mwfact = 0.7,
       exclusive = true,
       max_clients = 1,
-      screen = math.max(screen.count(), 2),
+      screen = math.min(screen.count(), 2),
       spawn = config.browser,
       icon = tagicon("web")
    },
@@ -40,7 +40,7 @@ shifty.config.tags = {
       position = 4,
       mwfact = 0.2,
       exclusive = true,
-      screen = math.max(screen.count(), 2),
+      screen = math.min(screen.count(), 2),
       icon = tagicon("im"),
       nopopup = true,           -- don't give focus on creation
    },
