@@ -16,9 +16,7 @@ local execute = {
       "text/html",
    -- Default MIME types
    "xdg-mime default evince.desktop application/pdf",
-   "xdg-mime default gpicview.desktop image/png image/x-apple-ios-png image/jpeg image/jpg image/gif",
-   -- dbus-mediakeys
-   "dbus-mediakeys &"
+   "xdg-mime default gpicview.desktop image/png image/x-apple-ios-png image/jpeg image/jpg image/gif"
 }
 
 os.execute(table.concat(execute, ";"))

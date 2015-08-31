@@ -32,10 +32,8 @@ end
 local function cmd(command)
    local client = spotify()
    if client then
-      os.execute("dbus-send --print-reply --reply-timeout=1000 --dest=org.gnome.SettingsDaemon "
-         .. "/org/gnome/SettingsDaemon/MediaKeys "
-         .. "org.gnome.SettingsDaemon.MediaKeys.PressMediaKey "
-         .. "string:" .. command)
+      os.execute("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify " ..
+         "/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player." .. command)
    end
 end
 
@@ -54,7 +52,7 @@ function show()
 end
 
 function playpause()
-   cmd("Play")
+   cmd("PlayPause")
 end
 
 function play()
