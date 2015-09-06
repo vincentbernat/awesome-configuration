@@ -32,6 +32,8 @@ export GDK_CORE_DEVICE_EVENTS=1
     export XAUTHORITY=$HOME/.Xauthority
 }
 
+systemctl --user import-environment
+
 case "$(hostname)" in
     neo)
         xrandr --output HDMI-0 --auto --output HDMI-1 --auto --right-of HDMI-0
