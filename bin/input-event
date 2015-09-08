@@ -15,7 +15,7 @@ xkb() {
         $HOME/.config/awesome/xkb/$1.xkb ${DISPLAY}
 }
 
-printf "$use: [%3d] $name\n" $device
+printf "input-event: $use: [%3d] $name\n" $device
 
 case "$use,$(uname -n),$name" in
     XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
