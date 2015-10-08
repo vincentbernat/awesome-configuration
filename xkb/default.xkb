@@ -9,6 +9,10 @@ xkb_keymap {
         xkb_keycodes  { include "evdev+aliases(qwerty)" };
         xkb_types     { include "complete" };
         xkb_compat    { include "complete" };
-        xkb_symbols   { include "pc+us+fr:2+inet(evdev)+compose(rwin)+compose(menu)+ctrl(nocaps)+group(rctrl_rshift_toggle)+vbe(pause)" };
+        xkb_symbols   { include "pc+us+fr:2+inet(evdev)"
+                        include "compose(rwin)+compose(menu)"
+                        include "ctrl(nocaps)"
+                        include "group(rctrl_rshift_toggle)"
+                        include "vbe(pause)" };
         xkb_geometry  { include "pc(pc105)" };
 };

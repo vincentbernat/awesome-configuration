@@ -14,6 +14,9 @@ xkb_keymap {
         xkb_keycodes  { include "evdev+aliases(qwerty)" };
         xkb_types     { include "complete" };
         xkb_compat    { include "complete" };
-        xkb_symbols   { include "pc+us+fr:2+inet(evdev)+compose(ralt)+ctrl(nocaps)+group(rctrl_rshift_toggle)+vbe(x1)" };
+        xkb_symbols   { include "pc+us+fr:2+inet(evdev)"
+                        include "compose(ralt)+ctrl(nocaps)"
+                        include "group(rctrl_rshift_toggle)"
+                        include "vbe(x1)" };
         xkb_geometry  { include "pc(pc105)" };
 };
