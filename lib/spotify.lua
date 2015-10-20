@@ -74,3 +74,7 @@ end
 function previous()
    cmd("Previous")
 end
+
+function mixer()
+   awful.util.spawn("pavucontrol")
+end
