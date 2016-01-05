@@ -44,11 +44,11 @@ function QuakeConsole:display()
    -- First, we locate the terminal
    local client = nil
    local i = 0
-   for c in awful.client.cycle(function (c)
-				  -- c.name may be changed!
-				  return (c.instance == self.name or c.role == self.name)
-			       end,
-			       nil, self.screen) do
+   for c in awful.client.iterate(function (c)
+                  -- c.name may be changed!
+                  return c.instance == self.name
+                   end,
+                   nil, self.screen) do
       i = i + 1
       if i == 1 then
 	 client = c
@@ -126,35 +126,35 @@ function QuakeConsole:new(config)
    config.argname  = config.argname  or "-name %s"     -- how to specify window name
 
    -- If width or height <= 1 this is a proportion of the workspace
-   config.height   = config.height   or 0.25	       -- height
-   config.width    = config.width    or 1	       -- width
-   config.vert     = config.vert     or "top"	       -- top, bottom or center
+   config.height   = config.height   or 0.25          -- height
+   config.width    = config.width    or 1         -- width
+   config.vert     = config.vert     or "top"         -- top, bottom or center
    config.horiz    = config.horiz    or "center"       -- left, right or center
 
    config.screen   = config.screen or capi.mouse.screen
    config.visible  = config.visible or false -- Initially, not visible
 
    local console = setmetatable(config, { __index = QuakeConsole })
-   capi.client.add_signal("manage",
-			  function(c)
-			     if (c.instance == console.name or c.role == console.name) and c.screen == console.screen then
-				console:display()
-			     end
-			  end)
-   capi.client.add_signal("unmanage",
-			  function(c)
-			     if (c.instance == console.name or c.role == console.name) and c.screen == console.screen then
-				console.visible = false
-			     end
-			  end)
+   capi.client.connect_signal("manage",
+              function(c)
+                 if c.instance == console.name and c.screen == console.screen then
+                console:display()
+                 end
+              end)
+   capi.client.connect_signal("unmanage",
+              function(c)
+                 if c.instance == console.name and c.screen == console.screen then
+                console.visible = false
+                 end
+              end)
 
    -- "Reattach" currently running QuakeConsole. This is in case awesome is restarted.
    local reattach = capi.timer { timeout = 0 }
-   reattach:add_signal("timeout",
-		       function()
-			  reattach:stop()
-			  console:display()
-		       end)
+   reattach:connect_signal("timeout",
+               function()
+              reattach:stop()
+              console:display()
+               end)
    reattach:start()
    return console
 end

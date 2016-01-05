@@ -5,7 +5,7 @@ local xrun_now = function(name, cmd)
    -- only if awesome has fully started, therefore, this function
    -- should be run inside a 0 timer)
    local squid = { name, name:sub(1,1):upper() .. name:sub(2) }
-   if awful.client.cycle(
+   if awful.client.iterate(
       function(c)
 	 return awful.rules.match_any(c,
 				      { name = squid,
@@ -31,6 +31,6 @@ xrun = function(name, cmd)
       stimer:stop()
       xrun_now(name, cmd)
    end
-   stimer:add_signal("timeout", run)
+   stimer:connect_signal("timeout", run)
    stimer:start()
 end
