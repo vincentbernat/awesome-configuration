@@ -21,7 +21,7 @@ end
 theme = {}
 theme.scale = scale()
 theme.icons = icons
-theme.wallpaper_cmd = { "/bin/true" }
+theme.wallpaper = "/usr/share/wallpapers/joy_inksplat/contents/images/1366x768.png"
 theme.font = "Terminus " .. 8 * theme.scale
 theme.tasklist_font = "DejaVu Sans " .. 8 * theme.scale
 
