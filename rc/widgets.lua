@@ -11,6 +11,7 @@ local sepclose = wibox.widget.imagebox()
 sepclose:set_image(beautiful.icons .. "/widgets/right.png")
 local spacer = wibox.widget.imagebox()
 spacer:set_image(beautiful.icons .. "/widgets/spacer.png")
+local e_widget = wibox.widget.base.empty_widget()
 
 -- Date
 local datewidget = wibox.widget.textbox()
@@ -274,7 +275,7 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox
     local on = function(n, what)
        if s == n or n > screen.count() then return what end
-       return ""
+       return e_widget
     end
 
     local left_layout = wibox.layout.fixed.horizontal()
