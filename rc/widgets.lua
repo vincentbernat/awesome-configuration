@@ -301,7 +301,9 @@ for s = 1, screen.count() do
     right_layout:add(on(1, netupicon))
     right_layout:add(on(1, netup))
     if screen.count() > 1 then
-        right_layout:add(on(1, netgraph.widget))
+        right_layout:add(on(1, sepclose))
+        right_layout:add(on(1, netgraph))
+        right_layout:add(on(1, sepopen))
         right_layout:add(on(2, sepopen))
         right_layout:add(on(2, fsicon))
         right_layout:add(on(2, fswidget))
