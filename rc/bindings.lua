@@ -287,8 +287,6 @@ config.keys.client = awful.util.table.join(
 	     "Fullscreen"),
    awful.key({ modkey,           }, "x",      function (c) c:kill()                                           end,
 	     "Close"),
-   awful.key({ modkey,           }, "F12",    function() awful.util.spawn("gnome-screensaver-command --lock") end,
-	     "Lock Screen"),
    awful.key({ modkey, "Shift" }, "q",      awesome.quit,
          "Quit Awesome"),
    awful.key({ modkey,           }, "o",
