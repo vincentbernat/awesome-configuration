@@ -47,7 +47,7 @@ client.connect_signal("manage",
                      -- If this is Spotify and it sets the urgent property, unset it
                      if c.instance == "spotify" then
                         c.urgent = false
-                        c:add_signal("property::urgent",
+                        c:connect_signal("property::urgent",
                                      function()
                                         c.urgent = false
                                      end)

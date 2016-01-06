@@ -149,7 +149,7 @@ for i = 1, (shifty.config.maxtags or 9) do
       awful.key({ modkey }, i,
                 function ()
                    local t = shifty.getpos(i)
-                   local s = t.screen
+                   local s = awful.tag.getscreen(t)
                    local c = awful.client.focus.history.get(s, 0)
                    awful.tag.viewonly(t)
                    mouse.screen = s
