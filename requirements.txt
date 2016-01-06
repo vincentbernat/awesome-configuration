@@ -22,3 +22,4 @@ gnome-bluetooth
 pulseaudio
 numlockx
 evilvte
+xdotool
