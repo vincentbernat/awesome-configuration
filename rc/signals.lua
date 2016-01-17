@@ -58,7 +58,7 @@ client.connect_signal("manage",
 			local icon = icons.lookup({ name = { c.class, c.instance },
 						    type = "apps" })
 			if icon then
-			   c.icon = image(icon)
+			   c.icon = wibox.widget.imagebox(icon)
 			end
 		     end
 
