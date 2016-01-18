@@ -22,7 +22,7 @@ awful.rules.rules = {
 	end
      end },
    { rule = { class = config.termclass },
-     properties = { icon = image(icons.lookup({ name = "gnome-terminal",
+     properties = { icon = wibox.widget.imagebox(icons.lookup({ name = "gnome-terminal",
                                                 type = "apps" })) } },
    { rule_any = { class = { "Iceweasel", "Firefox", "Chromium", "Conkeror", "Google-chrome" } },
      callback = function(c)
