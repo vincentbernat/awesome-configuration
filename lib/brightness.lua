@@ -5,6 +5,7 @@ local naughty      = require("naughty")
 local tonumber     = tonumber
 local string       = string
 local os           = os
+local dbg          = dbg
 
 -- A bit odd, but...
 require("lib/icons")
@@ -16,8 +17,7 @@ local nid = nil
 local function change(what)
    os.execute("xbacklight -" .. what)
    local out = awful.util.pread("xbacklight -get")
-   if not out then return end
-
+   if not out or out == "" then return end
    out = tonumber(out)
    local icon = icons.lookup({name = "display-brightness",
 			      type = "status"})
