@@ -192,11 +192,11 @@ config.keys.global = awful.util.table.join(
    awful.key({ modkey,           }, "u", toggle_im,
 	    "Toggle Pidgin conversation window"),
    awful.key({ modkey, "Control" }, "j", function ()
-		screen_focus( 1)
+		screen_focus(-1)
 					 end,
 	     "Jump to next screen"),
    awful.key({ modkey, "Control" }, "k", function ()
-		screen_focus(-1)
+		screen_focus( 1)
 					 end),
 
    keydoc.group("Layout manipulation"),
