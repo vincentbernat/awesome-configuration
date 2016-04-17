@@ -58,7 +58,7 @@ config.layouts = {
    awful.layout.suit.floating,
 }
 config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
-config.browser = "chromium"
+config.browser = "firefox"
 
 -- Remaining modules
 loadrc("xrun")			-- xrun function
