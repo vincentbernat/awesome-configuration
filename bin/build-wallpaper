@@ -19,9 +19,9 @@ import Image
 
 parser = optparse.OptionParser()
 parser.add_option("-d", "--directory", dest="directory", default=".",
-                   help="search for images in DIRECTORY", metavar="DIRECTORY")
+                  help="search for images in DIRECTORY", metavar="DIRECTORY")
 parser.add_option("-t", "--target", dest="target", default="background.jpg",
-                   help="write background to FILE", metavar="FILE")
+                  help="write background to FILE", metavar="FILE")
 parser.add_option("-c", "--crop", dest="crop", action="store_true",
                   help="crop image instead of centering them")
 options, args = parser.parse_args()
@@ -57,8 +57,16 @@ for root, _, files in os.walk(os.path.join(options.directory)):
             images.append(os.path.join(root, i))
 images = random.sample(images, len(screens))
 images = [Image.open(image) for image in images]
-print "wallpaper: %s" % " + ".join(["`%s`" % x.filename[(len(options.directory) + 1):]
-                                    for x in images])
+print("wallpaper: {}".format(" + ".join(
+    ["`%s`" % x.filename[(len(options.directory) + 1):]
+     for x in images])))
+
+# Link chosen wallpapers
+for idx, image in enumerate(images):
+    target = "{}.{}".format(options.target, idx)
+    if os.path.lexists(target):
+        os.remove(target)
+    os.symlink(os.path.abspath(image.filename), target)
 
 for index in range(len(screens)):
     x, y, offsetx, offsety = screens[index]
@@ -82,7 +90,8 @@ for index in range(len(screens)):
 
 # Save
 assert background, "Don't know the size of the display area"
-with tempfile.NamedTemporaryFile(delete=False,
+with tempfile.NamedTemporaryFile(
+        delete=False,
         dir=os.path.dirname(os.path.realpath(options.target))) as tmp:
     background.save(tmp, "png")
     os.rename(tmp.name, options.target)
