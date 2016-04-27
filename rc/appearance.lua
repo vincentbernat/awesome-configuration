@@ -78,9 +78,9 @@ gtk3:write([[
                          "insert-at-cursor" (" ")  };
 }
 
-GtkEntry, GtkTextView
+entry, textview
 {
-  gtk-key-bindings: custom-text-entry;
+  -gtk-key-bindings: custom-text-entry;
 }
 
 .window-frame, .window-frame:backdrop {
