@@ -5,7 +5,6 @@ awful.util.spawn("compton --backend glx --xrender-sync --xrender-sync-fence --vs
 local execute = {
    -- Start PulseAudio
    "pulseaudio --check || pulseaudio -D",
-   "udisks-glue -p /run/user/$(id -u)/udisks-glue.pid",
    "xset -b",	-- Disable bell
    -- Enable numlock
    "numlockx on",
