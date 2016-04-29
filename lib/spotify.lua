@@ -32,7 +32,7 @@ end
 local function cmd(command)
    local client = spotify()
    if client then
-      os.execute("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify " ..
+      os.execute("dbus-send --dest=org.mpris.MediaPlayer2.spotify " ..
          "/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player." .. command)
    end
 end
