@@ -40,34 +40,12 @@ case "$use,$(uname -n),$name" in
         xinput set-ptr-feedback $device 3 3 1
         ;;
     XISlavePointer,*,"TPPS/2 IBM TrackPoint")
-	xinput set-prop $device 'Evdev Wheel Emulation' 1
-	xinput set-prop $device 'Evdev Wheel Emulation Button' 2
-	xinput set-prop $device 'Evdev Wheel Emulation Axes' 6 7 4 5
         xinput set-ptr-feedback $device 2 5 1
         ;;
     XISlavePointer,zoro,"SynPS/2 Synaptics TouchPad")
-        # [    12.756] (--) synaptics: SynPS/2 Synaptics TouchPad: x-axis range 1472 - 5112 (res 42)
-        # [    12.756] (--) synaptics: SynPS/2 Synaptics TouchPad: y-axis range 1408 - 3834 (res 42)
-        # The following is 60% 0 0 0 40% 60% 0 0
-        # The logic is explained here:
-        #  http://who-t.blogspot.de/2013/12/lenovo-t440-touchpad-button.html
-        xstart=1472
-        xend=5112
-        xinput set-prop $device 'Synaptics Soft Button Areas' \
-               $(( ($xend - $xstart) * 65 / 100 + $xstart )) \
-               0 \
-               0 \
-               0 \
-               $(( ($xend - $xstart) * 35 / 100 + $xstart )) \
-               $(( ($xend - $xstart) * 65 / 100 + $xstart )) \
-               0 \
-               0
-        xinput set-prop $device 'Synaptics Off' 1
+        # Everything is configured correctly by default
         ;;
     XISlavePointer,zoro,"ELAN Touchscreen")
         xinput disable $device
-        ;;
-    XISlavePointer,guybrush,"SynPS/2 Synaptics TouchPad")
-        xinput set-prop $device 'Synaptics Off' 1
         ;;
 esac
