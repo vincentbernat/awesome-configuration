@@ -24,19 +24,8 @@ case "$1" in
         # First, stop any music player
         xdotool key XF86AudioStop
         # Then, lock screen
-        i3lock_options="-e -i $HOME/.cache/awesome/current-wallpaper.png -t -f"
         echo "$(date --rfc-3339=seconds) $me: lock: lock screen"
-        if [ -e /proc/self/fd/${XSS_SLEEP_LOCK_FD:--1} ]; then
-            trap 'kill %%' TERM INT
-            i3lock -n $i3lock_options {XSS_SLEEP_LOCK_FD}<&- &
-            sleep 0.3           # Slight race condition, better than an active loop
-            exec {XSS_SLEEP_LOCK_FD}<&-
-            wait
-        else
-            trap 'kill %%' TERM INT
-            i3lock -n $i3lock_options &
-            wait
-        fi
+        i3lock -n -e -i $HOME/.cache/awesome/current-wallpaper.png -t -f
         echo "$(date --rfc-3339=seconds) $me: lock: unlock screen"
         ;;
 esac
