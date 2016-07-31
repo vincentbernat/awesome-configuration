@@ -43,7 +43,7 @@ case "$use,$(uname -n),$name" in
         xinput set-ptr-feedback $device 2 5 1
         ;;
     XISlavePointer,zoro,"SynPS/2 Synaptics TouchPad")
-        # Everything is configured correctly by default
+        xinput set-props $device "libinput Natural Scrolling Enabled" 1
         ;;
     XISlavePointer,zoro,"ELAN Touchscreen")
         xinput disable $device
