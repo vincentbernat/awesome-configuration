@@ -10,6 +10,9 @@ awful.rules.rules = {
 		    maximized_horizontal = false,
                     keys = config.keys.client,
 		    buttons = config.mouse.client }},
+   -- i3lock
+   { rule = { name = "i3lock" },
+     properties = { ontop = true } },
    -- Browser stuff
    { rule = { role = "browser" },
      callback = function(c)
