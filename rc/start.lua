@@ -3,6 +3,8 @@ awful.util.spawn("compton --backend glx --xrender-sync --xrender-sync-fence --vs
 
 -- Start idempotent commands
 local execute = {
+   -- Kill any running nm-applet
+   "pkill nm-applet",
    -- Start PulseAudio
    "pulseaudio --check || pulseaudio -D",
    "xset -b",	-- Disable bell
