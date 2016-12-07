@@ -1,7 +1,8 @@
--- Handle brightness (with xbacklight)
+-- Handle brightness (with gsd-backlight-helper)
 
 local awful        = require("awful")
 local naughty      = require("naughty")
+local math         = math
 local tonumber     = tonumber
 local string       = string
 local os           = os
@@ -14,24 +15,37 @@ local icons        = package.loaded["vbe/icons"]
 module("vbe/brightness")
 
 local nid = nil
-local function change(what)
-   os.execute("xbacklight -" .. what)
-   local out = awful.util.pread("xbacklight -get")
-   if not out or out == "" then return end
-   out = tonumber(out)
+local function change(percent)
+   local cmd = "pkexec /usr/lib/gnome-settings-daemon/gsd-backlight-helper"
+
+   -- Current value
+   local current = awful.util.pread(cmd .. " --get-brightness")
+   if not current or current == "" then return end
+   current = tonumber(current)
+
+   -- Maximum value
+   local max = tonumber(awful.util.pread(cmd .. " --get-max-brightness"))
+
+   -- Set new value
+   local target = math.floor(current + percent*max / 100)
+   target = math.max(0, target)
+   target = math.min(max, target)
+   os.execute(cmd .. " --set-brightness " .. target)
+   current = tonumber(awful.util.pread(cmd .. " --get-brightness"))
+
    local icon = icons.lookup({name = "display-brightness",
 			      type = "status"})
 
-   nid = naughty.notify({ text = string.format("%3d %%", out),
+   nid = naughty.notify({ text = string.format("%3d %%", current * 100 / max),
 			  icon = icon,
 			  font = "Free Sans Bold 24",
 			  replaces_id = nid }).id
 end
 
 function increase()
-   change("inc 5")
+   change(5)
 end
 
 function decrease()
-   change("dec 5")
+   change(-5)
 end
