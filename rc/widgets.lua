@@ -229,20 +229,6 @@ local layoutbox = {}
 
 local taglist = {}
 local tasklist = {}
-tasklist.buttons = awful.util.table.join(
-   awful.button({ }, 1, function (c)
-		   if c == client.focus then
-		      c.minimized = true
-		   else
-		      if not c:isvisible() then
-			 awful.tag.viewonly(c:tags()[1])
-		      end
-		      -- This will also un-minimize
-		      -- the client, if needed
-		      client.focus = c
-		      c:raise()
-		   end
-			end))
 
 for s = 1, screen.count() do
     promptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
@@ -251,7 +237,7 @@ for s = 1, screen.count() do
        function(c)
 	  local title, color, _, icon = awful.widget.tasklist.label.currenttags(c, s)
 	  return title, color, nil, icon
-       end, tasklist.buttons)
+       end)
 
     -- Create the taglist
     taglist[s] = awful.widget.taglist.new(s,
