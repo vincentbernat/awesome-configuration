@@ -47,7 +47,7 @@ esac
 ~/.config/awesome/bin/xss-lock start &
 inputplug -0 -c ~/.config/awesome/bin/input-event 2> /dev/null
 rfkill block all 2> /dev/null
-redshift -l 6.666:46.533 -t 6500:4300 2> /dev/null &
+redshift -l 6.666:46.533 -t 6500:3900 2> /dev/null &
 systemd-run -q --scope --user tmux start-server
 
 exec awesome
