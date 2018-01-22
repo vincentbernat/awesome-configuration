@@ -37,14 +37,18 @@ local cal = (
 	 local save_offset = offset
 	 remove_calendar()
 	 offset = save_offset + inc_offset
-	 local datespec = os.date("*t")
-	 datespec = datespec.year * 12 + datespec.month - 1 + offset
+	 local curdate = os.date("*t")
+	 local datespec = curdate.year * 12 + curdate.month - 1 + offset
 	 datespec = (datespec % 12 + 1) .. " " .. math.floor(datespec / 12)
-	 local cal = awful.util.pread("ncal -w -m " .. datespec)
+	 local cal = awful.util.pread("ncal -h -w -m " .. datespec)
 	 -- Highlight the current date and month
-	 cal = cal:gsub("_.([%d ])",
-			string.format('<span color="%s">%%1</span>',
-				      beautiful.fg_widget_clock))
+         if offset == 0 then
+            cal = cal:gsub(string.format("( %d )", curdate.day),
+                           string.format('<span color="%s">%%1</span>',
+                                         beautiful.fg_widget_clock),
+                           1)
+         end
+         -- Month and year
 	 cal = cal:gsub("^( +[^ ]+ [0-9]+) *",
 			string.format('<span color="%s">%%1</span>',
 				      beautiful.fg_widget_clock))
