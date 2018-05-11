@@ -36,14 +36,6 @@ shifty.config.tags = {
       spawn = config.terminal,
       icon = tagicon("main"),
    },
-   im = {
-      position = 4,
-      mwfact = 0.2,
-      exclusive = true,
-      screen = math.min(screen.count(), 2),
-      icon = tagicon("im"),
-      nopopup = true,           -- don't give focus on creation
-   },
    spotify = {
       screen = 1,
       exclusive = true
@@ -59,10 +51,6 @@ shifty.config.apps = {
    {
       match = { "emacs" },
       tag = "emacs",
-   },
-   {
-      match = { class = { "Skype", "Pidgin" } },
-      tag = "im",
    },
    {
       match = { class = { "Spotify" } },
