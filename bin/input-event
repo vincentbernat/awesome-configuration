@@ -7,45 +7,50 @@ device="$2"
 use="$3"
 name="$4"
 
-[ x"$event" = x"XIDeviceEnabled" ] || exit 0
-
 # Load the given keymap
 xkb() {
     xkbcomp -i ${device} -w 0 -I$HOME/.config/awesome/xkb \
         $HOME/.config/awesome/xkb/$1.xkb ${DISPLAY}
 }
 
-printf "input-event: $use: [%3d] $name\n" $device
+printf "input-event: $use: [%3d] $event $name\n" $device
 
-case "$use,$(uname -n),$name" in
-    XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
+case "$event,$use,$(uname -n),$name" in
+    XIDeviceDisabled,XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
+        # Getting undocked
+        undock
+        ;;
+    XIDeviceDisabled,*)
+        :
+        ;;
+    *,XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
         # Are we getting docked?
         sleep 2
         dock
         xkb default
         ;;
-    XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
+    *,XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
         xkb x1
         ;;
-    XISlaveKeyboard,guybrush,"AT Translated Set 2 keyboard")
+    *,XISlaveKeyboard,guybrush,"AT Translated Set 2 keyboard")
         xkb norwin
         ;;
-    XISlaveKeyboard,*,"ThinkPad Extra Buttons")
+    *,XISlaveKeyboard,*,"ThinkPad Extra Buttons")
         xkb thinkpad-extra
         ;;
-    XISlaveKeyboard,*)
+    *,XISlaveKeyboard,*)
         xkb default
         ;;
-    XISlavePointer,*,"Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)")
+    *,XISlavePointer,*,"Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)")
         xinput set-ptr-feedback $device 3 3 1
         ;;
-    XISlavePointer,*,"TPPS/2 IBM TrackPoint")
+    *,XISlavePointer,*,"TPPS/2 IBM TrackPoint")
         xinput set-ptr-feedback $device 2 5 1
         ;;
-    XISlavePointer,zoro,"SynPS/2 Synaptics TouchPad")
+    *,XISlavePointer,zoro,"SynPS/2 Synaptics TouchPad")
         xinput set-props $device "libinput Natural Scrolling Enabled" 1
         ;;
-    XISlavePointer,zoro,"ELAN Touchscreen")
+    *,XISlavePointer,zoro,"ELAN Touchscreen")
         xinput disable $device
         ;;
 esac
