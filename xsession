@@ -37,6 +37,8 @@ systemctl --user import-environment
 case "$(hostname)" in
     neo)
         xrandr --output HDMI-0 --auto --output DP-0 --auto --right-of HDMI-0 --dpi 192
+        export GDK_SCALE=2
+        export GDK_DPI_SCALE=0.5
         ;;
     zoro)
         xrandr --output eDP1 --auto --dpi 144
