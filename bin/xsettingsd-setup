@@ -16,7 +16,12 @@ esac
 
 # Build xsettingsd.local
 cp  ~/.config/awesome/xsettingsd ~/.config/awesome/xsettingsd.local
-echo Xft/DPI $(( $dpi * 1024 )) >> ~/.config/awesome/xsettingsd.local
+echo Xft/DPI $(( $dpi*1024 )) >> ~/.config/awesome/xsettingsd.local
+
+if [ $(( $dpi/96 )) -ge 2 ]; then
+    echo Gdk/WindowScalingFactor $(( $dpi/96 )) >> ~/.config/awesome/xsettingsd.local
+    echo Gdk/UnscaledDPI $(( 96*1024 )) >> ~/.config/awesome/xsettingsd.local
+fi
 
 # Signal xsettingsd
 pid=$(xprop -name xsettingsd _NET_WM_PID 2> /dev/null | awk '{print $NF}')
