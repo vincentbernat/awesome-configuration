@@ -53,7 +53,7 @@ systemd-run -q --scope --user tmux start-server
 
 case $(glxinfo | awk -F': ' '($1 == "OpenGL vendor string") {print $2}') in
     "NVIDIA Corporation")
-        compton --daemon --backend glx --refresh-rate 60 --vsync opengl-swc --glx-no-stencil --glx-swap-method 3
+        compton --daemon --backend glx --refresh-rate 60 --vsync opengl-swc --glx-swap-method 3 --glx-no-rebind-pixmap
         ;;
     *)
         compton --daemon --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay
