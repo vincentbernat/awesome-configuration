@@ -51,4 +51,15 @@ rfkill block all 2> /dev/null
 redshift -l 6.666:46.533 -t 6500:3900 2> /dev/null &
 systemd-run -q --scope --user tmux start-server
 
+case $(glxinfo | awk -F': ' '($1 == "OpenGL vendor string") {print $2}') in
+    "NVIDIA Corporation")
+        compton --daemon --backend glx --refresh-rate 60 --vsync opengl-swc --glx-no-stencil --glx-swap-method 4
+        ;;
+    *)
+        compton --daemon --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay
+        ;;
+esac
+
+
+
 exec awesome
