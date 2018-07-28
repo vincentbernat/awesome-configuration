@@ -19,7 +19,7 @@ esac
     cat  ~/.config/awesome/xsettingsd
     echo Xft/DPI $(( $dpi*1024 ))
     echo Gdk/WindowScalingFactor $(( $dpi/96 ))
-    echo Gdk/UnscaledDPI $(( 96*1024 ))
+    echo Gdk/UnscaledDPI $(( $dpi*1024/($dpi/96) ))
 } > ~/.config/awesome/xsettingsd.local
 
 # Signal xsettingsd
