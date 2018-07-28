@@ -4,11 +4,10 @@ awesome
 awesome-extra
 i3lock
 xss-lock
-gnome-settings-daemon
 libnotify-bin
 xfonts-terminus
-ttf-dejavu
-xcompmgr
+fonts-dejavu
+compton
 python-xpyb
 python-imaging
 fvwm
@@ -17,7 +16,5 @@ gnome-themes-standard
 gnome-wine-icon-theme
 alsa-utils
 pavucontrol
-pidgin
-gnome-bluetooth
 pulseaudio
 numlockx
