@@ -19,15 +19,6 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # Environment variables
 [ -e ~/.zshenv ] && . ~/.zshenv
 
-# GDM move Xauthority in some obscure place
-# See:
-#  http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=614972
-#  http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=586685
-[ "$XAUTHORITY" = $HOME/.Xauthority ] || {
-    XAUTHORITY=$HOME/.Xauthority xauth merge $XAUTHORITY
-    export XAUTHORITY=$HOME/.Xauthority
-}
-
 systemctl --user import-environment
 
 case "$(hostname)" in
