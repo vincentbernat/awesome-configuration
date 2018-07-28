@@ -20,6 +20,9 @@ export MAILCAPS=$HOME/.mailcap
 #  https://bugzilla.gnome.org/show_bug.cgi?id=677329
 export GDK_CORE_DEVICE_EVENTS=1
 
+# Make QT automatically scale according to screen DPI
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+
 # Environment variables
 [ -e ~/.zsh/env ] && . ~/.zsh/env
 
