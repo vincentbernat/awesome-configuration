@@ -42,8 +42,7 @@ systemd-run -q --scope --user tmux start-server
 case $(glxinfo | awk -F': ' '($1 == "OpenGL vendor string") {print $2}') in
     "NVIDIA Corporation")
         # --glx-swap-method 2 causes cursor to be duplicated earlier on the line
-        # --glx-no-rebind-pixmap causes text not being redrawn when chaging to another line in Emacs
-        compton --daemon --backend glx --vsync opengl-swc --glx-swap-method 3
+        compton --daemon --backend glx --vsync opengl-swc --glx-swap-method 3 --glx-no-rebind-pixmap
         ;;
     *)
         compton --daemon --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay
