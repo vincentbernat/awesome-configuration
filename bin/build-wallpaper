@@ -49,14 +49,26 @@ screens.sort(key=lambda screen: -screen[0]*screen[1])
 
 # Get as many random image as we have screens
 images = []
-for root, _, files in os.walk(os.path.join(options.directory)):
+for base, _, files in os.walk(os.path.join(options.directory)):
     for i in files:
         if string.lower(os.path.splitext(i)[1]) in ('.jpg',
                                                     '.jpeg',
                                                     '.png'):
-            images.append(os.path.join(root, i))
+            images.append(os.path.join(base, i))
 images = random.sample(images, len(screens))
 images = [Image.open(image) for image in images]
+
+# If more than one screen and one image has the right aspect ratio,
+# use it.
+if len(screens) > 1:
+    target = root.width_in_pixels * 100 / root.height_in_pixels
+    ratios = [image.size[0] * 100 / image.size[1] for image in images]
+    try:
+        index = ratios.index(target)
+        images = [images[index]]
+    except ValueError:
+        pass
+
 print("wallpaper: {}".format(" + ".join(
     ["`%s`" % x.filename[(len(options.directory) + 1):]
      for x in images])))
@@ -68,25 +80,30 @@ for idx, image in enumerate(images):
         os.remove(target)
     os.symlink(os.path.abspath(image.filename), target)
 
-for index in range(len(screens)):
-    x, y, offsetx, offsety = screens[index]
-    image = images[index]
+if len(screens) > 1 and len(images) == 1:
+    # Wide wallpaper
+    if image.size != (root.width_in_pixels, root.height_in_pixels):
+        image = image.resize((root.width_in_pixels, root.height_in_pixels),
+                             Image.CUBIC)
+    background.paste(image, (0, 0))
+else:
+    for index in range(len(screens)):
+        x, y, offsetx, offsety = screens[index]
+        image = images[index]
 
-    # Find the right size for the screen
-    imx, imy = x, image.size[1]*x/image.size[0]
-    if (options.crop and imy < y) or (not options.crop and imy > y):
-        imx, imy = image.size[0]*y/image.size[1], y
-    image = image.resize((imx, imy), Image.CUBIC)
-    if options.crop:
-        image = image.crop(((imx-x)/2, (imy-y)/2,
-                            imx-(imx-x)/2, imy-(imy-y)/2))
-
-    # Include it
-    if options.crop:
-        background.paste(image, (offsetx, offsety))
-    else:
-        background.paste(image, ((x-imx)/2 + offsetx,
-                                 (y-imy)/2 + offsety))
+        # Find the right size for the screen
+        imx, imy = x, image.size[1]*x/image.size[0]
+        if (options.crop and imy < y) or (not options.crop and imy > y):
+            imx, imy = image.size[0]*y/image.size[1], y
+        if image.size != (imx, imy):
+            image = image.resize((imx, imy), Image.CUBIC)
+        if options.crop:
+            image = image.crop(((imx-x)/2, (imy-y)/2,
+                                imx-(imx-x)/2, imy-(imy-y)/2))
+            background.paste(image, (offsetx, offsety))
+        else:
+            background.paste(image, ((x-imx)/2 + offsetx,
+                                     (y-imy)/2 + offsety))
 
 # Save
 assert background, "Don't know the size of the display area"
