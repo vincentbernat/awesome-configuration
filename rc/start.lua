@@ -3,7 +3,6 @@ local execute = {
    -- Kill any running nm-applet
    "pkill nm-applet",
    -- Start PulseAudio
-   "pulseaudio --check || pulseaudio -D",
    "xset -b",	-- Disable bell
    -- Enable numlock
    "numlockx on",
