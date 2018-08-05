@@ -1,21 +1,21 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Build a multi screen wallpaper
 
 # First argument is the directory where the wallpapers can be
 # found. We use xinerama to know the dimension of each screen.
 
+from __future__ import print_function, unicode_literals, division
+
 import os
 import random
-import string
 import optparse
 import tempfile
 
-import xcb
-import xcb.xproto
-import xcb.xinerama
+from Xlib import X, display
+from Xlib.ext import randr
 
-import Image
+from PIL import Image
 
 parser = optparse.OptionParser()
 parser.add_option("-d", "--directory", dest="directory", default=".",
@@ -31,29 +31,34 @@ assert not args, "No additional arguments are accepted"
 background = None
 
 # Get display size
-display = xcb.connect()
-root = display.get_setup().roots[0]
-background = Image.new('RGB', (root.width_in_pixels, root.height_in_pixels))
+d = display.Display()
+screen = d.screen()
+window = screen.root.create_window(0, 0, 1, 1, 1, screen.root_depth)
+background = Image.new('RGB', (screen.width_in_pixels, screen.height_in_pixels))
 
-# Query xinerama (not randr since the query is longer)
-try:
-    xinerama = display(xcb.xinerama.key)
-except xcb.ExtensionException:
-    xinerama = None
-if not xinerama or not xinerama.IsActive().reply().state:
+# Query randr extension
+screens = []
+screen_resources = randr.get_screen_resources(window)
+for output in screen_resources.outputs:
+    output_info = randr.get_output_info(window, output,
+                                        screen_resources.timestamp)
+    if output_info.crtc == 0:
+        continue
+    crtc_info = randr.get_crtc_info(window, output_info.crtc,
+                                    output_info.timestamp)
+    screens.append((crtc_info.width, crtc_info.height,
+                    crtc_info.x, crtc_info.y))
+if not screens:
     screens = [(background.size[0], background.size[1], 0, 0)]
-else:
-    screens = [(screen.width, screen.height, screen.x_org, screen.y_org)
-               for screen in xinerama.QueryScreens().reply().screen_info]
 screens.sort(key=lambda screen: -screen[0]*screen[1])
 
 # Get as many random image as we have screens
 images = []
 for base, _, files in os.walk(os.path.join(options.directory)):
     for i in files:
-        if string.lower(os.path.splitext(i)[1]) in ('.jpg',
-                                                    '.jpeg',
-                                                    '.png'):
+        if os.path.splitext(i)[1].lower() in ('.jpg',
+                                              '.jpeg',
+                                              '.png'):
             images.append(os.path.join(base, i))
 images = random.sample(images, len(screens) + 3)
 images = [Image.open(image) for image in images]
@@ -63,7 +68,7 @@ images = images[:len(screens)]
 # If more than one screen and one image has the right aspect ratio,
 # use it.
 if len(screens) > 1:
-    target = root.width_in_pixels * 100 / root.height_in_pixels
+    target = screen.width_in_pixels * 100 / screen.height_in_pixels
     ratios = [image.size[0] * 100 / image.size[1] for image in images]
     try:
         index = ratios.index(target)
@@ -84,8 +89,8 @@ for idx, image in enumerate(images):
 
 if len(screens) > 1 and len(images) == 1:
     # Wide wallpaper
-    if image.size != (root.width_in_pixels, root.height_in_pixels):
-        image = image.resize((root.width_in_pixels, root.height_in_pixels),
+    if image.size != (screen.width_in_pixels, screen.height_in_pixels):
+        image = image.resize((screen.width_in_pixels, screen.height_in_pixels),
                              Image.CUBIC)
     background.paste(image, (0, 0))
 else:
@@ -94,9 +99,9 @@ else:
         image = images[index]
 
         # Find the right size for the screen
-        imx, imy = x, image.size[1]*x/image.size[0]
+        imx, imy = x, image.size[1]*x//image.size[0]
         if (options.crop and imy < y) or (not options.crop and imy > y):
-            imx, imy = image.size[0]*y/image.size[1], y
+            imx, imy = image.size[0]*y//image.size[1], y
         if image.size != (imx, imy):
             image = image.resize((imx, imy), Image.CUBIC)
         if options.crop:

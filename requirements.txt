@@ -8,8 +8,8 @@ libnotify-bin
 xfonts-terminus
 fonts-dejavu
 compton
-python-xpyb
-python-imaging
+python3-xlib
+python3-pil
 fvwm
 fvwm-crystal
 gnome-themes-standard
