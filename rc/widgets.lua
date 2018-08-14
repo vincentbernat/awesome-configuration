@@ -62,10 +62,10 @@ local cal = (
 	 calendar = naughty.notify(
 	    {
 	       text = string.format('<span font="%s">%s</span>',
-				    "Terminus 8",
+				    "Terminus " .. 8 * theme.scale,
 				    cal:gsub(" +\n","\n")),
 	       timeout = 0, hover_timeout = 0.5,
-	       width = 160,
+	       width = 160 * theme.scale,
 	       screen = mouse.screen,
 	    })
       end
