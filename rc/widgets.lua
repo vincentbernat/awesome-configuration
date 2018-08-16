@@ -185,7 +185,7 @@ volicon.image = image(beautiful.icons .. "/widgets/vol.png")
 local volwidget = widget({ type = "textbox" })
 vicious.register(volwidget, vicious.widgets.volume,
 		 '<span color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
-		17, "Master")
+                 17, "Master")
 volume = loadrc("volume", "vbe/volume")
 volwidget:buttons(awful.util.table.join(
 		     awful.button({ }, 1, volume.mixer),

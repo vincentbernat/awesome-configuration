@@ -34,7 +34,7 @@ local function change(what)
 
    volid = naughty.notify({ text = string.format("%3d %%", vol),
 			    icon = icon,
-			    font = "Free Sans Bold 24",
+			    font = "Free Sans Bold " .. 24*theme.scale,
 			    replaces_id = volid }).id
 end
 
