@@ -32,9 +32,6 @@ case "$event,$use,$(uname -n),$name" in
     *,XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
         xkb x1
         ;;
-    *,XISlaveKeyboard,guybrush,"AT Translated Set 2 keyboard")
-        xkb norwin
-        ;;
     *,XISlaveKeyboard,*,"ThinkPad Extra Buttons")
         xkb thinkpad-extra
         ;;
