@@ -2,9 +2,11 @@
 
 local awful        = require("awful")
 local naughty      = require("naughty")
+local beautiful    = require("beautiful")
 local tonumber     = tonumber
 local string       = string
 local os           = os
+local theme        = beautiful.get()
 
 -- A bit odd, but...
 require("lib/icons")
@@ -14,6 +16,7 @@ module("vbe/volume")
 
 local volid = nil
 local function change(what)
+
    os.execute("amixer -q sset Master " .. what, false)
    -- Read the current value
    local out = awful.util.pread("amixer sget Master")
