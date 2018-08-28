@@ -60,7 +60,7 @@ for base, _, files in os.walk(os.path.join(options.directory)):
                                               '.jpeg',
                                               '.png'):
             images.append(os.path.join(base, i))
-images = random.sample(images, len(screens) + 3)
+images = random.sample(images, len(screens))
 images = [Image.open(image) for image in images]
 images.sort(key=lambda im: -im.size[0]*im.size[1])
 images = images[:len(screens)]
