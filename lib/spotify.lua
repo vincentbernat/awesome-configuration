@@ -6,6 +6,8 @@
 -- To get the complete interface:
 --   mdbus2 org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2
 
+-- Updated to use playerctl instead.
+
 local awful = require("awful")
 local dbg   = dbg
 local pairs = pairs
@@ -30,11 +32,7 @@ end
 
 -- Send a command to spotify
 local function cmd(command)
-   local client = spotify()
-   if client then
-      awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify " ..
-         "/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player." .. command, false)
-   end
+   awful.util.spawn("playerctl " .. command, false)
 end
 
 -- Show spotify
@@ -52,27 +50,27 @@ function show()
 end
 
 function playpause()
-   cmd("PlayPause")
+   cmd("play-pause")
 end
 
 function play()
-   cmd("Play")
+   cmd("play")
 end
 
 function pause()
-   cmd("Pause")
+   cmd("pause")
 end
 
 function stop()
-   cmd("Stop")
+   cmd("stop")
 end
 
 function next()
-   cmd("Next")
+   cmd("next")
 end
 
 function previous()
-   cmd("Previous")
+   cmd("previous")
 end
 
 function mixer()
