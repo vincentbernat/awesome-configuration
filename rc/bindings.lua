@@ -4,6 +4,7 @@ local volume = loadrc("volume", "vbe/volume")
 local brightness = loadrc("brightness", "vbe/brightness")
 local keydoc = loadrc("keydoc", "vbe/keydoc")
 
+-- Alternative: flameshot
 local function screenshot(client)
    if client == "root" then
       client = "-window root"
