@@ -14,9 +14,9 @@ module("vbe/volume")
 
 local volid = nil
 local function change(what)
-   os.execute("amixer -q sset Master " .. what, false)
+   os.execute("amixer -q -D pulse sset Master " .. what, false)
    -- Read the current value
-   local out = awful.util.pread("amixer sget Master")
+   local out = awful.util.pread("amixer -D pulse sget Master")
    local vol, mute = out:match("([%d]+)%%.*%[([%l]*)")
    if not mute or not vol then return end
 
