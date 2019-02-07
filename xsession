@@ -42,11 +42,20 @@ systemd-run -q --scope --user tmux start-server
 case $(glxinfo | awk -F': ' '($1 == "OpenGL vendor string") {print $2}') in
     "NVIDIA Corporation")
         # --glx-swap-method 2 causes cursor to be duplicated earlier on the line or flickering
+        # --glx-swap-method X causes delay in refresh (visible when exiting a group in Gnus)
         # --glx-no-rebind-pixmap triggers some slow refresh, eg when using `delete-indentation' in Emacs
         #compton --daemon --backend glx --vsync opengl-swc --glx-swap-method 3 --paint-on-overlay
+        compton --daemon --backend glx \
+                --glx-no-stencil \
+                --glx-copy-from-front \
+                --glx-no-rebind-pixmap \
+                --refresh-rate 0 \
+                --vsync opengl-swc \
+                --paint-on-overlay \
+                --unredir-if-possible \
+                --no-dnd-shadow --no-dock-shadow
         # It seems there is no way to not have tearing with xrender...
         #compton --daemon --backend xrender --paint-on-overlay
-        # Everything is so slow...
         ;;
     *)
         compton --daemon --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay
