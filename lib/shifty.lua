@@ -556,7 +556,7 @@ function match(c, startup)
                     matched = (cls and cls:find(w)) or
                             (inst and inst:find(w)) or
                             (name and name:find(w)) or
-                            (role and role:find(w)) or
+                            (role and (role == w)) or
                             (typ and typ:find(w))
                     if matched then
                         break
