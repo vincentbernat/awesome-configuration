@@ -535,7 +535,7 @@ function match(c, startup)
             -- match only role
             if not matched and role and a.match.role then
                 for k, w in ipairs(a.match.role) do
-                    matched = role:find(w)
+                    matched = (role == w)
                     if matched then
                         break
                     end
