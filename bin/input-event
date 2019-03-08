@@ -25,8 +25,8 @@ case "$event,$use,$(uname -n),$name" in
         ;;
     *,XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
         #  Are we getting docked?
-        # sleep 2
-        # dock
+        sleep 2
+        dock
         xkb default
         ;;
     *,XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
