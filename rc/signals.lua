@@ -84,8 +84,7 @@ client.add_signal("focus", function(c)
 			   end)
 client.add_signal("unfocus", function(c)
 		     c.border_color = beautiful.border_normal
-                     if (not c.fullscreen and
-                         not (c.class == "Chromium" and c.name:sub(1, #"Meet –") == "Meet –")) then
+                     if not c.fullscreen then
                         c.opacity = 0.85
                      end
 			     end)
