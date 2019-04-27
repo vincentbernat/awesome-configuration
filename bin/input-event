@@ -41,6 +41,9 @@ case "$event,$use,$(uname -n),$name" in
     *,XISlavePointer,*,"Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)")
         xinput set-ptr-feedback $device 3 3 1
         ;;
+    *,XISlavePointer,*,"Logitech USB Receiver Mouse")
+        xinput set-ptr-feedback $device 30 5 2
+        ;;
     *,XISlavePointer,*,"TPPS/2 IBM TrackPoint")
         :
         # xinput set-ptr-feedback $device 2 5 1 # no effect?
