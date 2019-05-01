@@ -51,10 +51,10 @@ case $(glxinfo | awk -F': ' '($1 == "OpenGL vendor string") {print $2}') in
         #         --unredir-if-possible \
         #         --no-dnd-shadow --no-dock-shadow
         # It seems there is no way to not have tearing with xrender...
-        compton --daemon --backend xrender --paint-on-overlay
+        compton --backend xrender --paint-on-overlay &
         ;;
     *)
-        compton --daemon --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay
+        compton --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay &
         ;;
 esac
 
