@@ -38,26 +38,6 @@ nmcli radio all off
 rfkill block all 2> /dev/null
 redshift -l 6.666:46.533 -t 6500:3900 2> /dev/null &
 systemd-run -q --scope --user tmux start-server
-
-case $(glxinfo | awk -F': ' '($1 == "OpenGL vendor string") {print $2}') in
-    "NVIDIA Corporation")
-        # This require to disable "Allow flipping" in "nvidia-settings"
-        # compton --daemon --backend glx \
-        #         --glx-no-stencil \
-        #         --glx-swap-method copy \
-        #         --glx-no-rebind-pixmap \
-        #         --xrender-sync-fence \
-        #         --paint-on-overlay \
-        #         --unredir-if-possible \
-        #         --no-dnd-shadow --no-dock-shadow
-        # It seems there is no way to not have tearing with xrender...
-        compton --backend xrender --paint-on-overlay &
-        ;;
-    *)
-        compton --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay &
-        ;;
-esac
-
-
+compton --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay &
 
 exec awesome
