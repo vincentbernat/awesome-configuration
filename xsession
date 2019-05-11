@@ -33,6 +33,7 @@ esac
 . ~/.config/awesome/bin/xsettingsd-setup
 ~/.config/awesome/bin/xss-lock start &
 xiccd --edid &
+setxkbmap us
 inputplug -0 -c ~/.config/awesome/bin/input-event 2> /dev/null
 nmcli radio all off
 rfkill block all 2> /dev/null
