@@ -22,6 +22,7 @@ change() {
     {
         cat  ~/.config/awesome/xsettingsd
         echo Xft/DPI $(( $1*1024 ))
+        echo Xft/RGBA \"$( [ $1 -gt 144 ] && echo none || echo rgb )\"
         echo Gdk/WindowScalingFactor $(( $1/96 ))
         echo Gdk/UnscaledDPI $(( $1*1024/($1/96) ))
     } > ~/.xsettingsd
