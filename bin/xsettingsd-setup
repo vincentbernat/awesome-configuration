@@ -14,21 +14,33 @@ case $(hostname),$(xrandr --current | \
     *)                  dpi=96 ;;
 esac
 
-# Build xsettingsd.local
-{
-    cat  ~/.config/awesome/xsettingsd
-    echo Xft/DPI $(( $dpi*1024 ))
-    echo Gdk/WindowScalingFactor $(( $dpi/96 ))
-    echo Gdk/UnscaledDPI $(( $dpi*1024/($dpi/96) ))
-} > ~/.config/awesome/xsettingsd.local
-
-# Signal xsettingsd
+# Get xsettingsd PID
 pid=$(xprop -name xsettingsd _NET_WM_PID 2> /dev/null | awk '{print $NF}')
-if [ x"$pid" = x ]; then
-    xsettingsd -c ~/.config/awesome/xsettingsd.local &
-else
-    kill -HUP $pid
+
+change() {
+    # Build xsettingsd.local
+    {
+        cat  ~/.config/awesome/xsettingsd
+        echo Xft/DPI $(( $1*1024 ))
+        echo Gdk/WindowScalingFactor $(( $1/96 ))
+        echo Gdk/UnscaledDPI $(( $1*1024/($1/96) ))
+    } > ~/.xsettingsd
+
+    # Signal xsettingsd
+    if [ x"$pid" = x ]; then
+        xsettingsd -c ~/.xsettingsd &
+    else
+        kill -HUP $pid
+    fi
+}
+
+if [ x"$pid" != x ]; then
+    # Change a first time to a DPI that will trigger a scale factor
+    # change (notably, Firefox needs that).
+    change $(( $dpi * 2 ))
+    sleep 1
 fi
+change $dpi
 
 # Also use xrdb for very old stuff (you know, LibreOffice)
 echo Xft.dpi: $dpi | xrdb -merge
