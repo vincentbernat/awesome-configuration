@@ -38,4 +38,10 @@ change() {
     echo Xft.dpi: $dpi | xrdb -merge
 }
 
+if [ x"$pid" != x ]; then
+    # Change a first time to a DPI that will trigger a scale factor
+    # change (notably, Firefox needs that).
+    change $(( $dpi * 2 ))
+    sleep 1
+fi
 change $dpi
