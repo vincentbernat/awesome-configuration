@@ -6,15 +6,15 @@ notify=10
 
 case "$1" in
     start)
-        xset s $(($timeout - $notify)) $notify
-        xset dpms $(($timeout * 3)) $(($timeout * 4)) $(($timeout * 5))
+        xset s $((timeout - notify)) $notify
+        xset dpms $((timeout * 3)) $((timeout * 4)) $((timeout * 5))
         exec xss-lock -n "$me notify" -l $me lock
         ;;
     dim|notify)
         echo "$(date --rfc-3339=seconds) $me: notify: start"
         trap 'exit 0' TERM INT
         trap "kill %% ; wait" EXIT
-        notify-send "Lock screen" -t $(($notify * 1000)) \
+        notify-send "Lock screen" -t $((notify * 1000)) \
             "Screen will be locked in 10 seconds..."
         echo "$(date --rfc-3339=seconds) $me: notify: end"
         sleep 2147483647 &
