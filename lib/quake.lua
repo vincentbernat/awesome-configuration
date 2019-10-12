@@ -6,21 +6,6 @@
 -- are able to detect the Quake console from its name
 -- (QuakeConsoleNeedsUniqueName by default).
 
--- Use:
-
--- local quake = require("quake")
--- local quakeconsole = {}
--- for s = 1, screen.count() do
---    quakeconsole[s] = quake({ terminal = config.terminal,
--- 			        height = 0.3,
---                              screen = s })
--- end
-
--- config.keys.global = awful.util.table.join(
---    config.keys.global,
---    awful.key({ modkey }, "`",
--- 	     function () quakeconsole[mouse.screen]:toggle() end)
-
 -- If you have a rule like "awful.client.setslave" for your terminals,
 -- ensure you use an exception for
 -- QuakeConsoleNeedsUniqueName. Otherwise, you may run into problems
@@ -47,8 +32,7 @@ function QuakeConsole:display()
    for c in awful.client.cycle(function (c)
 				  -- c.name may be changed!
 				  return (c.instance == self.name or c.role == self.name)
-			       end,
-			       nil, self.screen) do
+			       end) do
       i = i + 1
       if i == 1 then
 	 client = c
@@ -71,13 +55,12 @@ function QuakeConsole:display()
 
    if not client then
       -- The client does not exist, we spawn it
-      awful.util.spawn(self.terminal .. " " .. string.format(self.argname, self.name),
-		       false, self.screen)
+      awful.util.spawn(self.terminal .. " " .. string.format(self.argname, self.name))
       return
    end
 
    -- Comptute size
-   local geom = capi.screen[self.screen].workarea
+   local geom = capi.screen[capi.mouse.screen].workarea
    local width, height = self.width, self.height
    if width  <= 1 then width = geom.width * width end
    if height <= 1 then height = geom.height * height end
@@ -131,19 +114,18 @@ function QuakeConsole:new(config)
    config.vert     = config.vert     or "top"	       -- top, bottom or center
    config.horiz    = config.horiz    or "center"       -- left, right or center
 
-   config.screen   = config.screen or capi.mouse.screen
    config.visible  = config.visible or false -- Initially, not visible
 
    local console = setmetatable(config, { __index = QuakeConsole })
    capi.client.add_signal("manage",
 			  function(c)
-			     if (c.instance == console.name or c.role == console.name) and c.screen == console.screen then
+			     if (c.instance == console.name or c.role == console.name) then
 				console:display()
 			     end
 			  end)
    capi.client.add_signal("unmanage",
 			  function(c)
-			     if (c.instance == console.name or c.role == console.name) and c.screen == console.screen then
+			     if (c.instance == console.name or c.role == console.name) then
 				console.visible = false
 			     end
 			  end)
