@@ -33,19 +33,9 @@ function QuakeConsole:display()
 				  -- c.name may be changed!
 				  return (c.instance == self.name or c.role == self.name)
 			       end) do
-      i = i + 1
-      if i == 1 then
-	 client = c
-         client:tags({})
-      else
-	 -- Additional matching clients, let's remove the sticky bit
-	 -- which may persist between awesome restarts. We don't close
-	 -- them as they may be valuable. They will just turn into a
-	 -- classic terminal.
-	 c.sticky = false
-	 c.ontop = false
-	 c.above = false
-      end
+      client = c
+      client:tags({})
+      break
    end
 
    if not client and not self.visible then
