@@ -8,6 +8,10 @@ configure() {
     xset s $((timeout - notify)) $notify
     xset dpms $((timeout * 3)) $((timeout * 4)) $((timeout * 5))
 }
+unconfigure() {
+    xset s 0
+    xset dpms 0 0 0
+}
 
 case "$1" in
     start)
