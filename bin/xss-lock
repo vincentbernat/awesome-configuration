@@ -4,10 +4,14 @@ me="$(readlink -f "$0")"
 timeout=300
 notify=10
 
+configure() {
+    xset s $((timeout - notify)) $notify
+    xset dpms $((timeout * 3)) $((timeout * 4)) $((timeout * 5))
+}
+
 case "$1" in
     start)
-        xset s $((timeout - notify)) $notify
-        xset dpms $((timeout * 3)) $((timeout * 4)) $((timeout * 5))
+        configure
         exec xss-lock -n "$me notify" -l $me lock
         ;;
     dim|notify)
@@ -21,6 +25,8 @@ case "$1" in
         wait
         ;;
     lock)
+        # Something may have mendled with screensaver settings
+        configure
         # First, stop any music player
         xdotool key XF86AudioStop
         # Then, lock screen
