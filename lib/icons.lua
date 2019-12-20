@@ -52,7 +52,7 @@ function lookup(arg)
 			local icon = path .. "/" .. size .. "/" .. t .. "/" .. name .. ext
 			if awful.util.file_readable(icon) then
 			   return icon
-			end 
+			end
 		     end
 		  end
 	       end
