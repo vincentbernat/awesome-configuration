@@ -32,10 +32,6 @@ awful.rules.rules = {
 	-- All windows should be slaves, except the browser windows.
 	if c.role ~= "browser" then awful.client.setslave(c) end
      end },
-   { rule = { instance = "plugin-container" },
-     properties = { floating = true }}, -- Flash with Firefox
-   { rule = { instance = "exe", class = "Exe" },
-     properties = { floating = true }}, -- Flash with Chromium
    -- See also tags.lua
    -- Pidgin
    { rule = { class = "Pidgin" },
