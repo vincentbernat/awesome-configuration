@@ -38,9 +38,6 @@ case "$event,$use,$(uname -n),$name" in
     *,XISlaveKeyboard,*)
         xkb default
         ;;
-    *,XISlavePointer,*,"Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)")
-        xinput set-ptr-feedback $device 3 3 1
-        ;;
     *,XISlavePointer,*,"Logitech USB Receiver Mouse")
         xinput set-ptr-feedback $device 30 5 2
         ;;
