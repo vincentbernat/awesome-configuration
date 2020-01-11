@@ -94,7 +94,6 @@ cpuicon.image = image(beautiful.icons .. "/widgets/cpu.png")
 local batwidget = { widget = "" }
 if awful.util.table.hasitem({"guybrush", "zoro"}, config.hostname) then
    local bat = "BAT0"
-   if config.hostname == "guybrush" then bat = "BAT1" end
    batwidget.widget = widget({ type = "textbox" })
    vicious.register(batwidget.widget, vicious.widgets.bat,
 		    function (widget, args)
