@@ -14,7 +14,7 @@ fvwm
 fvwm-crystal
 gnome-themes-standard
 gnome-wine-icon-theme
-gnome-settings-daemon
+brightnessctl
 alsa-utils
 pavucontrol
 pulseaudio
