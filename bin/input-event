@@ -16,14 +16,10 @@ xkb() {
 printf "input-event: $use: [%3d] $event $name\n" $device
 
 case "$event,$use,$(uname -n),$name" in
-    XIDeviceDisabled,XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
-        # Getting undocked
-        undock
-        ;;
     XIDeviceDisabled,*)
         :
         ;;
-    *,XISlaveKeyboard,zoro,"Topre Corporation Realforce 87")
+    *,XISlaveKeyboard,*,"Topre Corporation Realforce 87")
         #  Are we getting docked?
         sleep 2
         dock
