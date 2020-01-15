@@ -31,11 +31,6 @@ case "$event,$use,$(uname -n),$name" in
     *,XISlavePointer,*,"Logitech USB Receiver Mouse")
         xinput set-ptr-feedback $device 30 5 2
         ;;
-    *,XISlavePointer,*,"TPPS/2 IBM TrackPoint")
-        :
-        # xinput set-ptr-feedback $device 2 5 1 # no effect?
-        # xinput set-float-prop $device 'libinput Accel Speed' 0.5
-        ;;
     *,XISlavePointer,zoro,"SynPS/2 Synaptics TouchPad")
         xinput set-props $device "libinput Natural Scrolling Enabled" 1
         ;;
