@@ -19,12 +19,6 @@ case "$event,$use,$(uname -n),$name" in
     XIDeviceDisabled,*)
         :
         ;;
-    *,XISlaveKeyboard,*,"Topre Corporation Realforce 87")
-        #  Are we getting docked?
-        sleep 2
-        dock
-        xkb default
-        ;;
     *,XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
         xkb x1
         ;;
