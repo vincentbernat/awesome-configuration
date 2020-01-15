@@ -21,22 +21,12 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 systemctl --user import-environment
 
-case "$(hostname)" in
-    neo)
-        xrandr --output DisplayPort-0 --auto --primary --output HDMI-A-0 --auto --right-of DisplayPort-0 --dpi 192
-        ;;
-    zoro)
-        xrandr --output eDP1 --auto --dpi 144
-        ;;
-esac
-
+autorandr --change
 . ~/.config/awesome/bin/xsettingsd-setup
 ~/.config/awesome/bin/xss-lock start &
 xiccd --edid &
 setxkbmap us
 inputplug -0 -c ~/.config/awesome/bin/input-event 2> /dev/null
-nmcli radio all off
-rfkill block all 2> /dev/null
 redshift -l 2.35:48.87 -t 6500:3900 2> /dev/null &
 systemd-run -q --scope --user tmux start-server
 compton --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay &
