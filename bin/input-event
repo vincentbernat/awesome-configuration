@@ -19,6 +19,11 @@ case "$event,$use,$(uname -n),$name" in
     XIDeviceDisabled,*)
         :
         ;;
+    *,XISlaveKeyboard,*,"Topre Corporation Realforce 87")
+        sleep 2
+        autorandr --change
+        xkb default
+        ;;
     *,XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
         xkb x1
         ;;
