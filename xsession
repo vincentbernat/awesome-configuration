@@ -23,12 +23,12 @@ systemctl --user import-environment
 
 autorandr --change
 . ~/.config/awesome/bin/xsettingsd-setup
+~/.config/awesome/bin/compton &
 ~/.config/awesome/bin/xss-lock start &
 xiccd --edid &
 setxkbmap us
 inputplug -0 -c ~/.config/awesome/bin/input-event 2> /dev/null
 redshift -l 2.35:48.87 -t 6500:3900 2> /dev/null &
 systemd-run -q --scope --user tmux start-server
-compton --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay &
 
 exec awesome

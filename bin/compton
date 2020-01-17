@@ -1,0 +1,8 @@
+#!/bin/sh
+
+exec compton \
+     --backend glx \
+     --xrender-sync \
+     --xrender-sync-fence \
+     --vsync opengl-swc \
+     --paint-on-overlay

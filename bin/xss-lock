@@ -37,7 +37,7 @@ case "$1" in
         echo "$(date --rfc-3339=seconds) $me: lock: lock screen"
         pkill compton
         i3lock -n -e -i $HOME/.cache/awesome/current-wallpaper.png -t -f
-        compton --backend glx --xrender-sync --xrender-sync-fence --vsync opengl-swc --paint-on-overlay &
+        ~/.config/awesome/bin/compton &
         echo "$(date --rfc-3339=seconds) $me: lock: unlock screen"
         ;;
 esac
