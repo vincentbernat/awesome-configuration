@@ -16,7 +16,7 @@ unconfigure() {
 case "$1" in
     start)
         configure
-        exec xss-lock -n "$me notify" -l $me lock
+        exec xss-lock -s ${XDG_SESSION_ID} -n "$me notify" -l $me lock
         ;;
     dim|notify)
         echo "$(date --rfc-3339=seconds) $me: notify: start"
