@@ -4,4 +4,4 @@ PartOf=graphical-session@%i.target
 
 [Service]
 Environment=DISPLAY=%I
-ExecStart=/usr/bin/redshift -l 2.35:48.87 -t 6500:3900
+ExecStart=/usr/bin/redshift -l manual:lat=2.35:lon=48.87 -t 6500:3900
