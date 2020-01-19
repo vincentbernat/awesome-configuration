@@ -9,6 +9,3 @@ ExecStart=/usr/bin/compton --backend glx \
                            --xrender-sync-fence \
                            --vsync opengl-swc \
                            --paint-on-overlay
-
-[Install]
-WantedBy=graphical-session@%i.target

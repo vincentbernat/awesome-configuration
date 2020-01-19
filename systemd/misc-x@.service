@@ -8,6 +8,3 @@ ExecStart=/usr/bin/xset -b
 ExecStart=/usr/bin/numlock on
 Type=oneshot
 RemainAfterExit=false
-
-[Install]
-WantedBy=graphical-session@%i.target

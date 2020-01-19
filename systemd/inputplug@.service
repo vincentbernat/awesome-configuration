@@ -7,6 +7,3 @@ Environment=DISPLAY=%I
 ExecStartPre=/usr/bin/setxkbmap us
 ExecStart=%h/bin/inputplug -0 -c %h/.config/awesome/bin/input-event
 Type=forking
-
-[Install]
-WantedBy=graphical-session@%i.target

@@ -5,6 +5,3 @@ PartOf=graphical-session@%i.target
 [Service]
 Environment=DISPLAY=%I
 ExecStart=%h/.config/awesome/bin/xss-lock start
-
-[Install]
-WantedBy=graphical-session@%i.target
