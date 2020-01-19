@@ -28,7 +28,7 @@ case "$1" in
             for out in $outputs; do
                 xrandr --output $out --brightness $i
             done
-            sleep 0.02
+            sleep 0.1
         done
         echo "notify: end"
         sleep infinity &
