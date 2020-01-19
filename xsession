@@ -19,6 +19,7 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # Environment variables
 [ -e ~/.zshenv ] && . ~/.zshenv
 
+# Services are started with systemd
 systemctl --user import-environment
 systemd-run -q --scope --user tmux start-server
 mkdir -p ~/.config/systemd

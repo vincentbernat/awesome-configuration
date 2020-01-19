@@ -11,9 +11,6 @@ yet. Have a look at
 [@P-EB pull request](https://github.com/vincentbernat/awesome-configuration/pull/5)
 for 3.5 support.
 
-I rely on machine hostname for some configuration parts (see
-`rc/start.lua`) for the most important part.
-
 Here some of the things you may be interested in:
 
  - It is modular. I am using `config` as a table to pass different
@@ -52,6 +49,15 @@ Here some of the things you may be interested in:
    
  - On the debug front, I am quite happy with `dbg()` in
    `rc/debug.lua`.
+   
+ - Many stuff is handled by systemd. The session is still expected to
+   be handled by Xsession but we invoke a custom display-specific
+   `xsession@.target` which binds to a display-specific
+   `graphical-session@.target`. This is different from the
+   `graphical-session.target` shipped by distributions because I
+   wanted it to be display-specific. Also, unit activation is bundled
+   directly into `graphical-session@.target` while dependencies are
+   mostly handled in `awesome@.service`.
 
 Also, I am using my custom terminal (`vbeterm`). You need to change
 that in `rc.lua`. You can also find the sources on
