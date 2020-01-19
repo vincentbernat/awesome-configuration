@@ -18,5 +18,4 @@ brightnessctl
 alsa-utils
 pavucontrol
 pulseaudio
-numlockx
 playerctl

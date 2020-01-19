@@ -5,6 +5,5 @@ PartOf=graphical-session@%i.target
 [Service]
 Environment=DISPLAY=%I
 ExecStart=/usr/bin/xset -b
-ExecStart=/usr/bin/numlockx on
 Type=oneshot
 RemainAfterExit=false
