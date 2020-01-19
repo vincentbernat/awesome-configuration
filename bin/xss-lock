@@ -1,6 +1,5 @@
 #!/bin/bash
 
-me="$(readlink -f "$0")"
 timeout=300
 notify=10
 
@@ -16,10 +15,10 @@ unconfigure() {
 case "$1" in
     start)
         configure
-        exec xss-lock -s ${XDG_SESSION_ID} -n "$me notify" -l $me lock
+        exec xss-lock -s ${XDG_SESSION_ID} -n "$me notify" -l "$(readlink -f "$0")" lock
         ;;
     dim|notify)
-        echo "$(date --rfc-3339=seconds) $me: notify: start"
+        echo "notify: start"
         pkill -STOP redshift
         trap 'pkill -CONT redshift' EXIT
         trap 'kill %%; exit 0' HUP
@@ -31,7 +30,7 @@ case "$1" in
             done
             sleep 0.02
         done
-        echo "$(date --rfc-3339=seconds) $me: notify: end"
+        echo "notify: end"
         sleep infinity &
         wait
         ;;
@@ -41,10 +40,10 @@ case "$1" in
         # First, stop any music player
         xdotool key XF86AudioStop
         # Then, lock screen
-        echo "$(date --rfc-3339=seconds) $me: lock: lock screen"
+        echo "lock: lock screen"
         systemctl --user stop compton@$(systemd-escape -- "$DISPLAY").service
         i3lock -n -e -i $HOME/.cache/awesome/current-wallpaper.png -t -f
         systemctl --user start compton@$(systemd-escape -- "$DISPLAY").service
-        echo "$(date --rfc-3339=seconds) $me: lock: unlock screen"
+        echo "lock: unlock screen"
         ;;
 esac
