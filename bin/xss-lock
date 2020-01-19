@@ -20,12 +20,19 @@ case "$1" in
         ;;
     dim|notify)
         echo "$(date --rfc-3339=seconds) $me: notify: start"
-        trap 'exit 0' TERM INT
-        trap "kill %% ; wait" EXIT
-        notify-send "Lock screen" -t $((notify * 1000)) \
-            "Screen will be locked in 10 seconds..."
+        pkill -STOP redshift
+        trap 'pkill -CONT redshift' EXIT
+        trap 'kill %%; exit 0' HUP
+        trap 'sleep 1s; kill %%; exit 0' TERM
+        outputs=$(xrandr -q | sed -n 's/\([^ ]*\) connected .*/\1/p')
+        for i in $(seq 0.7 -0.01 0.1); do
+            for out in $outputs; do
+                xrandr --output $out --brightness $i
+            done
+            sleep 0.02
+        done
         echo "$(date --rfc-3339=seconds) $me: notify: end"
-        sleep 2147483647 &
+        sleep infinity &
         wait
         ;;
     lock)
