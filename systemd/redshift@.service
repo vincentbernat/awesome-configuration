@@ -1,0 +1,10 @@
+[Unit]
+Description=Set color temperature
+PartOf=graphical-session@%i.target
+
+[Service]
+Environment=DISPLAY=%I
+ExecStart=/usr/bin/redshift -l 2.35:48.87 -t 6500:3900
+
+[Install]
+WantedBy=graphical-session@%i.target

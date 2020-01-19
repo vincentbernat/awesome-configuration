@@ -1,0 +1,12 @@
+[Unit]
+Description=Awesome window manager
+PartOf=graphical-session@%i.target
+
+[Service]
+Environment=DISPLAY=%I
+ExecStart=/usr/bin/awesome
+ExecStopPost=/bin/systemctl --user stop graphical-session@%i.target
+Restart=on-failure
+
+[Install]
+RequiredBy=xsession@%i.target

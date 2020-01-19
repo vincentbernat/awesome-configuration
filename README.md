@@ -19,11 +19,6 @@ Here some of the things you may be interested in:
  - It is modular. I am using `config` as a table to pass different
    things between "modules".
 
- - In `rc/xrun.lua`, there is a `xrun` function which runs a program
-   only if it is not already running. Instead of relying on tools like
-   `ps`, it looks at the list of awesome clients and at the list of
-   connected clients with `xwininfo`. Seems reliable.
-
  - I use a light transparency effect to tell if a window has the focus
    or not. It needs a composite manager.
 

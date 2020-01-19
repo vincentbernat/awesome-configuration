@@ -1,0 +1,13 @@
+[Unit]
+Description=Miscellaneous settings for X11
+PartOf=graphical-session@%i.target
+
+[Service]
+Environment=DISPLAY=%I
+ExecStart=/usr/bin/xset -b
+ExecStart=/usr/bin/numlock on
+Type=oneshot
+RemainAfterExit=false
+
+[Install]
+WantedBy=graphical-session@%i.target

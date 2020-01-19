@@ -1,0 +1,10 @@
+[Unit]
+Description=Network Manager applet
+PartOf=graphical-session@%i.target
+
+[Service]
+Environment=DISPLAY=%I
+ExecStart=/usr/bin/nm-applet
+
+[Install]
+WantedBy=graphical-session@%i.target

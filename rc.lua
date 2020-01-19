@@ -61,7 +61,6 @@ config.hostname = awful.util.pread('uname -n'):gsub('\n', '')
 config.browser = "firefox"
 
 -- Remaining modules
-loadrc("xrun")			-- xrun function
 loadrc("appearance")		-- theme and appearance settings
 loadrc("debug")			-- debugging primitive `dbg()`
 

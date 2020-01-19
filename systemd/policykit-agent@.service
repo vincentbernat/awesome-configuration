@@ -1,0 +1,10 @@
+[Unit]
+Description=PolicyKit authentication agent
+PartOf=graphical-session@%i.target
+
+[Service]
+Environment=DISPLAY=%I
+ExecStart=/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+
+[Install]
+WantedBy=graphical-session@%i.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Configure displays
+PartOf=graphical-session@%i.target
+
+[Service]
+Environment=DISPLAY=%I
+ExecStart=/usr/bin/autorandr --change --default default
+Type=oneshot
+RemainAfterExit=false
+
+[Install]
+WantedBy=graphical-session@%i.target

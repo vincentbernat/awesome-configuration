@@ -42,9 +42,9 @@ case "$1" in
         xdotool key XF86AudioStop
         # Then, lock screen
         echo "$(date --rfc-3339=seconds) $me: lock: lock screen"
-        pkill compton
+        systemctl --user stop compton@$(systemd-escape -- "$DISPLAY").service
         i3lock -n -e -i $HOME/.cache/awesome/current-wallpaper.png -t -f
-        ~/.config/awesome/bin/compton &
+        systemctl --user start compton@$(systemd-escape -- "$DISPLAY").service
         echo "$(date --rfc-3339=seconds) $me: lock: unlock screen"
         ;;
 esac

@@ -1,11 +1,5 @@
 -- Start idempotent commands
 local execute = {
-   -- Kill any running nm-applet
-   "pkill nm-applet",
-   -- Start PulseAudio
-   "xset -b",	-- Disable bell
-   -- Enable numlock
-   "numlockx on",
    -- Default browser
    "xdg-mime default " .. config.browser .. ".desktop " ..
       "x-scheme-handler/http " ..
@@ -17,8 +11,3 @@ local execute = {
 }
 
 os.execute(table.concat(execute, ";"))
-
--- Spawn various X programs
-xrun("polkit-gnome-authentication-agent-1",
-     "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
-xrun("NetworkManager Applet", "nm-applet")

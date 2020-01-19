@@ -1,0 +1,14 @@
+[Unit]
+Description=Compositor for X11
+PartOf=graphical-session@%i.target
+
+[Service]
+Environment=DISPLAY=%I
+ExecStart=/usr/bin/compton --backend glx \
+                           --xrender-sync \
+                           --xrender-sync-fence \
+                           --vsync opengl-swc \
+                           --paint-on-overlay
+
+[Install]
+WantedBy=graphical-session@%i.target

@@ -9,9 +9,6 @@ case $(hostname),$(autorandr --current --skip-options gamma) in
     *,*)                dpi=96 ;;
 esac
 
-# Get xsettingsd PID
-pid=$(xprop -name xsettingsd _NET_WM_PID 2> /dev/null | awk '{print $NF}')
-
 change() {
     # Build xsettingsd.local
     {
@@ -23,11 +20,7 @@ change() {
     } > ~/.xsettingsd
 
     # Signal xsettingsd
-    if [ x"$pid" = x ]; then
-        xsettingsd -c ~/.xsettingsd &
-    else
-        kill -HUP $pid
-    fi
+    systemctl --user reload xsettingsd@$(systemd-escape -- "$DISPLAY").service
 
     # Also use xrdb for very old stuff (you know, LibreOffice)
     echo Xft.dpi: $dpi | xrdb -merge

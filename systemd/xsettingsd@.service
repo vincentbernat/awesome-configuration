@@ -1,0 +1,10 @@
+[Unit]
+Description=XSETTINGS daemon
+PartOf=graphical-session@%i.target
+
+[Service]
+Environment=DISPLAY=%I
+ExecStart=/usr/bin/xsettingsd -c %h/.xsettingsd
+
+[Install]
+WantedBy=graphical-session@%i.target
