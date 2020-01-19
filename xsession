@@ -23,4 +23,5 @@ systemctl --user import-environment
 systemd-run -q --scope --user tmux start-server
 mkdir -p ~/.config/systemd
 ln -nsf ~/.config/awesome/systemd ~/.config/systemd/user
+systemctl --user daemon-reload
 exec systemctl --user start --wait xsession@$(systemd-escape -- "$DISPLAY").target
