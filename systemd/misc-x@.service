@@ -1,5 +1,5 @@
 [Unit]
-Description=Miscellaneous settings for X11
+Description=Miscellaneous settings for X11 on %I
 PartOf=graphical-session@%i.target
 
 [Service]

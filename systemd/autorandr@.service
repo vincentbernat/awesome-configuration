@@ -1,5 +1,5 @@
 [Unit]
-Description=Configure displays
+Description=Configure monitors on %I
 PartOf=graphical-session@%i.target
 
 [Service]

@@ -1,12 +1,13 @@
 [Unit]
-Description=Awesome window manager
+Description=Awesome window manager for %I
 PartOf=graphical-session@%i.target
+After=autorandr@%i.service
+After=compton@%i.service
+After=xsettingsd@%i.service
+Before=nm-applet@%i.service
 
 [Service]
 Environment=DISPLAY=%I
 ExecStart=/usr/bin/awesome
 ExecStopPost=/bin/systemctl --user stop graphical-session@%i.target
 Restart=on-failure
-
-[Install]
-RequiredBy=xsession@%i.target

@@ -1,5 +1,5 @@
 [Unit]
-Description=XInput event monitor
+Description=XInput event monitor for %I
 PartOf=graphical-session@%i.target
 
 [Service]

@@ -1,5 +1,5 @@
 [Unit]
-Description=X color management
+Description=X color management for %I
 PartOf=graphical-session@%i.target
 
 [Service]

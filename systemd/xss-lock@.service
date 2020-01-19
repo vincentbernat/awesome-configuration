@@ -1,5 +1,5 @@
 [Unit]
-Description=Manage X screen saver
+Description=Manage X screen saver on %I
 PartOf=graphical-session@%i.target
 
 [Service]

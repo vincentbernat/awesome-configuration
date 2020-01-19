@@ -1,5 +1,5 @@
 [Unit]
-Description=Compositor for X11
+Description=Compositor for X11 on %I
 PartOf=graphical-session@%i.target
 
 [Service]

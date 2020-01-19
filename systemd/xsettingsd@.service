@@ -1,5 +1,5 @@
 [Unit]
-Description=XSETTINGS daemon
+Description=XSETTINGS daemon for %I
 PartOf=graphical-session@%i.target
 
 [Service]

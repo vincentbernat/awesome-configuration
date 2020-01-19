@@ -1,5 +1,5 @@
 [Unit]
-Description=Network Manager applet
+Description=Network Manager applet for %I
 PartOf=graphical-session@%i.target
 
 [Service]

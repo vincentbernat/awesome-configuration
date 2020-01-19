@@ -1,5 +1,5 @@
 [Unit]
-Description=PolicyKit authentication agent
+Description=PolicyKit authentication agent on %I
 PartOf=graphical-session@%i.target
 
 [Service]

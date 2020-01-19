@@ -1,5 +1,5 @@
 [Unit]
-Description=Set color temperature
+Description=Set color temperature on %I
 PartOf=graphical-session@%i.target
 
 [Service]
