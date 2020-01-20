@@ -23,10 +23,11 @@ case "$1" in
         trap 'pkill -CONT redshift' EXIT
         trap 'kill %%; exit 0' HUP
         trap 'sleep 1s; kill %%; exit 0' TERM
-        outputs=$(xrandr -q | sed -n 's/\([^ ]*\) connected .*/\1/p')
+        outputs=($(xrandr -q | sed -n 's/\([^ ]*\) connected .*/\1/p'))
         for i in $(seq 0.7 -0.01 0.1); do
-            for out in $outputs; do
-                xrandr --output $out --brightness $i
+            for out in ${outputs[@]}; do
+                xrandr --output $out --brightness $i || \
+                    outputs=("${outputs[@]/$out}")
             done
             sleep 0.1
         done
