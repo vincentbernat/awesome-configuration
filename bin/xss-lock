@@ -1,5 +1,6 @@
 #!/bin/bash
 
+me="$(readlink -f "$0")"
 timeout=300
 notify=10
 
@@ -15,7 +16,7 @@ unconfigure() {
 case "$1" in
     start)
         configure
-        exec xss-lock -s ${XDG_SESSION_ID} -n "$me notify" -l "$(readlink -f "$0")" lock
+        exec xss-lock -s ${XDG_SESSION_ID} -n "$me notify" -l $me lock
         ;;
     dim|notify)
         echo "notify: start"
