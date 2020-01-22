@@ -20,7 +20,7 @@ change() {
     } > ~/.xsettingsd
 
     # Signal xsettingsd
-    systemctl --user reload xsettingsd@$(systemd-escape -- "$DISPLAY").service
+    systemctl --user reload xsettingsd@$(systemd-escape -- "${DISPLAY%.0}").service
 
     # Also use xrdb for very old stuff (you know, LibreOffice)
     echo Xft.dpi: $dpi | xrdb -merge
