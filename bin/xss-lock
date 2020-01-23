@@ -30,7 +30,7 @@ case "$1" in
                 xrandr --output $out --brightness $i || \
                     outputs=("${outputs[@]/$out}")
             done
-            sleep 0.05
+            sleep 0.1
         done
         echo "notify: end"
         sleep infinity &
