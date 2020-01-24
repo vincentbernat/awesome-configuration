@@ -31,4 +31,5 @@ user_pref("browser.backspace_action", 0);
 user_pref("browser.ctrlTab.recentlyUsedOrder", false);
 
 // Don't display fullscreen warning
-user_pref("full-screen-api.warning.timeout", 0)
+user_pref("full-screen-api.warning.timeout", 0);
+user_pref("full-screen-api.transition.timeout", 0);
