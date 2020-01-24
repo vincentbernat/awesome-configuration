@@ -13,9 +13,6 @@ awful.rules.rules = {
    -- i3lock
    { rule = { name = "i3lock" },
      properties = { ontop = true } },
-   -- Apple2
-   { rule = { class = "BSOD" },
-     properties = { fullscreen = true, ontop = true, floating = true, sticky = true } },
    -- Browser stuff
    { rule = { role = "browser" },
      callback = function(c)

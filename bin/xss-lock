@@ -20,9 +20,20 @@ case "$1" in
         ;;
     dim|notify)
         echo "notify: start"
+        redshift=$(systemctl --user show \
+                             --property MainPID \
+                             --value redshift@$(systemd-escape -- "$DISPLAY").service)
+        [ x$redshift = x ] || {
+            kill -STOP $redshift
+            trap "kill -CONT $redshift" EXIT
+        }
         trap 'echo notify: user activity; kill %% 2> /dev/null; exit 0' HUP  # user activity
         trap 'echo notify: locker started; kill %% 2> /dev/null; exit 0' TERM # locker started
-        /usr/lib/xscreensaver/bsod &
+        outputs=($(xrandr -q | sed -n 's/\([^ ]*\) connected .*/\1/p'))
+        for out in ${outputs[@]}; do
+            xrandr --output $out --brightness 0.2
+        done
+        sleep infinity &
         wait
         echo "notify: end"
         ;;
