@@ -22,17 +22,7 @@ case "$1" in
         echo "notify: start"
         trap 'echo notify: user activity; kill %% 2> /dev/null; exit 0' HUP  # user activity
         trap 'echo notify: locker started; kill %% 2> /dev/null; exit 0' TERM # locker started
-        for i in $(seq 1.0 -0.1 0.1); do
-            awesome-client <<EOF
-for _, c in ipairs(client.get()) do
-  if c:isvisible() then
-    c.opacity=$i
-  end
-end
-EOF
-            sleep 0.2
-        done
-        sleep infinity &
+        /usr/lib/xscreensaver/barcode -clock24 &
         wait
         echo "notify: end"
         ;;
