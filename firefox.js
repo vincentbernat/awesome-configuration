@@ -33,3 +33,6 @@ user_pref("browser.ctrlTab.recentlyUsedOrder", false);
 // Don't display fullscreen warning
 user_pref("full-screen-api.warning.timeout", 0);
 user_pref("full-screen-api.transition.timeout", 0);
+
+// Remove some annoying animations (notably when going full screen)
+user_pref("toolkit.cosmeticAnimations.enabled", false);
