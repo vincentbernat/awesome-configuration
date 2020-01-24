@@ -20,22 +20,23 @@ case "$1" in
         ;;
     dim|notify)
         echo "notify: start"
-        pkill -STOP redshift
+        redshift=$(systemctl --user show \
+                             --property MainPID \
+                             --value redshift@$(systemd-escape -- "$DISPLAY").service)
+        [ x$redshift = x ] || kill -STOP $redshift
         current=$(xrandr --verbose | sed -n \
                                          -e 's/\([^ ]*\) connected .*/--output \1/p' \
                                          -e 's/\t*Gamma: *\([^ ]\)/--gamma \1/p' \
                                          -e 's/\t*Brightness: *\([^ ]\)/--brightness \1/p' | \
                       tr '\n' ' ')
-        trap "echo resume redshift; xrandr $current; pkill -CONT redshift" EXIT
+        trap "echo notify: restore brightness;
+              xrandr $current;
+              [ x$redshift = x ] || kill -CONT $redshift" EXIT
         trap 'kill %% 2> /dev/null; exit 0' HUP  # user activity
         trap 'sleep 0.2s; kill %% 2> /dev/null; exit 0' TERM # locker started
-        outputs=($(xrandr -q | sed -n 's/\([^ ]*\) connected .*/\1/p'))
         for i in $(seq 0.7 -0.01 0.1); do
-            for out in ${outputs[@]}; do
-                xrandr --output $out --brightness $i || \
-                    outputs=("${outputs[@]/$out}")
-            done
-            sleep 0.1
+            xrandr $(echo $current | sed "s/\(--brightness\) [^ ]*/\1 $i/g")
+            sleep 0.05
         done
         echo "notify: end"
         sleep infinity &
