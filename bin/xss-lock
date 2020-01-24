@@ -22,7 +22,7 @@ case "$1" in
         echo "notify: start"
         trap 'echo notify: user activity; kill %% 2> /dev/null; exit 0' HUP  # user activity
         trap 'echo notify: locker started; kill %% 2> /dev/null; exit 0' TERM # locker started
-        /usr/lib/xscreensaver/barcode -clock24 &
+        /usr/lib/xscreensaver/bsod &
         wait
         echo "notify: end"
         ;;
