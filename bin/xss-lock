@@ -20,13 +20,8 @@ case "$1" in
         ;;
     dim|notify)
         echo "notify: start"
-        redshift=$(systemctl --user show \
-                             --property MainPID \
-                             --value redshift@$(systemd-escape -- "$DISPLAY").service)
-        [ x$redshift = x ] || {
-            kill -STOP $redshift
-            trap "kill -CONT $redshift" EXIT
-        }
+        systemctl --user kill -s STOP redshift@$(systemd-escape -- "$DISPLAY").service
+        trap "systemctl --user kill -s CONT redshift@$(systemd-escape -- "$DISPLAY").service" EXIT
         trap 'echo notify: user activity; kill %% 2> /dev/null; exit 0' HUP  # user activity
         trap 'echo notify: locker started; kill %% 2> /dev/null; exit 0' TERM # locker started
         outputs=($(xrandr -q | sed -n 's/\([^ ]*\) connected .*/\1/p'))
