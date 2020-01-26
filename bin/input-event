@@ -13,12 +13,14 @@ xkb() {
         $HOME/.config/awesome/xkb/$1.xkb ${DISPLAY}
 }
 
+case $event in
+        XIDeviceDisabled,*) exit 0 ;;
+        XISlaveRemoved,*) exit 0 ;;
+esac
+
 printf "input-event: $use: [%3d] $event $name\n" $device
 
 case "$event,$use,$(uname -n),$name" in
-    XIDeviceDisabled,*)
-        :
-        ;;
     *,XISlaveKeyboard,*,"Topre Corporation Realforce 87")
         sleep 2
         systemctl --user start autorandr@$(systemd-escape -- "$DISPLAY").service
