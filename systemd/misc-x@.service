@@ -5,5 +5,8 @@ PartOf=graphical-session@%i.target
 [Service]
 Environment=DISPLAY=%I
 ExecStart=/usr/bin/xset -b
+ExecStart=/usr/bin/xdg-mime default firefox.desktop x-scheme-handler/http x-scheme-handler/https text/html
+ExecStart=/usr/bin/xdg-mime default org.gnome.Evince.desktop application/pdf
+ExecStart=/usr/bin/xdg-mime default gpicview.desktop image/png image/jpeg image/jpg image/gif image/webp
 Type=oneshot
 RemainAfterExit=false
