@@ -20,23 +20,19 @@ case $(hostname),$(autorandr --current) in
     *,*)                dpi=96 ;;
 esac
 
-change() {
-    xrandr --dpi $dpi
+xrandr --dpi $dpi
 
-    # Build xsettingsd.local
-    {
-        cat  ~/.config/awesome/xsettingsd
-        echo Xft/DPI $(( $1*1024 ))
-        echo Xft/RGBA \"$( [ $1 -gt 144 ] && echo none || echo rgb )\"
-        echo Gdk/WindowScalingFactor $(( $1/96 ))
-        echo Gdk/UnscaledDPI $(( $1*1024/($1/96) ))
-    } > ~/.xsettingsd
+# Build xsettingsd.local
+{
+    cat  ~/.config/awesome/xsettingsd
+    echo Xft/DPI $(( $1*1024 ))
+    echo Xft/RGBA \"$( [ $1 -gt 144 ] && echo none || echo rgb )\"
+    echo Gdk/WindowScalingFactor $(( $1/96 ))
+    echo Gdk/UnscaledDPI $(( $1*1024/($1/96) ))
+} > ~/.xsettingsd
 
-    # Signal xsettingsd
-    systemctl --user reload xsettingsd@$(systemd-escape -- "$DISPLAY").service
+# Signal xsettingsd
+systemctl --user reload xsettingsd@$(systemd-escape -- "$DISPLAY").service
 
-    # Also use xrdb for very old stuff (you know, LibreOffice)
-    echo Xft.dpi: $dpi | xrdb -merge
-}
-
-change $dpi
+# Also use xrdb for very old stuff (you know, LibreOffice)
+echo Xft.dpi: $dpi | xrdb -merge
