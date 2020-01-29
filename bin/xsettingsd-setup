@@ -21,6 +21,8 @@ case $(hostname),$(autorandr --current) in
 esac
 
 change() {
+    xrandr --dpi $dpi
+
     # Build xsettingsd.local
     {
         cat  ~/.config/awesome/xsettingsd
