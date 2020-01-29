@@ -4,9 +4,9 @@ DISPLAY=${DISPLAY%.0}
 
 # For information
 xrandr --current \
-    | sed -n 's/^\([^ ]\)* connected.* \([0-9]*\)x.* \([0-9]*\)mm x .*/\1 \2 \3/p' \
+    | sed -n 's/^\([^ ]\{1,\}\)* connected.* \([0-9]\{1,\}\)x.* \([0-9]\{1,\}\)mm x .*/\1 \2 \3/p' \
     | while read output pixels mm; do
-    dpi=$(($pixels * 25.4 / $mm))
+    dpi=$(($pixels * 254 / 10 / $mm))
     echo "$output: $dpi DPI"
 done
 
