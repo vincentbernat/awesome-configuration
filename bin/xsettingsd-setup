@@ -7,7 +7,8 @@ xrandr --current \
     | sed -n 's/^\([^ ]\{1,\}\)* connected.* \([0-9]\{1,\}\)x.* \([0-9]\{1,\}\)mm x .*/\1 \2 \3/p' \
     | while read output pixels mm; do
     dpi=$(($pixels * 254 / 10 / $mm))
-    echo "$output: $dpi DPI"
+    rounded=$(((dpi + 24) / 48 * 48))
+    echo "$output: ${dpi}dpi (rounded to ${rounded}dpi)"
 done
 
 # Don't try to guess DPI. For a laptop, we don't want the same DPI as
