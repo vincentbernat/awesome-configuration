@@ -7,8 +7,16 @@ xrandr --current \
     | sed -n 's/^\([^ ]\{1,\}\)* connected.* \([0-9]\{1,\}\)x.* \([0-9]\{1,\}\)mm x .*/\1 \2 \3/p' \
     | while read output pixels mm; do
     dpi=$(($pixels * 254 / 10 / $mm))
-    rounded=$(((dpi + 24) / 48 * 48))
-    echo "$output: ${dpi}dpi (rounded to ${rounded}dpi)"
+    # For laptop screens, we need to apply a correction factor
+    case $output in
+        eDP-1|eDP1) corrected=$(($dpi * 96/144)) ;;
+        *) corrected=$dpi
+    esac
+    # Authorized factors: 1, 1.5, 2, 3, 4, ...
+    rounded=$(((corrected + 24) / 48 * 48))
+    [ $rounded -gt 192 ] && rounded=$(((corrected + 48) / 96 * 96))
+    [ $rounded -lt 96 ] && rounded=96
+    echo "$output: ${dpi}dpi (corrected to ${corrected}dpi, rounded to ${rounded}dpi)" >&2
 done
 
 # Don't try to guess DPI. For a laptop, we don't want the same DPI as
