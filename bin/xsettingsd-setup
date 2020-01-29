@@ -4,7 +4,7 @@ DISPLAY=${DISPLAY%.0}
 
 # Don't try to guess DPI. For a laptop, we don't want the same DPI as
 # for an external screen. Just hardcode stuff...
-case $(hostname),$(autorandr --current --skip-options gamma) in
+case $(hostname),$(autorandr --current) in
     zoro,default)       dpi=144 ;;
     guybrush,default)   dpi=144 ;;
     neo,*)              dpi=192 ;;
