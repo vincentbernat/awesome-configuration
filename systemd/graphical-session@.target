@@ -12,3 +12,4 @@ Wants=redshift@%i.service
 Wants=xiccd@%i.service
 Wants=xsettingsd@%i.service
 Wants=xss-lock@%i.service
+Wants=tmux.service

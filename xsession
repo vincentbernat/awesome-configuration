@@ -21,7 +21,6 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 # Services are started with systemd
 systemctl --user import-environment
-systemd-run -q --scope --user tmux start-server
 mkdir -p ~/.config/systemd
 ln -nsf ~/.config/awesome/systemd ~/.config/systemd/user
 systemctl --user daemon-reload

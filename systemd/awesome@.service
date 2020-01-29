@@ -4,6 +4,7 @@ PartOf=graphical-session@%i.target
 After=autorandr@%i.service
 After=compton@%i.service
 After=xsettingsd@%i.service
+After=tmux.service
 Before=nm-applet@%i.service
 
 [Service]

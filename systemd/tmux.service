@@ -1,0 +1,7 @@
+[Unit]
+Description=tmux session
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/usr/bin/tmux start-server
+ExecStop=/usr/bin/tmux kill-server
