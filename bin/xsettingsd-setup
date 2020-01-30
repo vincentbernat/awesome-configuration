@@ -28,15 +28,16 @@ case $(hostname),$(autorandr --current) in
     *,*)                dpi=96 ;;
 esac
 
+echo "using ${dpi}dpi" >&2
 xrandr --dpi $dpi
 
 # Build xsettingsd.local
 {
     cat  ~/.config/awesome/xsettingsd
-    echo Xft/DPI $(( $1*1024 ))
-    echo Xft/RGBA \"$( [ $1 -gt 144 ] && echo none || echo rgb )\"
-    echo Gdk/WindowScalingFactor $(( $1/96 ))
-    echo Gdk/UnscaledDPI $(( $1*1024/($1/96) ))
+    echo Xft/DPI $(( $dpi*1024 ))
+    echo Xft/RGBA \"$( [ $dpi -gt 144 ] && echo none || echo rgb )\"
+    echo Gdk/WindowScalingFactor $(( $dpi/96 ))
+    echo Gdk/UnscaledDPI $(( $dpi*1024/($dpi/96) ))
 } > ~/.xsettingsd
 
 # Signal xsettingsd
