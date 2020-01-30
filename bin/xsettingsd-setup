@@ -10,7 +10,7 @@ xrandr --current \
     # For laptop screens, we need to apply a correction factor
     case $output in
         eDP-1|eDP1) corrected=$(($dpi * 96/144)) ;;
-        *) corrected=$dpi
+        *) corrected=$dpi ;;
     esac
     # Authorized factors: 1, 1.5, 2, 3, 4, ...
     rounded=$(((corrected + 24) / 48 * 48))
