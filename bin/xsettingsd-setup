@@ -25,7 +25,7 @@ for info in $(xrandr --current \
 done
 
 # Use first screen DPI
-dpi=${dpis## *}
+dpi=${dpis%% *}
 dpi=${dpi:-96}
 
 echo "using ${dpi}dpi" >&2
