@@ -3,9 +3,12 @@
 DISPLAY=${DISPLAY%.0}
 
 # For information
-xrandr --current \
-    | sed -n 's/^\([^ ]\{1,\}\)* connected.* \([0-9]\{1,\}\)x.* \([0-9]\{1,\}\)mm x .*/\1 \2 \3/p' \
-    | while read output pixels mm; do
+for info in $(xrandr --current \
+                  | sed -n 's/^\([^ ]\{1,\}\)* connected.* \([0-9]\{1,\}\)x.* \([0-9]\{1,\}\)mm x .*/\1,\2,\3/p'); do
+    output=${info%%,*}
+    pixels=${info#*,}
+    pixels=${pixels%%,*}
+    mm=${info##*,}
     dpi=$(($pixels * 254 / 10 / $mm))
     # For laptop screens, we need to apply a correction factor
     case $output in
