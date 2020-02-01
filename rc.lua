@@ -39,8 +39,7 @@ end
 loadrc("errors")		-- errors and debug stuff
 
 -- Create cache directory
-os.execute("test -d " .. awful.util.getdir("cache") ..
-           " || mkdir -p " .. awful.util.getdir("cache"))
+os.execute("mkdir -p " .. awful.util.getdir("cache"))
 
 -- Setup xsettings
 os.execute("~/.config/awesome/bin/xsettingsd-setup")
