@@ -20,6 +20,7 @@ esac
 
 printf "input-event: $use: [%3d] $event $name\n" $device
 
+set +x
 case "$event,$use,$(uname -n),$name" in
     *,XISlaveKeyboard,*,"Topre Corporation Realforce 87")
         sleep 2
