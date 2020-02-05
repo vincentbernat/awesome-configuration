@@ -1,0 +1,7 @@
+[Unit]
+Description=Wallpaper rotation for %I
+PartOf=graphical-session@%i.target
+
+[Timer]
+OnUnitActiveSec=1h
+RandomizedDelaySec=10m

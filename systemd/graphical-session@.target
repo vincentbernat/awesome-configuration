@@ -1,14 +1,16 @@
 [Unit]
 Description=Graphical user session for %I
 StopWhenUnneeded=yes
-Wants=awesome@%i.service
 Wants=autorandr@%i.service
+Wants=awesome@%i.service
 Wants=compton@%i.service
 Wants=inputplug@%i.service
 Wants=misc-x@%i.service
 Wants=nm-applet@%i.service
 Wants=policykit-agent@%i.service
 Wants=redshift@%i.service
+Wants=wallpaper@%i.service
+Wants=wallpaper@%i.timer
 Wants=xiccd@%i.service
 Wants=xsettingsd@%i.service
 Wants=xss-lock@%i.service

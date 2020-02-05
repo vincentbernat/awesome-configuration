@@ -6,6 +6,7 @@ After=compton@%i.service
 After=xsettingsd@%i.service
 After=tmux.service
 Before=nm-applet@%i.service
+Before=wallpaper@%i.service
 
 [Service]
 Environment=DISPLAY=%I

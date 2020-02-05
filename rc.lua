@@ -63,7 +63,6 @@ loadrc("appearance")		-- theme and appearance settings
 loadrc("debug")			-- debugging primitive `dbg()`
 
 loadrc("bindings")		-- keybindings
-loadrc("wallpaper")		-- wallpaper settings
 loadrc("widgets")		-- widgets configuration
 loadrc("tags")			-- tags handling
 loadrc("xlock")			-- lock screen
