@@ -9,7 +9,6 @@ Wants=misc-x@%i.service
 Wants=nm-applet@%i.service
 Wants=policykit-agent@%i.service
 Wants=redshift@%i.service
-Wants=wallpaper@%i.service
 Wants=wallpaper@%i.timer
 Wants=xiccd@%i.service
 Wants=xsettingsd@%i.service

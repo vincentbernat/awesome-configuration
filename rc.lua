@@ -43,6 +43,7 @@ os.execute("mkdir -p " .. awful.util.getdir("cache"))
 
 -- Setup xsettings
 os.execute("~/.config/awesome/bin/xsettingsd-setup")
+os.execute("systemctl --user start --no-block wallpaper@$(systemd-escape -- ${DISPLAY%.0})")
 
 -- Global configuration
 modkey = "Mod4"
