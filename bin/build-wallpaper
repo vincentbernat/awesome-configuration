@@ -12,7 +12,7 @@ import random
 import optparse
 import tempfile
 
-from Xlib import X, display
+from Xlib import display
 from Xlib.ext import randr
 
 from PIL import Image
