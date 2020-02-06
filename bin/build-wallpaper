@@ -24,6 +24,8 @@ parser.add_option("-t", "--target", dest="target", default="background.png",
                   help="write background to FILE", metavar="FILE")
 parser.add_option("-c", "--crop", dest="crop", action="store_true",
                   help="crop image instead of centering them")
+parser.add_option("--compression", default=0, type=int,
+                  help="compression level when saving")
 options, args = parser.parse_args()
 
 assert not args, "No additional arguments are accepted"
@@ -117,5 +119,5 @@ assert background, "Don't know the size of the display area"
 with tempfile.NamedTemporaryFile(
         delete=False,
         dir=os.path.dirname(os.path.realpath(options.target))) as tmp:
-    background.save(tmp, "png")
+    background.save(tmp, "png", compress_level=options.compression)
     os.rename(tmp.name, options.target)
