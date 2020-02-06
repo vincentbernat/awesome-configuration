@@ -20,7 +20,7 @@ from PIL import Image
 parser = optparse.OptionParser()
 parser.add_option("-d", "--directory", dest="directory", default=".",
                   help="search for images in DIRECTORY", metavar="DIRECTORY")
-parser.add_option("-t", "--target", dest="target", default="background.jpg",
+parser.add_option("-t", "--target", dest="target", default="background.png",
                   help="write background to FILE", metavar="FILE")
 parser.add_option("-c", "--crop", dest="crop", action="store_true",
                   help="crop image instead of centering them")
