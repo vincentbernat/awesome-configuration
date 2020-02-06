@@ -82,15 +82,9 @@ print("wallpaper: {}".format(" + ".join(
     ["`%s`" % x.filename[(len(options.directory) + 1):]
      for x in images])))
 
-# Link chosen wallpapers
-for idx, image in enumerate(images):
-    target = "{}.{}".format(options.target, idx)
-    if os.path.lexists(target):
-        os.remove(target)
-    os.symlink(os.path.abspath(image.filename), target)
-
 if len(screens) > 1 and len(images) == 1:
     # Wide wallpaper
+    image = images[0]
     if image.size != (screen.width_in_pixels, screen.height_in_pixels):
         image = image.resize((screen.width_in_pixels, screen.height_in_pixels),
                              Image.CUBIC)
