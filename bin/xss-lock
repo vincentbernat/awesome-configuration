@@ -3,6 +3,7 @@
 me="$(readlink -f "$0")"
 timeout=300
 notify=10
+display=$(systemd-escape -- "$DISPLAY")
 
 configure() {
     xset s $((timeout - notify)) $notify
@@ -20,8 +21,8 @@ case "$1" in
         ;;
     dim|notify)
         echo "notify: start"
-        systemctl --user kill -s STOP redshift@$(systemd-escape -- "$DISPLAY").service
-        trap "systemctl --user kill -s CONT redshift@$(systemd-escape -- "$DISPLAY").service" EXIT
+        systemctl --user kill -s STOP redshift@${display}.service
+        trap "systemctl --user kill -s CONT redshift@${display}.service" EXIT
         trap 'echo notify: user activity; kill %% 2> /dev/null; exit 0' HUP  # user activity
         trap 'echo notify: locker started; kill %% 2> /dev/null; exit 0' TERM # locker started
         outputs=($(xrandr --current | sed -n 's/\([^ ]*\) connected .*/\1/p'))
@@ -39,9 +40,9 @@ case "$1" in
         xdotool key XF86AudioStop
         # Then, lock screen
         echo "lock: lock screen"
-        systemctl --user stop compton@$(systemd-escape -- "$DISPLAY").service
-        i3lock -n -e -i $HOME/.cache/awesome/current-wallpaper.png -t -f
-        systemctl --user start compton@$(systemd-escape -- "$DISPLAY").service
+        systemctl --user stop compton@${display}.service
+        i3lock -n -e -i $HOME/.cache/awesome/current-wallpaper-${display}.png -t -f
+        systemctl --user start compton@${display}.service
         echo "lock: unlock screen"
         ;;
 esac

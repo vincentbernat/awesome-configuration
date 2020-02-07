@@ -5,7 +5,7 @@ PartOf=graphical-session@%i.target
 [Service]
 Environment=DISPLAY=%I
 Environment=WALLPAPER_DIRECTORY=%h/.config/awesome/wallpapers
-Environment=WALLPAPER_OUTPUT=%h/.cache/awesome/current-wallpaper.png
+Environment=WALLPAPER_OUTPUT=%h/.cache/awesome/current-wallpaper-%i.png
 ExecStart=%h/.config/awesome/bin/build-wallpaper --crop \
                                                  --directory $WALLPAPER_DIRECTORY \
                                                  --target $WALLPAPER_OUTPUT
