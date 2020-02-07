@@ -5,13 +5,6 @@ xkb_symbols "pause" {
     };
 };
 
-partial
-xkb_symbols "webcam" {
-    key <I220> {
-        [ XF86ScreenSaver, XF86ScreenSaver ]
-    };
-};
-
 partial modifier_keys alphanumeric_keys
 xkb_symbols "x1gen2" {
     key <LCTL> { [ Escape, Escape ] };
