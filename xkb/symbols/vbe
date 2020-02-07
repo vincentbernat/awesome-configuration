@@ -13,7 +13,7 @@ xkb_symbols "webcam" {
 };
 
 partial modifier_keys alphanumeric_keys
-xkb_symbols "x1" {
+xkb_symbols "x1gen2" {
     key <LCTL> { [ Escape, Escape ] };
     key <HOME> { [ Control_L, Control_L ] };
     key <END>  { [ Control_L, Control_L ] };
