@@ -17,7 +17,7 @@ unconfigure() {
 case "$1" in
     start)
         configure
-        exec xss-lock -s ${XDG_SESSION_ID} -n "$me notify" -l $me lock
+        exec xss-lock --session=${XDG_SESSION_ID} --notifier="$me notify" --transfer-sleep-lock "$me" lock
         ;;
     dim|notify)
         echo "notify: start"
