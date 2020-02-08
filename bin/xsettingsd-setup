@@ -31,7 +31,7 @@ dpi=${dpi:-96}
 echo "using ${dpi}dpi" >&2
 xrandr --dpi $dpi
 
-# Build xsettingsd.local
+# Build xsettingsd
 {
     cat  ~/.config/awesome/xsettingsd
     echo Xft/DPI $(( $dpi*1024 ))
