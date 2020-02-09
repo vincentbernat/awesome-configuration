@@ -3,5 +3,5 @@ Description=Wallpaper rotation for %I
 PartOf=graphical-session@%i.target
 
 [Timer]
-OnCalendar=hourly
+OnUnitActiveSec=1h
 RandomizedDelaySec=10m
