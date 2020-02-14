@@ -8,9 +8,6 @@ user_pref("ui.context_menus.after_mouseup", true);
 // Don't display menubar when pressing Alt
 user_pref("ui.key.menuAccessKeyFocuses", false);
 
-// Default download dir
-user_pref("browser.download.dir", "/home/bernat/download");
-
 // No popup at all!
 user_pref("browser.link.open_newwindow.restriction", 0);
 
