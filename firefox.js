@@ -34,7 +34,7 @@ user_pref("full-screen-api.transition.timeout", 0);
 // Remove some annoying animations (notably when going full screen)
 user_pref("toolkit.cosmeticAnimations.enabled", false);
 
-// Force-enable hardware compositing and WebRender.
-user_pref("layers.acceleration.force-enabled", true);
+// Do not force-enable hardware compositing and WebRender.
+user_pref("layers.acceleration.force-enabled", false);
 user_pref("gfx.webrender.enabled", false);
 user_pref("gfx.webrender.all", false);
