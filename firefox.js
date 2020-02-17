@@ -26,6 +26,8 @@ user_pref("browser.backspace_action", 0);
 
 // Ctrl-Tab should not use recent order (it's confusing for me)
 user_pref("browser.ctrlTab.recentlyUsedOrder", false);
+// Don't allow detaching a tab by pulling it (I use the menu)
+user_pref("browser.tabs.allowTabDetach", false);
 
 // Don't display fullscreen warning
 user_pref("full-screen-api.warning.timeout", 0);
