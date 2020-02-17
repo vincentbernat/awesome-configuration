@@ -10,6 +10,7 @@ local type      = type
 local modkey    = modkey
 local beautiful = require("beautiful")
 local naughty   = require("naughty")
+local theme     = beautiful.get()
 local capi      = {
    root = root,
    client = client
@@ -92,7 +93,7 @@ local function markup(keys)
 	 local help, group = doc[key].help, doc[key].group
 	 local skey = key2str(key)
 	 result[group] = (result[group] or "") ..
-	    '<span font="DejaVu Sans Mono 10" color="' .. beautiful.fg_widget_clock .. '"> ' ..
+	    '<span font="DejaVu Sans Mono ' .. 10 * theme.scale .. '" color="' .. beautiful.fg_widget_clock .. '"> ' ..
 	    string.format("%" .. (longest - unilen(skey)) .. "s  ", "") .. skey ..
 	    '</span>  <span color="' .. beautiful.fg_widget_value .. '">' ..
 	    help .. '</span>\n'
