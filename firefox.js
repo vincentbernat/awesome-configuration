@@ -43,3 +43,6 @@ user_pref("toolkit.cosmeticAnimations.enabled", false);
 user_pref("layers.acceleration.force-enabled", false);
 user_pref("gfx.webrender.enabled", false);
 user_pref("gfx.webrender.all", false);
+
+// Disable DoH for now
+user_pref("network.trr.mode", 5);
