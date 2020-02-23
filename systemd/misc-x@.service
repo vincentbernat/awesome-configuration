@@ -11,7 +11,9 @@ ExecStart=/usr/bin/xdg-mime default firefox.desktop \
                             x-scheme-handler/about \
                             text/html
 ExecStart=/usr/bin/xdg-mime default emacsmail.desktop x-scheme-handler/mailto
-ExecStart=/usr/bin/xdg-mime default org.gnome.Evince.desktop application/pdf
+ExecStart=/usr/bin/xdg-mime default org.pwmt.zathura-ps.desktop application/postscript
+ExecStart=/usr/bin/xdg-mime default org.pwmt.zathura-pdf-poppler.desktop application/pdf
+ExecStart=/usr/bin/xdg-mime default org.pwmt.zathura-djvu.desktop image/vnd.djvu image/vnd.djvu+multipage
 ExecStart=/usr/bin/xdg-mime default gpicview.desktop image/png image/jpeg image/jpg image/gif image/webp
 Type=oneshot
 RemainAfterExit=false
