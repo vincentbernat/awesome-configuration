@@ -1,0 +1,10 @@
+[Unit]
+Description=Apply quirks for Guybrush
+ConditionHost=guybrush
+After=pulseaudio.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=false
+ExecStart=/usr/bin/pactl load-module module-alsa-source device=hw:0,7 channels=4
+ExecStart=/usr/bin/pactl load-module module-alsa-sink device=hw:0,0 channels=4
