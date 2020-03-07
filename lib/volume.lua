@@ -50,6 +50,10 @@ function toggle()
    change("toggle")
 end
 
+function mictoggle()
+   os.execute("amixer -q -D pulse sset Capture toggle", false)
+end
+
 -- run pavucontrol
 function mixer()
    awful.util.spawn("pavucontrol", false)

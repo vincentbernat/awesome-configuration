@@ -253,6 +253,7 @@ config.keys.global = awful.util.table.join(
    awful.key({ }, "XF86AudioRaiseVolume", volume.increase),
    awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
    awful.key({ }, "XF86AudioMute",        volume.toggle),
+   awful.key({ }, "XF86AudioMicMute",     volume.mictoggle),
 
    awful.key({ }, "XF86AudioPlay",        music.playpause),
    awful.key({ }, "XF86AudioPause",       music.pause),
