@@ -250,10 +250,10 @@ config.keys.global = awful.util.table.join(
    -- Multimedia keys
    awful.key({ }, "XF86MonBrightnessUp",   brightness.increase),
    awful.key({ }, "XF86MonBrightnessDown", brightness.decrease),
-   awful.key({ }, "XF86AudioRaiseVolume", volume.increase),
-   awful.key({ }, "XF86AudioLowerVolume", volume.decrease),
-   awful.key({ }, "XF86AudioMute",        volume.toggle),
-   awful.key({ }, "XF86AudioMicMute",     volume.mictoggle),
+   awful.key({ }, "XF86AudioRaiseVolume", function() volume.increase("Master") end),
+   awful.key({ }, "XF86AudioLowerVolume", function() volume.decrease("Master") end),
+   awful.key({ }, "XF86AudioMute",        function() volume.toggle("Master") end),
+   awful.key({ }, "XF86AudioMicMute",     function() volume.toggle("Capture") end),
 
    awful.key({ }, "XF86AudioPlay",        music.playpause),
    awful.key({ }, "XF86AudioPause",       music.pause),

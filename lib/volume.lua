@@ -13,10 +13,10 @@ local icons        = package.loaded["vbe/icons"]
 module("vbe/volume")
 
 local volid = nil
-local function change(what)
-   os.execute("amixer -q -D pulse sset Master " .. what, false)
+local function change(what, how)
+   os.execute("amixer -q -D pulse sset " .. what .. " " .. how, false)
    -- Read the current value
-   local out = awful.util.pread("amixer -D pulse sget Master")
+   local out = awful.util.pread("amixer -D pulse sget " .. what)
    local vol, mute = out:match("([%d]+)%%.*%[([%l]*)")
    if not mute or not vol then return end
 
@@ -29,7 +29,11 @@ local function change(what)
    elseif vol < 60 then
       icon = "medium"
    end
-   icon = icons.lookup({name = "audio-volume-" .. icon,
+   local prefix = "audio-volume"
+   if what == "Capture" then
+      prefix = "microphone-sensitivity"
+   end
+   icon = icons.lookup({name = prefix .. "-" .. icon,
 		       type = "status"})
 
    volid = naughty.notify({ text = string.format("%3d %%", vol),
@@ -38,20 +42,16 @@ local function change(what)
 			    replaces_id = volid }).id
 end
 
-function increase()
-   change("5%+")
+function increase(what)
+   change(what, "5%+")
 end
 
-function decrease()
-   change("5%-")
+function decrease(what)
+   change(what, "5%-")
 end
 
-function toggle()
-   change("toggle")
-end
-
-function mictoggle()
-   os.execute("amixer -q -D pulse sset Capture toggle", false)
+function toggle(what)
+   change(what, "toggle")
 end
 
 -- run pavucontrol
