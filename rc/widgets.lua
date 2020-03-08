@@ -188,9 +188,9 @@ vicious.register(volwidget, vicious.widgets.volume,
 volume = loadrc("volume", "vbe/volume")
 volwidget:buttons(awful.util.table.join(
 		     awful.button({ }, 1, volume.mixer),
-		     awful.button({ }, 3, volume.toggle),
-		     awful.button({ }, 4, volume.increase),
-		     awful.button({ }, 5, volume.decrease)))
+		     awful.button({ }, 3, function() volume.toggle("Master") end),
+		     awful.button({ }, 4, function() volume.increase("Master") end),
+                     awful.button({ }, 5, function() volume.decrease("Master") end)))
 
 -- File systems
 local fs = { "/",
