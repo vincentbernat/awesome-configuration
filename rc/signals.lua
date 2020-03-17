@@ -85,7 +85,8 @@ client.add_signal("focus", function(c)
 client.add_signal("unfocus", function(c)
 		     c.border_color = beautiful.border_normal
                      if (not c.fullscreen and
-                         not awful.rules.match_any(c, { name = { "Picture-in-Picture" } })) then
+                         not awful.rules.match_any(c, { name = { "Picture-in-Picture" },
+                                                        class = { "zoom" }})) then
                         c.opacity = 0.85
                      end
 			     end)
