@@ -43,10 +43,10 @@ local cal = (
 	 local cal = awful.util.pread("ncal -h -w -m " .. datespec)
 	 -- Highlight the current date and month
          if offset == 0 then
-            cal = cal:gsub(string.format("( %d )", curdate.day),
-                           string.format('<span color="%s">%%1</span>',
-                                         beautiful.fg_widget_clock),
-                           1)
+            cal, n = cal:gsub(string.format("( %d)([ \n])", curdate.day),
+                              string.format('<span color="%s">%%1</span>%%2',
+                                            beautiful.fg_widget_clock),
+                              1)
          end
          -- Month and year
 	 cal = cal:gsub("^( +[^ ]+ [0-9]+) *",
