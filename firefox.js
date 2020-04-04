@@ -15,8 +15,9 @@ user_pref("browser.link.open_newwindow.restriction", 0);
 user_pref("browser.search.region", "FR");
 user_pref("browser.search.suggest.enabled", false);
 
-// Homepage is newtab
+// Homepage is newtab. On launch, restore session.
 user_pref("browser.startup.homepage", "about:newtab");
+user_pref("browser.startup.page", 3);
 
 // Languages
 user_pref("intl.accept_languages", "en-us,en,fr");
