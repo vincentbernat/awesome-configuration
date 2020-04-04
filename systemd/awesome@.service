@@ -5,6 +5,7 @@ After=autorandr@%i.service
 After=compton@%i.service
 After=xsettingsd@%i.service
 After=tmux.service
+After=ssh-agent.service
 Before=nm-applet@%i.service
 Before=wallpaper@%i.service
 
