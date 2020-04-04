@@ -4,5 +4,5 @@ Description=SSH key agent
 [Service]
 Type=simple
 Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStartPre=/usr/bin/dbus-update-activation-environment SSH_AUTH_SOCK
 ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
-ExecStart=/usr/bin/dbus-update-activation-environment SSH_AUTH_SOCK
