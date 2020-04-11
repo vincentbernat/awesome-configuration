@@ -22,7 +22,7 @@ theme = {}
 theme.scale = scale()
 theme.icons = icons
 theme.wallpaper_cmd = { "/bin/true" }
-theme.font = "Terminus " .. 8 * theme.scale
+theme.font = "Terminus (TTF) " .. 8 * theme.scale
 theme.tasklist_font = "DejaVu Sans " .. 8 * theme.scale
 
 theme.bg_normal     = "#22222299"
