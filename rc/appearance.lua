@@ -1,31 +1,27 @@
 -- Theme
 beautiful.init(awful.util.getdir("config") .. "/rc/theme.lua")
 
--- GTK stuff: we choose Adwaita theme which seems to be the only one
--- kept up-to-date with GTK2 and GTK3...
-
--- Also see: http://developer.gnome.org/gtk3/3.2/GtkSettings.html
-local gtk = [[
-gtk-font-name="DejaVu Sans 10"
+-- Also have a look at `xsettingsd` which is used for GTK 3. At some
+-- point, when we don't need GTK 2, we can use only xsettingsd and
+-- avoid duplication.
+local gtk2 = io.open(os.getenv("HOME") .. "/.gtkrc-2.0", "w")
+gtk2:write([[
 gtk-theme-name="Adwaita"
 gtk-icon-theme-name="Adwaita"
-gtk-fallback-icon-theme="gnome"
+gtk-font-name="DejaVu Sans 10"
 gtk-cursor-theme-name="oxy-cherry"
 gtk-cursor-theme-size=0
-gtk-toolbar-style=GTK_TOOLBAR_BOTH
-gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
 gtk-button-images=1
 gtk-menu-images=1
+gtk-fallback-icon-theme="gnome"
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-decoration-layout=":menu"
 gtk-xft-antialias=1
 gtk-xft-hinting=1
-gtk-xft-hintstyle="hintfull"
+gtk-xft-hintstyle="hintslight"
 gtk-xft-rgba="rgb"
-gtk-decoration-layout=":menu"
-]]
 
-local gtk2 = io.open(os.getenv("HOME") .. "/.gtkrc-2.0", "w")
-gtk2:write(gtk)
-gtk2:write([[
 gtk-key-theme-name="Emacs"
 binding "vbe-text-entry-bindings" {
   unbind "<ctrl>b"
@@ -40,13 +36,8 @@ class "GtkTextView" binding "vbe-text-entry-bindings"
 ]])
 gtk2:close()
 
--- GTK3 is the same, but no double quotes for strings
 os.execute("test -d ~/.config/gtk-3.0 || mkdir -p ~/.config/gtk-3.0")
-local gtk3 = io.open(os.getenv("HOME") .. "/.config/gtk-3.0/settings.ini", "w")
-gtk, _ = gtk:gsub('"', '')
-gtk3:write("[Settings]\n")
-gtk3:write(gtk)
-gtk3:close()
+os.execute("rm -f ~/.config/gtk-3.0/settings.ini")
 local gtk3 = io.open(os.getenv("HOME") .. "/.config/gtk-3.0/gtk.css", "w")
 gtk3:write([[
 /* Useless: we cannot override properly by unbinding some keys */

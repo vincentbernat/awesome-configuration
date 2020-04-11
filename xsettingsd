@@ -1,3 +1,12 @@
+# Before modifying, also check rc/appearance.lua
 Xft/Antialias 1
 Xft/Hinting 1
 Xft/HintStyle "hintslight"
+Net/ThemeName "Adwaita"
+Net/IconThemeName "Adwaita"
+Gtk/FontName "DejaVu Sans 10"
+Gtk/CursorThemeName "oxy-cherry"
+Gtk/CursorThemeSize 0
+Gtk/ButtonImages 1
+Gtk/MenuImages 1
+Gtk/DecorationLayout ":menu"
