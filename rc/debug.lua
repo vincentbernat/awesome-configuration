@@ -33,7 +33,7 @@ local function client_info(c)
 			       beautiful.fg_widget_value, tostring(c[inf[i]]))
     end
 
-    naughty.notify{ text = string.format('<span font="Terminus ' .. 8 * theme.scale .. '">%s</span>', v:sub(1,#v-1)),
+    naughty.notify{ text = string.format('<span font="' .. theme.font .. '">%s</span>', v:sub(1,#v-1)),
 		    timeout = 0, margin = 10, screen = c.screen }
 end
 
