@@ -8,9 +8,9 @@ local gtk2 = io.open(os.getenv("HOME") .. "/.gtkrc-2.0", "w")
 gtk2:write([[
 gtk-theme-name="Adwaita"
 gtk-icon-theme-name="Adwaita"
-gtk-font-name="DejaVu Sans 10"
-gtk-cursor-theme-name="oxy-cherry"
+gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
+gtk-font-name="DejaVu Sans 10"
 gtk-button-images=1
 gtk-menu-images=1
 gtk-fallback-icon-theme="gnome"
