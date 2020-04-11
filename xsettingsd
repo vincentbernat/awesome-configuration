@@ -7,6 +7,7 @@ Net/IconThemeName "Adwaita"
 Gtk/CursorThemeName "Adwaita"
 Gtk/CursorThemeSize 0
 Gtk/FontName "DejaVu Sans 10"
+Gtk/KeyThemeName "Emacs"
 Gtk/ButtonImages 1
 Gtk/MenuImages 1
 Gtk/DecorationLayout ":menu"
