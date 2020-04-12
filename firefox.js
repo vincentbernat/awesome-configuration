@@ -22,6 +22,9 @@ user_pref("browser.startup.page", 3);
 // Languages
 user_pref("intl.accept_languages", "en-us,en,fr");
 
+// Disable pocket
+user_pref("extensions.pocket.enabled", false);
+
 // Backspace is like back
 user_pref("browser.backspace_action", 0);
 
