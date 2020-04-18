@@ -25,6 +25,10 @@ user_pref("intl.accept_languages", "en-us,en,fr");
 // Disable pocket
 user_pref("extensions.pocket.enabled", false);
 
+// Don't recommend extensions
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
+user_pref("browser.discovery.enabled", false);
+
 // Backspace is like back
 user_pref("browser.backspace_action", 0);
 
