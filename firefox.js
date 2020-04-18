@@ -23,6 +23,7 @@ user_pref("browser.startup.page", 3);
 user_pref("intl.accept_languages", "en-us,en,fr");
 
 // Disable pocket
+user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
 user_pref("extensions.pocket.enabled", false);
 
 // Don't recommend extensions
