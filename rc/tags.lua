@@ -17,7 +17,7 @@ shifty.config.tags = {
       exclusive = true,
       max_clients = 1,
       screen = math.min(screen.count(), 2),
-      spawn = "xdg-open about:newtab",
+      spawn = "xdg-open moz-extension://074de055-85e1-48fc-9fc9-d97dea948f8d/index.html",
       icon = tagicon("web")
    },
    emacs = {
