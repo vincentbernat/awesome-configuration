@@ -55,3 +55,6 @@ user_pref("gfx.webrender.all", false);
 
 // Disable DoH for now
 user_pref("network.trr.mode", 5);
+
+// Keep warn me on deprecated TLS versions
+user_pref("security.tls.version.enable-deprecated", false);
