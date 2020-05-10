@@ -5,15 +5,6 @@ PartOf=graphical-session@%i.target
 [Service]
 Environment=DISPLAY=%I
 ExecStart=/usr/bin/xset -b
-ExecStart=/usr/bin/xdg-mime default firefox.desktop \
-                            x-scheme-handler/http \
-                            x-scheme-handler/https \
-                            x-scheme-handler/about \
-                            text/html
-ExecStart=/usr/bin/xdg-mime default emacsmail.desktop x-scheme-handler/mailto
-ExecStart=/usr/bin/xdg-mime default org.pwmt.zathura-ps.desktop application/postscript
-ExecStart=/usr/bin/xdg-mime default org.pwmt.zathura-pdf-poppler.desktop application/pdf
-ExecStart=/usr/bin/xdg-mime default org.pwmt.zathura-djvu.desktop image/vnd.djvu image/vnd.djvu+multipage
-ExecStart=/usr/bin/xdg-mime default gpicview.desktop image/png image/jpeg image/jpg image/gif image/webp
+ExecStart=%h/.config/awesome/bin/xdg-defaults
 Type=oneshot
 RemainAfterExit=false

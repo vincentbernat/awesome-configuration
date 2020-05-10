@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Set default MIME type for XDG. Linux desktop is a bit painful around
+# that. Random applications register for any MIME type and the default
+# is always surprising.
+
+set -e
+
+while read desktop mimetypes; do
+    for dir in ~/.local/share/applications /usr/local/share/applications /usr/share/applications notfound; do
+        [ -f "$dir"/"$desktop" ] || continue
+        echo "Set default for $mimetypes to $desktop"
+        xdg-mime default $desktop $mimetypes
+        break
+    done
+    [ "$dir" != "notfound" ] || echo "Application $desktop not found"
+done <<EOF
+firefox.desktop                       x-scheme-handler/http x-scheme-handler/https x-scheme-handler/about
+firefox.desktop                       text/html
+emacsmail.desktop                     x-scheme-handler/mailto
+org.pwmt.zathura-ps.desktop           application/postscript
+org.pwmt.zathura-pdf-poppler.desktop  application/pdf
+org.pwmt.zathura-djvu.desktop         image/vnd.djvu image/vnd.djvu+multipage
+org.kde.krita.desktop                 image/png image/jpeg image/jpg image/gif image/webp
+EOF
