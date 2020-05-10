@@ -5,6 +5,5 @@ PartOf=graphical-session@%i.target
 [Service]
 Environment=DISPLAY=%I
 ExecStart=/usr/bin/xset -b
-ExecStart=%h/.config/awesome/bin/xdg-defaults
 Type=oneshot
 RemainAfterExit=false
