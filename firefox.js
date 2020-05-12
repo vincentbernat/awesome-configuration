@@ -53,6 +53,9 @@ user_pref("layers.acceleration.force-enabled", false);
 user_pref("gfx.webrender.enabled", false);
 user_pref("gfx.webrender.all", false);
 
+// Lazy loading is too late on Firefox. See https://bugzilla.mozilla.org/show_bug.cgi?id=1618240
+user_pref("dom.image-lazy-loading.enabled", false);
+
 // Disable DoH for now
 user_pref("network.trr.mode", 5);
 // No HTTP/3 yet (disabled by default, but document here it doesn't work well for me on Google)
