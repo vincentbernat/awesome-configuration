@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+
+"""Simple application selector relying on GTK app chooser dialog.
+"""
+
+import argparse
+import sys
+import gi
+
+
+parser = argparse.ArgumentParser(description=sys.modules[__name__].__doc__)
+parser.add_argument("file",
+                    metavar="FILE",
+                    help="file to open")
+options = parser.parse_args()
+
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk, Gio
+
+# Query MIME TYPE
+f = Gio.File.new_for_path(options.file)
+file_info = f.query_info("standard::content-type", 0)
+content_type = file_info.get_content_type()
+
+# Display app chooser dialog box
+dialog = Gtk.AppChooserDialog.new_for_content_type(None,
+                                                   Gtk.DialogFlags.MODAL,
+                                                   content_type)
+dialog.get_widget().set_show_default(True)
+dialog.get_widget().set_show_fallback(True)
+response = dialog.run()
+
+# Execute the selected program
+if response == Gtk.ResponseType.OK:
+    app_info = dialog.get_app_info()
+    dialog.destroy()
+    # TODO: make it launch synchronously
+    sys.exit(0
+             if app_info.launch([f])
+             else 1)
+sys.exit(1)
