@@ -30,6 +30,7 @@ content_type = file_info.get_content_type()
 dialog = Gtk.AppChooserDialog.new_for_content_type(None,
                                                    Gtk.DialogFlags.MODAL,
                                                    content_type)
+dialog.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
 dialog.get_widget().set_show_default(True)
 dialog.get_widget().set_show_fallback(True)
 response = dialog.run()
