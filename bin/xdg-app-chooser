@@ -3,6 +3,10 @@
 """Simple application selector relying on GTK app chooser dialog.
 """
 
+# This doesn't allow to set a default application for a MIME type. Use
+# "xdg-mime default something.desktop mime/type" to change a default.
+# Usually, it will update ~/.config/mimeapps.list.
+
 import argparse
 import sys
 import gi
