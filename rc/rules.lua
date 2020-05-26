@@ -43,6 +43,9 @@ awful.rules.rules = {
    { rule = { class = "Skipe" },
      except = { role = nil }, -- should be the master
      properties = { }, callback = awful.client.setslave },
+   -- Shadow
+   { rule = { name = "Shadow", class = "Shadow" },
+     properties = { fullscreen = true }},
    -- Should not be master
    { rule_any = { class =
 		  { config.termclass,
