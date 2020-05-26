@@ -44,7 +44,7 @@ awful.rules.rules = {
      except = { role = nil }, -- should be the master
      properties = { }, callback = awful.client.setslave },
    -- Shadow
-   { rule = { name = "Shadow", class = "Shadow" },
+   { rule = { class = "Shadow" },
      properties = { fullscreen = true }},
    -- Should not be master
    { rule_any = { class =
