@@ -48,10 +48,8 @@ user_pref("media.autoplay.default", 5);
 // Remove some annoying animations (notably when going full screen)
 user_pref("toolkit.cosmeticAnimations.enabled", false);
 
-// Do not force-enable hardware compositing and WebRender.
-user_pref("layers.acceleration.force-enabled", false);
-user_pref("gfx.webrender.enabled", false);
-user_pref("gfx.webrender.all", false);
+// Force enable WebRender
+user_pref("gfx.webrender.all", true);
 
 // Lazy loading is too late on Firefox. See https://bugzilla.mozilla.org/show_bug.cgi?id=1618240
 user_pref("dom.image-lazy-loading.enabled", false);
