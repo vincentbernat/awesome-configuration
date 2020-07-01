@@ -61,6 +61,3 @@ user_pref("network.http.http3.enabled", false);
 
 // Don't use system notifications (awesome is not very good at displaying long notifications)
 user_pref("alerts.useSystemBackend", false);
-
-// Keep warn me on deprecated TLS versions
-user_pref("security.tls.version.enable-deprecated", false);
