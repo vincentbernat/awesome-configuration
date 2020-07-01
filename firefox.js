@@ -59,5 +59,8 @@ user_pref("network.trr.mode", 5);
 // No HTTP/3 yet (disabled by default, but document here it doesn't work well for me on Google)
 user_pref("network.http.http3.enabled", false);
 
+// Don't use system notifications (awesome is not very good at displaying long notifications)
+user_pref("alerts.useSystemBackend", false);
+
 // Keep warn me on deprecated TLS versions
 user_pref("security.tls.version.enable-deprecated", false);
