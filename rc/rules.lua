@@ -46,6 +46,9 @@ awful.rules.rules = {
    -- Shadow
    { rule = { class = "Shadow" },
      properties = { fullscreen = true }},
+   -- Zoom dialogs should not have focus
+   { rule = { class = "zoom", type = "dialog" },
+     properties = { focus = false }},
    -- Should not be master
    { rule_any = { class =
 		  { config.termclass,
