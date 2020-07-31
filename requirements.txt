@@ -7,7 +7,7 @@ xss-lock
 libnotify-bin
 xfonts-terminus
 fonts-dejavu
-compton
+picom
 python3-xlib
 python3-pil
 fvwm
