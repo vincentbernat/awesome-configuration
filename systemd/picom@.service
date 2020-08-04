@@ -5,5 +5,5 @@ PartOf=graphical-session@%i.target
 [Service]
 Environment=DISPLAY=%I
 ExecStart=/usr/bin/picom --backend glx \
-                         --glx-no-stencil \
+                         --glx-no-rebind-pixmap \
                          --vsync
