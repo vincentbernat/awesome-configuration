@@ -58,7 +58,7 @@ for _, l in pairs(config.layouts) do
 end
 
 -- Naughty
-naughty.config.presets.normal.bg = theme.bg_widget
+naughty.config.presets.normal.bg = "#111111"
 for _,preset in pairs({"normal", "low", "critical"}) do
    naughty.config.presets[preset].font = "DejaVu Sans " .. 10 * theme.scale
 end
