@@ -59,8 +59,10 @@ end
 
 -- Naughty
 naughty.config.presets.normal.bg = "#111111"
-for _,preset in pairs({"normal", "low", "critical"}) do
+for _, preset in pairs({"normal", "low", "critical"}) do
    naughty.config.presets[preset].font = "DejaVu Sans " .. 10 * theme.scale
+   naughty.config.presets[preset].margin = 12 * theme.scale
+   naughty.config.presets[preset].border_width = 3 * theme.scale
 end
 
 return theme
