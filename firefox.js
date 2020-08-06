@@ -64,4 +64,3 @@ user_pref("network.http.http3.enabled", false);
 
 // Awesome is not very good scaling random icons
 user_pref("alerts.showFavicons", true);
-user_pref("alerts.useSystemBackend", true);
