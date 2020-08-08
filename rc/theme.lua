@@ -65,7 +65,9 @@ for _, preset in pairs({"normal", "low", "critical"}) do
    naughty.config.presets[preset].border_width = 3 * theme.scale
 end
 naughty.config.notify_callback = function(args)
-   args.icon = nil
+   if args.icon ~= nil and string.sub(args.icon, 1, 5) ~= "/usr/" then
+      args.icon = nil
+   end
    return args
 end
 
