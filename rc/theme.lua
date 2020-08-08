@@ -64,5 +64,9 @@ for _, preset in pairs({"normal", "low", "critical"}) do
    naughty.config.presets[preset].margin = 12 * theme.scale
    naughty.config.presets[preset].border_width = 3 * theme.scale
 end
+naughty.config.notify_callback = function(args)
+   args.icon = nil
+   return args
+end
 
 return theme
