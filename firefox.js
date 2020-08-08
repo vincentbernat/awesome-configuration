@@ -61,6 +61,3 @@ user_pref("dom.image-lazy-loading.enabled", false);
 user_pref("network.trr.mode", 5);
 // No HTTP/3 yet (disabled by default, but document here it doesn't work well for me on Google)
 user_pref("network.http.http3.enabled", false);
-
-// Awesome is not very good scaling random icons
-user_pref("alerts.showFavicons", true);
