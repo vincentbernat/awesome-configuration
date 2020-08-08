@@ -4,6 +4,6 @@ PartOf=graphical-session@%i.target
 
 [Service]
 Environment=DISPLAY=%I
-ExecStart=/usr/bin/picom --backend glx \
-                         --glx-no-rebind-pixmap \
+ExecStart=/usr/bin/picom --experimental-backends \
+                         --backend glx \
                          --vsync
