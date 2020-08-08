@@ -1,7 +1,7 @@
 -- Lookup function for icons
 
 local paths = {
-   "/usr/share/icons/gnome-wine",
+   "/usr/share/icons/Adwaita",
    "/usr/share/icons/gnome",
    "/usr/share/icons/hicolor",
    "/usr/share/icons/HighContrast",
