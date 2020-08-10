@@ -223,6 +223,19 @@ vicious.register(fswidget, vicious.widgets.fs,
 		    return result
 		 end, 53, "-lx fuse -x aufs")
 
+local notifications = widget({ type = "imagebox" })
+notifications.image = image(beautiful.icons .. "/widgets/notifications-enabled.png")
+notifications:buttons(awful.util.table.join(
+                         awful.button({ }, 1,
+                            function()
+                               local state = "enabled"
+                               naughty.toggle()
+                               if naughty.is_suspended() then
+                                  state = "disabled"
+                               end
+                               notifications.image = image(beautiful.icons .. "/widgets/notifications-" .. state .. ".png")
+                            end)))
+
 local systray = widget({ type = "systray" })
 
 -- Wibox initialisation
@@ -283,6 +296,7 @@ for s = 1, screen.count() do
 	   layout = awful.widget.layout.horizontal.leftright
 	},
 	on(1, systray),
+        on(1, notifications),
 	sepclose, datewidget, screen.count() > 1 and dateicon or "", spacer,
 	on(2, volwidget), screen.count() > 1 and on(2, volicon) or "", on(2, spacer),
 
