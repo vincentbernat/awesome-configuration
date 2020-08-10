@@ -276,7 +276,7 @@ for s = 1, screen.count() do
     wibox[s] = awful.wibox({ screen = s,
 			     fg = beautiful.fg_normal,
 			     bg = beautiful.bg_widget,
-			     position = "top",
+			     position = "bottom",
 			     height = 16 * theme.scale,
     })
     -- Add widgets to the wibox
