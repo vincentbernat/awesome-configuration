@@ -179,8 +179,6 @@ local memicon = widget({ type = "imagebox" })
 memicon.image = image(beautiful.icons .. "/widgets/mem.png")
 
 -- Volume level
-local volicon = widget({ type = "imagebox" })
-volicon.image = image(beautiful.icons .. "/widgets/vol.png")
 local volwidget = widget({ type = "textbox" })
 vicious.register(volwidget, vicious.widgets.volume,
 		 '<span color="' .. beautiful.fg_widget_value .. '">$2 $1%</span>',
@@ -298,7 +296,7 @@ for s = 1, screen.count() do
 	on(1, systray),
         on(1, notifications),
 	sepclose, datewidget, screen.count() > 1 and dateicon or "", spacer,
-	on(2, volwidget), screen.count() > 1 and on(2, volicon) or "", on(2, spacer),
+	on(2, volwidget), on(2, spacer),
 
 	on(2, batwidget.widget),
 	on(2, batwidget.widget ~= "" and baticon or ""),
