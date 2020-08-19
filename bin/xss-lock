@@ -40,9 +40,9 @@ case "$1" in
         xdotool key XF86AudioStop
         # Then, lock screen
         echo "lock: lock screen"
-        systemctl --user stop picom@${display}.service
+        systemctl --user stop compton@${display}.service
         i3lock -n -e -i $HOME/.cache/awesome/current-wallpaper-${display}.png -t -f
-        systemctl --user start picom@${display}.service
+        systemctl --user start compton@${display}.service
         echo "lock: unlock screen"
         ;;
 esac
