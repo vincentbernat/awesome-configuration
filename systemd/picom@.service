@@ -4,6 +4,4 @@ PartOf=graphical-session@%i.target
 
 [Service]
 Environment=DISPLAY=%I
-ExecStart=/usr/bin/picom --backend xr_glx_hybrid \
-                         --vsync \
-                         --vsync-use-glfinish
+ExecStart=/usr/bin/picom --vsync
