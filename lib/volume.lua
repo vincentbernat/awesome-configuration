@@ -43,11 +43,11 @@ local function change(what, how)
 end
 
 function increase(what)
-   change(what, "5%+")
+   change(what, "2%+")
 end
 
 function decrease(what)
-   change(what, "5%-")
+   change(what, "2%-")
 end
 
 function toggle(what)
