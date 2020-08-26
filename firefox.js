@@ -52,7 +52,7 @@ user_pref("toolkit.cosmeticAnimations.enabled", false);
 user_pref("gfx.webrender.all", true);
 
 // Force use of VAAPI, also need Firefox 80 and MOZ_X11_EGL=1
-user_pref("media.ffmpeg.vaapi.enabled", true);
+// user_pref("media.ffmpeg.vaapi.enabled", true);
 
 // Lazy loading is too late on Firefox. See https://bugzilla.mozilla.org/show_bug.cgi?id=1618240
 user_pref("dom.image-lazy-loading.enabled", false);
