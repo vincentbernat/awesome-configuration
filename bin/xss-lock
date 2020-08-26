@@ -37,7 +37,7 @@ case "$1" in
         # Something may have mendled with screensaver settings
         configure
         # First, stop any music player
-        xdotool key XF86AudioStop
+        xdotool key --clearmodifiers XF86AudioStop
         # Then, lock screen
         echo "lock: lock screen"
         systemctl --user stop compton@${display}.service
