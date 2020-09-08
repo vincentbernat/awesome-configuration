@@ -23,9 +23,10 @@ printf "input-event: $use: [%3d] $event $name\n" $device
 set +x
 case "$event,$use,$(uname -n),$name" in
     *,XISlaveKeyboard,*,"Topre Corporation Realforce 87")
+        xkb default
+        sleep 1
         autorandr --load blade || sleep 1
         autorandr --load blade
-        xkb default
         ;;
     *,XISlaveKeyboard,zoro,"AT Translated Set 2 keyboard")
         xkb x1
