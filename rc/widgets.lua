@@ -13,8 +13,7 @@ spacer.image = image(beautiful.icons .. "/widgets/spacer.png")
 
 -- Date
 local datewidget = widget({ type = "textbox" })
-local dateformat = "%H:%M"
-if screen.count() > 1 then dateformat = "%a %d/%m, " .. dateformat end
+local dateformat = "%a %d/%m, %H:%M"
 vicious.register(datewidget, vicious.widgets.date,
 		 '<span color="' .. beautiful.fg_widget_clock .. '">' ..
 		    dateformat .. '</span>', 61)
