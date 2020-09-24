@@ -30,7 +30,7 @@ end
 
 -- Send a command to spotify
 local function cmd(command)
-   awful.util.spawn("playerctl " .. command, false)
+   awful.util.spawn("playerctl -p spotify " .. command, false)
 end
 
 -- Show spotify
