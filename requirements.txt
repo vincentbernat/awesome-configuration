@@ -19,3 +19,4 @@ alsa-utils
 pavucontrol
 pulseaudio
 playerctl
+flameshot

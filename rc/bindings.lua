@@ -4,18 +4,9 @@ local volume = loadrc("volume", "vbe/volume")
 local brightness = loadrc("brightness", "vbe/brightness")
 local keydoc = loadrc("keydoc", "vbe/keydoc")
 
--- Alternative: flameshot
-local function screenshot(client)
-   if client == "root" then
-      client = "-window root"
-   elseif client then
-      client = "-window " .. client.window
-   else
-      client = ""
-   end
-   local path = awful.util.getdir("config") .. "/screenshots/" ..
-      "screenshot-" .. os.date("%Y-%m-%d--%H:%M:%S") .. ".jpg"
-   awful.util.spawn("import -quality 95 " .. client .. " " .. path, false)
+local function screenshot()
+   awful.util.spawn_with_shell("flameshot gui -r | xclip -selection clipboard -t image/png",
+                               false)
 end
 
 
@@ -241,9 +232,7 @@ config.keys.global = awful.util.table.join(
 	     "Spawn a terminal"),
 
    -- Screenshot
-   awful.key({}, "Print", function() screenshot("root") end),
-   awful.key({ modkey, "Shift" }, "Print", screenshot),
-
+   awful.key({}, "Print", screenshot),
    -- Restart awesome
    awful.key({ modkey, "Control" }, "r", awesome.restart),
 
