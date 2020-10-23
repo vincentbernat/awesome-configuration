@@ -13,6 +13,9 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # We do not want to rely on crappy mailcap
 export MAILCAPS=$HOME/.mailcap
 
+# Make QT automatically scale according to screen DPI
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+
 # GTK3 apps try to contact org.a11y.Bus. Disable that.
 export NO_AT_BRIDGE=1
 
