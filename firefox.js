@@ -56,6 +56,7 @@ user_pref("media.ffmpeg.vaapi.enabled", true);
 user_pref("media.ffvpx.enabled", false);
 
 // Lazy loading is too late on Firefox. See https://bugzilla.mozilla.org/show_bug.cgi?id=1618240
+// Should be fixed in Firefox 84.
 user_pref("dom.image-lazy-loading.enabled", false);
 
 // Disable DoH for now
