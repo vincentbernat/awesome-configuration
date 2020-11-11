@@ -62,6 +62,9 @@ user_pref("media.ffvpx.enabled", false);
 // Should be fixed in Firefox 84.
 user_pref("dom.image-lazy-loading.enabled", false);
 
+// Enable color scheme selector in devtools
+user_pref("devtools.inspector.color-scheme-simulation.enabled", true);
+
 // Disable DoH for now
 user_pref("network.trr.mode", 5);
 // No HTTP/3 yet (disabled by default, but document here it doesn't work well for me on Google)
