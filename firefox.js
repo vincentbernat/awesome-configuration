@@ -60,7 +60,11 @@ user_pref("media.ffvpx.enabled", false);
 
 // Lazy loading is too late on Firefox. See https://bugzilla.mozilla.org/show_bug.cgi?id=1618240
 // Should be fixed in Firefox 84.
-user_pref("dom.image-lazy-loading.enabled", false);
+user_pref("dom.image-lazy-loading.enabled", true);
+user_pref("dom.image-lazy-loading.root-margin.bottom", 100);
+user_pref("dom.image-lazy-loading.root-margin.bottom.percentage", true);
+user_pref("dom.image-lazy-loading.root-margin.top", 50);
+user_pref("dom.image-lazy-loading.root-margin.top.percentage", true);
 
 // Enable color scheme selector in devtools
 user_pref("devtools.inspector.color-scheme-simulation.enabled", true);
