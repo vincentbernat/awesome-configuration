@@ -1,5 +1,4 @@
-Vincent Bernat's awesome configuration
---------------------------------------
+# Vincent Bernat's awesome configuration
 
 This is my [awesome](http://awesome.naquadah.org) configuration. It
 does not exactly feature the same keybindings as the default
@@ -70,3 +69,10 @@ way to load them is to use:
 
 	require("lib/quake")
 	local quake = package.loaded["vbe/quake"]
+
+## Requirements
+
+Required Debian packages to make everything work can be found in my
+[Puppet configuration][].
+
+[Puppet configuration]: https://github.com/vincentbernat/puppet-workstation/blob/master/local-modules/desktop/manifests/awesome.pp
