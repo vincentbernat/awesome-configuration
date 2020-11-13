@@ -36,7 +36,7 @@ class "GtkTextView" binding "vbe-text-entry-bindings"
 ]])
 gtk2:close()
 
-os.execute("test -d ~/.config/gtk-3.0 || mkdir -p ~/.config/gtk-3.0")
+os.execute("mkdir -p ~/.config/gtk-3.0")
 os.execute("rm -f ~/.config/gtk-3.0/settings.ini")
 local gtk3 = io.open(os.getenv("HOME") .. "/.config/gtk-3.0/gtk.css", "w")
 gtk3:write([[
@@ -87,12 +87,21 @@ entry, textview
 ]])
 gtk3:close()
 
--- For QT, the configuration file is ~/.config/Trolltech.conf. It
--- seems a bit complex to override it each time. The solution is to
--- run qtconfig and to select "GTK+" for the style and the appropriate
--- font. QT uses GTK2. You should ensure that the appropriate engines
--- exist (in both 32 and 64 bits in case of multiarch), notably
--- gtk2-engines-pixbuf.
+-- For QT, use qt5ct
+os.execute("mkdir -p ~/.config/qt5ct")
+local qt5ct = io.open(os.getenv("HOME") .. "/.config/qt5ct/qt5ct.conf", "w")
+qt5ct:write([[
+[Appearance]
+custom_palette=false
+icon_theme=Adwaita
+standard_dialogs=gtk3
+style=Adwaita
+
+[Fonts]
+fixed=@Variant(\0\0\0@\0\0\0 \0\x44\0\x65\0j\0\x61\0V\0u\0 \0S\0\x61\0n\0s\0 \0M\0o\0n\0o@$\0\0\0\0\0\0\xff\xff\xff\xff\x5\x1\0\x32\x10)
+general=@Variant(\0\0\0@\0\0\0\x16\0\x44\0\x65\0j\0\x61\0V\0u\0 \0S\0\x61\0n\0s@$\0\0\0\0\0\0\xff\xff\xff\xff\x5\x1\0\x32\x10)
+]])
+qt5ct:close()
 
 -- The systray is a bit complex. We need to configure it to display
 -- the right colors. Here is a link with more background about this:

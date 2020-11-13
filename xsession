@@ -15,6 +15,7 @@ export MAILCAPS=$HOME/.mailcap
 
 # Make QT automatically scale according to screen DPI
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_QPA_PLATFORMTHEME=qt5ct
 
 # GTK3 apps try to contact org.a11y.Bus. Disable that.
 export NO_AT_BRIDGE=1
