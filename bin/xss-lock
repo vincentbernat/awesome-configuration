@@ -20,7 +20,7 @@ case "$1" in
         exec xss-lock --session=${XDG_SESSION_ID} --notifier="$me notify" --transfer-sleep-lock "$me" lock
         ;;
     dim|notify)
-        echo "notify: start"
+        echo "notify: start (idle: $(xprintidle))"
         systemctl --user kill -s STOP redshift@${display}.service
         trap "systemctl --user kill -s CONT redshift@${display}.service" EXIT
         trap 'echo notify: user activity; kill %% 2> /dev/null; exit 0' HUP  # user activity
@@ -34,12 +34,12 @@ case "$1" in
         echo "notify: end"
         ;;
     lock)
+        echo "lock: lock screen (idle: $(xprintidle))"
         # Something may have mendled with screensaver settings
         configure
         # First, pause any music player
         playerctl -a pause
         # Then, lock screen
-        echo "lock: lock screen"
         systemctl --user stop compton@${display}.service
         i3lock -n -e -i $HOME/.cache/awesome/current-wallpaper-${display}.png -t -f
         systemctl --user start compton@${display}.service
