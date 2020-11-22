@@ -1,9 +1,11 @@
 [Unit]
 Description=Miscellaneous settings for X11 on %I
 PartOf=graphical-session@%i.target
+After=ssh-agent.service
 
 [Service]
 Environment=DISPLAY=%I
 ExecStart=/usr/bin/xset -b
+ExecStart=%h/.config/awesome/bin/ssh-add
 Type=oneshot
 RemainAfterExit=false
