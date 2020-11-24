@@ -52,10 +52,6 @@ user_pref("gfx.webrender.all", true);
 // Enable AVIF
 user_pref("image.avif.enabled", true);
 
-// Force use of VAAPI, also need Firefox 81 and MOZ_X11_EGL=1
-user_pref("media.ffmpeg.vaapi.enabled", true);
-user_pref("media.ffvpx.enabled", false);
-
 // Lazy loading is too late on Firefox. See https://bugzilla.mozilla.org/show_bug.cgi?id=1618240
 // Should be fixed in Firefox 84.
 user_pref("dom.image-lazy-loading.root-margin.bottom.percentage", true);
