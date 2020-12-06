@@ -457,18 +457,6 @@ function del(tag)
     -- remove tag
     t.screen = nil
 
-    -- if the current tag is being deleted, restore from history
-    if t == sel and #tags > 1 then
-        awful.tag.history.restore(scr, 1)
-        -- this is supposed to cycle if history is invalid?
-        -- e.g. if many tags are deleted in a row
-        if not awful.tag.selected(scr) then
-            awful.tag.viewonly(tags[awful.util.cycle(#tags, idx - 1)])
-        end
-    end
-
-    -- FIXME: what is this for??
-    if capi.client.focus then capi.client.focus:raise() end
     return true
 end
 
