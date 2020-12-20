@@ -300,10 +300,6 @@ config.keys.client = awful.util.table.join(
                 c:raise()
 	     end,
 	     "Maximize"),
-
-
-   -- Screenshot
-   awful.key({ modkey }, "Print", screenshot, "Screenshot")
 )
 
 keydoc.group("Misc")
