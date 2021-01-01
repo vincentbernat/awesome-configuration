@@ -299,7 +299,7 @@ config.keys.client = awful.util.table.join(
 		c.maximized_vertical   = not c.maximized_vertical
                 c:raise()
 	     end,
-	     "Maximize"),
+	     "Maximize")
 )
 
 keydoc.group("Misc")
