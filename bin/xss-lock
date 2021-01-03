@@ -1,8 +1,8 @@
 #!/bin/bash
 
 me="$(readlink -f "$0")"
-timeout=300
-notify=10
+timeout=600
+notify=20
 display=$(systemd-escape -- "$DISPLAY")
 
 configure() {
