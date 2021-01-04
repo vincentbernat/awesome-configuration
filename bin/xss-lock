@@ -7,7 +7,7 @@ display=$(systemd-escape -- "$DISPLAY")
 
 configure() {
     xset s $((timeout - notify)) $notify
-    xset dpms $((timeout * 3)) $((timeout * 4)) $((timeout * 5))
+    xset dpms $((timeout * 2)) $((timeout * 3)) $((timeout * 4))
 }
 unconfigure() {
     xset s 0
