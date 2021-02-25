@@ -66,7 +66,7 @@ shifty.config.apps = {
    {
       match = { class = { "Key[-]mon" },
                 role = { "pop[-]up" },
-                name = { "Firebug" },
+                name = { "Firebug", "Picture-in-Picture" },
                 instance = { "plugin[-]container", "exe" } },
       intrusive = true,
    },

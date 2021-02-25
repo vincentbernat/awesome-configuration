@@ -288,6 +288,7 @@ config.keys.client = awful.util.table.join(
                    c:raise()
                 end
              end, "Move to the other screen"),
+   awful.key({ modkey, "Control" }, "s",      function (c) c.sticky = not c.sticky  end, "Toggle stickyness"),
    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle, "Toggle floating"),
    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
 	     "Switch with master window"),

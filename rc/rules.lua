@@ -53,7 +53,10 @@ awful.rules.rules = {
      except = { icon_name = "QuakeConsoleNeedsUniqueName" },
      properties = { },
      callback = awful.client.setslave },
+   -- Picture in picture
+   { rule = { name = "Picture-in-Picture" },
+     properties = { floating = true, ontop = true } },
    -- Floating windows
-   { rule_any = { class = { "Display.im6", "Key-mon", "Picture-in-Picture" } },
+   { rule_any = { class = { "Display.im6", "Key-mon" } },
      properties = { floating = true }},
 }
