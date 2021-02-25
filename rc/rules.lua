@@ -39,10 +39,6 @@ awful.rules.rules = {
      properties = { }, callback = awful.client.setslave },
    { rule = { class = "Pidgin", role = "buddy_list" },
      properties = { }, callback = awful.client.setmaster },
-   -- Skype
-   { rule = { class = "Skipe" },
-     except = { role = nil }, -- should be the master
-     properties = { }, callback = awful.client.setslave },
    -- Shadow
    { rule = { class = "Shadow" },
      properties = { fullscreen = true }},
