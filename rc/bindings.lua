@@ -274,9 +274,14 @@ config.keys.global = awful.util.table.join(
 
 config.keys.client = awful.util.table.join(
    keydoc.group("Window-specific bindings"),
-   awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end,
+   awful.key({ modkey,           }, "f",
+      function (c)
+         c.fullscreen = not c.fullscreen
+         c.sticky = false
+         c:raise()
+      end,
 	     "Fullscreen"),
-   awful.key({ modkey,           }, "x",      function (c) c:kill()                         end,
+   awful.key({ modkey,           }, "x",      function (c) c:kill() end,
 	     "Close"),
    awful.key({ modkey,           }, "o",
              function (c)
@@ -288,7 +293,7 @@ config.keys.client = awful.util.table.join(
                    c:raise()
                 end
              end, "Move to the other screen"),
-   awful.key({ modkey, "Control" }, "s",      function (c) c.sticky = not c.sticky  end, "Toggle stickyness"),
+   awful.key({ modkey, "Control" }, "s",      function (c) c.sticky = not c.sticky end, "Toggle stickyness"),
    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle, "Toggle floating"),
    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
 	     "Switch with master window"),
@@ -298,6 +303,7 @@ config.keys.client = awful.util.table.join(
 	     function (c)
 		c.maximized_horizontal = not c.maximized_horizontal
 		c.maximized_vertical   = not c.maximized_vertical
+                c.sticky = false
                 c:raise()
 	     end,
 	     "Maximize")
