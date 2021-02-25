@@ -276,8 +276,8 @@ config.keys.client = awful.util.table.join(
    keydoc.group("Window-specific bindings"),
    awful.key({ modkey,           }, "f",
       function (c)
-         c.fullscreen = not c.fullscreen
          c.sticky = false
+         c.fullscreen = not c.fullscreen
          c:raise()
       end,
 	     "Fullscreen"),
@@ -301,9 +301,9 @@ config.keys.client = awful.util.table.join(
 	     "Get client-related information"),
    awful.key({ modkey,           }, "m",
 	     function (c)
+                c.sticky = false
 		c.maximized_horizontal = not c.maximized_horizontal
 		c.maximized_vertical   = not c.maximized_vertical
-                c.sticky = false
                 c:raise()
 	     end,
 	     "Maximize")
