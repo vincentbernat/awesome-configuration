@@ -15,4 +15,4 @@ Wants=xsettingsd@%i.service
 Wants=xss-lock@%i.service
 Wants=tmux.service
 Wants=ssh-agent.service
-Wants=pulseaudio.service
+Wants=pipewire-pulse.service
