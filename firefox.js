@@ -52,9 +52,6 @@ user_pref("gfx.webrender.all", true);
 // Enable AVIF
 user_pref("image.avif.enabled", true);
 
-// Enable color scheme selector in devtools
-user_pref("devtools.inspector.color-scheme-simulation.enabled", true);
-
 // Disable DoH for now
 user_pref("network.trr.mode", 5);
 // No HTTP/3 yet (disabled by default, but document here it doesn't work well for me on Google)
