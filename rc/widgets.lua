@@ -16,7 +16,7 @@ local datewidget = widget({ type = "textbox" })
 local dateformat = "%a %d/%m, %H:%M"
 vicious.register(datewidget, vicious.widgets.date,
 		 '<span color="' .. beautiful.fg_widget_clock .. '">' ..
-		    dateformat .. '</span>', 61)
+		    dateformat .. '</span>')
 local dateicon = widget({ type = "imagebox" })
 dateicon.image = image(beautiful.icons .. "/widgets/clock.png")
 local cal = (
