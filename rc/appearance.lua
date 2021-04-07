@@ -6,7 +6,7 @@ beautiful.init(awful.util.getdir("config") .. "/rc/theme.lua")
 -- avoid duplication.
 local gtk2 = io.open(os.getenv("HOME") .. "/.gtkrc-2.0", "w")
 gtk2:write([[
-gtk-theme-name="Adwaita"
+gtk-theme-name="Adwaita-dark"
 gtk-icon-theme-name="Adwaita"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
@@ -95,7 +95,7 @@ qt5ct:write([[
 custom_palette=false
 icon_theme=Adwaita
 standard_dialogs=gtk3
-style=Adwaita
+style=Adwaita-dark
 
 [Fonts]
 fixed=@Variant(\0\0\0@\0\0\0 \0\x44\0\x65\0j\0\x61\0V\0u\0 \0S\0\x61\0n\0s\0 \0M\0o\0n\0o@$\0\0\0\0\0\0\xff\xff\xff\xff\x5\x1\0\x32\x10)

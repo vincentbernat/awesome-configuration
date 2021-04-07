@@ -2,7 +2,7 @@
 Xft/Antialias 1
 Xft/Hinting 1
 Xft/HintStyle "hintslight"
-Net/ThemeName "Adwaita"
+Net/ThemeName "Adwaita-dark"
 Net/IconThemeName "Adwaita"
 Gtk/CursorThemeName "Adwaita"
 Gtk/CursorThemeSize 0
