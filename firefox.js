@@ -8,9 +8,6 @@ user_pref("ui.context_menus.after_mouseup", true);
 // Don't display menubar when pressing Alt
 user_pref("ui.key.menuAccessKeyFocuses", false);
 
-// Dark theme
-user_pref("ui.systemUsesDarkTheme", 1);
-
 // No popup at all!
 user_pref("browser.link.open_newwindow.restriction", 0);
 
