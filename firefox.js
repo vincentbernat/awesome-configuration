@@ -1,6 +1,10 @@
 // Preferences for Firefox. To be symlinked in the profile as user.js.
 // Settings synced through Firefox Accounts may not be present.
 
+// Theme
+user_pref("extensions.activeThemeID", "default-theme@mozilla.org");
+user_pref("devtools.theme", "dark");
+
 // Ensure context menus stay open after left-click (useful when scale
 // == 1.5)
 user_pref("ui.context_menus.after_mouseup", true);
