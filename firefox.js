@@ -41,6 +41,9 @@ user_pref("browser.backspace_action", 0);
 // Don't allow detaching a tab by pulling it
 user_pref("browser.tabs.allowTabDetach", false);
 
+// Don't display a close button for tabs
+user_pref("browser.tabs.tabClipWidth", 1000);
+
 // Don't display fullscreen warning
 user_pref("full-screen-api.warning.timeout", 0);
 user_pref("full-screen-api.transition.timeout", 0);
