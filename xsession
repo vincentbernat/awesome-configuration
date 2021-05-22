@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# Setup locale
-export LANG=fr_FR.utf8
-export LC_MESSAGES=en_US.utf8
-
 # Ensure we use the appropriate gtkrc-2.0 file
 export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 
@@ -21,6 +17,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export NO_AT_BRIDGE=1
 
 # Environment variables
+unset LC_ALL
 [ -e ~/.zshenv ] && . ~/.zshenv
 
 # Services are started with systemd
