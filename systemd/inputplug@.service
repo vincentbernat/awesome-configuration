@@ -5,4 +5,4 @@ PartOf=graphical-session@%i.target
 [Service]
 Environment=DISPLAY=%I
 ExecStartPre=/usr/bin/setxkbmap us
-ExecStart=%h/bin/inputplug -d -0 -c %h/.config/awesome/bin/input-event
+ExecStart=%h/.local/bin/inputplug -d -0 -c %h/.config/awesome/bin/input-event
