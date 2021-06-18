@@ -5,3 +5,4 @@ PartOf=graphical-session@%i.target
 [Service]
 Environment=DISPLAY=%I
 ExecStart=/usr/bin/xiccd --edid
+Restart=on-failure

@@ -9,3 +9,4 @@ ExecStart=/usr/bin/compton --backend glx \
                            --xrender-sync-fence \
                            --vsync opengl-swc \
                            --paint-on-overlay
+Restart=on-failure

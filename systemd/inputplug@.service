@@ -6,3 +6,4 @@ PartOf=graphical-session@%i.target
 Environment=DISPLAY=%I
 ExecStartPre=/usr/bin/setxkbmap us
 ExecStart=%h/.local/bin/inputplug -d -0 -c %h/.config/awesome/bin/input-event
+Restart=on-failure

@@ -6,3 +6,4 @@ PartOf=graphical-session@%i.target
 Environment=DISPLAY=%I
 ExecStart=/usr/bin/xsettingsd -c %h/.xsettingsd
 ExecReload=/usr/bin/kill -HUP $MAINPID
+Restart=on-failure

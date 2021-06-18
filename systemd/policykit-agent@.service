@@ -5,3 +5,4 @@ PartOf=graphical-session@%i.target
 [Service]
 Environment=DISPLAY=%I
 ExecStart=/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+Restart=on-failure
