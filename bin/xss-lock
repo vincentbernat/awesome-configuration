@@ -40,9 +40,7 @@ case "$1" in
         # First, pause any music player
         playerctl -a pause
         # Then, lock screen
-        systemctl --user stop compton@${display}.service
         i3lock -n -e -i $HOME/.cache/awesome/current-wallpaper-${display}.png -t -f
-        systemctl --user start compton@${display}.service
         echo "lock: unlock screen"
         ;;
 esac
