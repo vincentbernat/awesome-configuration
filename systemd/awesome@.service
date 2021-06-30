@@ -2,7 +2,7 @@
 Description=Awesome window manager for %I
 PartOf=graphical-session@%i.target
 After=autorandr@%i.service
-After=compton@%i.service
+After=picom@%i.service
 After=xsettingsd@%i.service
 After=tmux.service
 After=ssh-agent.service
