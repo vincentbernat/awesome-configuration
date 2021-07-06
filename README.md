@@ -1,3 +1,5 @@
+⚠ *I have now switched to [i3](https://github.com/vincentbernat/i3wm-configuration).*
+
 # Vincent Bernat's awesome configuration
 
 This is my [awesome](http://awesome.naquadah.org) configuration. It
